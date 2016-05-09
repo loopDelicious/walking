@@ -1,0 +1,29 @@
+<!-- Show walks, landmarks and scores -->
+
+{% extends 'base.html' %}
+{% block content %}
+
+    <h2>Profile</h2>
+    <ul>
+     <!-- Passed through user object, display user email attribute -->
+          <li>Username: {{ user.email }}</li>
+          </br>
+
+          <li>{% for walk in walks %}
+            <!-- for every walk that has been parsed from the ratings object that was passed through, we are able to display its score. Since the dbs have an established relationship, we can access the title from the movies table -->
+            {{ walk.start_datetime }} on {{ walk.geocode }}
+            {{walk.landmark.name}}: {{walk.landmark.score}}
+
+            <!-- FIXME:  DISPLAY WALKS OR LANDMARKS???  ADD LINK TO LANDMARK DETAILS PAGE -->
+
+            </br>
+          </li>{% endfor %}
+
+          <li>{% for rating in ratings %}
+            <!-- for every landmark that has been parsed from the ratings object that was passed through, we display its score.  -->
+            {{rating.landmark.name}}: {{rating.score}}
+            </br>
+          </li>{% endfor %}
+    </ul>
+              <!-- <a href="/users/{{ user.user_id }}"> -->
+{% endblock %}

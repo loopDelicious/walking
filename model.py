@@ -1,6 +1,7 @@
 """Models and database functions for Walking project."""
 
 from flask_sqlalchemy import SQLAlchemy
+import datetime
 
 # Connection to the PostgreSQL database through the Flask-SQLAlchemy library.
 # On this, we can find the `session` object, where we do most of our interactions.
@@ -74,10 +75,10 @@ class Walk(db.Model):
 
     walk_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
-    origin_geocode = db.Column(db.Integer, nullable=False)
-    destination_geocode = db.Column(db.Integer, nullable=False)
-    start_datetime = db.Column(db.String, nullable=False)
-    end_datetime = db.Column(db.String, nullable=False)
+    origin_geocode = db.Column(db.Float, nullable=False)
+    destination_geocode = db.Column(db.Float, nullable=False)
+    start_datetime = db.Column(db.Datetime, nullable=False)
+    end_datetime = db.Column(db.Datetime, nullable=False)
 
     #Define relationship to user
     user = db.relationship("User", backref=db.backref("walks", order_by=walk_id))

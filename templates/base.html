@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+
+<head>
+  <title></title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/static/project.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- Establish flash queue so messages can get flashed -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class=flashes>
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+      
+    {% block content %} 
+      put your content here 
+    {% endblock %}
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</body>
+
+</html>
