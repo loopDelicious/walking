@@ -1,17 +1,48 @@
 
 {% extends 'base.html' %}
+
+<head>
+  <style>
+    #map {
+      width: 500px;
+      height: 400px;
+    }
+  </style>
+</head>
+
 {% block content %}
 
 <h1>Start a New Walk:</h1>
 
 <p>A walking app that allows people to create and map out walks based on origin, destination, and time.  User can rate, add, comment on, and upload images of landmarks</p>
 
-<h2>Origin</h2>
-<h2>Destination</h2>
-<h2>Time</h2>
+<form action = '/walk' method="GET">
+      <input id="pac-input" class="controls" type = "text" placeholder = "Start typing origin here" name = "origin" />
+      </br>
+      <input id="pac-input" class="controls" type = "text" placeholder = "Start typing destination here" name = "destination" />
+      </br>
+      <input type = "text" placeholder = "time" name = "time" />
+      </br>
+
+      <input type = "submit" value = "Submit">
+</form>
+
+<!-- FIXME google map api key -->
+<!-- FIXME ajax request to update map -->
+<!-- Create a div for the map -->
+<div id="map"></div>
+
+<script src="/static/map.js"></script>
 
 <h2>My Walks</h2>
+    <a href="/profile">My Walks</a>
+
 <h2>Walk Details Page</h2>
 <h2>Landmark Details Page</h2>
-
+      <ul>
+            <li>Add new landmark</li>
+            <li>Upload image</li>
+            <li>Add comments</li>
+            <li>Rate this landmark</li>
+      </ul>
 {% endblock %}

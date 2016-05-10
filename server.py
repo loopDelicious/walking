@@ -7,12 +7,13 @@ from flask import Flask, render_template, redirect, request, flash, session
 from flask_debugtoolbar import DebugToolbarExtension
 
 from model import Landmark, User, Rating, Walk, WalkLandmarkLink, connect_to_db, db
+import os
 
 
 app = Flask(__name__)
 
 # Required to use Flask sessions and the debug toolbar
-app.secret_key = "ABC"
+app.secret_key = os.environ["FLASK_SECRET_KEY"]
 
 # Raise an error if you use an undefined variable in Jinja2
 app.jinja_env.undefined = StrictUndefined
@@ -97,29 +98,58 @@ def logout():
     return redirect('/')
 
 
+@app.route('/walk', methods=["GET"])
+def create_new_walk():
+    """Creates and maps new walk according to user input for origin, destination, 
+    time constraint."""
 
-@app.route('/profile/<int:user_id>')
-def show_user(user_id):
-    """Return page showing details of a user. Show walks, landmarks rated, scores."""
+    origin = request.args.get("origin")
+    destination = request.args.get("destination")
+    time = request.args.get("time)")
 
+    return render_template('/', 
+                            origin=origin, 
+                            destination=destination, 
+                            time=time)
+
+# FIXME google maps api
+#     return coordinates
+
+
+# def display_map(coordinates):
+#     api = Api(
+#             consumer_key=os.environ['GOOGLE_API_KEY'])
+
+
+@app.route('/profile')
+def show_user():
+    """Return page showing details:  walks, landmarks rated, scores."""
+
+    user_id = session.get('user_id')
     user = User.query.get(user_id)
 
     ratings = user.ratings
-    return render_template('profile.html', user=user, ratings=ratings)
-
+    walks = user.walks
+    
+    return render_template('profile.html', 
+                            user=user, 
+                            ratings=ratings, 
+                            walks=walks)
 
 
 @app.route('/landmarks/<int:landmark_id>', methods=['GET'])
 def show_landmark(landmark_id):
     """Show the details of a particular landmark."""
 
-    #Querying landmarks table to get landmark object
+    # Querying landmarks table to get landmark object
     landmark = Landmark.query.get(landmark_id)
     user_id = session.get('user_id')
 
     if user_id:
         user_rating = Rating.query.filter_by(
-            landmark_id=landmark_id, user_id=user_id).first()
+                                            landmark_id=landmark_id, 
+                                            user_id=user_id
+                                            ).first()
     else:
         user_rating = None
 
@@ -137,7 +167,12 @@ def show_landmark(landmark_id):
     ratings = landmark.ratings
 
     return render_template('landmark_details.html', 
-        movie=movie, ratings=ratings, user_rating=user_rating, average=avg_rating, prediction=prediction)
+                            movie=movie, 
+                            ratings=ratings, 
+                            user_rating=user_rating, 
+                            average=avg_rating, 
+                            prediction=prediction)
+
 
 @app.route('/rate_landmark', methods=["POST"])
 def rate_landmark():
@@ -157,7 +192,9 @@ def rate_landmark():
         flash("Your rating has been updated.")
     else:
         # Instantiate new rating to add to the user database 
-        new_rating = Rating(score=score, landmark_id=landmark_id, user_id=user_id)
+        new_rating = Rating(score=score, 
+                            landmark_id=landmark_id, 
+                            user_id=user_id)
         db.session.add(new_rating)
         flash("Rating saved.")
 

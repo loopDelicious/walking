@@ -1,7 +1,7 @@
 """Models and database functions for Walking project."""
 
 from flask_sqlalchemy import SQLAlchemy
-import datetime
+
 
 # Connection to the PostgreSQL database through the Flask-SQLAlchemy library.
 # On this, we can find the `session` object, where we do most of our interactions.
@@ -17,17 +17,25 @@ class Landmark(db.Model):
     __tablename__ = "landmarks"
 
     landmark_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    landmark_name = db.Column(db.String(100), nullable=False)
+    landmark_name = db.Column(db.String(100), nullable=True)
     landmark_description = db.Column(db.String(300), nullable=True)
-    landmark_location = db.Column(db.Integer, nullable=False)
-    avg_landmark_score = db.Column(db.Integer, nullable=True)
+    landmark_lat = db.Column(db.Float, nullable=False)
+    landmark_lng = db.Column(db.Float, nullable=False)
+    landmark_avg_score = db.Column(db.Integer, nullable=True)
+    
+    # Applicable to CIVIC ART data set:
+    landmark_artist = db.Column(db.String(100), nullable = True)
+    landmark_display_dimensions = db.Column(db.String(100), nullable = True)
+    landmark_location_description = db.Column(db.String(100), nullable = True)
+    landmark_medium = db.Column(db.String(150), nullable = True)
+
     # general_walk_score = db.Column(db.Integer, nullable=True)
 
     def __repr__(self):
         """Provide helpful representation when printed, for human readability."""
 
-        return "<Landmark landmark_id=%s landmark_name=%s landmark_description=%s location=%s avg_landmark_score=%s>" % (self.landmark_id, 
-            self.landmark_name, self.landmark_description, self.location, self.avg_landmark_score)
+        return "<Landmark landmark_id=%s landmark_name=%s landmark_description=%s location=%s landmark_avg_score=%s>" % (self.landmark_id, 
+            self.landmark_name, self.landmark_description, self.location, self.landmark_avg_score)
 
 class User(db.Model):
     """User of walking website."""
@@ -75,10 +83,12 @@ class Walk(db.Model):
 
     walk_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
-    origin_geocode = db.Column(db.Float, nullable=False)
-    destination_geocode = db.Column(db.Float, nullable=False)
-    start_datetime = db.Column(db.Datetime, nullable=False)
-    end_datetime = db.Column(db.Datetime, nullable=False)
+    origin_lat = db.Column(db.Float, nullable=False)
+    origin_lng = db.Column(db.Float, nullable=False)
+    destination_lat = db.Column(db.Float, nullable=False)
+    destination_lng = db.Column(db.Float, nullable=False)
+    start_datetime = db.Column(db.DateTime, nullable=False)
+    end_datetime = db.Column(db.DateTime, nullable=False)
 
     #Define relationship to user
     user = db.relationship("User", backref=db.backref("walks", order_by=walk_id))
@@ -96,6 +106,7 @@ class WalkLandmarkLink(db.Model):
 
     walk_id = db.Column(db.Integer, db.ForeignKey('walks.walk_id'), primary_key=True)
     landmark_id = db.Column(db.Integer, db.ForeignKey('landmarks.landmark_id'), primary_key=True)
+    # FIXME set unique constraint?
 
     def __repr__(self):
         """Provide helpful representation when printed, for human readability."""
@@ -109,7 +120,7 @@ def connect_to_db(app):
     """Connect the database to our Flask app."""
 
     # Configure to use our PstgreSQL database
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///ratings'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///landmarks'
     db.app = app
     db.init_app(app)
 
