@@ -1,21 +1,6 @@
 
 {% extends 'base.html' %}
 
-<head>
-    <style>
-      html, body {
-        height: 100%;
-        width: 50%;
-        margin: 10px;
-        padding: 10px;
-        display: block;
-      }
-      #map {
-        height: 100%;
-      }
-    </style>
-</head>
-
 {% block content %}
 
 <h1>Start a New Walk:</h1>
@@ -37,7 +22,7 @@
 
 <div id="map"></div>
 
-{% include '/map.html' %}
+{% include '/mapbox.html' %}
 
 <h2>My Walks</h2>
     <a href="/profile">My Walks</a>

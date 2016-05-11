@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset='utf-8' />
+        <title></title>
+        <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+        <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.18.0/mapbox-gl.js'></script>
+        <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.18.0/mapbox-gl.css' rel='stylesheet' />
+        <style>
+            #map { 
+                height: 400px;
+                width:  600px;
+                margin: 0 auto;
+                }
+        </style>
+    </head>
+          
+          
+    <body>
+
+        <div id='map'></div>
+        <script>
+        mapboxgl.accessToken = 'pk.eyJ1Ijoiam95Y2VsaW43OSIsImEiOiJjaW8zNzk5bHcwMDA5dzFrcXd6anpnY2xoIn0.ovObS9ODfNsnaa8ie--fKQ';
+
+        // Instantiate the map object
+        var lng_lat = [-122.4194, 37.7749]
+
+        var map = new mapboxgl.Map({
+            container: 'map', // container id
+            style: 'mapbox://styles/mapbox/streets-v8', //stylesheet location
+            center: lng_lat, // starting position
+            pitch: 70, // pitch in degrees
+            bearing: 0, // bearing in degrees
+            zoom: 12, // starting zoom
+            interactive: true // make interactive instead of static
+        });
+
+        // Add zoom and rotation controls to the map.
+        map.addControl(new mapboxgl.Navigation());
+
+        map.on('load', function () {
+            map.addSource("markers", {
+                "type": "geojson",
+                "data": {
+                "type": "FeatureCollection",
+                "features": [{
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [-77.03238901390978, 38.913188059745586]
+                    },
+                    "properties": {
+                        "title": "Mapbox DC",
+                        "marker-symbol": "monument"
+                    }
+                }, {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [-122.411497, 37.788913]
+                    },
+                    "properties": {
+                        "title": "Hackbright Academy",
+                        "marker-symbol": "harbor"
+                    }
+                }]
+            }
+         });
+
+        map.addLayer({
+            "id": "markers",
+            "type": "symbol",
+            "source": "markers",
+            "layout": {
+                "icon-image": "{marker-symbol}-15",
+                "text-field": "{title}",
+                "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+                "text-offset": [0, 0.6],
+                "text-anchor": "top"
+                }
+            });
+         });
+
+
+        // When a click event occurs near a marker icon, open a popup at the location of
+        // the feature, with description HTML from its properties.
+        map.on('click', function (e) {
+            var features = map.queryRenderedFeatures(e.point, { layers: ['markers'] });
+            if (!features.length) {
+                return;
+            }
+
+            var feature = features[0];
+
+            var popup = new mapboxgl.Popup()
+                .setLngLat(map.unproject(e.point))
+                .setHTML(feature.properties.name)
+                .addTo(map);
+        });
+    
+
+        // Indicate that markers are clickable by changing cursor to 'pointer'
+        map.on('mousemove', function (e) {
+            var features = map.queryRenderedFeatures(e.point, { layers: ['markers'] });
+            map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
+        });
+
+        </script>
+
+    </body>
+
+</html>
+          
+        
