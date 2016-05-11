@@ -10,7 +10,8 @@
           <li>Username: {{ user.email }}</li>
           </br>
 
-          <li>{% for walk in walks %}
+          <li>My Walks:
+            {% for walk in walks %}
             <!-- for every walk that has been parsed from the ratings object that was passed through, we are able to display its score. Since the dbs have an established relationship, we can access the title from the movies table -->
             {{ walk.start_datetime }} on PLACEHOLDER FOR LOCATION
             {{walk.landmark.name}}: {{walk.landmark.score}}
@@ -20,7 +21,8 @@
             </br>
           </li>{% endfor %}
 
-          <li>{% for rating in ratings %}
+          <li>My Landmark Ratings:
+            {% for rating in ratings %}
             <!-- for every landmark that has been parsed from the ratings object that was passed through, we display its score.  -->
             {{rating.landmark.name}}: {{rating.score}}
             </br>

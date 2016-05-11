@@ -2,13 +2,13 @@
 {% block content %}
 
     <h2>Landmark Details</h2>
-    <h3>{{ landmark.name }}</h3>
-    <p>Average Rating: {{ average }}</p>
+    <h3>{{ landmark.landmark_name }}</h3>
+    <p>Average Rating: </p>
 
     <form action = '/rate_landmark' method="POST">
        <input type="hidden" name="landmark_id" value="{{landmark.landmark_id}}">
         {% if session.get('user_id') %} 
-            Rate {{ landmark.name }}:
+            Rate {{ landmark.landmark_name }}:
             <select name="score">
               <option value="1">1</option>
               <option value="2">2</option>

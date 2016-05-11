@@ -21,7 +21,8 @@ class Landmark(db.Model):
     landmark_description = db.Column(db.String(300), nullable=True)
     landmark_lat = db.Column(db.Float, nullable=False)
     landmark_lng = db.Column(db.Float, nullable=False)
-    landmark_avg_score = db.Column(db.Integer, nullable=True)
+
+    # FIXME upload pics of landmarks (user uploaded or google images?)
     
     # Applicable to CIVIC ART data set:
     landmark_artist = db.Column(db.String(100), nullable = True)
@@ -34,8 +35,8 @@ class Landmark(db.Model):
     def __repr__(self):
         """Provide helpful representation when printed, for human readability."""
 
-        return "<Landmark landmark_id=%s landmark_name=%s landmark_description=%s location=%s landmark_avg_score=%s>" % (self.landmark_id, 
-            self.landmark_name, self.landmark_description, self.location, self.landmark_avg_score)
+        return "<Landmark landmark_id=%s landmark_name=%s landmark_description=%s location=%s>" % (self.landmark_id, 
+            self.landmark_name, self.landmark_description, self.location)
 
 class User(db.Model):
     """User of walking website."""
@@ -63,10 +64,10 @@ class Rating(db.Model):
     user_score = db.Column(db.Integer, nullable=False)
     user_notes_for_landmark = db.Column(db.String(500), nullable=True)
 
-    #Define relationship to user
+    # Define relationship to user
     user = db.relationship("User", backref=db.backref("ratings", order_by=rating_id))
 
-    #Define relationship to landmark
+    # Define relationship to landmark
     landmark = db.relationship("Landmark", backref=db.backref("ratings", order_by=rating_id))
 
     def __repr__(self):

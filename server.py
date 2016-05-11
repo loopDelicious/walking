@@ -15,6 +15,7 @@ app = Flask(__name__)
 # Required to use Flask sessions and the debug toolbar
 app.secret_key = os.environ["FLASK_SECRET_KEY"]
 
+
 # Raise an error if you use an undefined variable in Jinja2
 app.jinja_env.undefined = StrictUndefined
 
@@ -25,6 +26,32 @@ def index():
 
     return render_template("homepage.html")
 
+
+@app.route('/', methods=["GET"])
+def create_new_walk():
+    """Creates and maps new walk according to user input for origin, destination, 
+    time constraint."""
+
+    origin = request.args.get("origin")
+    destination = request.args.get("destination")
+    time = request.args.get("time)")
+
+    return render_template('/', 
+                            origin=origin, 
+                            destination=destination, 
+                            time=time)
+
+# FIXME google maps api
+#     return coordinates
+
+
+# def display_map(coordinates):
+#     api = Api(
+#             consumer_key=os.environ['GOOGLE_API_KEY'])
+# multiple waypoints result in multiple legs of the journey being created
+# resulting from destination time and origin time calculations
+# The maximum number of waypoints allowed when using the Directions service in 
+# the Google Maps JavaScript API is 8, plus the origin and destination.
 
 @app.route('/registration', methods=["GET"])
 def display_registration_form():
@@ -46,20 +73,24 @@ def process_registration_form():
 
     if possible_user:
         flash("An account has already been created for this email.")
+        return redirect('/login')
+
     # Add user to user database
     else:
         user = User(email=email, password=password)
         db.session.add(user)
         db.session.commit()
+
+        # add user_id to session variable, to login user automatically 
+        session['user_id'] = user.user_id
+        user_id = user.user_id
         flash("Your account has been created.")
-
-    # FIXME auto login user
-    return redirect('/login')
-
+        return redirect('/')
 
 @app.route('/login', methods=["GET"])
 def display_login_form():
-    """Displays form for users to login"""
+    """Displays form fo
+    r users to login"""
 
     return render_template('login.html')
 
@@ -82,11 +113,12 @@ def process_login():
         flash("You are logged in!")
         user_id = possible_user.user_id
 
-        # String formatting to insert user_id in the url to redirect to users details page
-        return redirect('/users/%s' % user_id)
+        return redirect('/')
+
     else:
         flash("Verify email and password entered is correct.")
         return redirect('/login')
+
 
 @app.route('/logout')
 def logout():
@@ -98,35 +130,12 @@ def logout():
     return redirect('/')
 
 
-@app.route('/walk', methods=["GET"])
-def create_new_walk():
-    """Creates and maps new walk according to user input for origin, destination, 
-    time constraint."""
-
-    origin = request.args.get("origin")
-    destination = request.args.get("destination")
-    time = request.args.get("time)")
-
-    return render_template('/', 
-                            origin=origin, 
-                            destination=destination, 
-                            time=time)
-
-# FIXME google maps api
-#     return coordinates
-
-
-# def display_map(coordinates):
-#     api = Api(
-#             consumer_key=os.environ['GOOGLE_API_KEY'])
-
 
 @app.route('/profile')
 def show_user():
     """Return page showing details:  walks, landmarks rated, scores."""
 
-    user_id = session.get('user_id')
-    user = User.query.get(user_id)
+    user = User.query.filter_by(user_id=session.get('user_id')).first()
 
     ratings = user.ratings
     walks = user.walks
@@ -135,6 +144,7 @@ def show_user():
                             user=user, 
                             ratings=ratings, 
                             walks=walks)
+
 
 
 @app.route('/landmarks/<int:landmark_id>', methods=['GET'])
@@ -154,24 +164,22 @@ def show_landmark(landmark_id):
         user_rating = None
 
     # Get the average rating of a landmark
-    rating_scores = [r.score for r in landmark.ratings]
+    rating_scores = [r.user_score for r in Rating.user_score]
     avg_rating = float(sum(rating_scores))/len(rating_scores)
 
-    prediction = None
 
-    if (not user_rating) and user_id:
-        user = User.query.get(user_id)
-        if user:
-            prediction = user.predict_rating(movie)
-    # getting ratings from movie object since tables are oined in the data model by db.relationship
+    # if (not user_rating) and user_id:
+    #     user = User.query.get(user_id)
+        #     if user:
+        #         prediction = user.predict_rating(movie)
     ratings = landmark.ratings
 
     return render_template('landmark_details.html', 
-                            movie=movie, 
-                            ratings=ratings, 
-                            user_rating=user_rating, 
-                            average=avg_rating, 
-                            prediction=prediction)
+                            landmark=landmark, 
+                            ratings=ratings,
+                            user_rating=user_rating,
+                            average=avg_rating)
+                          
 
 
 @app.route('/rate_landmark', methods=["POST"])

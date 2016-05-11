@@ -1,0 +1,1254 @@
+{
+  "meta" : {
+    "view" : {
+      "id" : "z76i-7s65",
+      "name" : "Recreation & Park Department Park Info Dataset",
+      "attribution" : "Recreation and Park Department",
+      "attributionLink" : "http://sfrecpark.org/",
+      "averageRating" : 0,
+      "category" : "Culture and Recreation",
+      "createdAt" : 1321380888,
+      "description" : "The following data-set is from the Recreation and Park Departments Master Property database. It list all Parks, Playgrounds, and Stadiums. This master list also contains the Park Service Area Manager along with their individual contact information.",
+      "displayType" : "table",
+      "downloadCount" : 1841,
+      "indexUpdatedAt" : 1430937442,
+      "licenseId" : "PDDL",
+      "newBackend" : false,
+      "numberOfComments" : 2,
+      "oid" : 4737550,
+      "publicationAppendEnabled" : false,
+      "publicationDate" : 1375459154,
+      "publicationGroup" : 252748,
+      "publicationStage" : "published",
+      "rowClass" : "",
+      "rowsUpdatedAt" : 1375459014,
+      "rowsUpdatedBy" : "3b4m-maes",
+      "tableId" : 1014806,
+      "totalTimesRated" : 0,
+      "viewCount" : 2494,
+      "viewLastModified" : 1458062636,
+      "viewType" : "tabular",
+      "columns" : [ {
+        "id" : -1,
+        "name" : "sid",
+        "dataTypeName" : "meta_data",
+        "fieldName" : ":sid",
+        "position" : 0,
+        "renderTypeName" : "meta_data",
+        "format" : { }
+      }, {
+        "id" : -1,
+        "name" : "id",
+        "dataTypeName" : "meta_data",
+        "fieldName" : ":id",
+        "position" : 0,
+        "renderTypeName" : "meta_data",
+        "format" : { }
+      }, {
+        "id" : -1,
+        "name" : "position",
+        "dataTypeName" : "meta_data",
+        "fieldName" : ":position",
+        "position" : 0,
+        "renderTypeName" : "meta_data",
+        "format" : { }
+      }, {
+        "id" : -1,
+        "name" : "created_at",
+        "dataTypeName" : "meta_data",
+        "fieldName" : ":created_at",
+        "position" : 0,
+        "renderTypeName" : "meta_data",
+        "format" : { }
+      }, {
+        "id" : -1,
+        "name" : "created_meta",
+        "dataTypeName" : "meta_data",
+        "fieldName" : ":created_meta",
+        "position" : 0,
+        "renderTypeName" : "meta_data",
+        "format" : { }
+      }, {
+        "id" : -1,
+        "name" : "updated_at",
+        "dataTypeName" : "meta_data",
+        "fieldName" : ":updated_at",
+        "position" : 0,
+        "renderTypeName" : "meta_data",
+        "format" : { }
+      }, {
+        "id" : -1,
+        "name" : "updated_meta",
+        "dataTypeName" : "meta_data",
+        "fieldName" : ":updated_meta",
+        "position" : 0,
+        "renderTypeName" : "meta_data",
+        "format" : { }
+      }, {
+        "id" : -1,
+        "name" : "meta",
+        "dataTypeName" : "meta_data",
+        "fieldName" : ":meta",
+        "position" : 0,
+        "renderTypeName" : "meta_data",
+        "format" : { }
+      }, {
+        "id" : 86562826,
+        "name" : "ParkName",
+        "dataTypeName" : "text",
+        "fieldName" : "parkname",
+        "position" : 2,
+        "renderTypeName" : "text",
+        "tableColumnId" : 1685347,
+        "width" : 196,
+        "cachedContents" : {
+          "non_null" : 230,
+          "smallest" : "10TH AVE/CLEMENT MINI PARK",
+          "null" : 0,
+          "largest" : "YOUNGBLOOD COLEMAN PLAYGROUND",
+          "top" : [ {
+            "count" : 20,
+            "item" : "SUNNYSIDE PLAYGROUND"
+          }, {
+            "count" : 19,
+            "item" : "SUNSET PLAYGROUND"
+          }, {
+            "count" : 18,
+            "item" : "TANK HILL"
+          }, {
+            "count" : 17,
+            "item" : "TELEGRAPH HILL/PIONEER PARK"
+          }, {
+            "count" : 16,
+            "item" : "TENDERLOIN CHILDREN'S REC CENTER"
+          }, {
+            "count" : 15,
+            "item" : "TOPAZ OPEN SPACE"
+          }, {
+            "count" : 14,
+            "item" : "TURK/HYDE MINI PARK"
+          }, {
+            "count" : 13,
+            "item" : "TWIN PEAKS"
+          }, {
+            "count" : 12,
+            "item" : "UNION SQUARE"
+          }, {
+            "count" : 11,
+            "item" : "UPPER NOE RECREATION CENTER"
+          }, {
+            "count" : 10,
+            "item" : "UTAH/18TH MINI PARK"
+          }, {
+            "count" : 9,
+            "item" : "VICTORIA MANALO DRAVES PARK"
+          }, {
+            "count" : 8,
+            "item" : "VISITACION VALLEY GREENWAY"
+          }, {
+            "count" : 7,
+            "item" : "VISITACION VALLEY PLAYGROUND"
+          }, {
+            "count" : 6,
+            "item" : "WALTER HAAS PLAYGROUND"
+          }, {
+            "count" : 5,
+            "item" : "WASHINGTON SQUARE"
+          }, {
+            "count" : 4,
+            "item" : "WASHINGTON/HYDE MINI PARK"
+          }, {
+            "count" : 3,
+            "item" : "WEST PORTAL PLAYGROUND"
+          }, {
+            "count" : 2,
+            "item" : "WEST SUNSET PLAYGROUND"
+          }, {
+            "count" : 1,
+            "item" : "White Crane Springs Community Garden"
+          } ]
+        },
+        "format" : { }
+      }, {
+        "id" : 86562827,
+        "name" : "ParkType",
+        "dataTypeName" : "text",
+        "fieldName" : "parktype",
+        "position" : 3,
+        "renderTypeName" : "text",
+        "tableColumnId" : 1685348,
+        "width" : 196,
+        "cachedContents" : {
+          "non_null" : 230,
+          "smallest" : "Civic Plaza or Square",
+          "null" : 0,
+          "largest" : "Zoological Garden",
+          "top" : [ {
+            "count" : 20,
+            "item" : "ParkType"
+          }, {
+            "count" : 19,
+            "item" : "Mini Park"
+          }, {
+            "count" : 18,
+            "item" : "Neighborhood Park or Playground"
+          }, {
+            "count" : 17,
+            "item" : "Community Garden"
+          }, {
+            "count" : 16,
+            "item" : "Regional Park"
+          }, {
+            "count" : 15,
+            "item" : "Family Camp"
+          }, {
+            "count" : 14,
+            "item" : "Concession"
+          }, {
+            "count" : 13,
+            "item" : "Civic Plaza or Square"
+          }, {
+            "count" : 12,
+            "item" : "Parkway"
+          }, {
+            "count" : 11,
+            "item" : "Zoological Garden"
+          } ]
+        },
+        "format" : { }
+      }, {
+        "id" : 86562828,
+        "name" : "ParkServiceArea",
+        "dataTypeName" : "text",
+        "fieldName" : "parkservicearea",
+        "position" : 4,
+        "renderTypeName" : "text",
+        "tableColumnId" : 1685349,
+        "width" : 280,
+        "cachedContents" : {
+          "non_null" : 230,
+          "smallest" : "Candlestick Park Stadium",
+          "null" : 0,
+          "largest" : "PSA 6",
+          "top" : [ {
+            "count" : 20,
+            "item" : "ParkServiceArea"
+          }, {
+            "count" : 19,
+            "item" : "PSA 1"
+          }, {
+            "count" : 18,
+            "item" : "PSA 4"
+          }, {
+            "count" : 17,
+            "item" : "PSA 6"
+          }, {
+            "count" : 16,
+            "item" : "PSA 5"
+          }, {
+            "count" : 15,
+            "item" : "PSA 3"
+          }, {
+            "count" : 14,
+            "item" : "PSA 2"
+          }, {
+            "count" : 13,
+            "item" : "Outside SF"
+          }, {
+            "count" : 12,
+            "item" : "Candlestick Park Stadium"
+          }, {
+            "count" : 11,
+            "item" : "Golden Gate Park"
+          } ]
+        },
+        "format" : { }
+      }, {
+        "id" : 86562829,
+        "name" : "PSAManager",
+        "dataTypeName" : "text",
+        "fieldName" : "psamanager",
+        "position" : 5,
+        "renderTypeName" : "text",
+        "tableColumnId" : 1685350,
+        "width" : 220,
+        "cachedContents" : {
+          "non_null" : 230,
+          "smallest" : "Castile, Steve",
+          "null" : 0,
+          "largest" : "Wayne, Lisa",
+          "top" : [ {
+            "count" : 20,
+            "item" : "PSAManager"
+          }, {
+            "count" : 19,
+            "item" : "Elder, Steve"
+          }, {
+            "count" : 18,
+            "item" : "Sheehy, Chuck"
+          }, {
+            "count" : 17,
+            "item" : "Field, Adrian"
+          }, {
+            "count" : 16,
+            "item" : "O'Brien, Teresa"
+          }, {
+            "count" : 15,
+            "item" : "Watkins, Robert"
+          }, {
+            "count" : 14,
+            "item" : "O'Connor, Tom"
+          }, {
+            "count" : 13,
+            "item" : "Taylor, Zack"
+          }, {
+            "count" : 12,
+            "item" : "Figone, Joe"
+          }, {
+            "count" : 11,
+            "item" : "Hill, Eric"
+          }, {
+            "count" : 10,
+            "item" : "Lockwood, Darlene"
+          }, {
+            "count" : 9,
+            "item" : "Wayne, Lisa"
+          }, {
+            "count" : 8,
+            "item" : "Miller, John"
+          }, {
+            "count" : 7,
+            "item" : "Cleveland, Maggie"
+          }, {
+            "count" : 6,
+            "item" : "Castile, Steve"
+          }, {
+            "count" : 5,
+            "item" : "Gay, Mike"
+          }, {
+            "count" : 4,
+            "item" : "Sheets, Robert"
+          }, {
+            "count" : 3,
+            "item" : "Koch-Gonzalez, Gloria"
+          }, {
+            "count" : 2,
+            "item" : "Martin, York (Acting)"
+          }, {
+            "count" : 1,
+            "item" : "McCormick, James"
+          } ]
+        },
+        "format" : { }
+      }, {
+        "id" : 86562830,
+        "name" : "email",
+        "dataTypeName" : "text",
+        "fieldName" : "email",
+        "position" : 6,
+        "renderTypeName" : "text",
+        "tableColumnId" : 1685351,
+        "width" : 160,
+        "cachedContents" : {
+          "non_null" : 230,
+          "smallest" : "adrian.field@sfgov.org",
+          "null" : 0,
+          "largest" : "zack.taylor@sfgov.org",
+          "top" : [ {
+            "count" : 20,
+            "item" : "email"
+          }, {
+            "count" : 19,
+            "item" : "steven.elder@sfgov.org"
+          }, {
+            "count" : 18,
+            "item" : "charles.sheehy@sfgov.org"
+          }, {
+            "count" : 17,
+            "item" : "adrian.field@sfgov.org"
+          }, {
+            "count" : 16,
+            "item" : "teresa.o'brien@sfgov.org"
+          }, {
+            "count" : 15,
+            "item" : "robert.watkins@sfgov.org"
+          }, {
+            "count" : 14,
+            "item" : "tom.o'connor@sfgov.org"
+          }, {
+            "count" : 13,
+            "item" : "zack.taylor@sfgov.org"
+          }, {
+            "count" : 12,
+            "item" : "joseph.figone@sfgov.org"
+          }, {
+            "count" : 11,
+            "item" : "eric.hill@sfgov.org"
+          }, {
+            "count" : 10,
+            "item" : "darlene.lockwood@sfgov.org"
+          }, {
+            "count" : 9,
+            "item" : "lisa.wayne@sfgov.org"
+          }, {
+            "count" : 8,
+            "item" : "john.miller@sfgov.org"
+          }, {
+            "count" : 7,
+            "item" : "maggie.cleveland@sfgov.org"
+          }, {
+            "count" : 6,
+            "item" : "steve.castile@sfgov.org"
+          }, {
+            "count" : 5,
+            "item" : "michael.gay@sfgov.org"
+          }, {
+            "count" : 4,
+            "item" : "robert.sheets@sfgov.org"
+          }, {
+            "count" : 3,
+            "item" : "gloria.koch-gonzalez@sfgov.org"
+          }, {
+            "count" : 2,
+            "item" : "york.martin@sfgov.org"
+          }, {
+            "count" : 1,
+            "item" : "james.mccormick@sfgov.org"
+          } ]
+        },
+        "format" : { }
+      }, {
+        "id" : 86562831,
+        "name" : "Number",
+        "dataTypeName" : "text",
+        "fieldName" : "number",
+        "position" : 7,
+        "renderTypeName" : "text",
+        "tableColumnId" : 1685352,
+        "width" : 172,
+        "cachedContents" : {
+          "non_null" : 230,
+          "smallest" : "(415) 218-0259",
+          "null" : 0,
+          "largest" : "Number",
+          "top" : [ {
+            "count" : 20,
+            "item" : "Number"
+          }, {
+            "count" : 19,
+            "item" : "(415) 601-6501"
+          }, {
+            "count" : 18,
+            "item" : "(415) 218-2226"
+          }, {
+            "count" : 17,
+            "item" : "(415) 717-2872"
+          }, {
+            "count" : 16,
+            "item" : "(415) 819-2699"
+          }, {
+            "count" : 15,
+            "item" : "(415) 819-6138"
+          }, {
+            "count" : 14,
+            "item" : "(415) 218-0259"
+          }, {
+            "count" : 13,
+            "item" : "(415) 601-7277"
+          }, {
+            "count" : 12,
+            "item" : "(415) 713-4997"
+          }, {
+            "count" : 11,
+            "item" : "(415) 254-8030"
+          }, {
+            "count" : 10,
+            "item" : "(415) 666-7092"
+          }, {
+            "count" : 9,
+            "item" : "(415) 513-2577"
+          }, {
+            "count" : 8,
+            "item" : "(415) 254-8014"
+          }, {
+            "count" : 7,
+            "item" : "(415) 841-0856"
+          }, {
+            "count" : 6,
+            "item" : "(415) 218-4786"
+          }, {
+            "count" : 5,
+            "item" : "(415) 235-4576"
+          }, {
+            "count" : 4,
+            "item" : "(415) 831-6307"
+          }, {
+            "count" : 3,
+            "item" : "(415) 753-7094"
+          }, {
+            "count" : 2,
+            "item" : "(415) 666-7002"
+          }, {
+            "count" : 1,
+            "item" : "(415) 753-7271"
+          } ]
+        },
+        "format" : { }
+      }, {
+        "id" : 86562832,
+        "name" : "Zipcode",
+        "dataTypeName" : "number",
+        "fieldName" : "zipcode",
+        "position" : 8,
+        "renderTypeName" : "number",
+        "tableColumnId" : 1685353,
+        "width" : 184,
+        "cachedContents" : {
+          "non_null" : 223,
+          "smallest" : "94044",
+          "sum" : "20989507",
+          "null" : 7,
+          "average" : "94123.34977578475",
+          "largest" : "95321",
+          "top" : [ {
+            "count" : 20,
+            "item" : "94118"
+          }, {
+            "count" : 19,
+            "item" : "94122"
+          }, {
+            "count" : 18,
+            "item" : "94110"
+          }, {
+            "count" : 17,
+            "item" : "94131"
+          }, {
+            "count" : 16,
+            "item" : "94124"
+          }, {
+            "count" : 15,
+            "item" : "94117"
+          }, {
+            "count" : 14,
+            "item" : "94112"
+          }, {
+            "count" : 13,
+            "item" : "94109"
+          }, {
+            "count" : 12,
+            "item" : "94123"
+          }, {
+            "count" : 11,
+            "item" : "94115"
+          }, {
+            "count" : 10,
+            "item" : "94127"
+          }, {
+            "count" : 9,
+            "item" : "94121"
+          }, {
+            "count" : 8,
+            "item" : "94107"
+          }, {
+            "count" : 7,
+            "item" : "94133"
+          }, {
+            "count" : 6,
+            "item" : "94132"
+          }, {
+            "count" : 5,
+            "item" : "94102"
+          }, {
+            "count" : 4,
+            "item" : "95321"
+          }, {
+            "count" : 3,
+            "item" : "94116"
+          }, {
+            "count" : 2,
+            "item" : "94108"
+          }, {
+            "count" : 1,
+            "item" : "94114"
+          } ]
+        },
+        "format" : { }
+      }, {
+        "id" : 86562833,
+        "name" : "Acreage",
+        "dataTypeName" : "number",
+        "fieldName" : "acreage",
+        "position" : 9,
+        "renderTypeName" : "number",
+        "tableColumnId" : 1685354,
+        "width" : 184,
+        "cachedContents" : {
+          "non_null" : 229,
+          "smallest" : "0",
+          "sum" : "4195.88",
+          "null" : 1,
+          "average" : "18.32262008733624",
+          "largest" : "1031.98",
+          "top" : [ {
+            "count" : 20,
+            "item" : "0.82"
+          }, {
+            "count" : 19,
+            "item" : "0.15"
+          }, {
+            "count" : 18,
+            "item" : "0"
+          }, {
+            "count" : 17,
+            "item" : "0.21"
+          }, {
+            "count" : 16,
+            "item" : "0.29"
+          }, {
+            "count" : 15,
+            "item" : "0.83"
+          }, {
+            "count" : 14,
+            "item" : "0.1"
+          }, {
+            "count" : 13,
+            "item" : "1.11"
+          }, {
+            "count" : 12,
+            "item" : "4.4"
+          }, {
+            "count" : 11,
+            "item" : "2.26"
+          }, {
+            "count" : 10,
+            "item" : "1.91"
+          }, {
+            "count" : 9,
+            "item" : "17.16"
+          }, {
+            "count" : 8,
+            "item" : "2.68"
+          }, {
+            "count" : 7,
+            "item" : "0.61"
+          }, {
+            "count" : 6,
+            "item" : "0.31"
+          }, {
+            "count" : 5,
+            "item" : "0.05"
+          }, {
+            "count" : 4,
+            "item" : "162.16"
+          }, {
+            "count" : 3,
+            "item" : "6.13"
+          } ]
+        },
+        "format" : { }
+      }, {
+        "id" : 86562834,
+        "name" : "SupDist",
+        "dataTypeName" : "number",
+        "fieldName" : "supdist",
+        "position" : 10,
+        "renderTypeName" : "number",
+        "tableColumnId" : 1685355,
+        "width" : 184,
+        "cachedContents" : {
+          "non_null" : 227,
+          "smallest" : "1",
+          "sum" : "1497",
+          "null" : 3,
+          "average" : "6.594713656387665",
+          "largest" : "11",
+          "top" : [ {
+            "count" : 20,
+            "item" : "1"
+          }, {
+            "count" : 19,
+            "item" : "7"
+          }, {
+            "count" : 18,
+            "item" : "9"
+          }, {
+            "count" : 17,
+            "item" : "8"
+          }, {
+            "count" : 16,
+            "item" : "10"
+          }, {
+            "count" : 15,
+            "item" : "5"
+          }, {
+            "count" : 14,
+            "item" : "11"
+          }, {
+            "count" : 13,
+            "item" : "2"
+          }, {
+            "count" : 12,
+            "item" : "3"
+          }, {
+            "count" : 11,
+            "item" : "4"
+          }, {
+            "count" : 10,
+            "item" : "6"
+          } ]
+        },
+        "format" : { }
+      }, {
+        "id" : 86562835,
+        "name" : "ParkID",
+        "dataTypeName" : "number",
+        "fieldName" : "parkid",
+        "position" : 11,
+        "renderTypeName" : "number",
+        "tableColumnId" : 1685356,
+        "width" : 172,
+        "cachedContents" : {
+          "non_null" : 229,
+          "smallest" : "1",
+          "sum" : "7483559",
+          "null" : 1,
+          "average" : "32679.29694323144",
+          "largest" : "756670",
+          "top" : [ {
+            "count" : 20,
+            "item" : "93"
+          }, {
+            "count" : 19,
+            "item" : "76"
+          }, {
+            "count" : 18,
+            "item" : "149"
+          }, {
+            "count" : 17,
+            "item" : "168"
+          }, {
+            "count" : 16,
+            "item" : "197"
+          }, {
+            "count" : 15,
+            "item" : "192"
+          }, {
+            "count" : 14,
+            "item" : "77"
+          }, {
+            "count" : 13,
+            "item" : "135"
+          }, {
+            "count" : 12,
+            "item" : "22"
+          }, {
+            "count" : 11,
+            "item" : "202"
+          }, {
+            "count" : 10,
+            "item" : "169"
+          }, {
+            "count" : 9,
+            "item" : "177"
+          }, {
+            "count" : 8,
+            "item" : "27"
+          }, {
+            "count" : 7,
+            "item" : "4"
+          }, {
+            "count" : 6,
+            "item" : "147"
+          }, {
+            "count" : 5,
+            "item" : "144"
+          }, {
+            "count" : 4,
+            "item" : "68"
+          }, {
+            "count" : 3,
+            "item" : "91"
+          }, {
+            "count" : 2,
+            "item" : "123631"
+          }, {
+            "count" : 1,
+            "item" : "139"
+          } ]
+        },
+        "format" : { }
+      }, {
+        "id" : 86562836,
+        "name" : "Location 1",
+        "dataTypeName" : "location",
+        "fieldName" : "location_1",
+        "position" : 12,
+        "renderTypeName" : "location",
+        "tableColumnId" : 1685357,
+        "width" : 220,
+        "cachedContents" : {
+          "non_null" : 202,
+          "smallest" : {
+            "longitude" : "-122.4690454",
+            "latitude" : "37.78724257",
+            "human_address" : "{\"address\":\"1 11th Ave\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}"
+          },
+          "null" : 28,
+          "largest" : {
+            "longitude" : "-122.4633024",
+            "latitude" : "37.75758279",
+            "human_address" : "{\"address\":\"of 7th\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}"
+          },
+          "top" : [ {
+            "count" : 20,
+            "item" : {
+              "longitude" : "-122.43732268",
+              "latitude" : "37.76655956",
+              "human_address" : "{\"address\":\"299 Henry St\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}"
+            }
+          }, {
+            "count" : 19,
+            "item" : {
+              "longitude" : "-122.42075699",
+              "latitude" : "37.80341611",
+              "human_address" : "{\"address\":\"Hyde\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}"
+            }
+          }, {
+            "count" : 18,
+            "item" : {
+              "longitude" : "-122.50380857",
+              "latitude" : "37.73158916",
+              "human_address" : "{\"address\":\"1 Zoo Rd\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}"
+            }
+          }, {
+            "count" : 17,
+            "item" : {
+              "longitude" : "-122.44055619",
+              "latitude" : "37.7626853",
+              "human_address" : "{\"address\":\"Saturn\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}"
+            }
+          }, {
+            "count" : 16,
+            "item" : {
+              "longitude" : "-122.40035293",
+              "latitude" : "37.73886468",
+              "human_address" : "{\"address\":\"Palou\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}"
+            }
+          }, {
+            "count" : 15,
+            "item" : {
+              "longitude" : "-122.44006058",
+              "latitude" : "37.75761058",
+              "human_address" : "{\"address\":\"Seward\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}"
+            }
+          }, {
+            "count" : 14,
+            "item" : {
+              "longitude" : "-122.41819743",
+              "latitude" : "37.78540001",
+              "human_address" : "{\"address\":\"Larkin\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}"
+            }
+          }, {
+            "count" : 13,
+            "item" : {
+              "longitude" : "-122.48189132",
+              "latitude" : "37.62439438",
+              "human_address" : "{\"address\":\"1 Sharp Park Rd\",\"city\":\"Pacifica\",\"state\":\"CA\",\"zip\":\"\"}"
+            }
+          }, {
+            "count" : 12,
+            "item" : {
+              "longitude" : "-122.47829786",
+              "latitude" : "37.73608224",
+              "human_address" : "{\"address\":\"19th Ave\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}"
+            }
+          }, {
+            "count" : 11,
+            "item" : {
+              "longitude" : "-122.40314958",
+              "latitude" : "37.73285911",
+              "human_address" : "{\"address\":\"Thornton\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}"
+            }
+          }, {
+            "count" : 10,
+            "item" : {
+              "longitude" : "-122.42126376",
+              "latitude" : "37.80796044",
+              "human_address" : "{\"address\":\"500 Jefferson St\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}"
+            }
+          }, {
+            "count" : 9,
+            "item" : {
+              "longitude" : "-122.39395227",
+              "latitude" : "37.78157949",
+              "human_address" : "{\"address\":\"64 Park Ave\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}"
+            }
+          }, {
+            "count" : 8,
+            "item" : {
+              "longitude" : "-122.49845174",
+              "latitude" : "37.73738679",
+              "human_address" : "{\"address\":\"40th Ave\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}"
+            }
+          }, {
+            "count" : 7,
+            "item" : {
+              "longitude" : "-122.42064294",
+              "latitude" : "37.73365828",
+              "human_address" : "{\"address\":\"Murray\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}"
+            }
+          }, {
+            "count" : 6,
+            "item" : {
+              "longitude" : "-122.40511712",
+              "latitude" : "37.79205617",
+              "human_address" : "{\"address\":\"California St\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}"
+            }
+          }, {
+            "count" : 5,
+            "item" : {
+              "longitude" : "-122.43785312",
+              "latitude" : "37.76380044",
+              "human_address" : "{\"address\":\"86 States St\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}"
+            }
+          }, {
+            "count" : 4,
+            "item" : {
+              "longitude" : "-122.3965106",
+              "latitude" : "37.79592597",
+              "human_address" : "{\"address\":\"Clay St\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}"
+            }
+          }, {
+            "count" : 3,
+            "item" : {
+              "longitude" : "-122.44076127",
+              "latitude" : "37.73193576",
+              "human_address" : "{\"address\":\"Monterey\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}"
+            }
+          }, {
+            "count" : 2,
+            "item" : {
+              "longitude" : "-122.4474787",
+              "latitude" : "37.73366412",
+              "human_address" : "{\"address\":\"Teresita Ave\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}"
+            }
+          }, {
+            "count" : 1,
+            "item" : {
+              "longitude" : "-122.48684698",
+              "latitude" : "37.75658875",
+              "human_address" : "{\"address\":\"2201 Lawton St\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}"
+            }
+          } ]
+        },
+        "format" : {
+          "view" : "coords",
+          "align" : "left"
+        },
+        "subColumnTypes" : [ "human_address", "latitude", "longitude", "machine_address", "needs_recoding" ]
+      }, {
+        "id" : 86563160,
+        "name" : "Lat",
+        "dataTypeName" : "number",
+        "fieldName" : "lat",
+        "position" : 13,
+        "renderTypeName" : "number",
+        "tableColumnId" : 12747317,
+        "width" : 100,
+        "cachedContents" : {
+          "non_null" : 0,
+          "sum" : "0",
+          "null" : 230
+        },
+        "format" : { }
+      } ],
+      "grants" : [ {
+        "inherited" : false,
+        "type" : "viewer",
+        "flags" : [ "public" ]
+      } ],
+      "license" : {
+        "name" : "Open Data Commons Public Domain Dedication and License",
+        "termsLink" : "http://opendatacommons.org/licenses/pddl/1.0/"
+      },
+      "metadata" : {
+        "custom_fields" : {
+          "Detailed Descriptive" : {
+            "Geographic unit" : "Latitude/longitude"
+          },
+          "Publishing Details" : {
+            "Data change frequency" : "As needed",
+            "Publishing frequency" : "As needed"
+          },
+          "Department Metrics" : {
+            "Publishing Department" : "Recreation and Parks"
+          }
+        },
+        "renderTypeConfig" : {
+          "visible" : {
+            "table" : true
+          }
+        },
+        "availableDisplayTypes" : [ "table", "fatrow", "page" ],
+        "rdfSubject" : "0",
+        "rowIdentifier" : "0",
+        "rdfClass" : ""
+      },
+      "owner" : {
+        "id" : "3b4m-maes",
+        "displayName" : "Sean Stasio",
+        "profileImageUrlLarge" : "/api/users/3b4m-maes/profile_images/LARGE",
+        "profileImageUrlMedium" : "/api/users/3b4m-maes/profile_images/THUMB",
+        "profileImageUrlSmall" : "/api/users/3b4m-maes/profile_images/TINY",
+        "roleName" : "editor",
+        "screenName" : "Sean Stasio",
+        "rights" : [ "create_datasets", "view_domain", "short_session", "view_goals", "view_dashboards", "view_story", "view_unpublished_story" ]
+      },
+      "query" : { },
+      "rights" : [ "read" ],
+      "tableAuthor" : {
+        "id" : "3b4m-maes",
+        "displayName" : "Sean Stasio",
+        "profileImageUrlLarge" : "/api/users/3b4m-maes/profile_images/LARGE",
+        "profileImageUrlMedium" : "/api/users/3b4m-maes/profile_images/THUMB",
+        "profileImageUrlSmall" : "/api/users/3b4m-maes/profile_images/TINY",
+        "roleName" : "editor",
+        "screenName" : "Sean Stasio",
+        "rights" : [ "create_datasets", "view_domain", "short_session", "view_goals", "view_dashboards", "view_story", "view_unpublished_story" ]
+      },
+      "tags" : [ "recreation", "parks", "playgrounds", "stadiums" ],
+      "flags" : [ "default" ]
+    }
+  },
+  "data" : [ [ 1, "B5901811-9644-433F-AA75-95BC7C6FB179", 1, 1321380912, "390036", 1321380912, "390036", "{\n  \"invalidCells\" : {\n    \"1685355\" : \"SupDist\",\n    \"1685354\" : \"Acreage\",\n    \"1685357\" : \"ParkAddress, City, State, (Lat, Lon)\",\n    \"1685356\" : \"ParkID\",\n    \"1685353\" : \"Zipcode\"\n  }\n}", "ParkName", "ParkType", "ParkServiceArea", "PSAManager", "email", "Number", null, null, null, null, [ null, null, null, null, null ], null ]
+, [ 2, "2DD4413D-B0AD-4F9E-9946-1768EE2EF001", 2, 1321380912, "390036", 1321380912, "390036", "{\n}", "10TH AVE/CLEMENT MINI PARK", "Mini Park", "PSA 1", "Elder, Steve", "steven.elder@sfgov.org", "(415) 601-6501", "94118", "0.66", "1", "156", [ "{\"address\":\"351 9th Ave\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.78184397", "-122.46809908", null, false ], null ]
+, [ 3, "5A1A4F25-B9E0-43E8-9CF7-A4B27ED6D27B", 3, 1321380912, "390036", 1321380912, "390036", "{\n}", "15TH AVENUE STEPS", "Mini Park", "PSA 4", "Sheehy, Chuck", "charles.sheehy@sfgov.org", "(415) 218-2226", "94122", "0.26", "7", "185", [ "{\"address\":\"15th Ave b w Kirkham\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.75956493", "-122.47226783", null, false ], null ]
+, [ 4, "FCB338A1-25D7-4E59-A36E-80E0530ECD8E", 4, 1321380912, "390036", 1321380912, "390036", "{\n}", "24TH/YORK MINI PARK", "Mini Park", "PSA 6", "Field, Adrian", "adrian.field@sfgov.org", "(415) 717-2872", "94110", "0.12", "9", "51", [ "{\"address\":\"24th\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.75306042", "-122.40857543", null, false ], null ]
+, [ 5, "B540A504-4B99-4EAF-9F7F-A790C5D7F3A2", 5, 1321380912, "390036", 1321380912, "390036", "{\n}", "29TH/DIAMOND OPEN SPACE", "Neighborhood Park or Playground", "PSA 5", "O'Brien, Teresa", "teresa.o'brien@sfgov.org", "(415) 819-2699", "94131", "0.82", "8", "194", [ "{\"address\":\"Diamond\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.74360211", "-122.43523589", null, false ], null ]
+, [ 6, "06FCEDF7-9E2D-42FE-9D42-3851189CCB91", 6, 1321380912, "390036", 1321380912, "390036", "{\n}", "ADAM ROGERS PARK", "Neighborhood Park or Playground", "PSA 3", "Watkins, Robert", "robert.watkins@sfgov.org", "(415) 819-6138", "94124", "2.74", "10", "46", [ "{\"address\":\"Ingalls\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.73101645", "-122.38385466", null, false ], null ]
+, [ 7, "7378CBB5-BF2B-4F18-B6E6-811D9A21CC52", 7, 1321380912, "390036", 1321380912, "390036", "{\n}", "ALAMO SQUARE", "Neighborhood Park or Playground", "PSA 2", "O'Connor, Tom", "tom.o'connor@sfgov.org", "(415) 218-0259", "94117", "12.7", "5", "117", [ "{\"address\":\"Hayes\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.77634875", "-122.43467396", null, false ], null ]
+, [ 8, "4A0CF43A-0874-4F9C-AE21-FFECBD33B0EF", 8, 1321380912, "390036", 1321380912, "390036", "{\n}", "ALICE CHALMERS PLAYGROUND", "Neighborhood Park or Playground", "PSA 3", "Taylor, Zack", "zack.taylor@sfgov.org", "(415) 601-7277", "94112", "1.68", "11", "25", [ "{\"address\":\"670 Brunswick\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.7098271", "-122.44665065", null, false ], null ]
+, [ 9, "94A32E45-85E9-4597-A9AD-4C068DBD2D0A", 9, 1321380912, "390036", 1321380912, "390036", "{\n}", "ALICE MARBLE TENNIS COURTS", "Neighborhood Park or Playground", "PSA 1", "Figone, Joe", "joseph.figone@sfgov.org", "(415) 713-4997", "94109", "0.84", "2", "151", [ "{\"address\":\"Greenwich\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.80142776", "-122.42034327", null, false ], null ]
+, [ 10, "C00D9D7D-6CAB-46EE-9BEA-FE243D954732", 10, 1321380912, "390036", 1321380912, "390036", "{\n}", "ALIOTO MINI PARK", "Mini Park", "PSA 6", "Field, Adrian", "adrian.field@sfgov.org", "(415) 717-2872", "94110", "0.16", "9", "62", [ "{\"address\":\"20th\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.75890196", "-122.41821702", null, false ], null ]
+, [ 11, "1B596A7E-A1F0-4294-9191-106F35068DCF", 11, 1321380912, "390036", 1321380912, "390036", "{\n}", "ALLYNE PARK", "Neighborhood Park or Playground", "PSA 1", "Figone, Joe", "joseph.figone@sfgov.org", "(415) 713-4997", "94123", "0.75", "2", "131", [ "{\"address\":\"2609 Gough St\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.79746066", "-122.42759992", null, false ], null ]
+, [ 12, "D72E0057-DB5B-4C87-91FD-43106C233159", 12, 1321380912, "390036", 1321380912, "390036", "{\n}", "ALTA PLAZA", "Neighborhood Park or Playground", "PSA 1", "Figone, Joe", "joseph.figone@sfgov.org", "(415) 713-4997", "94115", "11.91", "2", "129", [ "{\"address\":\"Jackson\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.79117333", "-122.43766978", null, false ], null ]
+, [ 13, "2A03C7C2-EA57-4260-ADC1-1B43E25D3572", 13, 1321380912, "390036", 1321380912, "390036", "{\n}", "ANGELO J. ROSSI PLAYGROUND", "Neighborhood Park or Playground", "PSA 1", "Elder, Steve", "steven.elder@sfgov.org", "(415) 601-6501", "94118", "6.47", "1", "105", [ "{\"address\":\"2 Willard North St\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.77874186", "-122.45745402", null, false ], null ]
+, [ 14, "8EFDDA32-77E4-49EB-B552-6CC285895683", 14, 1321380912, "390036", 1321380912, "390036", "{\n}", "APTOS PLAYGROUND", "Neighborhood Park or Playground", "PSA 4", "Sheehy, Chuck", "charles.sheehy@sfgov.org", "(415) 218-2226", "94127", "4.81", "7", "65", [ "{\"address\":\"Aptos\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.7285246", "-122.46654085", null, false ], null ]
+, [ 15, "AE32215F-CA68-41A3-8296-9D0EE51F93C7", 15, 1321380912, "390036", 1321380912, "390036", "{\n}", "ARGONNE PLAYGROUND", "Neighborhood Park or Playground", "PSA 1", "Elder, Steve", "steven.elder@sfgov.org", "(415) 601-6501", "94121", "0.82", "1", "97", [ "{\"address\":\"18th Ave\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.779415", "-122.47769976", null, false ], null ]
+, [ 16, "68C49352-7239-491B-8685-5AF0F0FEB71E", 16, 1321380912, "390036", 1321380912, "390036", "{\n  \"invalidCells\" : {\n    \"1685357\" : \"22nd/Arkansas, San Francisco, CA, (37.75737790, -122.39766207)\"\n  }\n}", "Arkansas Friendship Garden", "Community Garden", "PSA 2", "Hill, Eric", "eric.hill@sfgov.org", "(415) 254-8030", "94107", "0.13", "10", "171727", [ null, null, null, null, null ], null ]
+, [ 17, "05C02906-B07D-44B5-A249-19E5B92B7704", 17, 1321380912, "390036", 1321380912, "390036", "{\n}", "Arlington Community Garden", "Community Garden", "PSA 5", "Lockwood, Darlene", "darlene.lockwood@sfgov.org", "(415) 717-2872", "94131", "0.13", "8", "171736", [ "{\"address\":\"Arlington\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.73704325", "-122.42637624", null, false ], null ]
+, [ 18, "52AEC396-C7AE-4198-91FA-CFABB60AE345", 18, 1321380912, "390036", 1321380912, "390036", "{\n}", "BALBOA NATURAL AREA", "Neighborhood Park or Playground", "PSA 1", "Wayne, Lisa", "lisa.wayne@sfgov.org", "(415) 666-7092", "94121", "1.84", "1", "174", [ "{\"address\":\"Balboa\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.77591285", "-122.51103949", null, false ], null ]
+, [ 19, "8AEDB985-22F9-450B-B229-D71BDB39BD00", 19, 1321380912, "390036", 1321380912, "390036", "{\n}", "BALBOA PARK", "Neighborhood Park or Playground", "PSA 5", "Lockwood, Darlene", "darlene.lockwood@sfgov.org", "(415) 717-2872", "94112", "24.02", "11", "66", [ "{\"address\":\"Ocean\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.72494861", "-122.44462659", null, false ], null ]
+, [ 20, "98ACB6D3-86E5-4321-99DC-41C59810A11C", 20, 1321380912, "390036", 1321380912, "390036", "{\n  \"invalidCells\" : {\n    \"1685357\" : \"LeConte Ave, San Francisco, CA, (37.71513230, -122.39227019)\"\n  }\n}", "BAY VIEW PARK", "Regional Park", "PSA 3", "Watkins, Robert", "robert.watkins@sfgov.org", "(415) 819-6138", "94124", "46.63", "10", "43", [ null, null, null, null, null ], null ]
+, [ 21, "0BC4D1E5-E70C-41A1-A3ED-E909E97B5A92", 21, 1321380912, "390036", 1321380912, "390036", "{\n}", "BAY VIEW PLAYGROUND", "Neighborhood Park or Playground", "PSA 3", "Watkins, Robert", "robert.watkins@sfgov.org", "(415) 819-6138", "94124", "3.4", "10", "38", [ "{\"address\":\"3rd\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.72593906", "-122.39329436", null, false ], null ]
+, [ 22, "646916D2-BDE2-4B3E-AE82-1EDC8B87C112", 22, 1321380912, "390036", 1321380912, "390036", "{\n}", "BEIDEMAN/O'FARRELL MINI PARK", "Mini Park", "PSA 2", "O'Connor, Tom", "tom.o'connor@sfgov.org", "(415) 218-0259", "94115", "0.06", "5", "106", [ "{\"address\":\"O'Farrell\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.78238894", "-122.43861654", null, false ], null ]
+, [ 23, "5620163F-03E1-43D9-B4FA-07C3553A865E", 23, 1321380912, "390036", 1321380912, "390036", "{\n}", "BERKELEY WAY OPEN SPACE", "Neighborhood Park or Playground", "PSA 5", "Lockwood, Darlene", "darlene.lockwood@sfgov.org", "(415) 717-2872", "94131", "0.83", "8", "2", [ "{\"address\":\"298 Berkeley Wy\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.73956697", "-122.43995903", null, false ], null ]
+, [ 24, "B8446546-29EE-4B7C-BA61-C09E6034DC59", 24, 1321380912, "390036", 1321380912, "390036", "{\n  \"invalidCells\" : {\n    \"1685357\" : \"Bernal Heights Blvd, San Francisco, CA, (37.74313167, -122.41425204)\"\n  }\n}", "BERNAL HEIGHTS PARK", "Neighborhood Park or Playground", "PSA 6", "Miller, John", "john.miller@sfgov.org", "(415) 513-2577", "94110", "26.34", "9", "36", [ null, null, null, null, null ], null ]
+, [ 25, "F8205ED2-7337-42B5-B274-6588FFE18C6E", 25, 1321380912, "390036", 1321380912, "390036", "{\n}", "BERNAL HEIGHTS RECREATION CENTER", "Neighborhood Park or Playground", "PSA 6", "Miller, John", "john.miller@sfgov.org", "(415) 513-2577", "94110", "0.74", "9", "33", [ "{\"address\":\"500 Moultrie\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.73844636", "-122.41615685", null, false ], null ]
+, [ 26, "96F80098-640E-42C9-8028-83C506AA24CF", 26, 1321380912, "390036", 1321380912, "390036", "{\n}", "BILLY GOAT HILL", "Neighborhood Park or Playground", "PSA 5", "O'Brien, Teresa", "teresa.o'brien@sfgov.org", "(415) 819-2699", "94131", "3.67", "8", "5", [ "{\"address\":\"30th\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.74140787", "-122.43319872", null, false ], null ]
+, [ 27, "6A3EA7FA-FBED-4D35-AC15-F485E8D65832", 27, 1321380912, "390036", 1321380912, "390036", "{\n}", "BROADWAY TUNNEL EAST MINI PARK", "Mini Park", "PSA 1", "Cleveland, Maggie", "maggie.cleveland@sfgov.org", "(415) 254-8014", "94133", "0.03", "3", "204", [ "{\"address\":\"BRdway\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.79699682", "-122.412901", null, false ], null ]
+, [ 28, "BFA817EF-27A5-4D75-AA9A-A321CA6FA6E2", 28, 1321380912, "390036", 1321380912, "390036", "{\n}", "BROADWAY TUNNEL WEST MINI PARK", "Mini Park", "PSA 1", "Figone, Joe", "joseph.figone@sfgov.org", "(415) 713-4997", "94109", "0.12", "3", "203", [ "{\"address\":\"1201 Broadway\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.79643576", "-122.41742319", null, false ], null ]
+, [ 29, "B1F63289-702A-4F7F-AB3B-1D5F6F6D4D99", 29, 1321380912, "390036", 1321380912, "390036", "{\n}", "BROOKS PARK", "Neighborhood Park or Playground", "PSA 4", "Sheehy, Chuck", "charles.sheehy@sfgov.org", "(415) 218-2226", "94132", "3.77", "11", "18", [ "{\"address\":\"373 Ramsell St\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.71727397", "-122.46676875", null, false ], null ]
+, [ 30, "D684CF79-F516-4E62-9A25-A1E64773A6A1", 30, 1321380912, "390036", 1321380912, "390036", "{\n}", "BROTHERHOOD/CHESTER MINI PARK", "Mini Park", "PSA 4", "Sheehy, Chuck", "charles.sheehy@sfgov.org", "(415) 218-2226", "94132", "0.59", "7", "160", [ "{\"address\":\"501 Brotherhood Wy\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.71238249", "-122.46990318", null, false ], null ]
+, [ 31, "E75B2758-8E8E-4D0A-842C-4A2436742D00", 31, 1321380912, "390036", 1321380912, "390036", "{\n}", "BUCHANAN STREET MALL", "Neighborhood Park or Playground", "PSA 2", "O'Connor, Tom", "tom.o'connor@sfgov.org", "(415) 218-0259", "94102", "1.81", "5", "121", [ "{\"address\":\"Buchanan\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.77949531", "-122.42856481", null, false ], null ]
+, [ 32, "BBF5F074-A8A7-4B4C-9919-40012A36D8B9", 32, 1321380912, "390036", 1321380912, "390036", "{\n}", "BUENA VISTA PARK", "Regional Park", "PSA 5", "O'Brien, Teresa", "teresa.o'brien@sfgov.org", "(415) 819-2699", "94117", "36.08", "8", "81", [ "{\"address\":\"Buena Vista\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.7685639", "-122.44137945", null, false ], null ]
+, [ 33, "8B5C3B82-EFC6-41FD-929F-807CD448C489", 33, 1321380912, "390036", 1321380912, "390036", "{\n}", "BUSH/BRODERICK MINI PARK", "Mini Park", "PSA 2", "O'Connor, Tom", "tom.o'connor@sfgov.org", "(415) 218-0259", "94115", "0.18", "5", "108", [ "{\"address\":\"Baker\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.78557814", "-122.44253511", null, false ], null ]
+, [ 34, "FAD418A2-5872-4358-B52A-7E1AD5BE47E4", 34, 1321380912, "390036", 1321380912, "390036", "{\n}", "CABRILLO PLAYGROUND", "Neighborhood Park or Playground", "PSA 1", "Elder, Steve", "steven.elder@sfgov.org", "(415) 601-6501", "94121", "0.89", "1", "95", [ "{\"address\":\"858 38th Ave\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.77286672", "-122.49870214", null, false ], null ]
+, [ 35, "2C47E142-506C-481E-9815-D26530673A85", 35, 1321380912, "390036", 1321380912, "390036", "{\n}", "CAMP MATHER", "Family Camp", "Outside SF", "Castile, Steve", "steve.castile@sfgov.org", "(415) 841-0856", "95321", "337.51", null, "10379", [ "{\"address\":\"32560 Mather Rd\",\"city\":\"Groveland\",\"state\":\"CA\",\"zip\":\"\"}", "37.88160218", "-119.85076005", null, false ], null ]
+, [ 36, "1B104D62-D06E-476B-B99A-AF6A6359D0CC", 36, 1321380912, "390036", 1321380912, "390036", "{\n}", "CANDLESTICK PARK", "Concession", "Candlestick Park Stadium", "Gay, Mike", "michael.gay@sfgov.org", "(415) 218-4786", "94124", "86.13", "10", "41", [ "{\"address\":\"Jamestown Ave\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.71327692", "-122.38483572", null, false ], null ]
+, [ 37, "C80960B5-FC37-4651-B05B-86ECF9599F7A", 37, 1321380912, "390036", 1321380912, "390036", "{\n}", "CARL LARSEN PARK", "Neighborhood Park or Playground", "PSA 4", "Sheets, Robert", "robert.sheets@sfgov.org", "(415) 235-4576", "94116", "6.58", "4", "86", [ "{\"address\":\"19th Ave\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.73929782", "-122.47596603", null, false ], null ]
+, [ 38, "524DFA2D-9D9A-4275-B1F3-3D6304E26056", 38, 1321380912, "390036", 1321380912, "390036", "{\n}", "CAYUGA PLAYGROUND", "Neighborhood Park or Playground", "PSA 3", "Taylor, Zack", "zack.taylor@sfgov.org", "(415) 601-7277", "94112", "2.69", "11", "15", [ "{\"address\":\"301 Naglee Ave\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.71388814", "-122.45029719", null, false ], null ]
+, [ 39, "7F73007C-AF80-4911-A421-86C2E71DE772", 39, 1321380912, "390036", 1321380912, "390036", "{\n}", "CAYUGA/LAMARTINE MINI PARK", "Mini Park", "PSA 5", "Lockwood, Darlene", "darlene.lockwood@sfgov.org", "(415) 717-2872", "94112", "0.12", "11", "159", [ "{\"address\":\"Cayuga\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.73033758", "-122.43294264", null, false ], null ]
+, [ 40, "76D2990B-8777-49AA-A97A-66C182034F77", 40, 1321380912, "390036", 1321380912, "390036", "{\n}", "CHESTNUT/KEARNY OPEN SPACE", "Mini Park", "PSA 1", "Cleveland, Maggie", "maggie.cleveland@sfgov.org", "(415) 254-8014", "94133", "0.13", "3", "152", [ "{\"address\":\"Chestnut\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.80454125", "-122.4070907", null, false ], null ]
+, [ 41, "CB3DC2DB-4236-4AE2-BAB2-E2904B7DEFC2", 41, 1321380912, "390036", 1321380912, "390036", "{\n}", "CHINESE RECREATION CENTER", "Neighborhood Park or Playground", "PSA 1", "Cleveland, Maggie", "maggie.cleveland@sfgov.org", "(415) 254-8014", "94108", "0.65", "3", "140", [ "{\"address\":\"1101 Washington St\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.79420965", "-122.41178577", null, false ], null ]
+, [ 42, "E72083EE-B041-49B1-9FAF-D8F56223FA3E", 42, 1321380912, "390036", 1321380912, "390036", "{\n}", "Clipper Terrace Community Garden", "Community Garden", "PSA 5", "Lockwood, Darlene", "darlene.lockwood@sfgov.org", "(415) 717-2872", "94114", "0.35", "8", "135193", [ "{\"address\":\"855 Clipper Terrace\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.74785021", "-122.44317435", null, false ], null ]
+, [ 43, "0E5786CB-BA48-487D-A63B-17B41DA98F7B", 43, 1321380912, "390036", 1321380912, "390036", "{\n}", "COLERIDGE MINI PARK", "Mini Park", "PSA 6", "Miller, John", "john.miller@sfgov.org", "(415) 513-2577", "94110", "0.21", "9", "34", [ "{\"address\":\"Coleridge\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.74442266", "-122.41966647", null, false ], null ]
+, [ 44, "697FE26D-0B31-4063-990D-07D3CA12C7E9", 44, 1321380912, "390036", 1321380912, "390036", "{\n}", "COLLIS P. HUNTINGTON PARK", "Civic Plaza or Square", "PSA 1", "Cleveland, Maggie", "maggie.cleveland@sfgov.org", "(415) 254-8014", "94108", "1.07", "3", "137", [ "{\"address\":\"California\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.79216576", "-122.41215294", null, false ], null ]
+, [ 45, "67BA50B8-D664-4F95-AE36-14D8175C4415", 45, 1321380912, "390036", 1321380912, "390036", "{\n  \"invalidCells\" : {\n    \"1685357\" : \"22nd/Connecticut, San Francisco, CA, (37.75739852, -122.39731712)\"\n  }\n}", "Connecticut Friendship Garden", "Community Garden", "PSA 2", "Hill, Eric", "eric.hill@sfgov.org", "(415) 254-8030", "94107", "0.14", "10", "171700", [ null, null, null, null, null ], null ]
+, [ 46, "2E6BB8BF-7C2C-48BF-9A85-E04C1EC8D944", 46, 1321380912, "390036", 1321380912, "390036", "{\n}", "CORONA HEIGHTS", "Neighborhood Park or Playground", "PSA 5", "O'Brien, Teresa", "teresa.o'brien@sfgov.org", "(415) 819-2699", "94114", "13.38", "8", "80", [ "{\"address\":\"Roosevelt\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.76497671", "-122.43879691", null, false ], null ]
+, [ 47, "80F3159F-A756-41E4-AA4A-9EA5BC48DAB2", 47, 1321380912, "390036", 1321380912, "390036", "{\n}", "Corwin Community Garden", "Community Garden", "PSA 5", "O'Brien, Teresa", "teresa.o'brien@sfgov.org", "(415) 819-2699", "94114", "0.09", "8", "164221", [ "{\"address\":\"410 Douglass St\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.75723015", "-122.43902313", null, false ], null ]
+, [ 48, "F9DE17B5-CE35-49D3-93C8-37C8013D04A1", 48, 1321380912, "390036", 1321380912, "390036", "{\n}", "COSO/PRECITA MINI PARK", "Mini Park", "PSA 6", "Miller, John", "john.miller@sfgov.org", "(415) 513-2577", "94110", "0.15", "9", "199", [ "{\"address\":\"Coso\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.74624354", "-122.41812033", null, false ], null ]
+, [ 49, "F1C86DC7-83ED-4DDC-875D-8792CAE6945E", 49, 1321380912, "390036", 1321380912, "390036", "{\n}", "COTTAGE ROW MINI PARK", "Mini Park", "PSA 2", "O'Connor, Tom", "tom.o'connor@sfgov.org", "(415) 218-0259", "94115", "0.16", "5", "127", [ "{\"address\":\"Sutter\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.78657099", "-122.4323102", null, false ], null ]
+, [ 50, "0A64DECC-09AB-449E-A67F-6585A50DF355", 50, 1321380912, "390036", 1321380912, "390036", "{\n}", "COW HOLLOW PLAYGROUND", "Neighborhood Park or Playground", "PSA 1", "Figone, Joe", "joseph.figone@sfgov.org", "(415) 713-4997", "94123", "0.15", "2", "110", [ "{\"address\":\"1 Miley St\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.79733829", "-122.44485143", null, false ], null ]
+, [ 51, "E32FEA32-A289-440B-A68E-F476033194A3", 51, 1321380912, "390036", 1321380912, "390036", "{\n  \"invalidCells\" : {\n    \"1685357\" : \"Crags Ct, San Francisco, CA, (37.74141960, -122.44067225)\"\n  }\n}", "CRAGS COURT GARDEN", "Community Garden", "PSA 5", "Lockwood, Darlene", "darlene.lockwood@sfgov.org", "(415) 717-2872", "94131", "0.41", "8", "198", [ null, null, null, null, null ], null ]
+, [ 52, "7908EE4E-B4C6-4E07-B9FE-EF8E896EC640", 52, 1321380912, "390036", 1321380912, "390036", "{\n}", "CROCKER AMAZON PLAYGROUND", "Neighborhood Park or Playground", "PSA 3", "Taylor, Zack", "zack.taylor@sfgov.org", "(415) 601-7277", "94112", "56.46", "11", "164", [ "{\"address\":\"Moscow\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.7140459", "-122.42923866", null, false ], null ]
+, [ 53, "1078C422-D84D-45D1-A76D-1852BBC61B40", 53, 1321380912, "390036", 1321380912, "390036", "{\n}", "Dearborn Community Garden", "Community Garden", "PSA 6", "Field, Adrian", "adrian.field@sfgov.org", "(415) 717-2872", "94110", "0.15", "8", "137654", [ "{\"address\":\"59 Dearborn St\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.76237833", "-122.42274353", null, false ], null ]
+, [ 54, "BF07BB63-B93E-4896-A1DD-C91602F8A7BF", 54, 1321380912, "390036", 1321380912, "390036", "{\n}", "DIAMOND/FARNUM OPEN SPACE", "Neighborhood Park or Playground", "PSA 5", "Lockwood, Darlene", "darlene.lockwood@sfgov.org", "(415) 717-2872", "94131", "0.07", "8", "181", [ "{\"address\":\"Diamond\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.73880241", "-122.43431084", null, false ], null ]
+, [ 55, "A31AAD63-0E38-4170-8067-3AF79BAD8E44", 55, 1321380912, "390036", 1321380912, "390036", "{\n  \"invalidCells\" : {\n    \"1685357\" : \"Brewster/Rutledge St, San Francisco, CA, (37.74503985, -122.40715464)\"\n  }\n}", "Dog Patch-Miller Memorial Comm. Garden", "Community Garden", "PSA 6", "Miller, John", "john.miller@sfgov.org", "(415) 513-2577", "94110", "0.26", "9", "35", [ null, null, null, null, null ], null ]
+, [ 56, "C175994F-17ED-40FB-976A-C198FDA28C01", 56, 1321380912, "390036", 1321380912, "390036", "{\n}", "DOROTHY ERSKINE PARK", "Neighborhood Park or Playground", "PSA 5", "Lockwood, Darlene", "darlene.lockwood@sfgov.org", "(415) 717-2872", "94131", "1.5", "8", "179", [ "{\"address\":\"Martha\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.73391249", "-122.43944536", null, false ], null ]
+, [ 57, "0FC4BFD3-96EC-4B4F-A927-FE81AC3BC290", 57, 1321380912, "390036", 1321380912, "390036", "{\n}", "DOUGLASS PLAYGROUND", "Neighborhood Park or Playground", "PSA 5", "Lockwood, Darlene", "darlene.lockwood@sfgov.org", "(415) 717-2872", "94131", "7.45", "8", "8", [ "{\"address\":\"26th\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.74727823", "-122.43893283", null, false ], null ]
+, [ 58, "18A4E6B5-8BD7-41C8-BDB8-3B6B69D9D41B", 58, 1321380912, "390036", 1321380912, "390036", "{\n}", "DUBOCE PARK", "Neighborhood Park or Playground", "PSA 6", "Field, Adrian", "adrian.field@sfgov.org", "(415) 717-2872", "94117", "4.31", "8", "113", [ "{\"address\":\"Duboce\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.769615", "-122.43342784", null, false ], null ]
+, [ 59, "08E7C6B5-883C-4E04-A902-502EBA95F22F", 59, 1321380912, "390036", 1321380912, "390036", "{\n}", "DUNCAN/CASTRO OPEN SPACE", "Neighborhood Park or Playground", "PSA 5", "O'Brien, Teresa", "teresa.o'brien@sfgov.org", "(415) 819-2699", "94131", "0.55", "8", "178", [ "{\"address\":\"Duncan\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.74594931", "-122.43339409", null, false ], null ]
+, [ 60, "F5801E7D-DDAF-4A5C-9ADA-3459C90A1B3B", 60, 1321380912, "390036", 1321380912, "390036", "{\n}", "DUPONT COURTS", "Neighborhood Park or Playground", "PSA 1", "Elder, Steve", "steven.elder@sfgov.org", "(415) 601-6501", "94121", "0.82", "1", "98", [ "{\"address\":\"336 31st Ave\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.78268787", "-122.4908331", null, false ], null ]
+, [ 61, "97EC3523-FD9B-4A10-861A-60AE4B7D2ACF", 61, 1321380912, "390036", 1321380912, "390036", "{\n}", "EDGEHILL MOUNTAIN", "Neighborhood Park or Playground", "PSA 4", "Sheehy, Chuck", "charles.sheehy@sfgov.org", "(415) 218-2226", "94127", "2.33", "7", "71", [ "{\"address\":\"Edgehill\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.74203025", "-122.45976472", null, false ], null ]
+, [ 62, "40652E00-AF26-4E40-8A95-50C45289837D", 62, 1321380912, "390036", 1321380912, "390036", "{\n  \"invalidCells\" : {\n    \"1685357\" : \"Minnesota St, San Francisco, CA, (37.76098611, -122.39099369)\"\n  }\n}", "ESPRIT PARK", "Neighborhood Park or Playground", "PSA 2", "Hill, Eric", "eric.hill@sfgov.org", "(415) 254-8030", "94107", "1.83", "10", "193", [ null, null, null, null, null ], null ]
+, [ 63, "9CF27275-9626-4B37-A9BF-F3B25A3822EE", 63, 1321380912, "390036", 1321380912, "390036", "{\n}", "EUREKA VALLEY REC CENTER", "Neighborhood Park or Playground", "PSA 5", "O'Brien, Teresa", "teresa.o'brien@sfgov.org", "(415) 819-2699", "94114", "1.93", "8", "75", [ "{\"address\":\"100 Collingwood St\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.75978957", "-122.43648069", null, false ], null ]
+, [ 64, "F9CEBBA5-DAC7-4271-8F2E-0197CCF283FF", 64, 1321380912, "390036", 1321380912, "390036", "{\n}", "EVERSON/DIGBY LOTS", "Neighborhood Park or Playground", "PSA 5", "Lockwood, Darlene", "darlene.lockwood@sfgov.org", "(415) 717-2872", "94131", "1.2", "8", "6", [ "{\"address\":\"61 Everson St\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.73807643", "-122.43177574", null, false ], null ]
+, [ 65, "6010F7E2-DE1C-4BA0-8802-13FD1B2637C2", 65, 1321380912, "390036", 1321380912, "390036", "{\n}", "EXCELSIOR PLAYGROUND", "Neighborhood Park or Playground", "PSA 3", "Taylor, Zack", "zack.taylor@sfgov.org", "(415) 601-7277", "94112", "1.61", "11", "29", [ "{\"address\":\"Russia Ave\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.7203554", "-122.43321862", null, false ], null ]
+, [ 66, "BC558305-F526-4507-ADE1-C844B2BFA84E", 66, 1321380912, "390036", 1321380912, "390036", "{\n}", "FAIRMOUNT PLAZA", "Neighborhood Park or Playground", "PSA 6", "Miller, John", "john.miller@sfgov.org", "(415) 513-2577", "94131", "0.74", "8", "3", [ "{\"address\":\"Miquel\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.73849226", "-122.42913147", null, false ], null ]
+, [ 67, "4C656FCC-5465-48D3-8605-62EDCDE26543", 67, 1321380912, "390036", 1321380912, "390036", "{\n}", "FATHER ALFRED E. BOEDDEKER PARK", "Neighborhood Park or Playground", "PSA 2", "Hill, Eric", "eric.hill@sfgov.org", "(415) 254-8030", "94102", "0.97", "6", "134", [ "{\"address\":\"295 Eddy St\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.78439513", "-122.4120591", null, false ], null ]
+, [ 68, "1DE42A04-53DC-4A7F-AC9D-E843E3285226", 68, 1321380912, "390036", 1321380912, "390036", "{\n}", "FAY PARK", "Neighborhood Park or Playground", "PSA 1", "Cleveland, Maggie", "maggie.cleveland@sfgov.org", "(415) 254-8014", "94133", "0.25", "3", "184", [ "{\"address\":\"2366 Leavenworth St\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.80289031", "-122.4178443", null, false ], null ]
+, [ 69, "0EA69866-318B-4C17-AC51-1A2AF2398703", 69, 1321380912, "390036", 1321380912, "390036", "{\n}", "FILLMORE/TURK MINI PARK", "Mini Park", "PSA 2", "O'Connor, Tom", "tom.o'connor@sfgov.org", "(415) 218-0259", "94115", "0.23", "5", "182", [ "{\"address\":\"Fillmore\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.78018588", "-122.43178038", null, false ], null ]
+, [ 70, "C34F4189-C688-466D-8772-EC4DD1A3D6E7", 70, 1321380912, "390036", 1321380912, "390036", "{\n}", "FRANKLIN SQUARE", "Neighborhood Park or Playground", "PSA 2", "Hill, Eric", "eric.hill@sfgov.org", "(415) 254-8030", "94110", "5.18", "6", "55", [ "{\"address\":\"16th\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.76501506", "-122.4093148", null, false ], null ]
+, [ 71, "3C4B69EF-0FEE-4B96-B2D6-41708949011F", 71, 1321380912, "390036", 1321380912, "390036", "{\n}", "FULTON PLAYGROUND", "Neighborhood Park or Playground", "PSA 1", "Elder, Steve", "steven.elder@sfgov.org", "(415) 601-6501", "94121", "0.82", "1", "96", [ "{\"address\":\"855 27th Ave\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.7733822", "-122.48693405", null, false ], null ]
+, [ 72, "0ED3F3C9-80F9-46FE-9BA5-C0A35C79B0C4", 72, 1321380912, "390036", 1321380912, "390036", "{\n  \"invalidCells\" : {\n    \"1685357\" : \"7th Ave North of Lawton, San Francisco, CA, (37.75911093, -122.46357301)\"\n  }\n}", "Garden for the Environment", "Community Garden", "PSA 4", "Sheehy, Chuck", "charles.sheehy@sfgov.org", "(415) 218-2226", "94131", "0.51", "7", "20755", [ null, null, null, null, null ], null ]
+, [ 73, "28D67178-46E2-4483-A425-6DB28626CE95", 73, 1321380912, "390036", 1321380912, "390036", "{\n}", "GARFIELD SQUARE", "Neighborhood Park or Playground", "PSA 6", "Field, Adrian", "adrian.field@sfgov.org", "(415) 717-2872", "94110", "2.93", "9", "24", [ "{\"address\":\"26th\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.75020058", "-122.4122356", null, false ], null ]
+, [ 74, "8FC5047F-BC4D-447A-979F-A7F8DCE5C445", 74, 1321380912, "390036", 1321380912, "390036", "{\n}", "GENE FRIEND REC CENTER", "Neighborhood Park or Playground", "PSA 2", "Hill, Eric", "eric.hill@sfgov.org", "(415) 254-8030", "94103", "1.02", "6", "57", [ "{\"address\":\"270 6th St\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.77863929", "-122.40635191", null, false ], null ]
+, [ 75, "CFA0139F-C416-4021-A07B-5BF45D3248B7", 75, 1321380912, "390036", 1321380912, "390036", "{\n}", "GENEVA AVENUE STRIP", "Mini Park", "PSA 5", "Lockwood, Darlene", "darlene.lockwood@sfgov.org", "(415) 717-2872", "94112", "0.23", "11", "21", [ "{\"address\":\"600 Geneva\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.72046082", "-122.44546412", null, false ], null ]
+, [ 76, "8B3CEEF6-5AE7-4C08-8AD5-F95A51210408", 76, 1321380912, "390036", 1321380912, "390036", "{\n}", "GEORGE CHRISTOPHER PLAYGROUND", "Neighborhood Park or Playground", "PSA 5", "Lockwood, Darlene", "darlene.lockwood@sfgov.org", "(415) 717-2872", "94131", "6.8", "8", "7", [ "{\"address\":\"5210 Diamond Heights Blvd\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.74347014", "-122.44055037", null, false ], null ]
+, [ 77, "D7771C59-4CA3-423B-97CA-7A638072A80A", 77, 1321380912, "390036", 1321380912, "390036", "{\n}", "GILMAN PLAYGROUND", "Neighborhood Park or Playground", "PSA 3", "Watkins, Robert", "robert.watkins@sfgov.org", "(415) 819-6138", "94124", "4.4", "10", "44", [ "{\"address\":\"Gilman Ave\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.71698202", "-122.38809021", null, false ], null ]
+, [ 78, "F86FFCE9-EEDE-493D-9CEC-F98AB81BC5C0", 78, 1321380912, "390036", 1321380912, "390036", "{\n}", "GLEN PARK", "Regional Park", "PSA 5", "Lockwood, Darlene", "darlene.lockwood@sfgov.org", "(415) 717-2872", "94127", "77.94", "8", "1", [ "{\"address\":\"Elk St\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.7400257", "-122.44273225", null, false ], null ]
+, [ 79, "15ED6A3A-525E-444A-BF4E-73B5908C31A5", 79, 1321380912, "390036", 1321380912, "390036", "{\n}", "GOLDEN GATE HEIGHTS PARK", "Neighborhood Park or Playground", "PSA 4", "Sheehy, Chuck", "charles.sheehy@sfgov.org", "(415) 218-2226", "94116", "6.95", "7", "89", [ "{\"address\":\"12th Ave (off Pacheco\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.74998538", "-122.46940674", null, false ], null ]
+, [ 80, "CC6AC755-A6B0-4245-9674-CA61FEE90FBB", 80, 1321380912, "390036", 1321380912, "390036", "{\n}", "GOLDEN GATE PARK", "Regional Park", "Golden Gate Park", "Koch-Gonzalez, Gloria", "gloria.koch-gonzalez@sfgov.org", "(415) 831-6307", "94117", "1031.98", "1", "94", [ "{\"address\":\"Stanyan\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.76905891", "-122.48094821", null, false ], null ]
+, [ 81, "80C316CE-C5FF-4C9A-B7CC-9BD6FCF4F060", 81, 1321380912, "390036", 1321380912, "390036", "{\n  \"invalidCells\" : {\n    \"1685357\" : \", , , (, )\"\n  }\n}", "GOLDEN GATE PARK - Section 1", "Regional Park", "Golden Gate Park", "Martin, York (Acting)", "york.martin@sfgov.org", "(415) 753-7094", null, "0", "7", "756665", [ null, null, null, null, null ], null ]
+, [ 82, "2F30468D-4604-4A94-812E-DD1C18D03648", 82, 1321380912, "390036", 1321380912, "390036", "{\n  \"invalidCells\" : {\n    \"1685357\" : \", , , (, )\"\n  }\n}", "GOLDEN GATE PARK - Section 2", "Regional Park", "Golden Gate Park", "McCormick, James", "james.mccormick@sfgov.org", "(415) 666-7002", null, "0", "7", "756666", [ null, null, null, null, null ], null ]
+, [ 83, "75C41920-8BEE-4BA9-9C01-F289C3A80D46", 83, 1321380912, "390036", 1321380912, "390036", "{\n  \"invalidCells\" : {\n    \"1685357\" : \", , , (, )\"\n  }\n}", "GOLDEN GATE PARK - Section 3 (Arboretum)", "Regional Park", "Golden Gate Park", "Dennis, Brent", "brent.dennis@sfgov.org", "(415) 753-7271", null, "0", "7", "756667", [ null, null, null, null, null ], null ]
+, [ 84, "A7A732F5-9DDA-40A3-B506-E6EDFD7D4D50", 84, 1321380912, "390036", 1321380912, "390036", "{\n  \"invalidCells\" : {\n    \"1685357\" : \", , , (, )\"\n  }\n}", "GOLDEN GATE PARK - Section 4", "Regional Park", "Golden Gate Park", "Stone, Andy", "andy.stone@sfgov.org", "(415) 666-7003", null, "0", "7", "756668", [ null, null, null, null, null ], null ]
+, [ 85, "71FA5CE0-A749-4C1E-89B3-817630EBEC96", 85, 1321380912, "390036", 1321380912, "390036", "{\n  \"invalidCells\" : {\n    \"1685357\" : \", , , (, )\"\n  }\n}", "GOLDEN GATE PARK - Section 5", "Regional Park", "Golden Gate Park", "Giammattei, Joe", "joe.giammattei@sfgov.org", "(415) 666-7004", null, "0", "7", "756669", [ null, null, null, null, null ], null ]
+, [ 86, "6CF15D10-F960-44AF-9368-97784E7A197B", 86, 1321380912, "390036", 1321380912, "390036", "{\n  \"invalidCells\" : {\n    \"1685357\" : \", , , (, )\"\n  }\n}", "GOLDEN GATE PARK - Section 6", "Regional Park", "Golden Gate Park", "Deasy, Jon", "jon.deasy@sfgov.org", "(415) 753-7040", null, "0", "7", "756670", [ null, null, null, null, null ], null ]
+, [ 87, "87461841-D00C-48AC-A921-E5028566C4F4", 87, 1321380912, "390036", 1321380912, "390036", "{\n}", "GOLDEN GATE/STEINER MINI PARK", "Mini Park", "PSA 2", "O'Connor, Tom", "tom.o'connor@sfgov.org", "(415) 218-0259", "94115", "0.08", "5", "120", [ "{\"address\":\"Golden Gate\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.77958265", "-122.43345152", null, false ], null ]
+, [ 88, "A39BDE20-7694-48D2-81B9-B570E12954B8", 88, 1321380912, "390036", 1321380912, "390036", "{\n}", "Good Prospect Community Garden", "Community Garden", "PSA 6", "Miller, John", "john.miller@sfgov.org", "(415) 513-2577", "94110", "0.11", "9", "21141", [ "{\"address\":\"100 Cortland Ave\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.74002499", "-122.42097734", null, false ], null ]
+, [ 89, "E96E2021-E34B-4189-8B54-CA8B8B865AA3", 89, 1321380912, "390036", 1321380912, "390036", "{\n}", "GRAND VIEW OPEN SPACE", "Neighborhood Park or Playground", "PSA 4", "Sheehy, Chuck", "charles.sheehy@sfgov.org", "(415) 218-2226", "94122", "0.65", "7", "12910", [ "{\"address\":\"15th Ave\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.75507227", "-122.47235155", null, false ], null ]
+, [ 90, "64FB5DC2-3304-4FF3-BAC6-1A5B72C90EBE", 90, 1321380912, "390036", 1321380912, "390036", "{\n}", "GRAND VIEW PARK", "Neighborhood Park or Playground", "PSA 4", "Sheehy, Chuck", "charles.sheehy@sfgov.org", "(415) 218-2226", "94122", "3.98", "7", "92", [ "{\"address\":\"Moraga\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.75646571", "-122.47180128", null, false ], null ]
+, [ 91, "A1650111-901E-4CE8-9DE8-2A7CAE99FE37", 91, 1321380912, "390036", 1321380912, "390036", "{\n}", "GRATTAN PLAYGROUND", "Neighborhood Park or Playground", "PSA 2", "O'Connor, Tom", "tom.o'connor@sfgov.org", "(415) 218-0259", "94117", "1.52", "5", "104", [ "{\"address\":\"1180 Stanyan St\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.76259314", "-122.45147654", null, false ], null ]
+, [ 93, "EEC47193-2AFE-46DF-932C-3BA91C44FA3A", 93, 1321380912, "390036", 1321380912, "390036", "{\n}", "HAMILTON REC CENTER", "Neighborhood Park or Playground", "PSA 2", "O'Connor, Tom", "tom.o'connor@sfgov.org", "(415) 218-0259", "94115", "3.22", "5", "125", [ "{\"address\":\"1900 Geary Blvd\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.78441485", "-122.43603929", null, false ], null ]
+, [ 94, "A73A8358-6C66-44ED-8AD6-BE1D8DBF3A94", 94, 1321380912, "390036", 1321380912, "390036", "{\n}", "HAWK HILL", "Neighborhood Park or Playground", "PSA 4", "Sheehy, Chuck", "charles.sheehy@sfgov.org", "(415) 218-2226", "94116", "4.85", "7", "186", [ "{\"address\":\"14th Ave Rivera\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.74657651", "-122.46872941", null, false ], null ]
+, [ 95, "53D7FF65-0158-452A-8467-2E6EA3CE9F7C", 95, 1321380912, "390036", 1321380912, "390036", "{\n}", "HAYES VALLEY PLAYGROUND", "Neighborhood Park or Playground", "PSA 2", "O'Connor, Tom", "tom.o'connor@sfgov.org", "(415) 218-0259", "94102", "0.61", "5", "116", [ "{\"address\":\"Hayes\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.77606034", "-122.42736714", null, false ], null ]
+, [ 96, "0FA49C1B-AAB9-46FD-97BB-FD9EFC3B5E6D", 96, 1321380912, "390036", 1321380912, "390036", "{\n}", "HEAD/BROTHERHOOD MINI PARK", "Mini Park", "PSA 4", "Sheehy, Chuck", "charles.sheehy@sfgov.org", "(415) 218-2226", "94132", "0.55", "11", "196", [ "{\"address\":\"Head St\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.71262222", "-122.46422924", null, false ], null ]
+, [ 97, "61D318E3-CA8C-43D7-BD96-6D820A0ACB73", 97, 1321380912, "390036", 1321380912, "390036", "{\n}", "HELEN WILLS PLAYGROUND", "Neighborhood Park or Playground", "PSA 1", "Figone, Joe", "joseph.figone@sfgov.org", "(415) 713-4997", "94109", "0.8", "3", "130", [ "{\"address\":\"BRdway\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.79577299", "-122.42066143", null, false ], null ]
+, [ 98, "DD2B6AB4-ABAA-4F15-938C-1978B100AB95", 98, 1321380912, "390036", 1321380912, "390036", "{\n}", "HERZ PLAYGROUND", "Neighborhood Park or Playground", "PSA 3", "Taylor, Zack", "zack.taylor@sfgov.org", "(415) 601-7277", "94134", "6.68", "10", "137671", [ "{\"address\":\"Hahn\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.71348444", "-122.41659732", null, false ], null ]
+, [ 99, "C3A2C0D8-3271-4200-8608-EEB71054A1EC", 99, 1321380912, "390036", 1321380912, "390036", "{\n}", "HILLTOP PARK", "Neighborhood Park or Playground", "PSA 3", "Watkins, Robert", "robert.watkins@sfgov.org", "(415) 819-6138", "94124", "3.46", "10", "47", [ "{\"address\":\"La Salle\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.73291728", "-122.38347479", null, false ], null ]
+, [ 100, "722C84FB-D25A-4253-ACBD-29310E7B82F1", 100, 1321380912, "390036", 1321380912, "390036", "{\n  \"invalidCells\" : {\n    \"1685357\" : \"Holly Park Cir, San Francisco, CA, (37.73720955, -122.41994010)\"\n  }\n}", "HOLLY PARK", "Neighborhood Park or Playground", "PSA 6", "Miller, John", "john.miller@sfgov.org", "(415) 513-2577", "94110", "8.15", "9", "32", [ null, null, null, null, null ], null ]
+, [ 101, "2F544BBE-8913-4318-BBF4-2BDF3DFFA2CD", 101, 1321380912, "390036", 1321380912, "390036", "{\n  \"invalidCells\" : {\n    \"1685357\" : \"Hooker Aly, San Francisco, CA, (37.79043353, -122.41017264)\"\n  }\n}", "Hooker Alley Community Garden", "Community Garden", "PSA 1", "Cleveland, Maggie", "maggie.cleveland@sfgov.org", "(415) 254-8014", "94108", "0.06", "3", "171743", [ null, null, null, null, null ], null ]
+, [ 102, "9630CF71-A549-43C6-9FA9-26BC3E7FE4C0", 102, 1321380912, "390036", 1321380912, "390036", "{\n}", "HOWARD/LANGTON MINI PARK", "Community Garden", "PSA 2", "Hill, Eric", "eric.hill@sfgov.org", "(415) 254-8030", "94103", "0.23", "6", "58", [ "{\"address\":\"Howard\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.77723739", "-122.40981275", null, false ], null ]
+, [ 103, "0CD03DE7-8B26-4A0A-95F1-67345BA789F7", 103, 1321380912, "390036", 1321380912, "390036", "{\n}", "Hunter's Point Recreation Center", "Neighborhood Park or Playground", "PSA 3", "Watkins, Robert", "robert.watkins@sfgov.org", "(415) 695-5004", "94124", "0.3", "10", "165", [ "{\"address\":\"200 Middle Point Rd\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.73735", "-122.37834", null, false ], null ]
+, [ 104, "CEABEA27-EE40-4932-AACC-63DEED430C08", 104, 1321380912, "390036", 1321380912, "390036", "{\n}", "HYDE/VALLEJO MINI PARK", "Mini Park", "PSA 1", "Figone, Joe", "joseph.figone@sfgov.org", "(415) 713-4997", "94109", "0.1", "3", "146", [ "{\"address\":\"Hyde\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.79763564", "-122.41910564", null, false ], null ]
+, [ 105, "B8313706-09D4-4A94-AEBF-BADEECBB4185", 105, 1321380912, "390036", 1321380912, "390036", "{\n}", "INA COOLBRITH MINI PARK", "Mini Park", "PSA 1", "Cleveland, Maggie", "maggie.cleveland@sfgov.org", "(415) 254-8014", "94133", "0.8", "3", "145", [ "{\"address\":\"Vallejo\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.79816473", "-122.41338371", null, false ], null ]
+, [ 106, "76345D57-E706-44E9-BC19-7F3F2F166F0F", 106, 1321380912, "390036", 1321380912, "390036", "{\n}", "INDIA BASIN SHORELINE PARK", "Neighborhood Park or Playground", "PSA 3", "Watkins, Robert", "robert.watkins@sfgov.org", "(415) 819-6138", "94124", "11.57", "10", "48", [ "{\"address\":\"Evans\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.73366342", "-122.37371901", null, false ], null ]
+, [ 107, "6D1EA1C4-1C5F-4E0D-99E1-5578CA8EA16F", 107, 1321380912, "390036", 1321380912, "390036", "{\n}", "INTERIOR GREEN BELT", "Neighborhood Park or Playground", "PSA 4", "Sheehy, Chuck", "charles.sheehy@sfgov.org", "(415) 218-2226", "94131", "21.35", "7", "87", [ "{\"address\":\"Belmont\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.7585442", "-122.45319935", null, false ], null ]
+, [ 108, "7E55CC20-FE31-4FE7-A6BF-AF0D76564093", 108, 1321380912, "390036", 1321380912, "390036", "{\n}", "J. P. MURPHY PLAYGROUND", "Neighborhood Park or Playground", "PSA 4", "Sheehy, Chuck", "charles.sheehy@sfgov.org", "(415) 218-2226", "94116", "1.23", "7", "90", [ "{\"address\":\"1960 9th Ave\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.75180107", "-122.46500011", null, false ], null ]
+, [ 109, "5CAB18BC-118C-4824-863B-82D62E60D862", 109, 1321380912, "390036", 1321380912, "390036", "{\n}", "JACKSON PLAYGROUND", "Neighborhood Park or Playground", "PSA 2", "Hill, Eric", "eric.hill@sfgov.org", "(415) 254-8030", "94107", "4.41", "10", "54", [ "{\"address\":\"17th\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.7643148", "-122.3996072", null, false ], null ]
+, [ 110, "D78A540C-4EF9-4577-B1D3-D0D10B8169A1", 110, 1321380912, "390036", 1321380912, "390036", "{\n}", "JAMES ROLPH JR PLAYGROUND", "Neighborhood Park or Playground", "PSA 6", "Field, Adrian", "adrian.field@sfgov.org", "(415) 717-2872", "94110", "2.93", "9", "50", [ "{\"address\":\"Potrero\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.7497274", "-122.40623124", null, false ], null ]
+, [ 111, "A38FC600-A629-4E03-8960-CDB29A42E0E7", 111, 1321380912, "390036", 1321380912, "390036", "{\n}", "JAPANTOWN PEACE PLAZA", "Civic Plaza or Square", "PSA 2", "O'Connor, Tom", "tom.o'connor@sfgov.org", "(415) 218-0259", "94115", "0.71", "5", "126", [ "{\"address\":\"Post\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.78520911", "-122.42975098", null, false ], null ]
+, [ 112, "C5841C26-2CCD-4380-A271-16F43F52A424", 112, 1321380912, "390036", 1321380912, "390036", "{\n}", "JEFFERSON SQUARE", "Neighborhood Park or Playground", "PSA 2", "O'Connor, Tom", "tom.o'connor@sfgov.org", "(415) 218-0259", "94102", "5.64", "6", "122", [ "{\"address\":\"Eddy\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.78180034", "-122.42565792", null, false ], null ]
+, [ 113, "4CD059A5-5575-4236-8C51-DD4BDECA95AA", 113, 1321380912, "390036", 1321380912, "390036", "{\n}", "JOE DIMAGGIO PLAYGROUND", "Neighborhood Park or Playground", "PSA 1", "Cleveland, Maggie", "maggie.cleveland@sfgov.org", "(415) 254-8014", "94133", "2.52", "3", "150", [ "{\"address\":\"651 Lombard St\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.80248342", "-122.41206911", null, false ], null ]
+, [ 114, "5FB08A44-562F-4128-8F53-57796E2784B5", 114, 1321380912, "390036", 1321380912, "390036", "{\n}", "JOHN MCLAREN PARK", "Regional Park", "PSA 3", "Taylor, Zack", "zack.taylor@sfgov.org", "(415) 601-7277", "94112", "312.54", "10", "28", [ "{\"address\":\"Mansell\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.7180842", "-122.41907209", null, false ], null ]
+, [ 115, "EDBDBE74-7E9A-439B-ACEE-7D3F4D103160", 115, 1321380912, "390036", 1321380912, "390036", "{\n}", "JOOST/BADEN MINI PARK", "Mini Park", "PSA 5", "Lockwood, Darlene", "darlene.lockwood@sfgov.org", "(415) 717-2872", "94131", "0.14", "8", "158", [ "{\"address\":\"Joost\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.73273279", "-122.4408417", null, false ], null ]
+, [ 116, "EF6BD1D3-67C7-44DA-91E3-7C49BDF2632C", 116, 1321380912, "390036", 1321380912, "390036", "{\n}", "JOSE CORONADO PLAYGROUND", "Neighborhood Park or Playground", "PSA 6", "Field, Adrian", "adrian.field@sfgov.org", "(415) 717-2872", "94110", "0.78", "9", "60", [ "{\"address\":\"21st\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.75754628", "-122.41510589", null, false ], null ]
+, [ 117, "092F1079-CE2E-4FA9-86BD-690B5C8180D8", 117, 1321380912, "390036", 1321380912, "390036", "{\n}", "JOSEPH CONRAD MINI PARK", "Mini Park", "PSA 1", "Cleveland, Maggie", "maggie.cleveland@sfgov.org", "(415) 254-8014", "94109", "0.09", "3", "154", [ "{\"address\":\"601 Beach St\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.80667244", "-122.41906274", null, false ], null ]
+, [ 118, "54482EF8-09CB-4598-BCD4-4C8FBEDC3583", 118, 1321380912, "390036", 1321380912, "390036", "{\n}", "JOSEPH L. ALIOTO PERFORMING ARTS PIAZZA", "Civic Plaza or Square", "PSA 2", "Hill, Eric", "eric.hill@sfgov.org", "(415) 254-8030", "94102", "5.38", "6", "118", [ "{\"address\":\"Grove\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.77948045", "-122.4175995", null, false ], null ]
+, [ 119, "4235C4D8-8E1D-4445-A23D-D4C8AE3EF7B7", 119, 1321380912, "390036", 1321380912, "390036", "{\n}", "JOSEPH LEE RECREATION CENTER", "Neighborhood Park or Playground", "PSA 3", "Watkins, Robert", "robert.watkins@sfgov.org", "(415) 819-6138", "94124", "0.78", "10", "40", [ "{\"address\":\"1395 Mendell St\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.73453491", "-122.389412", null, false ], null ]
+, [ 120, "491FEB45-D512-46CF-9A15-AAA75622A4B1", 120, 1321380912, "390036", 1321380912, "390036", "{\n}", "JULIUS KAHN PLAYGROUND", "Neighborhood Park or Playground", "PSA 1", "Figone, Joe", "joseph.figone@sfgov.org", "(415) 713-4997", "94118", "12.38", "2", "166", [ "{\"address\":\"Pacific Ave\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.79131306", "-122.45397275", null, false ], null ]
+, [ 121, "24886310-52FA-47A8-8C96-2CEDDA5A5DBF", 121, 1321380912, "390036", 1321380912, "390036", "{\n}", "JUNIPERO SERRA PLAYGROUND", "Neighborhood Park or Playground", "PSA 4", "Sheehy, Chuck", "charles.sheehy@sfgov.org", "(415) 218-2226", "94132", "1.53", "7", "13", [ "{\"address\":\"300 Stonecrest Dr\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.72482337", "-122.47385187", null, false ], null ]
+, [ 122, "9164B209-B36F-4C73-BA3C-00F6D68AB3F7", 122, 1321380912, "390036", 1321380912, "390036", "{\n}", "JURI COMMONS", "Mini Park", "PSA 6", "Field, Adrian", "adrian.field@sfgov.org", "(415) 717-2872", "94110", "0.32", "9", "23", [ "{\"address\":\"Guerrero\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.74950391", "-122.42199245", null, false ], null ]
+, [ 123, "07B96766-A142-40A8-8B23-FE44809AAC09", 123, 1321380912, "390036", 1321380912, "390036", "{\n}", "JUSTIN HERMAN/EMBARCADERO PLAZA", "Civic Plaza or Square", "PSA 1", "Cleveland, Maggie", "maggie.cleveland@sfgov.org", "(415) 254-8014", "94111", "4.33", "3", "138", [ "{\"address\":\"Clay\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.79487978", "-122.39476577", null, false ], null ]
+, [ 124, "6CBB2091-5AEA-428F-93E7-FC9C7360D3AD", 124, 1321380912, "390036", 1321380912, "390036", "{\n}", "KELLOCH VELASCO MINI PARK", "Mini Park", "PSA 3", "Watkins, Robert", "robert.watkins@sfgov.org", "(415) 819-6138", "94134", "1.74", "10", "26", [ "{\"address\":\"Kelloch\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.70854271", "-122.41314877", null, false ], null ]
+, [ 125, "274004F6-5F16-41CB-B819-233CECA2A0ED", 125, 1321380912, "390036", 1321380912, "390036", "{\n}", "KID POWER PARK", "Neighborhood Park or Playground", "PSA 6", "Field, Adrian", "adrian.field@sfgov.org", "(415) 717-2872", "94110", "0.23", "6", "191", [ "{\"address\":\"45 Hoff St\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.76415431", "-122.42027989", null, false ], null ]
+, [ 126, "82437601-B0BC-4422-993D-0DD9F0BCA798", 126, 1321380912, "390036", 1321380912, "390036", "{\n}", "KITE HILL", "Neighborhood Park or Playground", "PSA 5", "O'Brien, Teresa", "teresa.o'brien@sfgov.org", "(415) 819-2699", "94114", "2.87", "8", "74", [ "{\"address\":\"Yukon\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.75824114", "-122.44166171", null, false ], null ]
+, [ 127, "9D044BA6-79E2-4193-B116-6A2E0D79821E", 127, 1321380912, "390036", 1321380912, "390036", "{\n}", "KOSHLAND PARK", "Neighborhood Park or Playground", "PSA 2", "O'Connor, Tom", "tom.o'connor@sfgov.org", "(415) 218-0259", "94102", "0.82", "5", "115", [ "{\"address\":\"Page\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.77324835", "-122.42672942", null, false ], null ]
+, [ 128, "6AE2BDF2-EB12-45AE-B25E-A884A48BEC8A", 128, 1321380912, "390036", 1321380912, "390036", "{\n}", "LAFAYETTE PARK", "Neighborhood Park or Playground", "PSA 1", "Figone, Joe", "joseph.figone@sfgov.org", "(415) 713-4997", "94109", "11.49", "2", "128", [ "{\"address\":\"Gough\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.79154983", "-122.42767158", null, false ], null ]
+, [ 129, "FF6FD6CE-B9AD-4598-903B-D0AFF591A03F", 129, 1321380912, "390036", 1321380912, "390036", "{\n  \"invalidCells\" : {\n    \"1685357\" : \"Lake Merced Blvd, San Francisco, CA, (37.72183556, -122.49238175)\"\n  }\n}", "LAKE MERCED PARK", "Regional Park", "PSA 4", "Sheehy, Chuck", "charles.sheehy@sfgov.org", "(415) 218-2226", "94132", "608.49", "7", "10", [ null, null, null, null, null ], null ]
+, [ 130, "ECF61E6B-7562-4B92-B1BB-44AD94FFD29B", 130, 1321380912, "390036", 1321380912, "390036", "{\n}", "LAKEVIEW/ASHTON MINI PARK", "Mini Park", "PSA 4", "Sheehy, Chuck", "charles.sheehy@sfgov.org", "(415) 218-2226", "94132", "0.51", "11", "20", [ "{\"address\":\"Ashton\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.71809145", "-122.4625727", null, false ], null ]
+, [ 131, "22413800-8CD8-4508-83B1-7D231FC21FCF", 131, 1321380912, "390036", 1321380912, "390036", "{\n}", "LAUREL HILL PLAYGROUND", "Neighborhood Park or Playground", "PSA 1", "Figone, Joe", "joseph.figone@sfgov.org", "(415) 713-4997", "94118", "1.47", "2", "107", [ "{\"address\":\"251 Euclid Ave\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.78393678", "-122.45093931", null, false ], null ]
+, [ 132, "5E5802B5-7919-46A4-8647-70E6F3F51B24", 132, 1321380912, "390036", 1321380912, "390036", "{\n}", "LECONTE MINI PARK", "Mini Park", "PSA 3", "Watkins, Robert", "robert.watkins@sfgov.org", "(415) 819-6138", "94124", "0.16", "10", "137649", [ "{\"address\":\"845 Meade St\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.71765613", "-122.3958507", null, false ], null ]
+, [ 133, "5043489D-E087-48A8-BC7C-93F4225D7385", 133, 1321380912, "390036", 1321380912, "390036", "{\n}", "LESSING/SEARS MINI PARK", "Mini Park", "PSA 3", "Watkins, Robert", "robert.watkins@sfgov.org", "(415) 819-6138", "94112", "0.15", "11", "14", [ "{\"address\":\"Sickles\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.70860406", "-122.4553029", null, false ], null ]
+, [ 134, "D6224154-B336-47FB-A8C0-1B2B63A959BD", 134, 1321380912, "390036", 1321380912, "390036", "{\n}", "LINCOLN PARK", "Regional Park", "PSA 1", "Elder, Steve", "steven.elder@sfgov.org", "(415) 601-6501", "94121", "112.03", "1", "103", [ "{\"address\":\"34th Ave\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.78423843", "-122.49838278", null, false ], null ]
+, [ 135, "F53D4087-65AF-453B-88E1-6833EFAA74FC", 135, 1321380912, "390036", 1321380912, "390036", "{\n}", "LITTLE HOLLYWOOD PARK", "Neighborhood Park or Playground", "PSA 3", "Watkins, Robert", "robert.watkins@sfgov.org", "(415) 819-6138", "94134", "1.31", "10", "42", [ "{\"address\":\"Lathrop\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.70996909", "-122.39820878", null, false ], null ]
+, [ 136, "D78B7A94-2C6A-473D-A604-FDB90FF3ED31", 136, 1321380912, "390036", 1321380912, "390036", "{\n}", "LOUIS SUTTER PLAYGROUND", "Neighborhood Park or Playground", "PSA 3", "Taylor, Zack", "zack.taylor@sfgov.org", "(415) 601-7277", "94134", "13.92", "10", "137665", [ "{\"address\":\"Wayland\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.72245982", "-122.41392441", null, false ], null ]
+, [ 137, "E491FF91-D4AF-49B4-958A-906B3095BC21", 137, 1321380912, "390036", 1321380912, "390036", "{\n}", "LOWER GREAT HIGHWAY", "Parkway", "Golden Gate Park", "Deasy, Jon", "jon.deasy@sfgov.org", "(415) 831-6307", "94122", "21.1", "4", "163", [ "{\"address\":\"Great Highway\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.74928062", "-122.50817528", null, false ], null ]
+, [ 138, "C206EA6A-FC08-443C-8519-0EB19B454372", 138, 1321380912, "390036", 1321380912, "390036", "{\n}", "MARGARET S HAYWARD PLAYGROUND", "Neighborhood Park or Playground", "PSA 2", "O'Connor, Tom", "tom.o'connor@sfgov.org", "(415) 218-0259", "94102", "5.03", "6", "119", [ "{\"address\":\"1016 Laguna\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.78084683", "-122.425427", null, false ], null ]
+, [ 139, "CE49E02A-E948-4510-BB4B-0CEFBA3A7E95", 139, 1321380912, "390036", 1321380912, "390036", "{\n}", "MARITIME PLAZA", "Civic Plaza or Square", "PSA 1", "Cleveland, Maggie", "maggie.cleveland@sfgov.org", "(415) 254-8014", "94111", "2.01", "3", "142", [ "{\"address\":\"285 Washington St\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.79560513", "-122.39923889", null, false ], null ]
+, [ 140, "6B6A627F-CE5E-4CB5-BD35-7538D5F2B068", 140, 1321380912, "390036", 1321380912, "390036", "{\n}", "MCCOPPIN SQUARE", "Neighborhood Park or Playground", "PSA 4", "Sheets, Robert", "robert.sheets@sfgov.org", "(415) 235-4576", "94116", "7.24", "4", "88", [ "{\"address\":\"24th\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.74382723", "-122.48007959", null, false ], null ]
+, [ 141, "8EB57DB8-C189-4717-8C4C-3161C07C76DD", 141, 1321380912, "390036", 1321380912, "390036", "{\n}", "MCKINLEY SQUARE", "Neighborhood Park or Playground", "PSA 2", "Hill, Eric", "eric.hill@sfgov.org", "(415) 254-8030", "94107", "2.81", "10", "53", [ "{\"address\":\"20th St\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.75913976", "-122.40469058", null, false ], null ]
+, [ 142, "15E1DD29-C9F4-446F-B4D6-EDF7467BB592", 142, 1321380912, "390036", 1321380912, "390036", "{\n}", "MERCED HEIGHTS PLAYGROUND", "Neighborhood Park or Playground", "PSA 4", "Sheehy, Chuck", "charles.sheehy@sfgov.org", "(415) 218-2226", "94132", "1.03", "11", "17", [ "{\"address\":\"Byxbee\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.71750931", "-122.47028126", null, false ], null ]
+, [ 143, "94F0C779-DFE0-464F-9983-86D63154122A", 143, 1321380912, "390036", 1321380912, "390036", "{\n}", "MICHELANGELO PLAYGROUND", "Neighborhood Park or Playground", "PSA 1", "Cleveland, Maggie", "maggie.cleveland@sfgov.org", "(415) 254-8014", "94133", "0.44", "3", "148", [ "{\"address\":\"Greenwich\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.80109573", "-122.41689916", null, false ], null ]
+, [ 144, "5799C716-CCA2-4CB6-819A-0AA7516B51CF", 144, 1321380912, "390036", 1321380912, "390036", "{\n}", "MIDTOWN TERRACE PLAYGROUND", "Neighborhood Park or Playground", "PSA 4", "Sheehy, Chuck", "charles.sheehy@sfgov.org", "(415) 218-2226", "94131", "1.57", "7", "167", [ "{\"address\":\"Clarendon\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.75223367", "-122.45453246", null, false ], null ]
+, [ 145, "380548A1-B08F-4F53-A27A-E5791574E71E", 145, 1321380912, "390036", 1321380912, "390036", "{\n}", "MINNIE & LOVIE WARD REC CENTER", "Neighborhood Park or Playground", "PSA 4", "Sheehy, Chuck", "charles.sheehy@sfgov.org", "(415) 218-2226", "94112", "10.3", "11", "19", [ "{\"address\":\"650 Capitol\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.71577016", "-122.45757024", null, false ], null ]
+, [ 146, "EBE4C7C5-EB04-4EF6-8008-875C511B861B", 146, 1321380912, "390036", 1321380912, "390036", "{\n}", "MIRALOMA PLAYGROUND", "Neighborhood Park or Playground", "PSA 5", "Lockwood, Darlene", "darlene.lockwood@sfgov.org", "(415) 717-2872", "94127", "2.2", "7", "70", [ "{\"address\":\"Omar\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.73864614", "-122.44931265", null, false ], null ]
+, [ 147, "58127F51-90B0-4637-BAE5-E38C34062573", 147, 1321380912, "390036", 1321380912, "390036", "{\n}", "MISSION DOLORES PARK", "Neighborhood Park or Playground", "PSA 6", "Field, Adrian", "adrian.field@sfgov.org", "(415) 717-2872", "94114", "15.94", "8", "63", [ "{\"address\":\"19th\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.75975506", "-122.42709405", null, false ], null ]
+, [ 148, "7A64AE1A-8C0D-4709-8871-0094D21E9E69", 148, 1321380912, "390036", 1321380912, "390036", "{\n}", "MISSION PLAYGROUND", "Neighborhood Park or Playground", "PSA 6", "Field, Adrian", "adrian.field@sfgov.org", "(415) 717-2872", "94110", "2.03", "8", "61", [ "{\"address\":\"19th\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.7592917", "-122.42230064", null, false ], null ]
+, [ 149, "840EC32A-EFE8-40AE-8848-773E98C255A1", 149, 1321380912, "390036", 1321380912, "390036", "{\n}", "MISSION REC CENTER", "Neighborhood Park or Playground", "PSA 6", "Field, Adrian", "adrian.field@sfgov.org", "(415) 717-2872", "94110", "0.63", "9", "59", [ "{\"address\":\"2450 Harrison St\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.75813659", "-122.41292225", null, false ], null ]
+, [ 150, "DB123D66-6C15-4A59-B260-26B958CBAB84", 150, 1321380912, "390036", 1321380912, "390036", "{\n}", "MOSCONE RECREATION CENTER", "Neighborhood Park or Playground", "PSA 1", "Figone, Joe", "joseph.figone@sfgov.org", "(415) 713-4997", "94123", "12.07", "2", "132", [ "{\"address\":\"1800 Chestnut St\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.8021249", "-122.43313532", null, false ], null ]
+, [ 151, "B96E03D8-A902-49CA-9990-46B825DB9E16", 151, 1321380912, "390036", 1321380912, "390036", "{\n}", "MOUNTAIN LAKE PARK", "Neighborhood Park or Playground", "PSA 1", "Elder, Steve", "steven.elder@sfgov.org", "(415) 601-6501", "94118", "12.79", "2", "102", [ "{\"address\":\"1 11th Ave\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.78724257", "-122.4690454", null, false ], null ]
+, [ 152, "212CF5DC-57B3-4F33-9768-760281052EC1", 152, 1321380912, "390036", 1321380912, "390036", "{\n  \"invalidCells\" : {\n    \"1685357\" : \"Myra Wy, San Francisco, CA, (37.73906280, -122.45465821)\"\n  }\n}", "MT DAVIDSON PARK", "Regional Park", "PSA 4", "Sheehy, Chuck", "charles.sheehy@sfgov.org", "(415) 218-2226", "94127", "40.71", "7", "69", [ null, null, null, null, null ], null ]
+, [ 153, "34B63209-BF28-4BF7-8E6E-F0EE5F0E7DD2", 153, 1321380912, "390036", 1321380912, "390036", "{\n  \"invalidCells\" : {\n    \"1685357\" : \"Upper Terrace, San Francisco, CA, (37.76330762, -122.44554051)\"\n  }\n}", "MT OLYMPUS", "Neighborhood Park or Playground", "PSA 5", "O'Brien, Teresa", "teresa.o'brien@sfgov.org", "(415) 819-2699", "94117", "0.21", "8", "78", [ null, null, null, null, null ], null ]
+, [ 154, "DCB68785-366F-4D4B-91A3-EBB87DA57751", 154, 1321380912, "390036", 1321380912, "390036", "{\n}", "MULLEN/PERALTA MINI PARK", "Mini Park", "PSA 6", "Miller, John", "john.miller@sfgov.org", "(415) 513-2577", "94110", "0.45", "9", "176", [ "{\"address\":\"Mullen\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.74607638", "-122.40880708", null, false ], null ]
+, [ 155, "7AD37D3F-8580-41F8-A4A9-61979F787173", 155, 1321380912, "390036", 1321380912, "390036", "{\n}", "MURIEL LEFF MINI PARK", "Mini Park", "PSA 1", "Elder, Steve", "steven.elder@sfgov.org", "(415) 601-6501", "94118", "0.21", "1", "155", [ "{\"address\":\"7th Ave between Geary\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.78006464", "-122.46500795", null, false ], null ]
+, [ 156, "61A0CFF6-521F-471E-851B-6A58A67D7422", 156, 1321380912, "390036", 1321380912, "390036", "{\n}", "NOE VALLEY COURTS", "Neighborhood Park or Playground", "PSA 5", "O'Brien, Teresa", "teresa.o'brien@sfgov.org", "(415) 819-2699", "94114", "0.93", "8", "72", [ "{\"address\":\"24th\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.75140324", "-122.43892096", null, false ], null ]
+, [ 157, "62C7AC32-B060-4DEF-9C90-49EC83EC328E", 157, 1321380912, "390036", 1321380912, "390036", "{\n}", "NOE/BEAVER COMMUNITY GARDEN", "Community Garden", "PSA 6", "Field, Adrian", "adrian.field@sfgov.org", "(415) 717-2872", "94114", "0.11", "8", "64", [ "{\"address\":\"Noe\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.76491711", "-122.4334455", null, false ], null ]
+, [ 158, "FC3F5BCC-172A-4C18-ADDE-18AC1F9ACB0F", 158, 1321380912, "390036", 1321380912, "390036", "{\n}", "Ogden Terrace Community Garden", "Community Garden", "PSA 6", "Miller, John", "john.miller@sfgov.org", "(415) 513-2577", "94110", "0.15", "9", "171609", [ "{\"address\":\"700 Ogden Ave\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.73580357", "-122.41203411", null, false ], null ]
+, [ 159, "9DC55684-CCB7-4323-A4F6-7F02C566C674", 159, 1321380912, "390036", 1321380912, "390036", "{\n  \"invalidCells\" : {\n    \"1685357\" : \"O'Shaughnessy Blvd, San Francisco, CA, (37.74016899, -122.44487598)\"\n  }\n}", "O'SHAUGHNESSY HOLLOW", "Neighborhood Park or Playground", "PSA 5", "Lockwood, Darlene", "darlene.lockwood@sfgov.org", "(415) 717-2872", "94127", "3.75", "7", "183", [ null, null, null, null, null ], null ]
+, [ 160, "0FE5F661-E1D2-4250-81A7-A0BAC33B64D2", 160, 1321380912, "390036", 1321380912, "390036", "{\n}", "PAGE ST. COMMUNITY GARDEN", "Community Garden", "PSA 2", "O'Connor, Tom", "tom.o'connor@sfgov.org", "(415) 218-0259", "94102", "0.08", "5", "11976", [ "{\"address\":\"438 Page St\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.77362331", "-122.42810149", null, false ], null ]
+, [ 161, "EF0039B0-D89C-4D8D-8E22-E6E6CDBDB98E", 161, 1321380912, "390036", 1321380912, "390036", "{\n}", "PAGE/LAGUNA MINI PARK", "Mini Park", "PSA 2", "O'Connor, Tom", "tom.o'connor@sfgov.org", "(415) 218-0259", "94102", "0.15", "5", "114", [ "{\"address\":\"Page\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.77346139", "-122.42524781", null, false ], null ]
+, [ 162, "3C778F18-3846-4833-84D7-27B9F6CD781D", 162, 1321380912, "390036", 1321380912, "390036", "{\n}", "PALACE OF FINE ARTS", "Civic Plaza or Square", "PSA 1", "Figone, Joe", "joseph.figone@sfgov.org", "(415) 713-4997", "94123", "19.37", "2", "111", [ "{\"address\":\"3601 Lyon St &amp; Marina Blvd\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.80299898", "-122.44851272", null, false ], null ]
+, [ 163, "ED5E4718-B1D0-4379-BAFB-E7B100029544", 163, 1321380912, "390036", 1321380912, "390036", "{\n}", "PALEGA RECREATION CENTER", "Neighborhood Park or Playground", "PSA 3", "Watkins, Robert", "robert.watkins@sfgov.org", "(415) 819-6138", "94134", "4.97", "9", "30", [ "{\"address\":\"500 Felton St\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.72934205", "-122.40978", null, false ], null ]
+, [ 164, "E1094573-7E71-4DD9-B2BF-6C6FDBF7A067", 164, 1321380912, "390036", 1321380912, "390036", "{\n}", "PALOU/PHELPS PARK", "Neighborhood Park or Playground", "PSA 3", "Watkins, Robert", "robert.watkins@sfgov.org", "(415) 819-6138", "94124", "2.63", "10", "188", [ "{\"address\":\"Palou\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.73551382", "-122.39472336", null, false ], null ]
+, [ 165, "F1DBC1EB-63DA-4EAA-B727-6B03CDCF0837", 165, 1321380912, "390036", 1321380912, "390036", "{\n  \"invalidCells\" : {\n    \"1685357\" : \"Park Presidio Blvd, San Francisco, CA, (37.78012283, -122.47228457)\"\n  }\n}", "PARK PRESIDIO BLVD", "Parkway", "PSA 1", "Elder, Steve", "steven.elder@sfgov.org", "(415) 601-6501", "94118", "20.38", "1", "101", [ null, null, null, null, null ], null ]
+, [ 166, "FCD55261-152C-4904-8A78-3D859723FE37", 166, 1321380912, "390036", 1321380912, "390036", "{\n}", "Park St Community Garden", "Community Garden", "PSA 6", "Miller, John", "john.miller@sfgov.org", "(415) 513-2577", "94110", "0.05", "9", "171731", [ "{\"address\":\"Park\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.73647064", "-122.42577666", null, false ], null ]
+, [ 167, "7DD10753-D10C-4946-806A-16DE23B31BA8", 167, 1321380912, "390036", 1321380912, "390036", "{\n}", "PARKSIDE SQUARE", "Neighborhood Park or Playground", "PSA 4", "Sheets, Robert", "robert.sheets@sfgov.org", "(415) 235-4576", "94132", "8.31", "4", "84", [ "{\"address\":\"28th Ave\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.73794781", "-122.48390596", null, false ], null ]
+, [ 168, "C0BF07D2-8C5B-409E-A9E0-A99CA4CF830B", 168, 1321380912, "390036", 1321380912, "390036", "{\n}", "PARQUE NINOS UNIDOS", "Neighborhood Park or Playground", "PSA 6", "Field, Adrian", "adrian.field@sfgov.org", "(415) 717-2872", "94110", "0.53", "9", "187", [ "{\"address\":\"23rd\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.75439053", "-122.41356906", null, false ], null ]
+, [ 169, "B139F080-A1FB-4D94-B624-CFB7FA44D022", 169, 1321380912, "390036", 1321380912, "390036", "{\n}", "PATRICIAS GREEN IN HAYES VALLEY", "Mini Park", "PSA 2", "O'Connor, Tom", "tom.o'connor@sfgov.org", "(415) 218-0259", "94102", "0.45", "5", "59481", [ "{\"address\":\"btw Hayes\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.77622289", "-122.42441307", null, false ], null ]
+, [ 170, "D51E3278-0736-4FA9-B39D-28189B156FBD", 170, 1321380912, "390036", 1321380912, "390036", "{\n}", "PEIXOTTO PLAYGROUND", "Neighborhood Park or Playground", "PSA 5", "O'Brien, Teresa", "teresa.o'brien@sfgov.org", "(415) 819-2699", "94114", "0.79", "8", "195", [ "{\"address\":\"15th St\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.76578838", "-122.43790519", null, false ], null ]
+, [ 171, "B168C771-C3F6-4AB2-8556-0053CE4FCBD2", 171, 1321380912, "390036", 1321380912, "390036", "{\n}", "PINE LAKE PARK", "Regional Park", "PSA 4", "Sheets, Robert", "robert.sheets@sfgov.org", "(415) 235-4576", "94132", "30.29", "4", "82", [ "{\"address\":\"Sloat Blvd\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.7363086", "-122.48592744", null, false ], null ]
+, [ 172, "56CDCF27-2304-4A63-8783-96030D551782", 172, 1321380912, "390036", 1321380912, "390036", "{\n}", "PORTOLA OPEN SPACE", "Mini Park", "PSA 5", "Lockwood, Darlene", "darlene.lockwood@sfgov.org", "(415) 717-2872", "94131", "0.81", "8", "37264", [ "{\"address\":\"201 Portola\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.74707797", "-122.44406156", null, false ], null ]
+, [ 173, "5FE280A7-157B-40C3-9EF7-CD218E5199B7", 173, 1321380912, "390036", 1321380912, "390036", "{\n}", "PORTSMOUTH SQUARE", "Neighborhood Park or Playground", "PSA 1", "Cleveland, Maggie", "maggie.cleveland@sfgov.org", "(415) 254-8014", "94108", "1.29", "3", "141", [ "{\"address\":\"Washington\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.79483492", "-122.40535067", null, false ], null ]
+, [ 174, "E9077752-BEC2-4C7A-963E-B807E80F345D", 174, 1321380912, "390036", 1321380912, "390036", "{\n}", "POTRERO DEL SOL PARK", "Neighborhood Park or Playground", "PSA 6", "Field, Adrian", "adrian.field@sfgov.org", "(415) 717-2872", "94110", "4.36", "10", "49", [ "{\"address\":\"Potrero\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.75060695", "-122.40507971", null, false ], null ]
+, [ 175, "964B54C6-1B1E-4D87-9619-0112003FA690", 175, 1321380912, "390036", 1321380912, "390036", "{\n}", "POTRERO HILL MINI PARK", "Mini Park", "PSA 2", "Hill, Eric", "eric.hill@sfgov.org", "(415) 254-8030", "94107", "0.22", "10", "10416", [ "{\"address\":\"22nd\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.75744642", "-122.3965207", null, false ], null ]
+, [ 176, "8EE51E9C-AD77-4693-895D-6417892C0C6C", 176, 1321380912, "390036", 1321380912, "390036", "{\n}", "POTRERO HILL RECREATION CENTER", "Neighborhood Park or Playground", "PSA 2", "Hill, Eric", "eric.hill@sfgov.org", "(415) 254-8030", "94107", "10.07", "10", "52", [ "{\"address\":\"801 Arkansas St\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.75613966", "-122.39688179", null, false ], null ]
+, [ 177, "7AA91306-1CB5-4951-A7E0-3EF11A6402AF", 177, 1321380912, "390036", 1321380912, "390036", "{\n}", "PRECITA PARK", "Neighborhood Park or Playground", "PSA 6", "Miller, John", "john.miller@sfgov.org", "(415) 513-2577", "94110", "2.21", "9", "37", [ "{\"address\":\"3200 Folsom St\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.74706232", "-122.41202466", null, false ], null ]
+, [ 178, "5C78D4C1-982C-42C4-8B02-BA9F3C2DA87F", 178, 1321380912, "390036", 1321380912, "390036", "{\n}", "PRENTISS MINI PARK", "Mini Park", "PSA 6", "Miller, John", "john.miller@sfgov.org", "(415) 513-2577", "94110", "0.06", "9", "201", [ "{\"address\":\"Prentiss\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.74021712", "-122.41187368", null, false ], null ]
+, [ 179, "80022260-74B3-488A-A3A0-18DEDA5F1C29", 179, 1321380912, "390036", 1321380912, "390036", "{\n}", "PRESIDIO HEIGHTS PLAYGROUND", "Neighborhood Park or Playground", "PSA 1", "Figone, Joe", "joseph.figone@sfgov.org", "(415) 713-4997", "94118", "0.44", "2", "109", [ "{\"address\":\"Clay\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.78847078", "-122.4495972", null, false ], null ]
+, [ 180, "97D97736-8BF5-4D9A-B92A-9EEEC05BB8FA", 180, 1321380912, "390036", 1321380912, "390036", "{\n}", "RANDOLPH/BRIGHT MINI PARK", "Mini Park", "PSA 4", "Sheehy, Chuck", "charles.sheehy@sfgov.org", "(415) 218-2226", "94132", "0.09", "11", "16", [ "{\"address\":\"Randolph\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.71451213", "-122.46369333", null, false ], null ]
+, [ 181, "479F9189-196B-48DB-ADF0-A9C733D636A0", 181, 1321380912, "390036", 1321380912, "390036", "{\n}", "RAYMOND KIMBELL PLAYGROUND", "Neighborhood Park or Playground", "PSA 2", "O'Connor, Tom", "tom.o'connor@sfgov.org", "(415) 218-0259", "94115", "0", "5", "124", [ "{\"address\":\"Geary Blvd\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.78294403", "-122.43512653", null, false ], null ]
+, [ 182, "E6995C04-5AEB-45EA-8BDC-76583F5FA115", 182, 1321380912, "390036", 1321380912, "390036", "{\n}", "RICHMOND PLAYGROUND", "Neighborhood Park or Playground", "PSA 1", "Elder, Steve", "steven.elder@sfgov.org", "(415) 601-6501", "94121", "0.82", "1", "100", [ "{\"address\":\"18th Ave\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.78513017", "-122.47811169", null, false ], null ]
+, [ 183, "C7921F88-AC8D-4274-A39F-5E3703744A6E", 183, 1321380912, "390036", 1321380912, "390036", "{\n}", "RICHMOND RECREATION CENTER", "Neighborhood Park or Playground", "PSA 1", "Elder, Steve", "steven.elder@sfgov.org", "(415) 601-6501", "94121", "0.82", "1", "172", [ "{\"address\":\"251 18th Ave\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.78326998", "-122.47797676", null, false ], null ]
+, [ 184, "07AC1775-0635-4A05-8B0A-558C79F5EBD3", 184, 1321380912, "390036", 1321380912, "390036", "{\n  \"invalidCells\" : {\n    \"1685357\" : \"Whitney Young Cire, San Francisco, CA, (37.73379832, -122.38345175)\"\n  }\n}", "RIDGETOP PLAZA", "Neighborhood Park or Playground", "PSA 3", "Watkins, Robert", "robert.watkins@sfgov.org", "(415) 819-6138", "94124", "0.29", "10", "189", [ null, null, null, null, null ], null ]
+, [ 185, "ADF2056A-7BCA-40FA-9C7B-9A1A71704094", 185, 1321380912, "390036", 1321380912, "390036", "{\n}", "ROCHAMBEAU PLAYGROUND", "Neighborhood Park or Playground", "PSA 1", "Elder, Steve", "steven.elder@sfgov.org", "(415) 601-6501", "94121", "0.83", "1", "99", [ "{\"address\":\"238 25th Ave\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.78483852", "-122.48454408", null, false ], null ]
+, [ 186, "08109C3A-E4EE-48F2-B4DC-32F889B99CBD", 186, 1321380912, "390036", 1321380912, "390036", "{\n}", "ROCK OUTCROPPING", "Neighborhood Park or Playground", "PSA 4", "Sheets, Robert", "robert.sheets@sfgov.org", "(415) 235-4576", "94116", "1.4", "7", "175", [ "{\"address\":\"Ortega\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.75384487", "-122.47086479", null, false ], null ]
+, [ 187, "84DCAB04-ED5D-497A-A774-4D6957E1FC01", 187, 1321380912, "390036", 1321380912, "390036", "{\n}", "ROLPH NICOL PLAYGROUND", "Neighborhood Park or Playground", "PSA 4", "Sheets, Robert", "robert.sheets@sfgov.org", "(415) 235-4576", "94132", "3.04", "7", "9", [ "{\"address\":\"Eucalyptus Dr\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.73060291", "-122.48041933", null, false ], null ]
+, [ 188, "07796381-EA7A-420F-A10B-A62163C09FA9", 188, 1321380912, "390036", 1321380912, "390036", "{\n}", "ROOSEVELT/HENRY STEPS", "Mini Park", "PSA 5", "O'Brien, Teresa", "teresa.o'brien@sfgov.org", "(415) 819-2699", "94114", "0.34", "8", "107857", [ "{\"address\":\"299 Henry St\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.76655956", "-122.43732268", null, false ], null ]
+, [ 189, "BC26FCD0-4B5E-4018-B3A6-16A8A4294389", 189, 1321380912, "390036", 1321380912, "390036", "{\n}", "RUSSIAN HILL OPEN SPACE", "Neighborhood Park or Playground", "PSA 1", "Cleveland, Maggie", "maggie.cleveland@sfgov.org", "(415) 254-8014", "94109", "0.96", "2", "153", [ "{\"address\":\"Hyde\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.80341611", "-122.42075699", null, false ], null ]
+, [ 190, "2D44E68D-C142-4F38-8AB0-05738EDE267D", 190, 1321380912, "390036", 1321380912, "390036", "{\n}", "SAN FRANCISCO ZOO", "Zoological Garden", "PSA 4", "Scott, Ronnie", "ronnie.scott@sfgov.org", "(415) 504-7923", "94132", "131.52", "7", "12", [ "{\"address\":\"1 Zoo Rd\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.73158916", "-122.50380857", null, false ], null ]
+, [ 191, "AC6D1873-F41A-47FA-958C-12A4521BDA10", 191, 1321380912, "390036", 1321380912, "390036", "{\n}", "SATURN STREET STEPS", "Mini Park", "PSA 5", "O'Brien, Teresa", "teresa.o'brien@sfgov.org", "(415) 819-2699", "94114", "0.1", "8", "79", [ "{\"address\":\"Saturn\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.7626853", "-122.44055619", null, false ], null ]
+, [ 192, "A201F184-EE34-4A56-BB55-BD775EADF262", 192, 1321380912, "390036", 1321380912, "390036", "{\n}", "SELBY/PALOU MINI PARK", "Mini Park", "PSA 3", "Watkins, Robert", "robert.watkins@sfgov.org", "(415) 819-6138", "94124", "0.29", "10", "157", [ "{\"address\":\"Palou\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.73886468", "-122.40035293", null, false ], null ]
+, [ 193, "27B39240-B727-45D7-9790-16A398EC086E", 193, 1321380912, "390036", 1321380912, "390036", "{\n}", "SEWARD MINI PARK", "Mini Park", "PSA 5", "O'Brien, Teresa", "teresa.o'brien@sfgov.org", "(415) 819-2699", "94114", "0.37", "8", "73", [ "{\"address\":\"Seward\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.75761058", "-122.44006058", null, false ], null ]
+, [ 194, "8E9CBDF8-94FD-4889-B719-1734FE6804E7", 194, 1321380912, "390036", 1321380912, "390036", "{\n}", "SGT. JOHN MACAULAY PARK", "Mini Park", "PSA 2", "Hill, Eric", "eric.hill@sfgov.org", "(415) 254-8030", "94109", "0.21", "6", "123", [ "{\"address\":\"Larkin\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.78540001", "-122.41819743", null, false ], null ]
+, [ 195, "07C66D3B-E749-4FEE-9585-AF42CC799835", 195, 1321380912, "390036", 1321380912, "390036", "{\n}", "SHARP PARK", "Regional Park", "Outside SF", "Castile, Steve", "steve.castile@sfgov.org", "(415) 841-0856", "94044", "409.69", null, "10380", [ "{\"address\":\"1 Sharp Park Rd\",\"city\":\"Pacifica\",\"state\":\"CA\",\"zip\":\"\"}", "37.62439438", "-122.48189132", null, false ], null ]
+, [ 196, "D5C3A863-F217-4B27-92DE-711484937B29", 196, 1321380912, "390036", 1321380912, "390036", "{\n}", "SIGMUND STERN RECREATION GROVE", "Regional Park", "PSA 4", "Sheets, Robert", "robert.sheets@sfgov.org", "(415) 235-4576", "94132", "33.78", "4", "83", [ "{\"address\":\"19th Ave\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.73608224", "-122.47829786", null, false ], null ]
+, [ 197, "346C4398-2A70-4869-B3F2-002ECA8BDAAD", 197, 1321380912, "390036", 1321380912, "390036", "{\n}", "SILVER TERRACE PLAYGROUND", "Neighborhood Park or Playground", "PSA 3", "Watkins, Robert", "robert.watkins@sfgov.org", "(415) 819-6138", "94124", "5.47", "10", "39", [ "{\"address\":\"Thornton\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.73285911", "-122.40314958", null, false ], null ]
+, [ 198, "91763868-5D39-45D7-B2DB-1381E655396C", 198, 1321380912, "390036", 1321380912, "390036", "{\n}", "SOUTH END ROWING/DOLPHIN CLUB", "Concession", "PSA 1", "Figone, Joe", "joseph.figone@sfgov.org", "(415) 713-4997", "94109", "1.11", "3", "190", [ "{\"address\":\"500 Jefferson St\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.80796044", "-122.42126376", null, false ], null ]
+, [ 199, "01CCF31C-5B2D-4046-9096-540F08EE2256", 199, 1321380912, "390036", 1321380912, "390036", "{\n}", "SOUTH PARK", "Neighborhood Park or Playground", "PSA 2", "Hill, Eric", "eric.hill@sfgov.org", "(415) 254-8030", "94107", "1.12", "6", "56", [ "{\"address\":\"64 Park Ave\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.78157949", "-122.39395227", null, false ], null ]
+, [ 200, "8FE057CC-4052-4B46-B4C1-86A1FD5C38FD", 200, 1321380912, "390036", 1321380912, "390036", "{\n}", "SOUTH SUNSET PLAYGROUND", "Neighborhood Park or Playground", "PSA 4", "Sheets, Robert", "robert.sheets@sfgov.org", "(415) 235-4576", "94116", "3.72", "4", "85", [ "{\"address\":\"40th Ave\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.73738679", "-122.49845174", null, false ], null ]
+, [ 201, "45AF80B4-6AD7-4AC4-A64C-FF4909341CAD", 201, 1321380912, "390036", 1321380912, "390036", "{\n}", "ST MARY'S REC CENTER", "Neighborhood Park or Playground", "PSA 6", "Miller, John", "john.miller@sfgov.org", "(415) 513-2577", "94110", "13.6", "9", "31", [ "{\"address\":\"Murray\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.73365828", "-122.42064294", null, false ], null ]
+, [ 202, "E9AB76F6-0C39-4541-A4DF-E7E2A75CA570", 202, 1321380912, "390036", 1321380912, "390036", "{\n}", "ST MARY'S SQUARE", "Civic Plaza or Square", "PSA 1", "Cleveland, Maggie", "maggie.cleveland@sfgov.org", "(415) 254-8014", "94108", "1.11", "3", "136", [ "{\"address\":\"California St\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.79205617", "-122.40511712", null, false ], null ]
+, [ 203, "7A3AE9AB-0820-4AE4-ADE0-E6123E168586", 203, 1321380912, "390036", 1321380912, "390036", "{\n}", "STATES STREET PLAYGROUND", "Neighborhood Park or Playground", "PSA 5", "O'Brien, Teresa", "teresa.o'brien@sfgov.org", "(415) 819-2699", "94114", "2.76", "8", "200", [ "{\"address\":\"86 States St\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.76380044", "-122.43785312", null, false ], null ]
+, [ 204, "76DC4855-C930-4ECE-9087-DEAAB6DA4AF9", 204, 1321380912, "390036", 1321380912, "390036", "{\n}", "SUE BIERMAN PARK", "Neighborhood Park or Playground", "PSA 1", "Cleveland, Maggie", "maggie.cleveland@sfgov.org", "(415) 601-7277", "94111", "4.41", "3", "143", [ "{\"address\":\"Clay St\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.79592597", "-122.3965106", null, false ], null ]
+, [ 205, "AAF8128B-19E8-4C47-899F-FCAA05FF0648", 205, 1321380912, "390036", 1321380912, "390036", "{\n}", "SUNNYSIDE CONSERVATORY", "Mini Park", "PSA 5", "Lockwood, Darlene", "darlene.lockwood@sfgov.org", "(415) 717-2872", "94131", "0.26", "8", "180", [ "{\"address\":\"Monterey\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.73193576", "-122.44076127", null, false ], null ]
+, [ 206, "FEB7C75A-9148-48A7-86A7-A28614F7F12B", 206, 1321380912, "390036", 1321380912, "390036", "{\n}", "SUNNYSIDE PLAYGROUND", "Neighborhood Park or Playground", "PSA 5", "Lockwood, Darlene", "darlene.lockwood@sfgov.org", "(415) 717-2872", "94127", "2.37", "7", "67", [ "{\"address\":\"Teresita Ave\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.73366412", "-122.4474787", null, false ], null ]
+, [ 207, "C0A80A98-88F1-43CD-A1D5-2DAADD6DE492", 207, 1321380912, "390036", 1321380912, "390036", "{\n}", "SUNSET PLAYGROUND", "Neighborhood Park or Playground", "PSA 4", "Sheets, Robert", "robert.sheets@sfgov.org", "(415) 235-4576", "94122", "3.29", "4", "93", [ "{\"address\":\"2201 Lawton St\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.75658875", "-122.48684698", null, false ], null ]
+, [ 208, "7137957B-7571-4DEB-B47B-318E97CE3B9A", 208, 1321380912, "390036", 1321380912, "390036", "{\n}", "TANK HILL", "Neighborhood Park or Playground", "PSA 5", "O'Brien, Teresa", "teresa.o'brien@sfgov.org", "(415) 819-2699", "94117", "2.87", "5", "76", [ "{\"address\":\"Clarendon\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.75994801", "-122.44768643", null, false ], null ]
+, [ 209, "F25A43B1-D548-4A18-9E54-DF44245C4C86", 209, 1321380912, "390036", 1321380912, "390036", "{\n  \"invalidCells\" : {\n    \"1685357\" : \"Telegraph Hill Blvd, San Francisco, CA, (37.80278413, -122.40583596)\"\n  }\n}", "TELEGRAPH HILL/PIONEER PARK", "Civic Plaza or Square", "PSA 1", "Cleveland, Maggie", "maggie.cleveland@sfgov.org", "(415) 254-8014", "94133", "4.89", "3", "149", [ null, null, null, null, null ], null ]
+, [ 210, "FC99513E-AB5F-4D46-AB0F-8F8D437EB4FC", 210, 1321380912, "390036", 1321380912, "390036", "{\n}", "TENDERLOIN CHILDREN'S REC CENTER", "Neighborhood Park or Playground", "PSA 2", "Hill, Eric", "eric.hill@sfgov.org", "(415) 254-8030", "94109", "0.61", "6", "168", [ "{\"address\":\"570 Ellis St\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.78482103", "-122.41540228", null, false ], null ]
+, [ 211, "9FAC431B-18E3-4C04-A1ED-8B4FA1BA21F3", 211, 1321380912, "390036", 1321380912, "390036", "{\n  \"invalidCells\" : {\n    \"1685357\" : \"Diamond Heights, San Francisco, CA, (37.74170413, -122.43616246)\"\n  }\n}", "TOPAZ OPEN SPACE", "Neighborhood Park or Playground", "PSA 5", "Lockwood, Darlene", "darlene.lockwood@sfgov.org", "(415) 717-2872", "94131", "0.83", "8", "197", [ null, null, null, null, null ], null ]
+, [ 212, "A434F633-EC32-470C-A6A1-490BDACE8252", 212, 1321380912, "390036", 1321380912, "390036", "{\n}", "TURK/HYDE MINI PARK", "Mini Park", "PSA 2", "Hill, Eric", "eric.hill@sfgov.org", "(415) 254-8030", "94102", "0.11", "6", "192", [ "{\"address\":\"Hyde\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.78274031", "-122.41596297", null, false ], null ]
+, [ 213, "E6D590B3-F383-4DC1-BE63-57E15CA084AE", 213, 1321380912, "390036", 1321380912, "390036", "{\n  \"invalidCells\" : {\n    \"1685357\" : \"Twin Peaks Blvd, San Francisco, CA, (37.75279086, -122.44748390)\"\n  }\n}", "TWIN PEAKS", "Regional Park", "PSA 5", "Lockwood, Darlene", "darlene.lockwood@sfgov.org", "(415) 717-2872", "94131", "54.59", "7", "77", [ null, null, null, null, null ], null ]
+, [ 214, "414B7020-ABA4-499F-8F38-7EB77ACA1100", 214, 1321380912, "390036", 1321380912, "390036", "{\n}", "UNION SQUARE", "Civic Plaza or Square", "PSA 2", "Hill, Eric", "eric.hill@sfgov.org", "(415) 254-8030", "94108", "2.6", "3", "135", [ "{\"address\":\"Post\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.78793122", "-122.40750049", null, false ], null ]
+, [ 215, "02FCA896-AC15-48EB-9CFB-B63E6F209007", 215, 1321380912, "390036", 1321380912, "390036", "{\n}", "UPPER NOE RECREATION CENTER", "Neighborhood Park or Playground", "PSA 5", "O'Brien, Teresa", "teresa.o'brien@sfgov.org", "(415) 819-2699", "94131", "2.51", "8", "22", [ "{\"address\":\"Day\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.74243091", "-122.42779751", null, false ], null ]
+, [ 216, "990D0430-F9D9-4FDD-B401-DFB8A76FC1CB", 216, 1321380912, "390036", 1321380912, "390036", "{\n}", "UTAH/18TH MINI PARK", "Mini Park", "PSA 2", "Hill, Eric", "eric.hill@sfgov.org", "(415) 254-8030", "94110", "0.1", "10", "202", [ "{\"address\":\"18th\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.76251745", "-122.40599759", null, false ], null ]
+, [ 217, "2686B5EE-4409-4DCD-B4F6-57572F2D4B73", 217, 1321380912, "390036", 1321380912, "390036", "{\n}", "VICTORIA MANALO DRAVES PARK", "Neighborhood Park or Playground", "PSA 2", "Hill, Eric", "eric.hill@sfgov.org", "(415) 254-8030", "94103", "2.52", "6", "169", [ "{\"address\":\"Folsom\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.77700947", "-122.40595532", null, false ], null ]
+, [ 218, "2BF7B80B-FC29-4C7F-AD5A-D2540702D922", 218, 1321380912, "390036", 1321380912, "390036", "{\n}", "VISITACION VALLEY GREENWAY", "Neighborhood Park or Playground", "PSA 3", "Taylor, Zack", "zack.taylor@sfgov.org", "(415) 601-7277", "94134", "2.13", "10", "177", [ "{\"address\":\"Lel\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.71476638", "-122.40613194", null, false ], null ]
+, [ 219, "FE5CD3F4-EF6C-4786-8E2A-77FBAFD30B47", 219, 1321380912, "390036", 1321380912, "390036", "{\n}", "VISITACION VALLEY PLAYGROUND", "Neighborhood Park or Playground", "PSA 3", "Taylor, Zack", "zack.taylor@sfgov.org", "(415) 601-7277", "94134", "2.05", "10", "27", [ "{\"address\":\"251 Lel&amp; St\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.71240126", "-122.40908547", null, false ], null ]
+, [ 220, "4C902E9D-7F5D-4486-8AA7-54D55337DC20", 220, 1321380912, "390036", 1321380912, "390036", "{\n}", "WALTER HAAS PLAYGROUND", "Neighborhood Park or Playground", "PSA 5", "Lockwood, Darlene", "darlene.lockwood@sfgov.org", "(415) 717-2872", "94131", "4.4", "8", "4", [ "{\"address\":\"Addison\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.74058384", "-122.43436978", null, false ], null ]
+, [ 221, "F6EC7DCB-917D-4F10-B471-DE71FD62FCFF", 221, 1321380912, "390036", 1321380912, "390036", "{\n}", "WASHINGTON SQUARE", "Civic Plaza or Square", "PSA 1", "Cleveland, Maggie", "maggie.cleveland@sfgov.org", "(415) 254-8014", "94133", "2.26", "3", "147", [ "{\"address\":\"Filbert\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.80083781", "-122.41002829", null, false ], null ]
+, [ 222, "D6F5B0DC-CD41-40FE-8A8D-177873898313", 222, 1321380912, "390036", 1321380912, "390036", "{\n}", "WASHINGTON/HYDE MINI PARK", "Mini Park", "PSA 1", "Figone, Joe", "joseph.figone@sfgov.org", "(415) 713-4997", "94109", "0.15", "3", "144", [ "{\"address\":\"Washington\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.79400955", "-122.41740007", null, false ], null ]
+, [ 223, "9A0D8D36-242E-4F1E-A793-784DC08F9D1E", 223, 1321380912, "390036", 1321380912, "390036", "{\n}", "WEST PORTAL PLAYGROUND", "Neighborhood Park or Playground", "PSA 4", "Sheets, Robert", "robert.sheets@sfgov.org", "(415) 235-4576", "94127", "1.91", "7", "68", [ "{\"address\":\"Ulloa\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.74160392", "-122.46524393", null, false ], null ]
+, [ 224, "F789001C-2515-4422-B888-DAA955321F4A", 224, 1321380912, "390036", 1321380912, "390036", "{\n}", "WEST SUNSET PLAYGROUND", "Neighborhood Park or Playground", "PSA 4", "Sheets, Robert", "robert.sheets@sfgov.org", "(415) 235-4576", "94116", "17.16", "4", "91", [ "{\"address\":\"3223 Ortega St &amp; 39th Ave\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.74899627", "-122.49800859", null, false ], null ]
+, [ 225, "3E431687-C8FC-41DF-A237-BED320A72A14", 225, 1321380912, "390036", 1321380912, "390036", "{\n}", "White Crane Springs Community Garden", "Community Garden", "PSA 4", "Sheets, Robert", "robert.sheets@sfgov.org", "(415) 235-4576", "94131", "2.68", "7", "123631", [ "{\"address\":\"of 7th\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.75758279", "-122.4633024", null, false ], null ]
+, [ 226, "EC5EB237-C3A1-4A90-BE76-EC74E17D897D", 226, 1321380912, "390036", 1321380912, "390036", "{\n  \"invalidCells\" : {\n    \"1685357\" : \"Sacramento St, San Francisco, CA, (37.79358605, -122.40718489)\"\n  }\n}", "WILLIE WOO WOO WONG PLAYGROUND", "Neighborhood Park or Playground", "PSA 1", "Cleveland, Maggie", "maggie.cleveland@sfgov.org", "(415) 254-8014", "94108", "0.61", "3", "139", [ null, null, null, null, null ], null ]
+, [ 227, "3A556F1E-A638-4335-9CB6-31B91506C36F", 227, 1321380912, "390036", 1321380912, "390036", "{\n}", "WOH HEI YUEN PARK", "Neighborhood Park or Playground", "PSA 1", "Cleveland, Maggie", "maggie.cleveland@sfgov.org", "(415) 254-8014", "94133", "0.31", "3", "170", [ "{\"address\":\"922 Jackson St\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.79584858", "-122.41033649", null, false ], null ]
+, [ 228, "D8F7609C-0446-4189-A359-20238E3B8F9B", 228, 1321380912, "390036", 1321380912, "390036", "{\n}", "Wolfe Lane Community Garden", "Community Garden", "PSA 6", "Miller, John", "john.miller@sfgov.org", "(415) 513-2577", "94110", "0.05", "9", "171608", [ "{\"address\":\"90 Rutledge St\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.74528401", "-122.4066037", null, false ], null ]
+, [ 229, "13581A3F-5517-491B-845E-808B332C1DCC", 229, 1321380912, "390036", 1321380912, "390036", "{\n  \"invalidCells\" : {\n    \"1685357\" : \"Marina Blvd, San Francisco, CA, (37.80677550, -122.44076019)\"\n  }\n}", "YACHT HARBOR AND MARINA GREEN", "Regional Park", "PSA 1", "Figone, Joe", "joseph.figone@sfgov.org", "(415) 713-4997", "94123", "162.16", "2", "112", [ null, null, null, null, null ], null ]
+, [ 230, "55030AB1-983F-4605-8BCC-8E351F7052CD", 230, 1321380912, "390036", 1321380912, "390036", "{\n}", "YOUNGBLOOD COLEMAN PLAYGROUND", "Neighborhood Park or Playground", "PSA 3", "Watkins, Robert", "robert.watkins@sfgov.org", "(415) 819-6138", "94124", "6.13", "10", "45", [ "{\"address\":\"1398 Hudson St\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.73876792", "-122.38450221", null, false ], null ]
+, [ 92, "07C018B0-36D8-4030-9A1F-EE04D0E72125", 92, 1321380912, "390036", 1321380918, "390036", "{\n}", "GUY PLACE MINI PARK", "Mini Park", "PSA 2", "Hill, Eric", "eric.hill@sfgov.org", "(415) 254-8030", "94105", "0", "6", "445358", [ "{\"address\":\"4 8 Guy Place\",\"city\":\"San Francisco\",\"state\":\"CA\",\"zip\":\"\"}", "37.7750329000483", "-122.41916720030605", null, false ], null ]
+ ]
+}

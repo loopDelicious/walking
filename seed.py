@@ -47,6 +47,41 @@ def load_civic_art():
     db.session.commit()
 
 
+def load_parks():
+    """Load parks from sfgov_parks.json into database."""
+
+    print "Parks and Rec"
+
+    # Delete all rows in table, so we won't try and duplicate records if re-seeding
+    # Will delete in above function load_civic_art()
+    # Landmark.query.delete()
+
+    with open('seed_data/sfgov_parks.json') as data_file:    
+        data_file2 = data_file.read()
+        data = json.loads(data_file2)
+
+    # remove first item in list (field headings)
+    data['data'].pop(0)
+
+    for park in data['data']:
+      if (park[18][1] != None) and (park[18][2] != None):
+        landmark_lat = park[18][1]
+        landmark_lng = park[18][2]
+        display_dimensions = park[15]
+        landmark_description = park[9]
+        landmark_name = park[8]
+
+        landmark = Landmark(
+                      landmark_lat=landmark_lat,
+                      landmark_lng=landmark_lng,
+                      landmark_display_dimensions=display_dimensions,
+                      landmark_description=landmark_description,
+                      landmark_name=landmark_name)
+
+        db.session.add(landmark)
+
+    db.session.commit()
+
 
 if __name__ == "__main__":
     connect_to_db(app)
@@ -54,7 +89,6 @@ if __name__ == "__main__":
     db.create_all()
 
     # Import different types of data
-    # load_users()
     load_civic_art()
-    # load_ratings()
-    # set_val_user_id()
+    load_parks()
+  
