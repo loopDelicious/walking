@@ -3,11 +3,13 @@
 import sqlalchemy
 from jinja2 import StrictUndefined
 
-from flask import Flask, render_template, redirect, request, flash, session
+from flask import Flask, render_template, redirect, request, flash, session, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 
 from model import Landmark, User, Rating, Walk, WalkLandmarkLink, connect_to_db, db
 import os
+import urllib2
+import geocoder
 
 
 app = Flask(__name__)
@@ -26,32 +28,6 @@ def index():
 
     return render_template("homepage.html")
 
-
-@app.route('/', methods=["GET"])
-def create_new_walk():
-    """Creates and maps new walk according to user input for origin, destination, 
-    time constraint."""
-
-    origin = request.args.get("origin")
-    destination = request.args.get("destination")
-    time = request.args.get("time)")
-
-    return render_template('/', 
-                            origin=origin, 
-                            destination=destination, 
-                            time=time)
-
-# FIXME google maps api
-#     return coordinates
-
-
-# def display_map(coordinates):
-#     api = Api(
-#             consumer_key=os.environ['GOOGLE_API_KEY'])
-# multiple waypoints result in multiple legs of the journey being created
-# resulting from destination time and origin time calculations
-# The maximum number of waypoints allowed when using the Directions service in 
-# the Google Maps JavaScript API is 8, plus the origin and destination.
 
 @app.route('/registration', methods=["GET"])
 def display_registration_form():
@@ -85,7 +61,7 @@ def process_registration_form():
         session['user_id'] = user.user_id
         user_id = user.user_id
         flash("Your account has been created.")
-        return redirect('/')
+        return redirect('/map')
 
 @app.route('/login', methods=["GET"])
 def display_login_form():
@@ -113,7 +89,7 @@ def process_login():
         flash("You are logged in!")
         user_id = possible_user.user_id
 
-        return redirect('/')
+        return redirect('/map')
 
     else:
         flash("Verify email and password entered is correct.")
@@ -130,6 +106,178 @@ def logout():
     return redirect('/')
 
 
+
+@app.route('/map')
+def display_map():
+    """Display the initial map"""
+
+    return render_template('mapbox.html')
+
+
+@app.route('/initial_landmarks.geojson')
+def initial_landmarks_json():
+    """Pull a limited set of landmarks for initial map display."""
+
+    initial_landmarks_geojson = {
+                        "type": "FeatureCollection",
+                        "features": [
+                            {
+                            "type": "Feature",
+                            "properties": {
+                                "name": landmark.landmark_name,
+                                "description": landmark.landmark_description,
+                                "artist":  landmark.landmark_artist,
+                                "display-dimensions": landmark.landmark_display_dimensions,
+                                "location-description": landmark.landmark_location_description,
+                                "medium": landmark.landmark_medium
+                                },
+                            "geometry": {
+                                "coordinates": [
+                                    landmark.landmark_lng,
+                                    landmark.landmark_lat],
+                                "type": "Point"
+                            },
+                            "id": landmark.landmark_id
+                            }
+                        for landmark in Landmark.query.limit(20)
+                        ]
+                    }
+
+    return jsonify(initial_landmarks_geojson)
+
+
+@app.route('/landmarks.geojson')
+def landmarks_json():
+    """Send landmark data for map layer as Geojson from database."""
+
+    landmarks_geojson = {
+                        "type": "FeatureCollection",
+                        "features": [
+                            {
+                            "type": "Feature",
+                            "properties": {
+                                "name": landmark.landmark_name,
+                                "description": landmark.landmark_description,
+                                "artist":  landmark.landmark_artist,
+                                "display-dimensions": landmark.landmark_display_dimensions,
+                                "location-description": landmark.landmark_location_description,
+                                "medium": landmark.landmark_medium
+                                },
+                            "geometry": {
+                                "coordinates": [
+                                    landmark.landmark_lng,
+                                    landmark.landmark_lat],
+                                "type": "Point"
+                            },
+                            "id": landmark.landmark_id
+                            }
+                        for landmark in Landmark.query.all()
+                        ]
+                    }
+
+    return jsonify(landmarks_geojson)
+
+
+
+
+@app.route('/geocode')
+def geocode_address_to_coordinates():
+    """User inputs address.  Convert to geojson lng_lat coordinates
+    via server-side Google Geocoding API request."""
+
+    address = request.args.get("address")
+    url="https://maps.googleapis.com/maps/api/geocode/json?address=%s" % address
+    response = urllib2.urlopen(url)
+    address_json = response.read()
+
+    if address_json["status"] == "OK":
+        coordinates = address_json["geometry"]["location"]
+        address_data = {
+            "status": "OK",
+            "coordinates": coordinates}
+    else:
+        flash("Location not found.")
+        address_data = {"status": "location not found"}
+
+    return jsonify(address_data)
+
+# @app.route('/set_origin', methods=['GET'])
+# def set_origin():
+#     """Add origin as first waypoint in the session."""
+
+#     origin = request.args.get("origin")
+
+
+#     // when user press enter after typed in address, start findAddress process
+#     $('#type-address').keypress(function(e) {
+#       if(e.which == 13) {
+#         var address = $(this).val();
+#         console.log(address);
+#         $('#wait').css("display", "block");
+#         $.get('/geocode_address', {'address': address}, findAddress);
+#         console.log("Finished toAddress");
+
+#       }
+#     });
+
+
+@app.route('/add_waypoint', methods=['GET'])
+def add_waypoint():
+    """Add a new waypoint to the session."""
+
+    waypoint = request.args.get("landmark_id")
+
+    if "waypoints" in session:
+        # mapbox.Directions limits routes to 25 places of interest
+        if len(session['waypoints']) < 25:
+            if waypoint in session['waypoints']:
+                return "Already added."
+            else: 
+                session['waypoints'].append(waypoint)
+                return "Added."
+        else:
+            return "Only 25 places can be included in a trip."
+    else:
+        session['waypoints'] = [waypoint]
+        return "Added."
+    print session['waypoints']
+
+
+# @app.route('/route_directions')
+# def get_directions_geojson():
+#     """Get directions via Mapbox Directions API with all the waypoints in the session."""
+
+#     waypoints_list = session['waypoints']
+#     coordinates = []
+
+#     for waypoint in waypoints_list:
+#         landmark = Landmark.query.filter_by(landmark_id=waypoint).one()
+#         lng = landmark.landmark_lng 
+#         lat = landmark.landmark_lat
+#         pair = lng + ', ' + lat + '; '
+#         coordinates.append(pair)
+
+#     url = "https://api.mapbox.com/directions/v5/mapbox.walking/" + coordinates
+
+#     response = requests.get(url)
+#     response = response.json()
+#     route = response['routes'][0]
+
+#     return jsonify(route)
+
+
+# @app.route('/clear')
+# def clear_waypoints():
+#     """Clear waypoints from session."""
+
+#     session['waypoints'] = []
+
+#     return "Route is cleared."
+
+
+# https://github.com/terriwong/weekend-wanderlust/blob/master/server.py
+# dan:  add waypoint in sequential order and update travel time per added waypoint
+    
 
 @app.route('/profile')
 def show_user():

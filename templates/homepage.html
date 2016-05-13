@@ -5,24 +5,8 @@
 
 <h1>Start a New Walk:</h1>
 
-<p>A walking app that allows people to create and map out walks based on origin, destination, and time.  User can rate, add, comment on, and upload images of landmarks</p>
+<p>A walking app that allows people to create and map out walks based on origin and points of interest.  User can rate, add, comment on, and upload images of landmarks</p>
 
-<h2>Where do you want to go today?</h2>
-
-<form action = '/walk' method="GET">
-      <input id="pac-input" class="controls" type = "text" placeholder = "Start typing origin here" name = "origin" />
-      </br>
-      <input id="pac-input" class="controls" type = "text" placeholder = "Start typing destination here" name = "destination" />
-      </br>
-      <input type = "text" placeholder = "time" name = "time" />
-      </br>
-
-      <input type = "submit" value = "Submit">
-</form>
-
-<div id="map"></div>
-
-{% include '/mapbox.html' %}
 
 <h2>My Walks</h2>
     <a href="/profile">My Walks</a>

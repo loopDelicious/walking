@@ -83,6 +83,7 @@ def load_parks():
     db.session.commit()
 
 
+
 if __name__ == "__main__":
     connect_to_db(app)
 
