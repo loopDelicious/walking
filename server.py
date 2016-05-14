@@ -29,71 +29,73 @@ def index():
     return render_template("homepage.html")
 
 
-@app.route('/registration', methods=["GET"])
-def display_registration_form():
-    """Displays form for users to register an account."""
-
-    return render_template('registration.html')
 
 
-@app.route('/registration', methods=["POST"])
-def process_registration_form():
-    """Processes registration when user provides email and password."""
+@app.route('/registration', methods=['GET', 'POST'])
+def registration():
+    """Processes registration when user provides email and password, or 
+    displays the form."""
 
-    email = request.form.get("email")
-    password = request.form.get("password")
+    if request.method == 'POST':
+        email = request.form.get("email")
+        password = request.form.get("password")
 
-    # Create a possible user object to query if the user's email is in the users table.
-    # If this user doesn't yet exist, query will return None.
-    possible_user = User.query.filter_by(email=email).first()
+        # Create a possible user object to query if the user's email is in the users table.
+        # If this user doesn't yet exist, query will return None.
+        possible_user = User.query.filter_by(email=email).first()
 
-    if possible_user:
-        flash("An account has already been created for this email.")
-        return redirect('/login')
+        if possible_user:
+            flash("An account has already been created for this email.")
+            return redirect('/login')
 
-    # Add user to user database
-    else:
-        user = User(email=email, password=password)
-        db.session.add(user)
-        db.session.commit()
+        # Add user to user database
+        else:
+            user = User(email=email, password=password)
+            db.session.add(user)
+            db.session.commit()
 
-        # add user_id to session variable, to login user automatically 
-        session['user_id'] = user.user_id
-        user_id = user.user_id
-        flash("Your account has been created.")
-        return redirect('/map')
-
-@app.route('/login', methods=["GET"])
-def display_login_form():
-    """Displays form fo
-    r users to login"""
-
-    return render_template('login.html')
-
-
-@app.route('/login', methods=["POST"])
-def process_login():
-    """Process login from User, redirect to homepage"""
-
-    email = request.form.get("email")
-    password = request.form.get("password")
-    
-    # Create a possible user object to query if the user's email is in the users table.
-    # If this user doesn't yet exist, query will return None.
-    possible_user = User.query.filter_by(email=email).first()
-
-    if possible_user and possible_user.password == password:
-
-        # add user_id to session variable 
-        session['user_id'] = possible_user.user_id
-        flash("You are logged in!")
-        user_id = possible_user.user_id
-
-        return redirect('/map')
+            # add user_id to session variable, to login user automatically 
+            session['user_id'] = user.user_id
+            user_id = user.user_id
+            flash("Your account has been created.")
+            return redirect('/map')
 
     else:
-        flash("Verify email and password entered is correct.")
-        return redirect('/login')
+        return render_template('registration.html')
+
+
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    """Processes login when user provides email and password, or
+    displays the login form."""
+
+    if request.method == 'POST':
+
+        email = request.form.get("email")
+        password = request.form.get("password")
+        
+        # Create a possible user object to query if the user's email is in the users table.
+        # If this user doesn't yet exist, query will return None.
+        possible_user = User.query.filter_by(email=email).first()
+
+        if possible_user and possible_user.password == password:
+
+            # add user_id to session variable 
+            session['user_id'] = possible_user.user_id
+            flash("You are logged in!")
+            user_id = possible_user.user_id
+
+            return redirect('/map')
+        else:
+            flash("Verify email and password entered is correct.")
+            return redirect('/login')
+
+    else:
+        return render_template('login.html')
+
+
 
 
 @app.route('/logout')
@@ -111,7 +113,19 @@ def logout():
 def display_map():
     """Display the initial map"""
 
-    return render_template('mapbox.html')
+    waypoints = []
+
+    return render_template('mapbox.html', 
+                            waypoints=waypoints)
+
+# To update map display
+    # waypoint_list = session['waypoints']
+    # for points in waypoint_list:
+    #     possible_point = Landmark.query.filter_by(landmark_id=landmark_id).first()
+    #     waypoints.append(possible_point)
+
+    # return render_template('mapbox.html',
+    #                         waypoints=waypoints)
 
 
 @app.route('/initial_landmarks.geojson')
@@ -201,24 +215,16 @@ def geocode_address_to_coordinates():
 
     return jsonify(address_data)
 
-# @app.route('/set_origin', methods=['GET'])
-# def set_origin():
-#     """Add origin as first waypoint in the session."""
 
-#     origin = request.args.get("origin")
+@app.route('/set_origin', methods=['POST'])
+def set_origin():
+    """Add origin as first waypoint in the session."""
 
+    origin = request.args.get("origin")
+    # DOES THIS RETURN FROM /GEOCODE or AJAX CALL???
+    # session['waypoints'] = [waypoint]
+    # FIXME here.
 
-#     // when user press enter after typed in address, start findAddress process
-#     $('#type-address').keypress(function(e) {
-#       if(e.which == 13) {
-#         var address = $(this).val();
-#         console.log(address);
-#         $('#wait').css("display", "block");
-#         $.get('/geocode_address', {'address': address}, findAddress);
-#         console.log("Finished toAddress");
-
-#       }
-#     });
 
 
 @app.route('/add_waypoint', methods=['GET'])
@@ -227,57 +233,58 @@ def add_waypoint():
 
     waypoint = request.args.get("landmark_id")
 
-    if "waypoints" in session:
+    if 'waypoints' in session:
         # mapbox.Directions limits routes to 25 places of interest
         if len(session['waypoints']) < 25:
             if waypoint in session['waypoints']:
-                return "Already added."
+                flash("Already added.")
             else: 
                 session['waypoints'].append(waypoint)
-                return "Added."
+                print session['waypoints']
+                flash("Added.")
         else:
-            return "Only 25 places can be included in a trip."
+            flash("Only 25 places can be included in a trip.")
+        return redirect ('/map')
     else:
         session['waypoints'] = [waypoint]
-        return "Added."
-    print session['waypoints']
+        print session['waypoints']
+        flash("Added.")
+        return redirect ('/map')
 
 
-# @app.route('/route_directions')
-# def get_directions_geojson():
-#     """Get directions via Mapbox Directions API with all the waypoints in the session."""
 
-#     waypoints_list = session['waypoints']
-#     coordinates = []
+@app.route('/route_directions')
+def get_directions_geojson():
+    """Get directions via Mapbox Directions API with all the waypoints in the session."""
 
-#     for waypoint in waypoints_list:
-#         landmark = Landmark.query.filter_by(landmark_id=waypoint).one()
-#         lng = landmark.landmark_lng 
-#         lat = landmark.landmark_lat
-#         pair = lng + ', ' + lat + '; '
-#         coordinates.append(pair)
+    waypoints_list = session['waypoints']
+    coordinates = []
 
-#     url = "https://api.mapbox.com/directions/v5/mapbox.walking/" + coordinates
+    for waypoint in waypoints_list:
+        landmark = Landmark.query.filter_by(landmark_id=waypoint).one()
+        lng = landmark.landmark_lng 
+        lat = landmark.landmark_lat
+        pair = lng + ', ' + lat + '; '
+        coordinates.append(pair)
 
-#     response = requests.get(url)
-#     response = response.json()
-#     route = response['routes'][0]
+    url = "https://api.mapbox.com/directions/v5/mapbox.walking/" + coordinates
 
-#     return jsonify(route)
+    response = requests.get(url)
+    response = response.json()
+    route = response['routes'][0]
 
-
-# @app.route('/clear')
-# def clear_waypoints():
-#     """Clear waypoints from session."""
-
-#     session['waypoints'] = []
-
-#     return "Route is cleared."
+    return jsonify(route)
 
 
-# https://github.com/terriwong/weekend-wanderlust/blob/master/server.py
-# dan:  add waypoint in sequential order and update travel time per added waypoint
-    
+@app.route('/clear', methods=['POST'])
+def clear_waypoints():
+    """Clear waypoints from session."""
+
+    session['waypoints'] = []
+
+    return "Route is cleared."
+
+   
 
 @app.route('/profile')
 def show_user():

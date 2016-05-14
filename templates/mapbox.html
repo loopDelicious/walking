@@ -22,16 +22,23 @@
             <input id="address-input" class="controls" type = "text" placeholder = "Starting from" name = "origin" />
             </form>
 
-        <div id='map-tooltips' class='map'> </div>
+        <div id='map-tooltips' class='popUp'></div>
         
-        <div id='inputs'></div>
-        <div id='errors'></div>
+        <div id='errors'>Errors</div>
+
+        <div id='route'>Route</div>
+
+            {% if waypoints %}
+                {% for waypoint in waypoints %}
+                    <ul>{{ waypoint }}</ul>
+                {% endfor %}
+            {% endif %}
 
         <button id="get-directions" class="control-link">Lock it in</button><br>
         <button id="clear" class="control-link">clear</button><br>
 
-        <script src="https://code.jquery.com/jquery.js"></script>
         <script src="/static/mapbox.js"></script>
+
 
     {% endblock %}
           

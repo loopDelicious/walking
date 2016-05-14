@@ -11,12 +11,22 @@ var map = L.mapbox.map('map', 'mapbox.streets', {
     maxZoom: 16,  // closest you can zoom in
     center: [37.7749, -122.4194],  // starting position to center map on SF
     interactive: true // make interactive instead of static
-    })
-    .addControl(L.mapbox.geocoderControl('mapbox.places', {
-      autocomplete: true,
-      keepOpen: true
-    }));
+    });
  
+// add search box to map
+var geocoderControl = L.mapbox.geocoderControl('mapbox.places',{
+  autocomplete: true,
+  keepOpen: true
+});
+geocoderControl.addTo(map);
+
+// place a marker for entered address
+geocoderControl.on('select', function(e) {
+  var coordinates = e.feature.geometry.coordinates;
+  L.marker([coordinates[1], coordinates[0]]).addTo(map);
+});
+// popUp and ask user to confirm starting point for trip, if so,
+// add to session['waypoints'], add to route, and prompt user for another waypoint
 
 // load the initial landmark set into a featureLayer from geojson for display
 var initialLandmarkLayer = L.mapbox.featureLayer().addTo(map);
@@ -31,7 +41,12 @@ initialLandmarkLayer.on('click', function(e) {
     map.setView(e.latlng, 14);
     map.panTo(e.latlng);
     landmarkLayer.addTo(map);
+    map.removeLayer(initialLandmarkLayer);
   });
+
+
+//  FIXME how do I remove the initial landmark layer so that doesn't load?
+//  map.removeLayer(initialLandmarkLayer);
 
 // create tooltips for landmarks
 landmarkLayer.on('layeradd', function(e) {
@@ -41,7 +56,7 @@ landmarkLayer.on('layeradd', function(e) {
     var toolTips = 
         '<h2>' + feature.properties.name + '</h2>' + 
         feature.properties.description + '<form action="/add_waypoint"><input type="hidden" name="landmark_id" onclick="openPanel()" value="' + feature.id + '"><button id="popupButton" class="popUp" onclick="openPanel()" data-id="' + feature.id + '" data-name="' + feature.properties.name + '">Add waypoint</button></form>'; 
-    
+
     marker.bindPopup(toolTips, {
         closeButton: true,
         minWidth: 120
@@ -54,11 +69,23 @@ landmarkLayer.on('mouseover', function(e) {
     e.layer.openPopup();
 });
 
+
+// If no waypoints in session, prompt user to add origin, also add waypoints popups
+// should show get started and add origin
+$('.address-input').on('submit', function(e) {
+  $.post('/set_origin', function() {
+    alert('Origin set')
+  });
+  e.preventDefault();
+});
+
 // HOW DO YOU LEAVE THE USER ON THE PAGE WITH AJAX?
 // Add destination to session 
-$('#popUp').on('click', function(e) {
+$('.popUp').on('click', function(e) {
   e.preventDefault();
-  $.get('/add_waypoint', {'landmark_id': this.dataset.id}, add_waypoint);
+  $.get('/add_waypoint', {'landmark_id': this.dataset.id}, function(){
+    add_waypoint();
+  });
 });
 
 // get directions for all destinations in the session
@@ -67,12 +94,13 @@ $('#get-directions').on('click', function(e) {
   $.get('/route_directions', get_directions_geojson);
 });
 
-// FIXME need to display results, and then save waypoints in session as a walk
-// CLEAR - remove layer OR clear session variable?
-// clear route from map
+// FIXME NEED to direct success function to select origin again
+// clear route from map by removing waypoints in session
 $('#clear').on('click', function(e) {
   e.preventDefault();
-  $.get('/clear', clear_waypoints);
+  $.post('/clear', function() {
+    alert('Cleared!')
+  });
 });
 
 
