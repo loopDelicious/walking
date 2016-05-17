@@ -9,6 +9,12 @@
         <script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
         <link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet' />
         <link href="/static/mapbox.css" rel="stylesheet" />
+        
+        <script src='https://api.mapbox.com/mapbox.js/plugins/mapbox-directions.js/v0.4.0/mapbox.directions.js'></script>
+        <link rel='stylesheet' href='https://api.mapbox.com/mapbox.js/plugins/mapbox-directions.js/v0.4.0/mapbox.directions.css' type='text/css' />
+
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
 
     {% endblock %}
     
@@ -18,15 +24,46 @@
         <!-- Display the map and prompt -->
         <div id='map'></div>
 
-            <form action = '/geocode' method="GET">
-            <input id="address-input" class="controls" type = "text" placeholder = "Starting from" name = "origin" />
+            <form action = '/geocode' id="address-input" method="POST">
+                <input id='user-input' class="controls" type="text" placeholder="Where do you want to start?" name="destination" />
             </form>
 
-        <div id='map-tooltips' class='popUp'></div>
+        <div class='markers'>
+            <div class='marker-icon'>
+                <div class='popup'></div>
+                    <div class='popup-title'>
+                        <div class='popup-content'>
+                            <div class='popover'>
+                                <div class='popover-actions'>
+                                    <div class='save-destination' role='button'>
+                                        <i class='icon-save-destination'></i>
+                                    </div>
+                                    <div class='add_destination' role='button'>
+                                        <i class='icon-add-destination'>
+                                            <span class="default">Add destination</span>
+                                            <span class="active">Destination added</span>
+                                            <span class="remove">Remove</span>
+                                        </i>
+                                    </div>
+                                </div>
+                            </div>  
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class='map-tooltips'></div>
         
-        <div id='errors'>Errors</div>
+        <div id='map-controls'>
+            <div id='geolocation'></div>
+            <div id='zoom-controls'></div>
+        </div>
 
-        <div id='route'>Route</div>
+        <div id='errors'>errors</div>
+        <div id='directions'>
+          <div id='routes'>routes</div>
+          <div id='instructions'>instructions</div>
+        </div>
 
             {% if waypoints %}
                 {% for waypoint in waypoints %}

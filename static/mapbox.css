@@ -1,6 +1,6 @@
 
 /*Markers and pop ups*/
-.mapboxgl-popup {
+#popup {
     max-width: 400px;
     font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
 }
@@ -10,7 +10,7 @@
 }
 
 #map { 
-    height: 600px;
+    height: 400px;
     width:  100%;
     margin: 0 auto;
     }
@@ -29,8 +29,9 @@
     min-width: 200px;
 }
 
-#inputs {
+.address-input {
     z-index: 10;
+    width: 100px;
     top: 10px;
     left: 10px;
 }

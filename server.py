@@ -7,16 +7,19 @@ from flask import Flask, render_template, redirect, request, flash, session, jso
 from flask_debugtoolbar import DebugToolbarExtension
 
 from model import Landmark, User, Rating, Walk, WalkLandmarkLink, connect_to_db, db
+
 import os
-import urllib2
-import geocoder
+import json
+import requests
+
+from mapbox import Geocoder
 
 
 app = Flask(__name__)
 
 # Required to use Flask sessions and the debug toolbar
 app.secret_key = os.environ["FLASK_SECRET_KEY"]
-
+accessToken = os.environ["MAPBOX_API_KEY"]
 
 # Raise an error if you use an undefined variable in Jinja2
 app.jinja_env.undefined = StrictUndefined
@@ -194,26 +197,27 @@ def landmarks_json():
 
 
 
-@app.route('/geocode')
-def geocode_address_to_coordinates():
-    """User inputs address.  Convert to geojson lng_lat coordinates
-    via server-side Google Geocoding API request."""
+@app.route('/geocode', methods=['POST'])
+def geocode():
+    """User inputs address.  Convert to geojson lat_long coordinates and add to session."""
 
-    address = request.args.get("address")
-    url="https://maps.googleapis.com/maps/api/geocode/json?address=%s" % address
-    response = urllib2.urlopen(url)
-    address_json = response.read()
+    destination = request.form.get("destination")
+ 
+    # geocoder = Geocoder()
+    url = "https://api.mapbox.com/geocoding/v5/mapbox.places/%s.json?access_token=%s" % (destination, accessToken)
+    response = requests.get(url)
+    # import pdb; pdb.set_trace()
+    response = response.json()
+    place_name = response['features'][0]['place_name']
+    coordinates = response['features'][0]['geometry']['coordinates']
+    data = {
+        "place_name": place_name,
+        "coordinates": coordinates
+    }
+    
+    session['waypoints'].append(data)
 
-    if address_json["status"] == "OK":
-        coordinates = address_json["geometry"]["location"]
-        address_data = {
-            "status": "OK",
-            "coordinates": coordinates}
-    else:
-        flash("Location not found.")
-        address_data = {"status": "location not found"}
-
-    return jsonify(address_data)
+    return jsonify(data)
 
 
 @app.route('/set_origin', methods=['POST'])
@@ -221,15 +225,16 @@ def set_origin():
     """Add origin as first waypoint in the session."""
 
     origin = request.args.get("origin")
+
     # DOES THIS RETURN FROM /GEOCODE or AJAX CALL???
     # session['waypoints'] = [waypoint]
     # FIXME here.
 
 
 
-@app.route('/add_waypoint', methods=['GET'])
-def add_waypoint():
-    """Add a new waypoint to the session."""
+@app.route('/add_destination', methods=['GET'])
+def add_destination():
+    """Add a new destination to the session."""
 
     waypoint = request.args.get("landmark_id")
 
@@ -245,11 +250,14 @@ def add_waypoint():
         else:
             flash("Only 25 places can be included in a trip.")
         return redirect ('/map')
+        # do i want to redirect or handle with ajax?
+
     else:
         session['waypoints'] = [waypoint]
         print session['waypoints']
         flash("Added.")
         return redirect ('/map')
+        # do i want to redirect or handle with ajax?
 
 
 
@@ -257,23 +265,33 @@ def add_waypoint():
 def get_directions_geojson():
     """Get directions via Mapbox Directions API with all the waypoints in the session."""
 
+    # https://github.com/mapbox/intro-to-mapbox/blob/master/demos/directions.html
+
     waypoints_list = session['waypoints']
-    coordinates = []
+    route_list = []
 
     for waypoint in waypoints_list:
-        landmark = Landmark.query.filter_by(landmark_id=waypoint).one()
-        lng = landmark.landmark_lng 
-        lat = landmark.landmark_lat
-        pair = lng + ', ' + lat + '; '
-        coordinates.append(pair)
+        lng = str(waypoint['coordinates'][0])
+        lat = str(waypoint['coordinates'][1])
+        pair = lng + ',' + lat
+        # pair = pair[1:-1]
+        route_list.append(pair)
+ 
+    route_list = ';'.join(route_list)
 
-    url = "https://api.mapbox.com/directions/v5/mapbox.walking/" + coordinates
+    url = "https://api.mapbox.com/directions/v5/mapbox/walking/%s.json?access_token=%s" % (route_list, accessToken)
 
     response = requests.get(url)
     response = response.json()
-    route = response['routes'][0]
 
-    return jsonify(route)
+    route = response['routes']
+
+    data = {
+        "route": route,
+    }
+    # import pdb; pdb.set_trace()
+    return jsonify(data)
+
 
 
 @app.route('/clear', methods=['POST'])
