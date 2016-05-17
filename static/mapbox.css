@@ -54,3 +54,19 @@
     top: 90px;
     left: 10px;
 }
+
+
+#jquery-flash-container {
+    padding: 20px;
+    border: 2px solid blue;
+    border-radius: 50px;
+    position: fixed;
+    top: 20px;
+    left: 50px;
+    display: none;
+    background: whitesmoke;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: arial;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}

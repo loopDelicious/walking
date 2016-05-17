@@ -232,11 +232,11 @@ def set_origin():
 
 
 
-@app.route('/add_destination', methods=['GET'])
+@app.route('/add_destination', methods=['POST'])
 def add_destination():
     """Add a new destination to the session."""
 
-    waypoint = request.args.get("landmark_id")
+    waypoint = request.form.get("landmark_id")
 
     if 'waypoints' in session:
         # mapbox.Directions limits routes to 25 places of interest
@@ -249,15 +249,13 @@ def add_destination():
                 flash("Added.")
         else:
             flash("Only 25 places can be included in a trip.")
-        return redirect ('/map')
-        # do i want to redirect or handle with ajax?
 
     else:
         session['waypoints'] = [waypoint]
         print session['waypoints']
         flash("Added.")
-        return redirect ('/map')
-        # do i want to redirect or handle with ajax?
+    return 'success'
+
 
 
 
@@ -279,18 +277,12 @@ def get_directions_geojson():
  
     route_list = ';'.join(route_list)
 
-    url = "https://api.mapbox.com/directions/v5/mapbox/walking/%s.json?access_token=%s" % (route_list, accessToken)
+    url = "https://api.mapbox.com/directions/v5/mapbox/walking/%s.json?access_token=%s&geometries=geojson" % (route_list, accessToken)
 
     response = requests.get(url)
     response = response.json()
 
-    route = response['routes']
-
-    data = {
-        "route": route,
-    }
-    # import pdb; pdb.set_trace()
-    return jsonify(data)
+    return jsonify(response)
 
 
 

@@ -69,7 +69,7 @@ landmarkLayer.on('layeradd', function(e) {
     var popupContent = 
         '<h2>' + feature.properties.name + '</h2>' + 
         feature.properties.description + 
-        '<form action="/add_waypoint"><input type="hidden" name="landmark_id"' + 
+        '<form action="/add_destination" method="POST" class="popUpAdd"><input type="hidden" name="landmark_id"' + 
         feature.id + '"><button id="popupButton" class="popUp"' + 
         feature.id + feature.properties.name + '">Add destination</button></form>'; 
 
@@ -146,43 +146,41 @@ $('#address-input').on('submit', function(e) {
     },
     success: function(response) {
       alert('Destination added.' + response.coordinates + response.place_name);
-      var coordinates = response.feature.geometry.coordinates;
+      var coordinates = response.coordinates;
+      var place_name = response.place_name;
       L.marker([coordinates[1], coordinates[0]]).addTo(map);
-      map.setView(layer.getLatLng(), 14);
-      layer.openPopup();
+      // var routeLayer = L.mapbox.featureLayer(response, {
+      //   pointToLayer: function(place_name, coordinates) {
+      //     return L.circleMarker(coordinates, {
+      //       fillColor: '#ff0000',
+      //       fillOpacity: 0.8,
+      //       stroke: false
+      //     });
+      //   }
+      // }).addTo(map);
     },
-    // dataType: dataType
   });
 });
 
 
 // Add destination to session 
-$('#add_destination').on('click', function(e) {
+// use $.on() vs. $('selector').on to add asynchronous event listener
+// that will watch for newly added DOM elements
+$(document).on('submit', '.popUpAdd', function(e) {
   e.preventDefault();
-  $.get('/add_destination', {'landmark_id': this.dataset.id}, function(){
-    add_destination();
-  });
   $.ajax({
-    type: "POST",
+    type:  "POST",
     url: '/add_destination',
     data: {
-      'destination': this.dataset.id
-      // FIXME here.
-    }
-  })
+      'landmark_id': this.dataset.id
+    }, 
+    success: function() {
+      // FIXME turn marker blue
+      // FIXME close popup
+    },
+  });
 });
 
-// establish route layer
-// var routeLayer = L.mapbox.featureLayer();
-
-// get directions for all destinations in the session
-// $('#get-directions').on('click', function(e) {
-//   e.preventDefault();
-//   routeLayer.addTo(map).loadURL('/route_directions');
-// }); 
-
-// establish route polyline
-var polyline = L.polyline([]).addTo(map);
 
 // map.on('click', function(e) {
 //         // Let's add a callback to makeMarker so that it can draw the route only
@@ -197,32 +195,29 @@ var polyline = L.polyline([]).addTo(map);
 //     return done();
 // }
 
+// establish route polyline
+var polyline = L.polyline([]).addTo(map);
+
+// get route directions from Mapbox Directions API via ajax call
 $('#get-directions').on('click', function(e) {
-  e.preventDefault();
   $.ajax({
     type: "GET",
     url: '/route_directions',
     success: function(response) {
-      console.log(response);
-      var route = response['route']['legs'];
-      console.log(route);
-      // polyline.setLatLngs(route);
-    },
+      var route = response.routes[0].geometry.coordinates;
+      route = route.map(function(point) {
+        return [point[1], point[0]];
+      });
+      polyline.setLatLngs(route);
+      var coordinates = response.waypoints.forEach(function(waypoint) {
+        L.marker([waypoint.location[1],waypoint.location[0]]).addTo(map);
+      });
+      // map.setView(polyline.getLatLng(), 14);
+      // find some other way to pan to route
+      // FIXME do I need to add my markers to a route session variable - to clear the markers from the UI?
+    }
   });
 });
-
-
-// $.get(directionsUrl, function(data) {
-//     var route = data.routes[0].geometry.coordinates;
-//     route = route.map(function(point) {
-//         // Turns out if we zoom out we see that the lat/lngs are flipped,
-//         // which is why it didn't look like they were being added to the
-//         // map. We can invert them here before drawing.
-//         return [point[1], point[0]];
-//     });
-//     polyline.setLatLngs(route);
-// });
-
 
 
 // FIXME NEED to direct success function to select origin again
@@ -230,12 +225,13 @@ $('#get-directions').on('click', function(e) {
 $('#clear').on('click', function(e) {
   e.preventDefault();
   $.post('/clear', function() {
-    if (routeLayer != null) {
-      map.removeLayer(routeLayer);
-    }
+    if (marker != null) {
+      map.removeLayer(marker);
+    };
     alert('Cleared!');
   });
 });
+
 
 // // Initial view and interaction:
 // // prompt user to input origin
@@ -257,4 +253,18 @@ $('#clear').on('click', function(e) {
 // // User can rate landmarks, add new ones, leave public comments
 
 
+
+
+
+
+// jQuery.fn.extend({
+//   flash: function(message) {
+//     $('#jquery-flash-container').text(message).show();
+//     setTimeout(function(){
+//       $('#jquery-flash-container').fadeOut();
+//     }, 5000);
+//   }
+// });
+
+// $(document).flash('hello world');
 
