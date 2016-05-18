@@ -25,11 +25,8 @@ geocoderControl.addTo(map);
 geocoderControl.on('select', function(e) {
   var coordinates = e.feature.geometry.coordinates;
   L.marker([coordinates[1], coordinates[0]]).addTo(map);
-
-
-  // var popupContent = 
-
 });
+
 
 // var popupContent = 
 //         '<h2>' + feature.properties.name + '</h2>' + 
@@ -145,10 +142,12 @@ $('#address-input').on('submit', function(e) {
       'destination': $('#user-input').val()
     },
     success: function(response) {
+      $("#address-input").trigger('reset');
       alert('Destination added.' + response.coordinates + response.place_name);
       var coordinates = response.coordinates;
       var place_name = response.place_name;
-      L.marker([coordinates[1], coordinates[0]]).addTo(map);
+      L.marker([coordinates[1], coordinates[0]]).addTo(routeLayer);
+      return_all_waypoints();
       // var routeLayer = L.mapbox.featureLayer(response, {
       //   pointToLayer: function(place_name, coordinates) {
       //     return L.circleMarker(coordinates, {
@@ -174,13 +173,50 @@ $(document).on('submit', '.popUpAdd', function(e) {
     data: {
       'landmark_id': this.dataset.id
     }, 
-    success: function() {
+    success: return_all_waypoints(),
       // FIXME turn marker blue
       // FIXME close popup
-    },
   });
 });
 
+// establish layer of selected (new) markers for the trip
+var routeLayer = L.mapbox.featureLayer().addTo(map);
+
+// create popups for selected (new) landmarks
+routeLayer.on('layeradd', function(e) {
+    var marker = e.layer,
+        feature = marker.feature;    
+
+    var popupContent = 
+        '<h2>' + feature.properties.name + '</h2>' + 
+        feature.properties.description; 
+
+    marker.bindPopup(popupContent, {
+        closeButton: false,
+        minWidth: 120
+    });
+});
+
+routeLayer.on('mouseover', function(e) {
+    e.layer.openPopup();
+    });
+
+
+// add layer with landmark markers to map
+
+function return_all_waypoints() {
+  $.ajax({
+    type: "GET",
+    url: '/return_all_waypoints',
+    success: function(response) {
+      for (var i = 0; i < response.length; i++) {
+        var coordinates = response.coordinates;
+        var place_name = response.place_name;
+        L.marker([coordinates[1], coordinates[0]]).addTo(routeLayer);
+      };
+    }
+  });
+};
 
 // map.on('click', function(e) {
 //         // Let's add a callback to makeMarker so that it can draw the route only
@@ -195,7 +231,8 @@ $(document).on('submit', '.popUpAdd', function(e) {
 //     return done();
 // }
 
-// establish route polyline
+
+// establish polyline with path of landmarks
 var polyline = L.polyline([]).addTo(map);
 
 // get route directions from Mapbox Directions API via ajax call
@@ -210,12 +247,11 @@ $('#get-directions').on('click', function(e) {
       });
       polyline.setLatLngs(route);
       var coordinates = response.waypoints.forEach(function(waypoint) {
-        L.marker([waypoint.location[1],waypoint.location[0]]).addTo(map);
+        L.marker([waypoint.location[1],waypoint.location[0]]).addTo(polyline);
       });
-      // map.setView(polyline.getLatLng(), 14);
-      // find some other way to pan to route
-      // FIXME do I need to add my markers to a route session variable - to clear the markers from the UI?
     }
+    // map.setView(polyline.getLatLng(), 14);
+    // map.setView(polyline.latlng, 14);
   });
 });
 
@@ -225,9 +261,16 @@ $('#get-directions').on('click', function(e) {
 $('#clear').on('click', function(e) {
   e.preventDefault();
   $.post('/clear', function() {
-    if (marker != null) {
-      map.removeLayer(marker);
-    };
+    map.removeLayer(routeLayer);
+    // if (routeLayer instanceof L.mapbox.featureLayer) {
+    //   console.log('hi');
+    //   map.removeLayer(routeLayer);
+    // };
+    if (polyline instanceof L.Polyline) {
+      map.removeLayer(polyline);
+    }
+    polyline = L.polyline([]).addTo(map);
+    routeLayer = L.mapbox.featureLayer().addTo(map);
     alert('Cleared!');
   });
 });

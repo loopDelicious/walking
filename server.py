@@ -121,14 +121,6 @@ def display_map():
     return render_template('mapbox.html', 
                             waypoints=waypoints)
 
-# To update map display
-    # waypoint_list = session['waypoints']
-    # for points in waypoint_list:
-    #     possible_point = Landmark.query.filter_by(landmark_id=landmark_id).first()
-    #     waypoints.append(possible_point)
-
-    # return render_template('mapbox.html',
-    #                         waypoints=waypoints)
 
 
 @app.route('/initial_landmarks.geojson')
@@ -220,11 +212,20 @@ def geocode():
     return jsonify(data)
 
 
-@app.route('/set_origin', methods=['POST'])
-def set_origin():
-    """Add origin as first waypoint in the session."""
+# @app.route('save_destination', methods=['POST'])
+# def save_destination():
+#     """User does not add destination to their trip, but saves the destination for later."""
 
-    origin = request.args.get("origin")
+#     destination = request. form.get("destination")
+
+
+
+
+# @app.route('/set_origin', methods=['POST'])
+# def set_origin():
+#     """Add origin as first waypoint in the session."""
+
+#     origin = request.args.get("origin")
 
     # DOES THIS RETURN FROM /GEOCODE or AJAX CALL???
     # session['waypoints'] = [waypoint]
@@ -232,29 +233,37 @@ def set_origin():
 
 
 
-@app.route('/add_destination', methods=['POST'])
-def add_destination():
-    """Add a new destination to the session."""
+# @app.route('/add_destination', methods=['POST'])
+# def add_destination():
+#     """Add a new destination to the session."""
 
-    waypoint = request.form.get("landmark_id")
+#     destination = request.form.get("landmark_id")
+#     place_name = destination.landmark_name
+#     coordinates = [destination.landmark_lat, destination.landmark_lng]
 
-    if 'waypoints' in session:
-        # mapbox.Directions limits routes to 25 places of interest
-        if len(session['waypoints']) < 25:
-            if waypoint in session['waypoints']:
-                flash("Already added.")
-            else: 
-                session['waypoints'].append(waypoint)
-                print session['waypoints']
-                flash("Added.")
-        else:
-            flash("Only 25 places can be included in a trip.")
+#     data = {
+#         "place_name": place_name,
+#         "coordinates": coordinates
+#     }
+    
 
-    else:
-        session['waypoints'] = [waypoint]
-        print session['waypoints']
-        flash("Added.")
-    return 'success'
+#     if 'waypoints' in session:
+#         # mapbox.Directions limits routes to 25 places of interest
+#         if len(session['waypoints']) < 25:
+#             if waypoint in session['waypoints']:
+#                 flash("Already added.")
+#             else: 
+#                 session['waypoints'].append(waypoint)
+#                 print session['waypoints']
+#                 flash("Added.")
+#         else:
+#             flash("Only 25 places can be included in a trip.")
+
+#     else:
+#         session['waypoints'] = [waypoint]
+#         print session['waypoints']
+#         flash("Added.")
+#     return 'success'
 
 
 
@@ -264,6 +273,7 @@ def get_directions_geojson():
     """Get directions via Mapbox Directions API with all the waypoints in the session."""
 
     # https://github.com/mapbox/intro-to-mapbox/blob/master/demos/directions.html
+    # https://github.com/mapbox/mapbox-directions.js
 
     waypoints_list = session['waypoints']
     route_list = []
@@ -283,6 +293,16 @@ def get_directions_geojson():
     response = response.json()
 
     return jsonify(response)
+
+
+
+@app.route('/return_all_waypoints')
+def return_all_waypoints():
+    """Return all waypoints via get request."""
+
+    waypoints = session['waypoints']
+
+    return jsonify(waypoints)
 
 
 
