@@ -233,37 +233,38 @@ def geocode():
 
 
 
-# @app.route('/add_destination', methods=['POST'])
-# def add_destination():
-#     """Add a new destination to the session."""
+@app.route('/add_destination', methods=['POST'])
+def add_destination():
+    """Add a new destination to the session."""
 
-#     destination = request.form.get("landmark_id")
-#     place_name = destination.landmark_name
-#     coordinates = [destination.landmark_lat, destination.landmark_lng]
+    destination = request.form.get("landmark_id")
+    place_name = destination.landmark_name
+    coordinates = [destination.landmark_lat, destination.landmark_lng]
 
-#     data = {
-#         "place_name": place_name,
-#         "coordinates": coordinates
-#     }
+    data = {
+        "place_name": place_name,
+        "coordinates": coordinates
+    }
     
 
-#     if 'waypoints' in session:
-#         # mapbox.Directions limits routes to 25 places of interest
-#         if len(session['waypoints']) < 25:
-#             if waypoint in session['waypoints']:
-#                 flash("Already added.")
-#             else: 
-#                 session['waypoints'].append(waypoint)
-#                 print session['waypoints']
-#                 flash("Added.")
-#         else:
-#             flash("Only 25 places can be included in a trip.")
+    if 'waypoints' in session:
+        # mapbox.Directions limits routes to 25 places of interest
+        if len(session['waypoints']) < 25:
+            if data in session['waypoints']:
+                flash("Already added.")
+            else: 
+                session['waypoints'].append(data)
+                print session['waypoints']
+                flash("Added.")
+        else:
+            flash("Only 25 places can be included in a trip.")
 
-#     else:
-#         session['waypoints'] = [waypoint]
-#         print session['waypoints']
-#         flash("Added.")
-#     return 'success'
+    else:
+        session['waypoints'] = [data]
+        print session['waypoints']
+        flash("Added.")
+    
+    return jsonify(data)
 
 
 
@@ -287,7 +288,7 @@ def get_directions_geojson():
  
     route_list = ';'.join(route_list)
 
-    url = "https://api.mapbox.com/directions/v5/mapbox/walking/%s.json?access_token=%s&geometries=geojson" % (route_list, accessToken)
+    url = "https://api.mapbox.com/directions/v5/mapbox/walking/%s.json?access_token=%s&geometries=geojson&steps=true" % (route_list, accessToken)
 
     response = requests.get(url)
     response = response.json()
@@ -312,7 +313,8 @@ def clear_waypoints():
 
     session['waypoints'] = []
 
-    return "Route is cleared."
+    flash("Cleared!")
+    return redirect ('/map')
 
    
 
@@ -393,6 +395,13 @@ def rate_landmark():
 
     db.session.commit()
     return redirect('/')
+
+
+@app.route('/debugger')
+def display_debug_message():
+    """Display debug message in colorbox alert."""
+
+    return jsonify(session)
 
 
 if __name__ == "__main__":

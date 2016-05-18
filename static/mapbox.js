@@ -147,7 +147,7 @@ $('#address-input').on('submit', function(e) {
       var coordinates = response.coordinates;
       var place_name = response.place_name;
       L.marker([coordinates[1], coordinates[0]]).addTo(routeLayer);
-      return_all_waypoints();
+      // return_all_waypoints();
       // var routeLayer = L.mapbox.featureLayer(response, {
       //   pointToLayer: function(place_name, coordinates) {
       //     return L.circleMarker(coordinates, {
@@ -161,6 +161,7 @@ $('#address-input').on('submit', function(e) {
   });
 });
 
+// dan: draw route everytime new waypoint is added
 
 // Add destination to session 
 // use $.on() vs. $('selector').on to add asynchronous event listener
@@ -173,7 +174,12 @@ $(document).on('submit', '.popUpAdd', function(e) {
     data: {
       'landmark_id': this.dataset.id
     }, 
-    success: return_all_waypoints(),
+    success: function(response) {
+      $('.popup').trigger('reset');
+      var coordinates = response.coordinates;
+      var place_name = response.place_name;
+      L.marker([coordinates[1], coordinates[0]]).addTo(routeLayer);
+    },
       // FIXME turn marker blue
       // FIXME close popup
   });
@@ -186,10 +192,9 @@ var routeLayer = L.mapbox.featureLayer().addTo(map);
 routeLayer.on('layeradd', function(e) {
     var marker = e.layer,
         feature = marker.feature;    
-
+    // console.log(marker);  FIXME add feature NAME
     var popupContent = 
-        '<h2>' + feature.properties.name + '</h2>' + 
-        feature.properties.description; 
+        '<h2>' + feature.place_name + '</h2>'; 
 
     marker.bindPopup(popupContent, {
         closeButton: false,
@@ -235,6 +240,7 @@ function return_all_waypoints() {
 // establish polyline with path of landmarks
 var polyline = L.polyline([]).addTo(map);
 
+
 // get route directions from Mapbox Directions API via ajax call
 $('#get-directions').on('click', function(e) {
   $.ajax({
@@ -246,8 +252,11 @@ $('#get-directions').on('click', function(e) {
         return [point[1], point[0]];
       });
       polyline.setLatLngs(route);
-      var coordinates = response.waypoints.forEach(function(waypoint) {
-        L.marker([waypoint.location[1],waypoint.location[0]]).addTo(polyline);
+      // var coordinates = response.waypoints.forEach(function(waypoint) {
+      //   L.marker([waypoint.location[1],waypoint.location[0]]).addTo(polyline);
+      // });
+      var steps = response.routes[0].legs[0].steps.forEach(function(step) {
+        $('#instructions').append('<p>'+ step.maneuver.instruction + '</p>');
       });
     }
     // map.setView(polyline.getLatLng(), 14);
@@ -275,6 +284,15 @@ $('#clear').on('click', function(e) {
   });
 });
 
+$('#debugger').on('click', function(e){
+  $.ajax({
+    type: "GET",
+    url: '/debugger',
+    success:  function(response) {
+      $.colorbox({html: response});    
+    }
+  });
+});
 
 // // Initial view and interaction:
 // // prompt user to input origin
