@@ -69,14 +69,11 @@ class MyAppIntegrationTestCase(unittest.TestCase):
                                   data={'name': "Jane", 'email': "jane@jane.com"},
                                   follow_redirects=True)
         self.assertIn("An account has already been created for this email.", result.data)
-    # add check for redirect to login page
 
 
     def test_logout(self):
         result = self.client.get('/logout')
         self.assertIn('Logged out', result.data)
-        # self.assertNotIn('user_id', session)
-    # add check for redirect to home page
 
 
 if __name__ == '__main__':

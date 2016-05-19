@@ -254,13 +254,14 @@ def add_destination():
     """Add a new destination to the session from popup marker."""
 
     landmark_id = request.form.get("landmark_id")
+ 
     # import pdb; pdb.set_trace();
     destination = Landmark.query.filter(Landmark.landmark_id == landmark_id).first()
     
     # FIXME destination.landmark_name
 
     place_name = destination.landmark_name
-    coordinates = [destination.landmark_lat, destination.landmark_lng]
+    coordinates = [destination.landmark_lng, destination.landmark_lat]
 
     data = {
         "place_name": place_name,
@@ -334,13 +335,14 @@ def get_directions_geojson():
 
     # https://github.com/mapbox/intro-to-mapbox/blob/master/demos/directions.html
     # https://github.com/mapbox/mapbox-directions.js
-
+    
+    # import pdb; pdb.set_trace();
     waypoints_list = session['waypoints']
     route_list = []
 
     for waypoint in waypoints_list:
-        lng = str(waypoint['coordinates'][0])
-        lat = str(waypoint['coordinates'][1])
+        lng = str(waypoint['coordinates'][0]) 
+        lat = str(waypoint['coordinates'][1]) 
         pair = lng + ',' + lat
         # pair = pair[1:-1]
         route_list.append(pair)

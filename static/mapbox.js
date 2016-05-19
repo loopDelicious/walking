@@ -2,7 +2,7 @@
 //  Initializing the map and controls
 // ================================================================================
 
-// default mapbox public access token
+// default mapbox.js API public access token
 L.mapbox.accessToken = 'pk.eyJ1Ijoiam95Y2VsaW43OSIsImEiOiJjaW8zNzk5bHcwMDA5dzFrcXd6anpnY2xoIn0.ovObS9ODfNsnaa8ie--fKQ';
 
 // load base map of San Francisco
@@ -16,10 +16,12 @@ var map = L.mapbox.map('map', 'mapbox.streets', {
     interactive: true // make interactive instead of static
     });
  
-// add search box to map
+// add search box geocoder to map
 var geocoderControl = L.mapbox.geocoderControl('mapbox.places',{
   autocomplete: true,
-  keepOpen: true
+  keepOpen: true,
+  // placeholder: "Where do you want to go?",
+  // FIXME integrate address-input form field to geocoder field here
 });
 geocoderControl.addTo(map);
 
@@ -138,16 +140,18 @@ var directionsInstructionsControl = L.mapbox.directions.instructionsControl('ins
 //  User interactions to construct a trip route
 // ================================================================================
 
-$.ajax({
-  type: "GET",
-  url: '/has_origin',
-  success: function(response) {
-    if (response.status == false) {
-      alert("Where would you like to begin?");
-    }
-  }
-});
+// ajax get request to determine if user has origin entered as waypoint
+// $.ajax({
+//   type: "GET",
+//   url: '/has_origin',
+//   success: function(response) {
+//     if (response.status == false) {
+//       alert("Where would you like to begin?");
+//     }
+//   }
+// });
 
+// stand alone function to add destination marker to routelayer
 function add_destination(response) {
   var coordinates = response.coordinates;
   var place_name = response.place_name;
@@ -157,7 +161,7 @@ function add_destination(response) {
   }).addTo(routeLayer);
 };
 
-// Geocode user-entered address to lat_lng coordinates, and add to session
+// ajax post request to geocode user-entered address to coordinates, add to session
 $('#address-input').on('submit', function(e) {
   e.preventDefault();
   $.ajax({
@@ -177,30 +181,32 @@ $('#address-input').on('submit', function(e) {
 // Add destination to session 
 // use $.on() vs. $('selector').on to add asynchronous event listener
 // that will watch for newly added DOM elements
+
+// ajax post request to add user-selected pop-up landmark to session
 $(document).on('submit', '.popUpAdd', function(e) {
   e.preventDefault();
   $.ajax({
     type:  "POST",
     url: '/add_destination',
     data: {
-      'destination': $('#popup-id').val()
+      'landmark_id': $('#popup-id').val()
     }, 
     success: add_destination,
   });
   $('.popup').trigger('reset');
+  alert('Destination added.');
       // FIXME turn marker blue
       // FIXME close popup
 });
 
 
-// establish layer of selected (new) markers for the trip
+// initialize route layer, add to map
 var routeLayer = L.mapbox.featureLayer().addTo(map);
 
-// create popups for selected (new) landmarks
+// create popups for selected route landmarks
 routeLayer.on('layeradd', function(e) {
     var marker = e.layer;
   
-    // console.log(marker);  FIXME add feature NAME
     var popupContent = 
         '<h2>' + marker.options.title + '</h2>' +
         '<p>Destination added</p>'; 
@@ -220,8 +226,7 @@ routeLayer.on('mouseover', function(e) {
 //  Finalizing a trip and getting route directions
 // ================================================================================
 
-// add layer with landmark markers to map
-
+// add selected landmarks to map route layer
 function return_all_waypoints() {
   $.ajax({
     type: "GET",
@@ -240,7 +245,7 @@ function return_all_waypoints() {
 var polyline = L.polyline([]).addTo(map);
 
 
-// get route directions from Mapbox Directions API via ajax call
+// ajax get request to retrieve route directions from Mapbox Directions API
 $('#get-directions').on('click', function(e) {
   $.ajax({
     type: "GET",
@@ -264,18 +269,16 @@ $('#get-directions').on('click', function(e) {
       //   L.marker([waypoint.location[1],waypoint.location[0]]).addTo(polyline);
       // });
       var steps = response.routes[0].legs[0].steps.forEach(function(step) {
-        $('#instructions').append('<p>'+ step.maneuver.instruction + ' for ' + step.distance + ' meters</p>');
+        var meters_conv = step.distance.toFixed(1);
+        $('#instructions').append('<p>'+ step.maneuver.instruction + ' for ' + meters_conv + ' meters</p>');
       });
     }
-    // FIXME convert meters to miles
     // map.setView(polyline.getLatLng(), 14);
     // map.setView(polyline.latlng, 14);
   });
 });
 
-
-// FIXME NEED to direct success function to select origin again
-// clear route from map by removing waypoints in session
+// ajax post request to clear route from map by removing waypoints in session
 $('#clear').on('click', function(e) {
   e.preventDefault();
   $.post('/clear', function() {
@@ -294,11 +297,11 @@ $('#clear').on('click', function(e) {
   });
 });
 
-
-// debugger function to display python session variable
 // python returns a jsonified string, jquery interprets as object so must re-stringify
 // use optional 3rd parameter to indicate 4 spaces JS indentation
 // <pre> tags indicate to maintain pre-formatted response
+
+// ajax get request to display python session variable for debugging
 $('#debugger').on('click', function(e){
   $.ajax({
     type: "GET",
