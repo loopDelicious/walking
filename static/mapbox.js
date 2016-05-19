@@ -79,7 +79,7 @@ landmarkLayer.on('layeradd', function(e) {
 
     var popupContent = 
         '<h2>' + feature.properties.name + '</h2>' + feature.properties.description + 
-        '<form action="/add_destination" method="POST" class="popUpAdd"><input type="hidden" name="landmark_id" value="' + 
+        '<form action="/add_destination" method="POST" class="popUpAdd"><input type="hidden" id="popup-id" name="landmark_id" value="' + 
         feature.id + '"><button id="popupButton" class="popUp" data-id="' + 
         feature.id + '" data-name="' + feature.properties.name + '">Add destination</button></form>'; 
 
@@ -138,18 +138,24 @@ var directionsInstructionsControl = L.mapbox.directions.instructionsControl('ins
 //  User interactions to construct a trip route
 // ================================================================================
 
-function add_destination() {
-  $.ajax({
-    type: "POST",
-    url: '/add_destination',
-    success: function(response) {
-      var coordinates = response.coordinates;
-      var place_name = response.place_name;
-      L.marker([coordinates[1], coordinates[0]]).addTo(routeLayer);
+$.ajax({
+  type: "GET",
+  url: '/has_origin',
+  success: function(response) {
+    if (response.status == false) {
+      alert("Where would you like to begin?");
     }
-  });
-};
+  }
+});
 
+function add_destination(response) {
+  var coordinates = response.coordinates;
+  var place_name = response.place_name;
+  L.marker([coordinates[1], coordinates[0]], {
+    'title': place_name,
+    'riseOnHover': true
+  }).addTo(routeLayer);
+};
 
 // Geocode user-entered address to lat_lng coordinates, and add to session
 $('#address-input').on('submit', function(e) {
@@ -160,7 +166,7 @@ $('#address-input').on('submit', function(e) {
     data: {
       'destination': $('#user-input').val()
     },
-    success: add_destination(),
+    success: add_destination,
   });
   $("#address-input").trigger('reset');
   alert('Destination added.');
@@ -177,29 +183,27 @@ $(document).on('submit', '.popUpAdd', function(e) {
     type:  "POST",
     url: '/add_destination',
     data: {
-      'destination': this.dataset.id
+      'destination': $('#popup-id').val()
     }, 
-    success: function(response) {
-      $('.popup').trigger('reset');
-      var coordinates = response.coordinates;
-      var place_name = response.place_name;
-      L.marker([coordinates[1], coordinates[0]]).addTo(routeLayer);
-    },
+    success: add_destination,
+  });
+  $('.popup').trigger('reset');
       // FIXME turn marker blue
       // FIXME close popup
-  });
 });
+
 
 // establish layer of selected (new) markers for the trip
 var routeLayer = L.mapbox.featureLayer().addTo(map);
 
 // create popups for selected (new) landmarks
 routeLayer.on('layeradd', function(e) {
-    var marker = e.layer,
-        feature = marker.feature;    
+    var marker = e.layer;
+  
     // console.log(marker);  FIXME add feature NAME
     var popupContent = 
-        '<h2>' + feature.place_name + '</h2>'; 
+        '<h2>' + marker.options.title + '</h2>' +
+        '<p>Destination added</p>'; 
 
     marker.bindPopup(popupContent, {
         closeButton: false,
@@ -242,7 +246,9 @@ $('#get-directions').on('click', function(e) {
     type: "GET",
     url: '/origin_and_destination',
     success: function(data) {
-      $('#route').append('<p>'+ data.origin + ' to ' + data.destination +': </p>');
+      var origin = data.origin.place_name.split(',')[0];
+      var destination = data.destination.place_name.split(',')[0];
+      $('#routes').append('<p>'+ origin + ' to ' + destination +': </p>');
     }
   });
   $.ajax({
@@ -261,6 +267,7 @@ $('#get-directions').on('click', function(e) {
         $('#instructions').append('<p>'+ step.maneuver.instruction + ' for ' + step.distance + ' meters</p>');
       });
     }
+    // FIXME convert meters to miles
     // map.setView(polyline.getLatLng(), 14);
     // map.setView(polyline.latlng, 14);
   });
@@ -282,6 +289,7 @@ $('#clear').on('click', function(e) {
     }
     polyline = L.polyline([]).addTo(map);
     routeLayer = L.mapbox.featureLayer().addTo(map);
+    location.reload();
     alert('Cleared!');
   });
 });

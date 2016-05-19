@@ -206,14 +206,18 @@ def landmarks_json():
 #  Map interaction
 # ================================================================================
 
-@app.route('/prompt_origin')
-def prompt_origin():
-    """Prompt user to enter a destination or explore if no destinations have been added to session."""
+@app.route('/has_origin')
+def has_origin():
+    """Prompt user to enter an origin or explore if no destinations have been added to session."""
 
-    # if (session['waypoints'] != null):
-    #     pass  INFINITE LOOP!!!
-    # else:
-    #     return ("Please enter a destination or select a point of interest for your trip.")
+    origin = {
+        'status': False
+    }
+
+    if len(session['waypoints']) > 0:
+        origin['status'] = True
+
+    return jsonify(origin)
 
 
 # FIXME /add_destination so address input and popup selection both work
@@ -245,42 +249,24 @@ def geocode():
     return jsonify(data)
 
 
-@app.route('/save_destination', methods=['POST'])
-def save_destination():
-    """User does not add destination to their trip, but saves the destination for later."""
-
-    landmark_id = request.form.get("landmark_id")
-
-    destination = Landmark.query.filter(Landmark.landmark_id == landmark_id).first()
-
-    if 'saved' in session:
-        session['saved'].append(destination)
-
-    else:
-        session['saved'] = destination
-
-    return jsonify(destination)
-
-
-
 @app.route('/add_destination', methods=['POST'])
 def add_destination():
-    """Add a new destination to the session."""
+    """Add a new destination to the session from popup marker."""
 
     landmark_id = request.form.get("landmark_id")
     # import pdb; pdb.set_trace();
     destination = Landmark.query.filter(Landmark.landmark_id == landmark_id).first()
     
-    if destination:
-        place_name = destination.landmark_name
-        coordinates = [destination.landmark_lat, destination.landmark_lng]
+    # FIXME destination.landmark_name
 
-        data = {
-            "place_name": place_name,
-            "coordinates": coordinates
-        }
-    # if landmark_id in database, return attributes, otherwise geocode and add
-    
+    place_name = destination.landmark_name
+    coordinates = [destination.landmark_lat, destination.landmark_lng]
+
+    data = {
+        "place_name": place_name,
+        "coordinates": coordinates
+    }
+
     if 'waypoints' in session:
         # mapbox.Directions limits routes to 25 places of interest
         if len(session['waypoints']) < 25:
@@ -299,6 +285,25 @@ def add_destination():
         flash("Added.")
     
     return jsonify(data)
+
+
+
+@app.route('/save_destination', methods=['POST'])
+def save_destination():
+    """User does not add destination to their trip, but saves the destination for later."""
+
+    landmark_id = request.form.get("landmark_id")
+
+    destination = Landmark.query.filter(Landmark.landmark_id == landmark_id).first()
+
+    if 'saved' in session:
+        session['saved'].append(destination)
+
+    else:
+        session['saved'] = destination
+
+    return jsonify(destination)
+
 
 
 
@@ -367,8 +372,8 @@ def clear_waypoints():
 
     session['waypoints'] = []
 
-    flash("Cleared!")
-    return redirect ('/map')
+    return "Cleared"
+
 
 
 # ================================================================================
