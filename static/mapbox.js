@@ -1,4 +1,6 @@
-
+// ================================================================================
+//  Initializing the map and controls
+// ================================================================================
 
 // default mapbox public access token
 L.mapbox.accessToken = 'pk.eyJ1Ijoiam95Y2VsaW43OSIsImEiOiJjaW8zNzk5bHcwMDA5dzFrcXd6anpnY2xoIn0.ovObS9ODfNsnaa8ie--fKQ';
@@ -27,16 +29,12 @@ geocoderControl.on('select', function(e) {
   L.marker([coordinates[1], coordinates[0]]).addTo(map);
 });
 
-
-// var popupContent = 
-//         '<h2>' + feature.properties.name + '</h2>' + 
-//         feature.properties.description + 
-//         '<form action="/add_waypoint"><input type="hidden" name="landmark_id"' + 
-//         feature.id + '"><button id="popupButton" class="popUp"' + 
-//         feature.id + feature.properties.name + '">Add destination</button></form>'; 
-
 // popUp and ask user to confirm starting point for trip, if so,
 // add to session['waypoints'], add to route, and prompt user for another waypoint
+
+// ================================================================================
+//  Initializing the landmark layer and popups
+// ================================================================================
 
 // load the initial landmark set into a featureLayer from geojson for display
 var initialLandmarkLayer = L.mapbox.featureLayer().addTo(map);
@@ -60,18 +58,31 @@ initialLandmarkLayer.on('click', function(e) {
 
 // create popups for landmarks
 landmarkLayer.on('layeradd', function(e) {
+    // $.ajax({
+    //   type: "GET",
+    //   url: "/prompt_origin",
+    //   success: function(response) {
+    //     alert(response);
+    //   }
+    // });
+
     var marker = e.layer,
-        feature = marker.feature;    
+        feature = marker.feature;
+
+    // stylize markers
+    // marker.setIcon(L.mapbox.marker.icon({
+    // 'marker-symbol': 'star',
+    // 'marker-color': '#D3D3D3',
+    // 'marker-size': 'small',
+    // 'riseOnHover': 'true',
+    // }));  
 
     var popupContent = 
-        '<h2>' + feature.properties.name + '</h2>' + 
-        feature.properties.description + 
-        '<form action="/add_destination" method="POST" class="popUpAdd"><input type="hidden" name="landmark_id"' + 
-        feature.id + '"><button id="popupButton" class="popUp"' + 
-        feature.id + feature.properties.name + '">Add destination</button></form>'; 
+        '<h2>' + feature.properties.name + '</h2>' + feature.properties.description + 
+        '<form action="/add_destination" method="POST" class="popUpAdd"><input type="hidden" name="landmark_id" value="' + 
+        feature.id + '"><button id="popupButton" class="popUp" data-id="' + 
+        feature.id + '" data-name="' + feature.properties.name + '">Add destination</button></form>'; 
 
-    // Create custom popup content
-    // var popupContent = '<h2>' + feature.properties.name + '</h2>' + feature.properties.description;
                         
     // var popoverContent = 
     //     '<form action="/add_waypoint"><input type="hidden" name="landmark_id"><button id="popupButton" data-toggle="popover" data-placement="bottom" data-trigger="focus" class="trigger" ' + feature.id + feature.properties.name + '">Add waypoint</button></form>'; 
@@ -114,23 +125,31 @@ var directions = L.mapbox.directions({
 
 var directionsLayer = L.mapbox.directions.layer(directions)
     .addTo(map);
-
 var directionsInputControl = L.mapbox.directions.inputControl('inputs', directions)
     .addTo(map);
-
 var directionsErrorsControl = L.mapbox.directions.errorsControl('errors', directions)
     .addTo(map);
-
 var directionsRoutesControl = L.mapbox.directions.routesControl('routes', directions)
     .addTo(map);
-
 var directionsInstructionsControl = L.mapbox.directions.instructionsControl('instructions', directions)
     .addTo(map);
 
+// ================================================================================
+//  User interactions to construct a trip route
+// ================================================================================
 
+function add_destination() {
+  $.ajax({
+    type: "POST",
+    url: '/add_destination',
+    success: function(response) {
+      var coordinates = response.coordinates;
+      var place_name = response.place_name;
+      L.marker([coordinates[1], coordinates[0]]).addTo(routeLayer);
+    }
+  });
+};
 
-// If no waypoints in session, prompt user to add origin, also add waypoints popups
-// should show get started and add origin
 
 // Geocode user-entered address to lat_lng coordinates, and add to session
 $('#address-input').on('submit', function(e) {
@@ -141,24 +160,10 @@ $('#address-input').on('submit', function(e) {
     data: {
       'destination': $('#user-input').val()
     },
-    success: function(response) {
-      $("#address-input").trigger('reset');
-      alert('Destination added.' + response.coordinates + response.place_name);
-      var coordinates = response.coordinates;
-      var place_name = response.place_name;
-      L.marker([coordinates[1], coordinates[0]]).addTo(routeLayer);
-      // return_all_waypoints();
-      // var routeLayer = L.mapbox.featureLayer(response, {
-      //   pointToLayer: function(place_name, coordinates) {
-      //     return L.circleMarker(coordinates, {
-      //       fillColor: '#ff0000',
-      //       fillOpacity: 0.8,
-      //       stroke: false
-      //     });
-      //   }
-      // }).addTo(map);
-    },
+    success: add_destination(),
   });
+  $("#address-input").trigger('reset');
+  alert('Destination added.');
 });
 
 // dan: draw route everytime new waypoint is added
@@ -172,7 +177,7 @@ $(document).on('submit', '.popUpAdd', function(e) {
     type:  "POST",
     url: '/add_destination',
     data: {
-      'landmark_id': this.dataset.id
+      'destination': this.dataset.id
     }, 
     success: function(response) {
       $('.popup').trigger('reset');
@@ -207,6 +212,10 @@ routeLayer.on('mouseover', function(e) {
     });
 
 
+// ================================================================================
+//  Finalizing a trip and getting route directions
+// ================================================================================
+
 // add layer with landmark markers to map
 
 function return_all_waypoints() {
@@ -223,26 +232,19 @@ function return_all_waypoints() {
   });
 };
 
-// map.on('click', function(e) {
-//         // Let's add a callback to makeMarker so that it can draw the route only
-//         // *after* it's done processing the marker adding.
-//         makeMarker(e, drawRoute);
-//     });
-
-// function makeMarker(e, done) {
-//     var marker = L.marker(e.latlng, { draggable: true }).addTo(map);
-//     marker.on('dragend', drawRoute);
-//     waypoints.push(marker);
-//     return done();
-// }
-
-
 // establish polyline with path of landmarks
 var polyline = L.polyline([]).addTo(map);
 
 
 // get route directions from Mapbox Directions API via ajax call
 $('#get-directions').on('click', function(e) {
+  $.ajax({
+    type: "GET",
+    url: '/origin_and_destination',
+    success: function(data) {
+      $('#route').append('<p>'+ data.origin + ' to ' + data.destination +': </p>');
+    }
+  });
   $.ajax({
     type: "GET",
     url: '/route_directions',
@@ -256,7 +258,7 @@ $('#get-directions').on('click', function(e) {
       //   L.marker([waypoint.location[1],waypoint.location[0]]).addTo(polyline);
       // });
       var steps = response.routes[0].legs[0].steps.forEach(function(step) {
-        $('#instructions').append('<p>'+ step.maneuver.instruction + '</p>');
+        $('#instructions').append('<p>'+ step.maneuver.instruction + ' for ' + step.distance + ' meters</p>');
       });
     }
     // map.setView(polyline.getLatLng(), 14);
@@ -284,12 +286,22 @@ $('#clear').on('click', function(e) {
   });
 });
 
+
+// debugger function to display python session variable
+// python returns a jsonified string, jquery interprets as object so must re-stringify
+// use optional 3rd parameter to indicate 4 spaces JS indentation
+// <pre> tags indicate to maintain pre-formatted response
 $('#debugger').on('click', function(e){
   $.ajax({
     type: "GET",
     url: '/debugger',
     success:  function(response) {
-      $.colorbox({html: response});    
+      response = JSON.stringify(response, null, 4);
+      $.colorbox({
+        html: "<pre>" + response + "</pre>",
+        width: '500px',
+        height: '500px'
+      });    
     }
   });
 });
@@ -312,9 +324,6 @@ $('#debugger').on('click', function(e){
 
 // // User can delete walks from their display
 // // User can rate landmarks, add new ones, leave public comments
-
-
-
 
 
 

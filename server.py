@@ -31,7 +31,9 @@ def index():
 
     return render_template("homepage.html")
 
-
+# ================================================================================
+#  Registration, Login, and User Profile
+# ================================================================================
 
 
 @app.route('/registration', methods=['GET', 'POST'])
@@ -67,8 +69,6 @@ def registration():
         return render_template('registration.html')
 
 
-
-
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     """Processes login when user provides email and password, or
@@ -99,8 +99,6 @@ def login():
         return render_template('login.html')
 
 
-
-
 @app.route('/logout')
 def logout():
     """Removes user_id from the session"""
@@ -111,6 +109,24 @@ def logout():
     return redirect('/')
 
 
+@app.route('/profile')
+def show_user():
+    """Return page showing details:  walks, landmarks rated, scores."""
+
+    user = User.query.filter_by(user_id=session.get('user_id')).first()
+
+    ratings = user.ratings
+    walks = user.walks
+    
+    return render_template('profile.html', 
+                            user=user, 
+                            ratings=ratings, 
+                            walks=walks)
+
+
+# ================================================================================
+#  Initial map rendering
+# ================================================================================
 
 @app.route('/map')
 def display_map():
@@ -120,7 +136,6 @@ def display_map():
 
     return render_template('mapbox.html', 
                             waypoints=waypoints)
-
 
 
 @app.route('/initial_landmarks.geojson')
@@ -187,6 +202,22 @@ def landmarks_json():
     return jsonify(landmarks_geojson)
 
 
+# ================================================================================
+#  Map interaction
+# ================================================================================
+
+@app.route('/prompt_origin')
+def prompt_origin():
+    """Prompt user to enter a destination or explore if no destinations have been added to session."""
+
+    # if (session['waypoints'] != null):
+    #     pass  INFINITE LOOP!!!
+    # else:
+    #     return ("Please enter a destination or select a point of interest for your trip.")
+
+
+# FIXME /add_destination so address input and popup selection both work
+
 
 
 @app.route('/geocode', methods=['POST'])
@@ -194,6 +225,8 @@ def geocode():
     """User inputs address.  Convert to geojson lat_long coordinates and add to session."""
 
     destination = request.form.get("destination")
+
+    # check if in database first???
  
     # geocoder = Geocoder()
     url = "https://api.mapbox.com/geocoding/v5/mapbox.places/%s.json?access_token=%s" % (destination, accessToken)
@@ -212,24 +245,21 @@ def geocode():
     return jsonify(data)
 
 
-# @app.route('save_destination', methods=['POST'])
-# def save_destination():
-#     """User does not add destination to their trip, but saves the destination for later."""
+@app.route('/save_destination', methods=['POST'])
+def save_destination():
+    """User does not add destination to their trip, but saves the destination for later."""
 
-#     destination = request. form.get("destination")
+    landmark_id = request.form.get("landmark_id")
 
+    destination = Landmark.query.filter(Landmark.landmark_id == landmark_id).first()
 
+    if 'saved' in session:
+        session['saved'].append(destination)
 
+    else:
+        session['saved'] = destination
 
-# @app.route('/set_origin', methods=['POST'])
-# def set_origin():
-#     """Add origin as first waypoint in the session."""
-
-#     origin = request.args.get("origin")
-
-    # DOES THIS RETURN FROM /GEOCODE or AJAX CALL???
-    # session['waypoints'] = [waypoint]
-    # FIXME here.
+    return jsonify(destination)
 
 
 
@@ -237,16 +267,20 @@ def geocode():
 def add_destination():
     """Add a new destination to the session."""
 
-    destination = request.form.get("landmark_id")
-    place_name = destination.landmark_name
-    coordinates = [destination.landmark_lat, destination.landmark_lng]
-
-    data = {
-        "place_name": place_name,
-        "coordinates": coordinates
-    }
+    landmark_id = request.form.get("landmark_id")
+    # import pdb; pdb.set_trace();
+    destination = Landmark.query.filter(Landmark.landmark_id == landmark_id).first()
     
+    if destination:
+        place_name = destination.landmark_name
+        coordinates = [destination.landmark_lat, destination.landmark_lng]
 
+        data = {
+            "place_name": place_name,
+            "coordinates": coordinates
+        }
+    # if landmark_id in database, return attributes, otherwise geocode and add
+    
     if 'waypoints' in session:
         # mapbox.Directions limits routes to 25 places of interest
         if len(session['waypoints']) < 25:
@@ -266,6 +300,26 @@ def add_destination():
     
     return jsonify(data)
 
+
+
+@app.route('/origin_and_destination')
+def return_origin_and_destination():
+    """Return origin and destination from session's waypoints key."""
+
+    waypoints_list = session['waypoints']
+
+    if len(waypoints_list) <= 1:
+        flash('Please enter at least 2 destinations for your trip.')
+    else:
+        origin = session['waypoints'][0]
+        destination = session['waypoints'][-1]
+
+    data = {
+        "origin": origin,
+        "destination": destination
+    }
+
+    return jsonify(data)
 
 
 
@@ -316,22 +370,10 @@ def clear_waypoints():
     flash("Cleared!")
     return redirect ('/map')
 
-   
 
-@app.route('/profile')
-def show_user():
-    """Return page showing details:  walks, landmarks rated, scores."""
-
-    user = User.query.filter_by(user_id=session.get('user_id')).first()
-
-    ratings = user.ratings
-    walks = user.walks
-    
-    return render_template('profile.html', 
-                            user=user, 
-                            ratings=ratings, 
-                            walks=walks)
-
+# ================================================================================
+#  Phase 2: landmark ratings, walk score, user notes
+# ================================================================================
 
 
 @app.route('/landmarks/<int:landmark_id>', methods=['GET'])
@@ -397,11 +439,14 @@ def rate_landmark():
     return redirect('/')
 
 
+
+
 @app.route('/debugger')
 def display_debug_message():
-    """Display debug message in colorbox alert."""
+    """Display session and preserves dictionary format in colorbox alert."""
 
     return jsonify(session)
+
 
 
 if __name__ == "__main__":

@@ -38,7 +38,7 @@
                                     <div class='save-destination' role='button'>
                                         <i class='icon-save-destination'></i>
                                     </div>
-                                    <div class='add_destination' role='button'>
+                                        <button id='popupButton' class='trigger'></button>
                                         <i class='icon-add-destination'>
                                             <span class="default">Add destination</span>
                                             <span class="active">Destination added</span>
@@ -60,9 +60,11 @@
         </div>
 
         <div id='errors'>errors</div>
+
+
         <div id='directions'>
-          <div id='routes'>routes</div>
-          <div id='instructions'>instructions</div>
+          <div id='routes'>Route: </div>
+          <div id='instructions'>Instructions:</div>
         </div>
 
             {% if waypoints %}
