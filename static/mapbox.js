@@ -1,15 +1,14 @@
-// Initial view and interaction:
+// MVP:
 // landmark layer: load first 10 landmarks within 1 mile of current user
 // popups: allow user to explore nearby landmarks with pop-ups in the map
 // geocode: allow user to text-search for next destination
-// filter: toggle layers to display landmarks by type
+// directions: determine route and directions to waypoint
 
-// Creating the walk:
-// once a waypoint has been added, determine route, directions to waypoint
-// prompt the user to add another waypoint OR save the walk to their profile
-
-// User can delete walks from their display
-// User can rate landmarks, add new ones, leave public comments
+// PHASE 2 ideas:
+// UI / UX enhancements
+// filter: toggle layers to display landmarks by type (park, art, stairwells)
+// save the walk to user profile (and delete)
+// user can rate landmarks, add new ones, upload photos, leave public comments
 
 // ================================================================================
 //  Initializing the map and controls
@@ -39,10 +38,9 @@ var geocoderControl = L.mapbox.geocoderControl('mapbox.places',{
   position: 'topleft',
 }).addTo(map);
 
-// can't bias autocomplete results by SF proximity since /geocoding is occuring on backend and included in query parameters
-
 // https://www.mapbox.com/mapbox.js/api/v2.4.0/l-mapbox-geocoder/
 // where do I pass through optional parameters proximity=latlng to bias search results?
+// can't bias autocomplete results by SF proximity since /geocoding is occuring on backend and included in query parameters
 
 // display variable copy in the geocoder depending if the user has entered an origin
 // http://stackoverflow.com/questions/28551603/change-the-placeholder-text-of-an-input-field-after-initializing
@@ -60,22 +58,46 @@ map.addEventListener('ready', function () {
   });
 });
 
+// create a directions object, from which the layer and inputs will pull data
+var directions = L.mapbox.directions({
+  profile: 'mapbox.walking'
+});
+
+var directionsLayer = L.mapbox.directions.layer(directions)
+    .addTo(map);
+var directionsInputControl = L.mapbox.directions.inputControl('inputs', directions)
+    .addTo(map);
+var directionsErrorsControl = L.mapbox.directions.errorsControl('errors', directions)
+    .addTo(map);
+var directionsRoutesControl = L.mapbox.directions.routesControl('routes', directions)
+    .addTo(map);
+var directionsInstructionsControl = L.mapbox.directions.instructionsControl('instructions', directions)
+    .addTo(map);
+new L.Control.Zoom({ position: 'topleft' }).addTo(map);
+
+
+// ================================================================================
+//  User enters address using geocoder control
+// ================================================================================
+
 // place a marker for entered address
 geocoderControl.on('select', function(e) {
   var coordinates = e.feature.geometry.coordinates;
   var place_name = e.feature.text;
   // map.panTo(e.latlng);
-  // http://bootboxjs.com/
+  confirm_destination(e);
+});
 
-  // bootbox.confirm({ 
-  //   size: 'small',
-  //   message: "Add " + place_name + " to your trip?", 
-  //   callback: add_destination,
-  // });
-
+// confirm user selection with dialog to save, add or cancel action
+function confirm_destination(e) {
+  var coordinates = e.feature.geometry.coordinates;
+  var place_name = e.feature.text;
   bootbox.dialog({
     message: "Add this destination to your trip?",
     title: place_name,
+    onEscape: function () {
+      $('.bootbox.modal').modal('hide');
+    },
     buttons: {
       save: {
         label: "Save to Favorites",
@@ -96,7 +118,7 @@ geocoderControl.on('select', function(e) {
         label: "Cancel",
         className: "btn-cancel",
         callback: function() {
-          Example.show("uh oh, look out!");
+          $('.btn-cancel').modal('hide');
         }
       },
       add: {
@@ -116,9 +138,7 @@ geocoderControl.on('select', function(e) {
       }
     }
   });
-});
-
-// popUp and ask user to confirm starting point for trip, if so, add_destination()
+};
 
 // ================================================================================
 //  Initializing the landmark layer and popups
@@ -139,9 +159,8 @@ initialLandmarkLayer.once('click', function(e) {
     map.removeLayer(initialLandmarkLayer);
   });
 
+// FIXME transition user from initialLandmarkLayer to landmarkLayer and persist
 // FIXME how to do zoom / pan on zoom OR click
-//  FIXME how do I remove the initial landmark layer so that doesn't load?
-//  map.removeLayer(initialLandmarkLayer);
 
 // create popups for landmarks
 landmarkLayer.on('layeradd', function(e) {
@@ -166,9 +185,6 @@ landmarkLayer.on('layeradd', function(e) {
         feature.id + '"><button id="saveButton" class="popUpSave" data-id="' +
         feature.id + '" data-name="' + feature.properties.name + '">Save</button></form>'; 
                         
-    // var popoverContent = 
-    //     '<form action="/add_waypoint"><input type="hidden" name="landmark_id"><button id="popupButton" data-toggle="popover" data-placement="bottom" data-trigger="focus" class="trigger" ' + feature.id + feature.properties.name + '">Add waypoint</button></form>'; 
-
     marker.bindPopup(popupContent, {
         closeButton: false,
         minWidth: 120,
@@ -184,37 +200,6 @@ landmarkLayer.on('mouseover', function(e) {
     e.layer.openPopup();
 });
 
-// $('#popup').ready(function(){
-//     $('[data-toggle="popover"]').popover(); 
-// });
-
-// $(document).ready(function(){
-//     $('[data-toggle="popover"]').popover();   
-// });
-// FIXME popover doesn't work
-
-// FIXME START HERE
-// open popover content on clicking popup
-// $('#trigger').on('click', '.trigger', function(e) {
-//     alert('Hello from Toronto!');
-// });
-
-// create a directions object, from which the layer and inputs will pull data
-var directions = L.mapbox.directions({
-  profile: 'mapbox.walking'
-});
-
-var directionsLayer = L.mapbox.directions.layer(directions)
-    .addTo(map);
-var directionsInputControl = L.mapbox.directions.inputControl('inputs', directions)
-    .addTo(map);
-var directionsErrorsControl = L.mapbox.directions.errorsControl('errors', directions)
-    .addTo(map);
-var directionsRoutesControl = L.mapbox.directions.routesControl('routes', directions)
-    .addTo(map);
-var directionsInstructionsControl = L.mapbox.directions.instructionsControl('instructions', directions)
-    .addTo(map);
-new L.Control.Zoom({ position: 'topleft' }).addTo(map);
 
 // ================================================================================
 //  User interactions to construct a trip route
@@ -240,9 +225,7 @@ function save_destination(response) {
   }
 };
 
-// dan: draw route everytime new waypoint is added
-
-// Add destination to session 
+// Add destination to session via popup
 // use $.on() vs. $('selector').on to add asynchronous event listener
 // that will watch for newly added DOM elements
 
@@ -255,7 +238,7 @@ $(document).on('submit', '.popUpAdd', function(e) {
     data: {
       'landmark_id': $('#popup-id').val()
     }, 
-    success: add_destination,
+    success: confirm_destination(e),
   });
   $('.popup').trigger('reset');
       // FIXME turn marker blue
@@ -307,6 +290,7 @@ function return_all_waypoints() {
 // establish polyline with path of landmarks
 var polyline = L.polyline([]).addTo(map);
 
+// FIXME draw route everytime new waypoint is added
 
 // ajax get request to retrieve route directions from Mapbox Directions API
 $('#get-directions').on('click', function(e) {
