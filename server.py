@@ -35,6 +35,7 @@ def index():
 #  Registration, Login, and User Profile
 # ================================================================================
 
+# use colorbox for login and registration modals
 
 @app.route('/registration', methods=['GET', 'POST'])
 def registration():
@@ -117,11 +118,13 @@ def show_user():
 
     ratings = user.ratings
     walks = user.walks
+    saved_landmarks = session['saved']
     
     return render_template('profile.html', 
                             user=user, 
                             ratings=ratings, 
-                            walks=walks)
+                            walks=walks,
+                            saved_landmarks=saved_landmarks)
 
 
 # ================================================================================
@@ -233,7 +236,7 @@ def geocode():
     # check if in database first???
  
     # geocoder = Geocoder()
-    url = "https://api.mapbox.com/geocoding/v5/mapbox.places/%s.json?access_token=%s" % (destination, accessToken)
+    url = "https://api.mapbox.com/geocoding/v5/mapbox.places/proximity=-122.4194,37.7749&%s.json?access_token=%s" % (destination, accessToken)
     response = requests.get(url)
     # import pdb; pdb.set_trace()
     response = response.json()
@@ -254,14 +257,18 @@ def add_destination():
     """Add a new destination to the session from popup marker."""
 
     landmark_id = request.form.get("landmark_id")
- 
-    # import pdb; pdb.set_trace();
-    destination = Landmark.query.filter(Landmark.landmark_id == landmark_id).first()
-    
-    # FIXME destination.landmark_name
 
-    place_name = destination.landmark_name
-    coordinates = [destination.landmark_lng, destination.landmark_lat]
+    if landmark_id:
+        # import pdb; pdb.set_trace();
+        destination = Landmark.query.filter(Landmark.landmark_id == landmark_id).first()
+        place_name = destination.landmark_name
+        coordinates = [destination.landmark_lng, destination.landmark_lat]
+
+    # http://stackoverflow.com/questions/23889107/sending-array-data-with-jquery-and-flask
+    else:
+        coordinates = request.form.getlist("coordinates[]")
+        place_name = request.form.get("place_name")
+
 
     data = {
         "place_name": place_name,
@@ -272,18 +279,14 @@ def add_destination():
         # mapbox.Directions limits routes to 25 places of interest
         if len(session['waypoints']) < 25:
             if data in session['waypoints']:
-                flash("Already added.")
+                return "Already added."
             else: 
                 session['waypoints'].append(data)
-                print session['waypoints']
-                flash("Added.")
         else:
-            flash("Only 25 places can be included in a trip.")
+            return "Only 25 places can be included in a trip."
 
     else:
         session['waypoints'] = [data]
-        print session['waypoints']
-        flash("Added.")
     
     return jsonify(data)
 
@@ -295,15 +298,31 @@ def save_destination():
 
     landmark_id = request.form.get("landmark_id")
 
-    destination = Landmark.query.filter(Landmark.landmark_id == landmark_id).first()
-
-    if 'saved' in session:
-        session['saved'].append(destination)
+    if landmark_id:
+        destination = Landmark.query.filter(Landmark.landmark_id == landmark_id).first()
+        place_name = destination.landmark_name
+        coordinates = [destination.landmark_lng, destination.landmark_lat]
 
     else:
-        session['saved'] = destination
+        coordinates = request.form.getlist("coordinates[]")
+        place_name = request.form.get("place_name")
 
-    return jsonify(destination)
+    data = {
+        "place_name": place_name,
+        "coordinates": coordinates
+    }
+
+    if 'saved' in session:
+        
+        if data in session['saved']:
+            return "Already saved."
+        else:
+            session['saved'].append(data)
+
+    else:
+        session['saved'] = [data]
+
+    return jsonify(data)
 
 
 
@@ -335,8 +354,7 @@ def get_directions_geojson():
 
     # https://github.com/mapbox/intro-to-mapbox/blob/master/demos/directions.html
     # https://github.com/mapbox/mapbox-directions.js
-    
-    # import pdb; pdb.set_trace();
+
     waypoints_list = session['waypoints']
     route_list = []
 
@@ -344,7 +362,6 @@ def get_directions_geojson():
         lng = str(waypoint['coordinates'][0]) 
         lat = str(waypoint['coordinates'][1]) 
         pair = lng + ',' + lat
-        # pair = pair[1:-1]
         route_list.append(pair)
  
     route_list = ';'.join(route_list)

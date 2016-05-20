@@ -13,7 +13,7 @@
         <script src='https://api.mapbox.com/mapbox.js/plugins/mapbox-directions.js/v0.4.0/mapbox.directions.js'></script>
         <link rel='stylesheet' href='https://api.mapbox.com/mapbox.js/plugins/mapbox-directions.js/v0.4.0/mapbox.directions.css' type='text/css' />
 
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
 
     {% endblock %}
@@ -23,35 +23,11 @@
 
         <!-- Display the map and prompt -->
         <div id='map'></div>
-            <div class='geocoder'></div>
-            <form action = '/geocode' id="address-input" method="POST">
-                <input id='user-input' class="controls" type="text" placeholder="Where do you want to start?" name="destination" />
-            </form>
 
-<!--         <div class='markers'>
-            <div class='marker-icon'>
-                <div class='popup'></div>
-                    <div class='popup-title'>
-                        <div class='popup-content'>
-                            <div class='popover'>
-                                <div class='popover-actions'>
-                                    <div class='save-destination' role='button'>
-                                        <i class='icon-save-destination'></i>
-                                    </div>
-                                        <button id='popupButton'></button>
-                                        <i class='icon-add-destination'>
-                                            <span class="default">Add destination</span>
-                                            <span class="active">Destination added</span>
-                                            <span class="remove">Remove</span>
-                                        </i>
-                                    </div>
-                                </div>
-                            </div>  
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
+<!--             <span class="default">Add destination</span>
+            <span class="active">Destination added</span>
+            <span class="remove">Remove</span> -->
+   
         <div class='map-tooltips'></div>
         
         <div id='map-controls'>
@@ -64,6 +40,7 @@
 
         <div id='directions'>
           <div id='routes'>Route: </div>
+          <div id='duration'>Duration: </div>
           <div id='instructions'>Directions:</div>
         </div>
 
@@ -80,6 +57,10 @@
 
         <script src="/static/colorbox-master/jquery.colorbox.js"></script>
         <script src="/static/mapbox.js"></script>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" async></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" async></script>
+        <script src="https://cdn.jsdelivr.net/bootbox/4.4.0/bootbox.min.js" async></script>
 
 
 

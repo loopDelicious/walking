@@ -27,6 +27,13 @@
             {{rating.landmark.name}}: {{rating.score}}
             </br>
           </li>{% endfor %}
+
+          <li>My Saved Landmarks:
+            {% for landmark in saved_landmarks %}
+            <!-- for every landmark that has been parsed from the ratings object that was passed through, we display its score.  -->
+              <ul>{{landmark.place_name}}</ul>
+          </li>{% endfor %}
+          
     </ul>
               <!-- <a href="/users/{{ user.user_id }}"> -->
 {% endblock %}

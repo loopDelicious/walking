@@ -23,6 +23,7 @@ class Landmark(db.Model):
     landmark_lng = db.Column(db.Float, nullable=False)
 
     # FIXME upload pics of landmarks (user uploaded or google images?)
+    # FIXME add yelp rooftop parks and online stairwells, or landmark_type
     
     # Applicable to CIVIC ART data set:
     landmark_artist = db.Column(db.String(100), nullable = True)
@@ -81,6 +82,8 @@ class Walk(db.Model):
     """Walks that will be created by users."""
 
     __tablename__ = "walks"
+
+    # FIXME do I need a walks table?  or should i stick to landmarks?
 
     walk_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
