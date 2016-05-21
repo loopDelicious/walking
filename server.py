@@ -256,20 +256,21 @@ def geocode():
 def add_destination():
     """Add a new destination to the session from popup marker."""
 
+    # users submitting from popup will have landmark_id
     landmark_id = request.form.get("landmark_id")
-
+    # access attributes of the model Landmark object from db
     if landmark_id:
-        # import pdb; pdb.set_trace();
         destination = Landmark.query.filter(Landmark.landmark_id == landmark_id).first()
         place_name = destination.landmark_name
         coordinates = [destination.landmark_lng, destination.landmark_lat]
 
     # http://stackoverflow.com/questions/23889107/sending-array-data-with-jquery-and-flask
+    # users saving from popup will have full geojson object
     else:
         coordinates = request.form.getlist("coordinates[]")
         place_name = request.form.get("place_name")
 
-
+    # format all users into data dictionary with 2 keys
     data = {
         "place_name": place_name,
         "coordinates": coordinates
@@ -296,17 +297,18 @@ def add_destination():
 def save_destination():
     """User does not add destination to their trip, but saves the destination for later."""
 
+    # users submitting from popup will have landmark_id
     landmark_id = request.form.get("landmark_id")
-
+    # access attributes of the model Landmark object from db
     if landmark_id:
         destination = Landmark.query.filter(Landmark.landmark_id == landmark_id).first()
         place_name = destination.landmark_name
         coordinates = [destination.landmark_lng, destination.landmark_lat]
-
+    # users saving from geocoder will have full geojson object
     else:
         coordinates = request.form.getlist("coordinates[]")
         place_name = request.form.get("place_name")
-
+    # format all users into data dictionary with 2 keys
     data = {
         "place_name": place_name,
         "coordinates": coordinates

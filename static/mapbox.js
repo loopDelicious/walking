@@ -85,13 +85,11 @@ geocoderControl.on('select', function(e) {
   var coordinates = e.feature.geometry.coordinates;
   var place_name = e.feature.text;
   // map.panTo(e.latlng);
-  confirm_destination(e);
+  confirm_destination(coordinates, place_name);
 });
 
 // confirm user selection with dialog to save, add or cancel action
-function confirm_destination(e) {
-  var coordinates = e.feature.geometry.coordinates;
-  var place_name = e.feature.text;
+function confirm_destination(coordinates, place_name) {
   bootbox.dialog({
     message: "Add this destination to your trip?",
     title: place_name,
@@ -219,9 +217,9 @@ function add_destination(response) {
 
 function save_destination(response) {
   if (response == "Already saved.") {
-    alert("Already saved.");
+    alert("Destination already saved.");
   } else {
-    alert("Saved.");
+    alert("Destination saved.");
   }
 };
 
@@ -238,13 +236,23 @@ $(document).on('submit', '.popUpAdd', function(e) {
     data: {
       'landmark_id': $('#popup-id').val()
     }, 
-    success: confirm_destination(e),
+    success: add_destination,
   });
-  $('.popup').trigger('reset');
-      // FIXME turn marker blue
       // FIXME close popup
 });
 
+// ajax post request to save user-selected pop-up landmark to session
+$(document).on('submit', '.popUpSave', function(e) {
+  e.preventDefault();
+  $.ajax({
+    type:  "POST",
+    url: '/save_destination',
+    data: {
+      'landmark_id': $('#save-id').val()
+    }, 
+    success: save_destination,
+  });
+});
 
 // initialize route layer, add to map
 var routeLayer = L.mapbox.featureLayer().addTo(map);
@@ -353,18 +361,6 @@ $('#clear').on('click', function(e) {
 //  Additional user interaction
 // ================================================================================
 
-// ajax post request to save user-selected pop-up landmark to session
-$(document).on('submit', '.popUpSave', function(e) {
-  e.preventDefault();
-  $.ajax({
-    type:  "POST",
-    url: '/save_destination',
-    data: {
-      'landmark_id': $('#save-id').val()
-    }, 
-    success: save_destination,
-  });
-});
 
 // python returns a jsonified string, jquery interprets as object so must re-stringify
 // use optional 3rd parameter to indicate 4 spaces JS indentation

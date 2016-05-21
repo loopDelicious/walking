@@ -76,6 +76,12 @@ class MyAppIntegrationTestCase(unittest.TestCase):
         self.assertIn('Logged out', result.data)
 
 
+# User landmark scenarios:
+# User enters address into geocoder, must confirm Add, Save, Cancel
+# User selects popup from marker, must Add or Save
+
+
+
 if __name__ == '__main__':
     # If called like a script, run our tests
 
