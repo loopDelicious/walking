@@ -39,9 +39,12 @@
 
 
         <div id='directions'>
-          <div id='routes'>Route: </div>
-          <div id='duration'>Duration: </div>
-          <div id='instructions'>Directions:</div>
+          <div id='routes'></div>
+          <div id='duration'></div>
+          <div id='instructions'></div>
+             <ul id='instructions-list'>
+                <ul id='distance-list'></ul>
+            </ul>
         </div>
 
             {% if waypoints %}
@@ -54,10 +57,8 @@
         <button id="clear" class="control-link">clear</button><br>
         <button id="debugger" class="control-link">debugger</button><br>
 
-
-        <script src="/static/colorbox-master/jquery.colorbox.js"></script>
         <script src="/static/mapbox.js"></script>
-        
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" async></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" async></script>
         <script src="https://cdn.jsdelivr.net/bootbox/4.4.0/bootbox.min.js" async></script>

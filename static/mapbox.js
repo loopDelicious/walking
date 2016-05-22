@@ -1,5 +1,5 @@
 // MVP:
-// landmark layer: load first 10 landmarks within 1 mile of current user
+// landmark layer: load subset of all landmarks initially
 // popups: allow user to explore nearby landmarks with pop-ups in the map
 // geocode: allow user to text-search for next destination
 // directions: determine route and directions to waypoint
@@ -30,7 +30,7 @@ var map = L.mapbox.map('map', 'mapbox.streets', {
     center: latlng,  // starting position to center map on SF
     interactive: true, // make interactive instead of static
     });
- 
+
 // add search box geocoder to map
 var geocoderControl = L.mapbox.geocoderControl('mapbox.places',{
   autocomplete: true,
@@ -175,7 +175,7 @@ landmarkLayer.on('layeradd', function(e) {
     // }));  
 
     var popupContent = 
-        '<h2>' + feature.properties.name + '</h2>' + feature.properties.description + 
+        '<h2><a href="/landmarks/' + feature.id + '">' + feature.properties.name + '</a></h2>' + feature.properties.description + 
         '<form action="/add_destination" method="POST" class="popUpAdd"><input type="hidden" id="popup-id" name="landmark_id" value="' + 
         feature.id + '"><button id="popupButton" class="popUp" data-id="' + 
         feature.id + '" data-name="' + feature.properties.name + 
@@ -211,15 +211,15 @@ function add_destination(response) {
     'title': place_name,
     'riseOnHover': true
   }).addTo(routeLayer);
-  alert('Destination added.');  
+  bootbox.alert('Destination added.');
   // closePopup();
 };
 
 function save_destination(response) {
   if (response == "Already saved.") {
-    alert("Destination already saved.");
+    bootbox.alert("Destination already saved.");
   } else {
-    alert("Destination saved.");
+    bootbox.alert("Destination saved.");
   }
 };
 
@@ -329,7 +329,8 @@ $('#get-directions').on('click', function(e) {
 
       var steps = response.routes[0].legs[0].steps.forEach(function(step) {
         var meters_conv = step.distance.toFixed(1);
-        $('#instructions').append('<p>'+ step.maneuver.instruction + ' for ' + meters_conv + ' meters</p>');
+        $('#instructions-list').append('<p>'+ step.maneuver.instruction + '</p>');
+        $('#distance-list').append('<p>' + meters_conv + ' meters</p>');
       });
     }
     // map.setView(polyline.getLatLng(), 14);
@@ -352,7 +353,7 @@ $('#clear').on('click', function(e) {
     polyline = L.polyline([]).addTo(map);
     routeLayer = L.mapbox.featureLayer().addTo(map);
     location.reload();
-    alert('Cleared!');
+    bootbox.alert('Cleared!');
   });
 });
 
@@ -360,6 +361,17 @@ $('#clear').on('click', function(e) {
 // ================================================================================
 //  Additional user interaction
 // ================================================================================
+
+//from geocoder confirm dialog? or separate button?
+// ajax post request to add new landmark to database
+$('#add-new').on('click', function(e) {
+  $.ajax({
+    type: "POST",
+    url: '/add_new_landmark',
+    success: add_destination,
+  });
+});
+
 
 
 // python returns a jsonified string, jquery interprets as object so must re-stringify
@@ -373,26 +385,17 @@ $('#debugger').on('click', function(e){
     url: '/debugger',
     success:  function(response) {
       response = JSON.stringify(response, null, 4);
-      $.colorbox({
-        html: "<pre>" + response + "</pre>",
-        width: '500px',
-        height: '500px'
-      });    
-    }
+      bootbox.dialog({
+        message: "<pre>" + response + "</pre>",
+        title: "Session", 
+        buttons: {
+          OK: {
+            label: "OK",
+            className: "btn-OK",
+          }
+        }
+      });
+    }   
   });
 });
-
-
-
-
-// jQuery.fn.extend({
-//   flash: function(message) {
-//     $('#jquery-flash-container').text(message).show();
-//     setTimeout(function(){
-//       $('#jquery-flash-container').fadeOut();
-//     }, 5000);
-//   }
-// });
-
-// $(document).flash('hello world');
 

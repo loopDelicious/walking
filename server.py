@@ -408,6 +408,7 @@ def show_landmark(landmark_id):
 
     # Querying landmarks table to get landmark object
     landmark = Landmark.query.get(landmark_id)
+
     user_id = session.get('user_id')
 
     if user_id:
@@ -419,21 +420,22 @@ def show_landmark(landmark_id):
         user_rating = None
 
     # Get the average rating of a landmark
-    rating_scores = [r.user_score for r in Rating.user_score]
-    avg_rating = float(sum(rating_scores))/len(rating_scores)
+    # rating_scores = [r.user_score for r in Rating.user_score]
+    # avg_rating = float(sum(rating_scores))/len(rating_scores)
 
 
     # if (not user_rating) and user_id:
     #     user = User.query.get(user_id)
         #     if user:
         #         prediction = user.predict_rating(movie)
-    ratings = landmark.ratings
+    # ratings = landmark.ratings
 
     return render_template('landmark_details.html', 
                             landmark=landmark, 
-                            ratings=ratings,
+                            # ratings=ratings,
                             user_rating=user_rating,
-                            average=avg_rating)
+                            # average=avg_rating
+                            )
                           
 
 
@@ -464,6 +466,12 @@ def rate_landmark():
     db.session.commit()
     return redirect('/')
 
+
+@app.route('/add_new_landmark', methods=["POST"])
+def add_new_landmark():
+    """User adds a new landmark to the database."""
+
+    # INSERT NEW RECORD INTO LANDMARK TABLE
 
 
 
