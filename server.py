@@ -6,7 +6,7 @@ from jinja2 import StrictUndefined
 from flask import Flask, render_template, redirect, request, flash, session, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 
-from model import Landmark, User, Rating, Walk, WalkLandmarkLink, connect_to_db, db
+from model import Landmark, User, Rating, Walk, WalkLandmarkLink, LandmarkImage, connect_to_db, db
 
 import os
 import json
@@ -420,21 +420,21 @@ def show_landmark(landmark_id):
         user_rating = None
 
     # Get the average rating of a landmark
-    # rating_scores = [r.user_score for r in Rating.user_score]
-    # avg_rating = float(sum(rating_scores))/len(rating_scores)
+    ratings = Rating.query.filter_by(landmark_id=landmark_id).all()
+    rating_scores = [r.user_score for r in ratings]
 
+    if len(rating_scores) > 1:
+        avg_rating = float(sum(rating_scores))/len(rating_scores)
+    else:
+        avg_rating = 0
 
-    # if (not user_rating) and user_id:
-    #     user = User.query.get(user_id)
-        #     if user:
-        #         prediction = user.predict_rating(movie)
-    # ratings = landmark.ratings
+    images = LandmarkImage.query.filter_by(landmark_id=landmark_id).all()
 
     return render_template('landmark_details.html', 
                             landmark=landmark, 
-                            # ratings=ratings,
                             user_rating=user_rating,
-                            # average=avg_rating
+                            average=avg_rating,
+                            images=images
                             )
                           
 
@@ -467,11 +467,27 @@ def rate_landmark():
     return redirect('/')
 
 
-@app.route('/add_new_landmark', methods=["POST"])
-def add_new_landmark():
-    """User adds a new landmark to the database."""
+# @app.route('/add_new_landmark', methods=["POST"])
+# def add_new_landmark():
+#     """User adds a new landmark to the database."""
 
     # INSERT NEW RECORD INTO LANDMARK TABLE
+
+@app.route('/add_image', methods=["POST"])
+def add_image():
+    """User uploads a new landmark image, and inserts into db."""
+
+    imageURL = request.form.get("imageURL")
+    landmark_id = request.form.get("landmark_id")
+
+    new_image = LandmarkImage(landmark_id=landmark_id, 
+                              imageurl=imageURL)
+
+    db.session.add(new_image)
+    db.session.commit()
+
+    return "Success"
+
 
 
 

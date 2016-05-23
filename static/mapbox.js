@@ -182,6 +182,9 @@ landmarkLayer.on('layeradd', function(e) {
         '">Add destination</button></form><form action="/save_destination" method="POST" class="popUpSave"><input type="hidden" id="save-id" name="landmark_id" value="' +
         feature.id + '"><button id="saveButton" class="popUpSave" data-id="' +
         feature.id + '" data-name="' + feature.properties.name + '">Save</button></form>'; 
+
+    // if user had added, change to destination added, provide option to remove from trip
+    // display average score (if any)
                         
     marker.bindPopup(popupContent, {
         closeButton: false,
@@ -362,6 +365,7 @@ $('#clear').on('click', function(e) {
 //  Additional user interaction
 // ================================================================================
 
+//do i want to allow users to add a new landmark?
 //from geocoder confirm dialog? or separate button?
 // ajax post request to add new landmark to database
 $('#add-new').on('click', function(e) {

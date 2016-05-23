@@ -117,6 +117,19 @@ class WalkLandmarkLink(db.Model):
 
         return "<WalkLandmarkLink walk_id=%s landmark_id=%s>" % (self.walk_id, self.landmark_id)
 
+
+class LandmarkImage(db.Model):
+    """Landmark images uploaded by users or uploaded from static data set."""
+
+    __tablename__ = "landmark_images"
+
+    image_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    landmark_id = db.Column(db.Integer, db.ForeignKey('landmarks.landmark_id'))
+    imageurl = db.Column(db.String(255), nullable=False)
+
+
+
+
 ##############################################################################
 # Helper functions
 

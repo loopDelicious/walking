@@ -75,6 +75,12 @@ class MyAppIntegrationTestCase(unittest.TestCase):
         result = self.client.get('/logout')
         self.assertIn('Logged out', result.data)
 
+    def test_landmark_page(self):
+        result = self.client.get('/landmarks/<int:landmark_id>',
+                                landmark_id='4389',
+                                follow_redirects=True)
+        self.assertIn("Rate"), result.data)
+
 
 # User landmark scenarios:
 # User enters address into geocoder, must confirm Add, Save, Cancel
