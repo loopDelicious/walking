@@ -177,32 +177,40 @@ def initial_landmarks_json():
 def landmarks_json():
     """Send landmark data for map layer as Geojson from database."""
 
+    features = []
+
+
+    for landmark in Landmark.query.all():
+        
+        image = ""
+
+        if len(landmark.images) > 0:
+            image = landmark.images[0].imageurl 
+
+        features.append({
+                        "type": "Feature",
+                        "properties": {
+                            "name": landmark.landmark_name,
+                            "description": landmark.landmark_description,
+                            "artist":  landmark.landmark_artist,
+                            "display-dimensions": landmark.landmark_display_dimensions,
+                            "location-description": landmark.landmark_location_description,
+                            "medium": landmark.landmark_medium
+                            },
+                        "geometry": {
+                            "coordinates": [
+                                landmark.landmark_lng,
+                                landmark.landmark_lat],
+                            "type": "Point"
+                        },
+                        "id": landmark.landmark_id,
+                        'image': image,
+                        })
     
     landmarks_geojson = {
                         "type": "FeatureCollection",
-                        "features": [
-                            {
-                            "type": "Feature",
-                            "properties": {
-                                "name": landmark.landmark_name,
-                                "description": landmark.landmark_description,
-                                "artist":  landmark.landmark_artist,
-                                "display-dimensions": landmark.landmark_display_dimensions,
-                                "location-description": landmark.landmark_location_description,
-                                "medium": landmark.landmark_medium
-                                },
-                            "geometry": {
-                                "coordinates": [
-                                    landmark.landmark_lng,
-                                    landmark.landmark_lat],
-                                "type": "Point"
-                            },
-                            "id": landmark.landmark_id,
-                            'image': landmark.images,
-                            }
-                        for landmark in Landmark.query.all()
-                        ]
-                    }
+                        "features": features,
+                        }
 
     return jsonify(landmarks_geojson)
 

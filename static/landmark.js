@@ -1,28 +1,23 @@
 
 function rate_landmark() {
-  $('.choice').text(this.value + ' stars');
+
 }
 
 // http://rog.ie/blog/css-star-rater
 // ajax post request to save user landmark rating from landmark page to db
-$('.star-rating').on('click', function(e) {
+$('.rating').on('click', function(e) {
+  e.preventDefault();
   $.ajax({
     type: "POST",
     url: '/rate_landmark',
     data: {
       'landmark_id': landmark_id,
-      'score': $('#ratings').val()
+      'score': $(this).val()
     },
     success: rate_landmark,
   });
 });
 
-
-$(':radio').change(
-  function(){
-    $('.choice').text( this.value + ' stars' );
-  } 
-)
 
 // http://stackoverflow.com/questions/10863658/load-image-with-jquery-and-append-it-to-the-dom
 

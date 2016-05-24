@@ -4,8 +4,6 @@
 
     <title>Landmark Details</title>
 
-    <link href="/static/landmark.css" rel="stylesheet" />
-
 {% endblock %}
 
 {% block content %}
@@ -32,18 +30,12 @@
                 <!-- Rate via Like/Heart or 5-stars? -->
 
                 <form id='ratings' method='POST'>
-                  <strong class="choice">Select a rating</strong>
-                    <span class='star-rating'>
-                      <input type='radio' name='rating' value='1'>
-                      <input type='radio' name='rating' value='2'>
-                      <input type='radio' name='rating' value='3'>
-                      <input type='radio' name='rating' value='4'>
-                      <input type='radio' name='rating' value='5'>
-                    </span>
-                </form>
-
-<!--                 <label><button id='btn-heart' class='btn-rate' value='1'>Heart</button></label> -->                
-          </form>  
+                  <input type='button' src='/static/catburrito.jpeg' class='rating' value='1'>
+                  <input type='button' src='/static/catburrito.jpeg' class='rating' value='2'>
+                  <input type='button' src='/static/catburrito.jpeg' class='rating' value='3'>
+                  <input type='button' src='/static/catburrito.jpeg' class='rating' value='4'>
+                  <input type='button' src='/static/catburrito.jpeg' class='rating' value='5'>
+                </form>                  
 
         {% else %}
 
