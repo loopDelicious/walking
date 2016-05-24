@@ -118,7 +118,7 @@ def show_user():
 
     ratings = user.ratings
     walks = user.walks
-    saved_landmarks = session['saved']
+    saved_landmarks = user.saved
     
     return render_template('profile.html', 
                             user=user, 
@@ -177,6 +177,7 @@ def initial_landmarks_json():
 def landmarks_json():
     """Send landmark data for map layer as Geojson from database."""
 
+    
     landmarks_geojson = {
                         "type": "FeatureCollection",
                         "features": [
@@ -196,13 +197,15 @@ def landmarks_json():
                                     landmark.landmark_lat],
                                 "type": "Point"
                             },
-                            "id": landmark.landmark_id
+                            "id": landmark.landmark_id,
+                            'image': landmark.images,
                             }
                         for landmark in Landmark.query.all()
                         ]
                     }
 
     return jsonify(landmarks_geojson)
+
 
 
 # ================================================================================
@@ -223,17 +226,12 @@ def has_origin():
     return jsonify(origin)
 
 
-# FIXME /add_destination so address input and popup selection both work
-
-
 
 @app.route('/geocode', methods=['POST'])
 def geocode():
     """User inputs address.  Convert to geojson lat_long coordinates and add to session."""
 
     destination = request.form.get("destination")
-
-    # check if in database first???
  
     # geocoder = Geocoder()
     url = "https://api.mapbox.com/geocoding/v5/mapbox.places/proximity=-122.4194,37.7749&%s.json?access_token=%s" % (destination, accessToken)
@@ -314,18 +312,26 @@ def save_destination():
         "coordinates": coordinates
     }
 
-    if 'saved' in session:
-        
-        if data in session['saved']:
+    user = User.query.filter_by(user_id=session.get('user_id')).first()
+
+    # import pdb; pdb.set_trace()
+
+    saved_landmarks = user.saved
+
+    if saved_landmarks:
+        if data in saved_landmarks:
             return "Already saved."
         else:
-            session['saved'].append(data)
+            saved.append(data)
 
     else:
-        session['saved'] = [data]
+        user.saved = [data]
+
+    # ProgrammingError: (psycopg2.ProgrammingError) can't adapt type 'dict' [SQL: 'UPDATE users SET saved=%(saved)s WHERE users.user_id = %(users_user_id)s'] [parameters: {'users_user_id': 1, 'saved': [{'coordinates': [u'-122.404896', u'37.800621'], 'place_name': u'Montague Pl'}]}]
+
+    db.session.commit()
 
     return jsonify(data)
-
 
 
 
@@ -428,10 +434,17 @@ def show_landmark(landmark_id):
     else:
         avg_rating = 0
 
+    if (not user_rating) and user_id:
+        user = User.query.get(user_id)
+
+    # getting ratings from landmark object since tables are joined by db.relationship
+    ratings = landmark.ratings
+
     images = LandmarkImage.query.filter_by(landmark_id=landmark_id).all()
 
     return render_template('landmark_details.html', 
                             landmark=landmark, 
+                            ratings=ratings,
                             user_rating=user_rating,
                             average=avg_rating,
                             images=images
@@ -454,24 +467,20 @@ def rate_landmark():
     # If this score already exists, we will update the value of the existing score.
     if possible_rating:
         possible_rating.score = score
-        flash("Your rating has been updated.")
+        db.session.commit()
+        return "Your rating has been updated."
     else:
         # Instantiate new rating to add to the user database 
-        new_rating = Rating(score=score, 
+        new_rating = Rating(user_score=score, 
                             landmark_id=landmark_id, 
                             user_id=user_id)
         db.session.add(new_rating)
-        flash("Rating saved.")
+        db.session.commit()
+        return "Rating saved."
 
-    db.session.commit()
-    return redirect('/')
+        # FIXME return average score or reload page?
 
 
-# @app.route('/add_new_landmark', methods=["POST"])
-# def add_new_landmark():
-#     """User adds a new landmark to the database."""
-
-    # INSERT NEW RECORD INTO LANDMARK TABLE
 
 @app.route('/add_image', methods=["POST"])
 def add_image():

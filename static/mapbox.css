@@ -75,3 +75,7 @@
 #image-display img {
     max-width: 200px;
 }
+
+div:empty {
+  display: none;
+}

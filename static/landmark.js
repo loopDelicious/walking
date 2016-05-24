@@ -1,20 +1,28 @@
 
 function rate_landmark() {
-  // display rating on landmark details page
+  $('.choice').text(this.value + ' stars');
 }
 
+// http://rog.ie/blog/css-star-rater
 // ajax post request to save user landmark rating from landmark page to db
-// 5 star buttons, each with a value, do i need a form wrapper?
-$('.btn.rate').on('click', function(e) {
+$('.star-rating').on('click', function(e) {
   $.ajax({
     type: "POST",
     url: '/rate_landmark',
     data: {
-      'landmark_id': $('.btn.rate').val()
+      'landmark_id': landmark_id,
+      'score': $('#ratings').val()
     },
     success: rate_landmark,
   });
 });
+
+
+$(':radio').change(
+  function(){
+    $('.choice').text( this.value + ' stars' );
+  } 
+)
 
 // http://stackoverflow.com/questions/10863658/load-image-with-jquery-and-append-it-to-the-dom
 

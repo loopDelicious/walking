@@ -175,7 +175,7 @@ landmarkLayer.on('layeradd', function(e) {
     // }));  
 
     var popupContent = 
-        '<h2><a href="/landmarks/' + feature.id + '">' + feature.properties.name + '</a></h2>' + feature.properties.description + 
+        '<h2><a href="/landmarks/' + feature.id + '"><img src="' + feature.image + '" />' + feature.properties.name + '</a></h2>' + feature.properties.description + 
         '<form action="/add_destination" method="POST" class="popUpAdd"><input type="hidden" id="popup-id" name="landmark_id" value="' + 
         feature.id + '"><button id="popupButton" class="popUp" data-id="' + 
         feature.id + '" data-name="' + feature.properties.name + 
@@ -244,7 +244,7 @@ $(document).on('submit', '.popUpAdd', function(e) {
       // FIXME close popup
 });
 
-// ajax post request to save user-selected pop-up landmark to session
+// ajax post request to save user-selected pop-up landmark to db
 $(document).on('submit', '.popUpSave', function(e) {
   e.preventDefault();
   $.ajax({

@@ -11,9 +11,9 @@ def load_tests(loader, tests, ignore):
     This function name, ``load_tests``, is required.
     """
 
-    tests.addTests(doctest.DocTestSuite(server))
-    tests.addTests(doctest.DocFileSuite("tests.txt"))
-    return tests
+    # tests.addTests(doctest.DocTestSuite(server))
+    # tests.addTests(doctest.DocFileSuite("tests.txt"))
+    # return tests
 
 
 # class MyAppUnitTestCase(unittest.TestCase):
@@ -79,13 +79,38 @@ class MyAppIntegrationTestCase(unittest.TestCase):
         result = self.client.get('/landmarks/<int:landmark_id>',
                                 landmark_id='4389',
                                 follow_redirects=True)
-        self.assertIn("Rate"), result.data)
+        self.assertIn("Rate", result.data)
 
+class LandmarksDatabase(unittest.TestCase):
+    """Flask tests that use the database."""
 
-# User landmark scenarios:
-# User enters address into geocoder, must confirm Add, Save, Cancel
-# User selects popup from marker, must Add or Save
+    def setUp(self):
+        """Stuff to do before every test."""
 
+        # Get the Flask test client
+        self.client = app.test_client()
+
+        # Show Flask errors that happen during tests
+        app.config['TESTING'] = True
+
+        # Connect to test database
+        connect_to_db(app, "postgresql:///testlandmarks")
+
+        # Create tables and add sample data
+        db.create_all()
+        example_data()
+
+    def tearDown(self):
+        """Do at end of every test."""
+
+        db.session.close()
+        db.drop_all()
+
+    def test_map(self):
+        """Test map page."""
+
+        result = self.client.get("/map")
+        self.assertIn("Coit Tower", result.data)
 
 
 if __name__ == '__main__':

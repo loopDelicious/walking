@@ -47,11 +47,12 @@ class User(db.Model):
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     email = db.Column(db.String(70), nullable=True)
     password = db.Column(db.String(20), nullable=True)
+    saved = db.Column(db.String(500), nullable=True)
 
     def __repr__(self):
         """Provide helpful representation when printed, for human readability."""
 
-        return "<User user_id=%s email=%s>" % (self.user_id, self.email)
+        return "<User user_id=%s email=%s saved=%s>" % (self.user_id, self.email, self.saved)
         
 
 class Rating(db.Model):
@@ -103,6 +104,7 @@ class Walk(db.Model):
         return "<Walk walk_id=%s user_id=%s origin_geocode=%s destination_geocode=%s start_datetime=%s end_datetime=%s>" % (self.walk_id, 
             self.user_id, self.origin_geocode, self.destination_geocode, self.start_datetime, self.end_datetime)
 
+
 class WalkLandmarkLink(db.Model):
     """Association table connecting walks to landmarks with unique constraint."""
 
@@ -110,7 +112,7 @@ class WalkLandmarkLink(db.Model):
 
     walk_id = db.Column(db.Integer, db.ForeignKey('walks.walk_id'), primary_key=True)
     landmark_id = db.Column(db.Integer, db.ForeignKey('landmarks.landmark_id'), primary_key=True)
-    # FIXME set unique constraint?
+    # UniqueConstraint('walk_id', 'landmark_id')
 
     def __repr__(self):
         """Provide helpful representation when printed, for human readability."""
@@ -126,6 +128,15 @@ class LandmarkImage(db.Model):
     image_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     landmark_id = db.Column(db.Integer, db.ForeignKey('landmarks.landmark_id'))
     imageurl = db.Column(db.String(255), nullable=False)
+
+    # Define relationship to landmark
+    landmark = db.relationship("Landmark", backref=db.backref('images'))
+
+    def __repr__(self):
+        """Provide helpful representation when printed, for human readability."""
+
+        return "<LandmarkImage image_id=%s landmark_id=%s imageurl=%s>" % (self.image_id, self.landmark_id, self.imageurl)
+
 
 
 

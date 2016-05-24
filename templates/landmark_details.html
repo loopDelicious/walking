@@ -1,58 +1,67 @@
 {% extends 'base.html' %}
+
+{% block head %}
+
     <title>Landmark Details</title>
+
+    <link href="/static/landmark.css" rel="stylesheet" />
+
+{% endblock %}
+
 {% block content %}
 
-    <h3>{{ landmark.landmark_name }}</h3>
+    <!-- display landmark details -->
 
-    <p>{{ landmark.landmark_description }}</p>
+    <h3>{{ landmark.landmark_name|default("", True) }}</h3>
 
-    <ul>
-      <li>Location:  {{ landmark.landmark_location_description }}</li>
-      <li>Artist:  {{ landmark.landmark_artist }}</li>
-      <li>Dislay dimensions:  {{ landmark.landmark_display_dimensions }}</li>
-      <li>Medium:  {{ landmark.landmark_medium }}</li>
-    </ul>
+      <!-- http://stackoverflow.com/questions/11146619/suppress-none-output-as-string-in-jinja2 -->
+      <p>{{ landmark.landmark_description|default("", True) }}</p>
 
-    <p>Average Rating: {{ average }}</p>
-    <form action = '/rate_landmark' method="POST">
-       <input type="hidden" name="landmark_id" value="{{landmark.landmark_id}}">
+        <ul>
+          <li>Location:  {{ landmark.landmark_location_description|default("", True) }}</li>
+          <li>Artist:  {{ landmark.landmark_artist|default("", True) }}</li>
+          <li>Dislay dimensions:  {{ landmark.landmark_display_dimensions|default("", True) }}</li>
+          <li>Medium:  {{ landmark.landmark_medium|default("", True) }}</li>
+        </ul>
+
+    <!-- display average rating and option to rate this landmark -->
+
+    <h3>Average Rating: {{ average|default("Be the first to rate this landmark.", True) }}</h3>
         {% if session.get('user_id') %} 
-            Rate {{ landmark.landmark_name }}:
 
-            <!-- Rate via Like/Heart or 5-stars? -->
+                <!-- Rate via Like/Heart or 5-stars? -->
 
-            <label><button id='btn-heart' class='btn-rate' value='1'>Heart</button></label>
-            <!-- 
-            <button id='btn-1' class='btn-rate' value='1'>1</button>
-            <button id='btn-2' class='btn-rate' value='2'>2</button>
-            <button id='btn-3' class='btn-rate' value='3'>3</button>
-            <button id='btn-4' class='btn-rate' value='4'>4</button>
-            <button id='btn-5' class='btn-rate' value='5'>5</button>  -->
+                <form id='ratings' method='POST'>
+                  <strong class="choice">Select a rating</strong>
+                    <span class='star-rating'>
+                      <input type='radio' name='rating' value='1'>
+                      <input type='radio' name='rating' value='2'>
+                      <input type='radio' name='rating' value='3'>
+                      <input type='radio' name='rating' value='4'>
+                      <input type='radio' name='rating' value='5'>
+                    </span>
+                </form>
 
-            <!-- <select name="score">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-          </br>
-            <input type = "submit"> -->
+<!--                 <label><button id='btn-heart' class='btn-rate' value='1'>Heart</button></label> -->                
+          </form>  
 
         {% else %}
+
             <a href="/login">Log In to Rate this Landmark</a>
+
         {% endif %}
 
-    </form>  
 
-        <div id='image-display'>
-          {% for image in images %}
-            <img src="{{ image.imageurl }}">
-          {% endfor %}
-        </div>
+    <!-- image gallery and option to upload a new image -->
+
+      <div id='image-display'>
+        {% for image in images %}
+          <img src="{{ image.imageurl }}">
+        {% endfor %}
+      </div>
 
       <form id='upload' method="POST">
-      <label>Upload an Image of {{ landmark.landmark_name }}<input type='file' id='input-upload' name='image' ></label>
+        <label>Upload an Image of {{ landmark.landmark_name }}<input type='file' id='input-upload' name='image' ></label>
       </form>
 
 
