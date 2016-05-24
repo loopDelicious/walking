@@ -4,6 +4,9 @@
 
     <title>Landmark Details</title>
 
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+
 {% endblock %}
 
 {% block content %}
@@ -35,7 +38,8 @@
                   <input type='button' src='/static/catburrito.jpeg' class='rating' value='3'>
                   <input type='button' src='/static/catburrito.jpeg' class='rating' value='4'>
                   <input type='button' src='/static/catburrito.jpeg' class='rating' value='5'>
-                </form>                  
+                </form>  
+                <br>                
 
         {% else %}
 
@@ -57,9 +61,13 @@
       </form>
 
 
-    <script type="text/javascript">
-      var landmark_id = "{{ landmark.landmark_id }}";
-    </script>
-    <script src="/static/landmark.js"></script>
+        <script type="text/javascript">
+          var landmark_id = "{{ landmark.landmark_id }}";
+        </script>
+        <script src="/static/landmark.js"></script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" async></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" async></script>
+        <script src="https://cdn.jsdelivr.net/bootbox/4.4.0/bootbox.min.js" async></script>
 
 {% endblock %}

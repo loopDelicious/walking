@@ -1,9 +1,17 @@
 
-function rate_landmark() {
+// http://stackoverflow.com/questions/1987524/turn-a-number-into-star-rating-display-using-jquery-and-css
 
-}
 
-// http://rog.ie/blog/css-star-rater
+
+// display rating confirmation
+function rate_landmark(response) {
+  if (response =="Your rating has been updated.") {
+    bootbox.alert("Your rating has been updated.");
+  } else {
+    bootbox.alert("Thank you for your rating.");
+  }
+};
+
 // ajax post request to save user landmark rating from landmark page to db
 $('.rating').on('click', function(e) {
   e.preventDefault();

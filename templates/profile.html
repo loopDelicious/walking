@@ -12,26 +12,28 @@
 
           <li>My Walks:
             {% for walk in walks %}
-            <!-- for every walk that has been parsed from the ratings object that was passed through, we are able to display its score. Since the dbs have an established relationship, we can access the title from the movies table -->
-            {{ walk.start_datetime }} on PLACEHOLDER FOR LOCATION
-            {{walk.landmark.name}}: {{walk.landmark.score}}
+              <!-- for every walk that has been parsed from the ratings object that was passed through, we are able to display its score. Since the dbs have an established relationship, we can access the title from the movies table -->
+              {{ walk.start_datetime }} on PLACEHOLDER FOR LOCATION
+              {{ walk.landmark.name }}: {{ walk.landmark.score }}
 
-            <!-- FIXME:  DISPLAY WALKS OR LANDMARKS???  ADD LINK TO LANDMARK DETAILS PAGE -->
+              <!-- FIXME:  DISPLAY WALKS OR LANDMARKS???  ADD LINK TO LANDMARK DETAILS PAGE -->
 
-            </br>
-          </li>{% endfor %}
+              </br>
+            {% endfor %}
+          </li>
 
           <li>My Landmark Ratings:
-            {% for rating in ratings %}
-            <!-- for every landmark that has been parsed from the ratings object that was passed through, we display its score.  -->
-            {{rating.landmark.name}}: {{rating.score}}
-            </br>
-          </li>{% endfor %}
+              {% for rating in ratings %}
+                <!-- for every landmark that has been parsed from the ratings object that was passed through, we display its score.  -->
+                {{ rating.landmark.landmark_name }}: {{ rating.user_score }}
+                </br>
+              {% endfor %}
+          </li>
 
           <li>My Saved Landmarks:
-            {% for landmark in saved_landmarks %}
+            {% for landmark in saved_landmarks|default("", True) %}
             <!-- for every landmark that has been parsed from the ratings object that was passed through, we display its score.  -->
-              <ul>{{landmark.place_name}}</ul>
+              <ul>{{ landmark.place_name|default("", True) }}</ul>
           </li>{% endfor %}
           
     </ul>

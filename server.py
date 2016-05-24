@@ -433,11 +433,13 @@ def show_landmark(landmark_id):
     else:
         user_rating = None
 
+    # import pdb; pdb.set_trace()
+
     # Get the average rating of a landmark
     ratings = Rating.query.filter_by(landmark_id=landmark_id).all()
     rating_scores = [r.user_score for r in ratings]
 
-    if len(rating_scores) > 1:
+    if len(rating_scores) > 0:
         avg_rating = float(sum(rating_scores))/len(rating_scores)
     else:
         avg_rating = 0
