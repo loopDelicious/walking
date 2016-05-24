@@ -83,6 +83,64 @@ def load_parks():
     db.session.commit()
 
 
+def load_users():
+    """Load seed users with random data generator."""
+    # https://www.mockaroo.com/
+    
+    print "Users"
+
+    # Start with newly generated users when re-seeding
+    # User.query.delete()
+
+    with open('seed_data/MOCK_DATA_users.json') as data_file:
+      data_file2 = data_file.read()
+      data = json.loads(data_file2)
+   
+    for user in data:
+      email = user["email"]
+      password = user["password"]
+
+      user = User(
+                  email=email,
+                  password=password)
+
+      db.session.add(user)
+
+    db.session.commit()
+
+
+def load_ratings():
+    """Load seed ratings with random data generator."""
+    # https://www.mockaroo.com/
+    
+    print "Ratings"
+
+    #Start with newly generated users when re-seeding
+    Rating.query.delete()
+
+    with open('seed_data/MOCK_DATA_ratings.json') as data_file:
+      data_file2 = data_file.read()
+      data = json.loads(data_file2)
+
+    for rating in data:
+      landmark_id = rating['landmark_id']
+      user_id = rating['user_id']
+      user_score = rating['user_score']
+      
+      user_notes_for_landmark = None
+      if user_notes_for_landmark:
+        user_notes_for_landmark = rating['user_notes_for_landmark']
+
+      rating = Rating(
+                    landmark_id=landmark_id,
+                    user_id=user_id,
+                    user_score=user_score,
+                    user_notes_for_landmark=user_notes_for_landmark)
+
+      db.session.add(rating)
+
+    db.session.commit()
+
 
 if __name__ == "__main__":
     connect_to_db(app)
@@ -92,4 +150,6 @@ if __name__ == "__main__":
     # Import different types of data
     load_civic_art()
     load_parks()
+    load_users()
+    load_ratings()
   
