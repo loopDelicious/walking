@@ -10,7 +10,11 @@ from model import Landmark, User, Rating, Walk, WalkLandmarkLink, LandmarkImage,
 
 import os
 import json
+import bcrypt
 import requests
+
+import smtplib
+from email.mime.text import MIMEText
 
 from mapbox import Geocoder
 
@@ -84,7 +88,7 @@ def login():
         # If this user doesn't yet exist, query will return None.
         possible_user = User.query.filter_by(email=email).first()
 
-        if possible_user and possible_user.password == password:
+        if possible_user and possible_user.verify_password(password):
 
             # add user_id to session variable 
             session['user_id'] = possible_user.user_id
@@ -408,6 +412,32 @@ def clear_waypoints():
     session['waypoints'] = []
 
     return "Cleared"
+
+
+@app.route('/email_directions', methods=['POST'])
+def email_directions():
+    """User requests email directions to be sent to their phone via smtplib."""
+
+    steps = request.form.get("steps")
+
+    user = User.query.filter_by(session['user_id']==user_id).first()
+    email = user.email
+
+    # python smartlib
+    # me == the sender's email address
+    # you == the recipient's email address
+    msg['Subject'] = 'Walking Directions'
+    msg['From'] = 'joycelin79@gmail.com'
+    msg['To'] = email
+
+    # FIXME EMAIL directions (figure out steps, sendmail)
+
+    # Send the message via our own SMTP server, but don't include envelope header
+    s = smtplib.SMTP('localhost')
+    s.sendmail(me, [you], msg.as_string())
+    s.quit()
+
+    return "Email has been sent."
 
 
 

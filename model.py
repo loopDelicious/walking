@@ -1,7 +1,7 @@
 """Models and database functions for Walking project."""
 
 from flask_sqlalchemy import SQLAlchemy
-
+import bcrypt
 
 # Connection to the PostgreSQL database through the Flask-SQLAlchemy library.
 # On this, we can find the `session` object, where we do most of our interactions.
@@ -39,21 +39,35 @@ class Landmark(db.Model):
         return "<Landmark landmark_id=%s landmark_name=%s landmark_description=%s location=%s>" % (self.landmark_id, 
             self.landmark_name, self.landmark_description, self.location)
 
+
 class User(db.Model):
     """User of walking website."""
 
     __tablename__ = "users"
 
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    email = db.Column(db.String(70), nullable=True)
-    password = db.Column(db.String(20), nullable=True)
+    email = db.Column(db.String(70), nullable=False)
+    password_hash = db.Column(db.String(80), nullable=False)
+    salt = db.Column(db.String(40), nullable=False)
     saved = db.Column(db.String(500), nullable=True)
 
     def __repr__(self):
         """Provide helpful representation when printed, for human readability."""
 
         return "<User user_id=%s email=%s saved=%s>" % (self.user_id, self.email, self.saved)
-        
+           
+    def __init__(self, email, password):
+        """Instantiate a user object within the User class with salted passwords."""
+
+        self.email = email
+        self.salt = bcrypt.gensalt()
+        self.password_hash = bcrypt.hashpw(password.encode('utf8'), self.salt)
+
+    def verify_password(self, password):
+        """Verify user's password, a method that can be called on a user."""
+
+        return check_password_hash(self.password_hash, password.encode('utf8'))
+
 
 class Rating(db.Model):
     """Ratings score of landmark given by users."""

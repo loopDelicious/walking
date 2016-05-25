@@ -197,7 +197,7 @@ landmarkLayer.on('layeradd', function(e) {
 
 // ADJUST SENSITIVITY SO CAN CLICK
 // display popups on mouseover
-landmarkLayer.on('mouseover', function(e) {
+landmarkLayer.on('click', function(e) {
     e.layer.openPopup();
 });
 
@@ -274,7 +274,7 @@ routeLayer.on('layeradd', function(e) {
     });
 });
 
-routeLayer.on('mouseover', function(e) {
+routeLayer.on('click', function(e) {
     e.layer.openPopup();
     });
 
@@ -373,6 +373,22 @@ $('#add-new').on('click', function(e) {
     type: "POST",
     url: '/add_new_landmark',
     success: add_destination,
+  });
+});
+
+
+// email directions to your phone
+$('#email').on('click', function(e) {
+  e.preventDefault();
+  $.ajax({
+    type: "POST",
+    url: '/email_directions',
+    data: {
+      'step': $('#???').val()
+    }, 
+    success: function() {
+      bootbox.alert('Email has been sent.');
+    }
   });
 });
 

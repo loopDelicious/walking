@@ -1,12 +1,13 @@
 """Utility file to seed landmarks database from SFgov data in seed_data/"""
 
 from sqlalchemy import func
-from model import Landmark, User, Rating, Walk, WalkLandmarkLink
+from model import Landmark, User, Rating, Walk, WalkLandmarkLink, LandmarkImage
 from datetime import datetime
 
 from model import connect_to_db, db
 from server import app
 import json
+import requests
 
 
 def load_civic_art():
@@ -126,9 +127,8 @@ def load_ratings():
       landmark_id = rating['landmark_id']
       user_id = rating['user_id']
       user_score = rating['user_score']
-      
-      user_notes_for_landmark = None
-      if user_notes_for_landmark:
+
+      if rating['user_notes_for_landmark']:
         user_notes_for_landmark = rating['user_notes_for_landmark']
 
       rating = Rating(
@@ -142,6 +142,32 @@ def load_ratings():
     db.session.commit()
 
 
+def load_images():
+  """Load seed images of landmarks with Google Streetview API."""
+
+  # https://developers.google.com/maps/documentation/streetview/intro#introduction
+
+    # lat/lng 40.457375,-80.009353
+    coordinates = 
+    # width/height in pixels
+    size = '300x200'
+
+    url = "https://maps.googleapis.com/maps/api/streetview?location=%s&size=%s" % (coordinates, size)
+    response = requests.get(url)
+    
+    # response = response.json()
+    # place_name = response['features'][0]['place_name']
+    # coordinates = response['features'][0]['geometry']['coordinates']
+
+    # return imageurl, host on imgur, call load_images() within dataset loading
+    #  henry: create a csv file with images from google street view and imgur imageurl
+    #  and then seed only once so rate limits aren't exceeded
+    for image in images:
+
+      return imageurl
+
+
+
 if __name__ == "__main__":
     connect_to_db(app)
 
@@ -152,4 +178,5 @@ if __name__ == "__main__":
     load_parks()
     load_users()
     load_ratings()
+    # load_images()
   

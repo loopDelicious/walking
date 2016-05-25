@@ -11,8 +11,8 @@
 
 #map { 
     height: 400px;
-    width:  100%;
-    margin: 0 auto;
+    width:  75%;
+    margin: 0 left;
     }
 
 .map { 
@@ -24,7 +24,8 @@
 
 #directions {
     position: absolute;
-    width: 33.3333%;
+    width: 25%;
+    margin: 0 right;
     max-width: 300px;
     min-width: 200px;
 }
