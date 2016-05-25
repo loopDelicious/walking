@@ -418,27 +418,32 @@ def clear_waypoints():
 def email_directions():
     """User requests email directions to be sent to their phone via smtplib."""
 
-    steps = request.form.get("steps")
+    steps = request.form.get("email_message")
 
     user = User.query.filter_by(session['user_id']==user_id).first()
     email = user.email
 
     # python smartlib
-    # me == the sender's email address
-    # you == the recipient's email address
-    msg['Subject'] = 'Walking Directions'
-    msg['From'] = 'joycelin79@gmail.com'
-    msg['To'] = email
+    sender = 'joycelin79@gmail.com'
+    receiver = ['joycelin79@gmail.com']
+    message = """From: From <%s>
+    To: To <%s>
+    Subject: Walking Directions
 
-    # FIXME EMAIL directions (figure out steps, sendmail)
+    %s
+    """ % (sender, receiver, steps)
+    steps
 
-    # Send the message via our own SMTP server, but don't include envelope header
-    s = smtplib.SMTP('localhost')
-    s.sendmail(me, [you], msg.as_string())
-    s.quit()
+    try:
+        s = smtplib.SMTP('localhost')
+        s.sendmail(sender, receiver, message)
+        s.quit()
+        result = "Email sent."
 
-    return "Email has been sent."
+    except SMTPException:
+        result = "Error: unable to send email"
 
+    return result
 
 
 # ================================================================================

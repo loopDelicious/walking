@@ -377,20 +377,30 @@ $('#add-new').on('click', function(e) {
 });
 
 
-// email directions to your phone
+// get step directions and email directions to your phone
 $('#email').on('click', function(e) {
   e.preventDefault();
+  var email_message = "";
+  $.ajax({
+    type: "POST",
+    url: '/route_directions',
+    success: function(response) {
+      var steps = response.routes[0].legs[0].steps.forEach(function(step) {
+        var meters_conv = step.distance.toFixed(1);
+        email_message += (step.maneuver.instruction + " for " + meters_conv ";\n");
+      });
+    }
+  });
   $.ajax({
     type: "POST",
     url: '/email_directions',
-    data: {
-      'step': $('#???').val()
-    }, 
+    data: email_message,
     success: function() {
       bootbox.alert('Email has been sent.');
-    }
+    },
   });
 });
+
 
 
 
