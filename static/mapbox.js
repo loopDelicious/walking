@@ -36,6 +36,7 @@ var geocoderControl = L.mapbox.geocoderControl('mapbox.places',{
   autocomplete: true,
   keepOpen: true,
   position: 'topleft',
+  // rippleEffect: true,
 }).addTo(map);
 
 // https://www.mapbox.com/mapbox.js/api/v2.4.0/l-mapbox-geocoder/
@@ -86,6 +87,10 @@ geocoderControl.on('select', function(e) {
   var place_name = e.feature.text;
   // map.panTo(e.latlng);
   confirm_destination(coordinates, place_name);
+});
+
+geocoderControl.on('submit', function(e) {
+  e.geocoderControl.close();
 });
 
 // confirm user selection with dialog to save, add or cancel action
@@ -173,6 +178,7 @@ landmarkLayer.on('layeradd', function(e) {
     // 'marker-size': 'small',
     // 'riseOnHover': 'true',
     // }));  
+  
 
     var popupContent = 
         '<h2><a href="/landmarks/' + feature.id + '"><img src="' + feature.image + '" />' + feature.properties.name + '</a></h2>' + feature.properties.description + 
@@ -195,11 +201,14 @@ landmarkLayer.on('layeradd', function(e) {
     });
 });
 
-// ADJUST SENSITIVITY SO CAN CLICK
-// display popups on mouseover
+// display popups on click, and close popups on mouseout
 landmarkLayer.on('click', function(e) {
     e.layer.openPopup();
 });
+//FIXME adjust sensitivity so user can catch the popup
+// landmarkLayer.on('mouseout', function(e) {
+//   e.layer.closePopup();
+// });
 
 
 // ================================================================================
@@ -259,6 +268,7 @@ $(document).on('submit', '.popUpSave', function(e) {
 
 // initialize route layer, add to map
 var routeLayer = L.mapbox.featureLayer().addTo(map);
+var markerList = document.getElementById('marker-list');
 
 // create popups for selected route landmarks
 routeLayer.on('layeradd', function(e) {
@@ -274,9 +284,31 @@ routeLayer.on('layeradd', function(e) {
     });
 });
 
-routeLayer.on('click', function(e) {
-    e.layer.openPopup();
-    });
+// https://www.mapbox.com/mapbox.js/example/v1.0.0/marker-list-click/
+// add destinations to side panel, zoom to marker when clicked
+// routeLayer.on('click', function(e) {
+//   map.routeLayer.eachLayer(function(layer) {
+//     var item = markerList.appendChild(document.createElement('li'));
+//     item.innerHTML = layer.toGeoJSON().properties.title;
+//     item.onclick = function() {
+//       map.setView(layer.getLatLng(), 14);
+//       layer.openPopup();
+//     };
+//   });
+// });
+
+// routeLayer.on('layeradd', function(e) {
+//   map.routeLayer.eachLayer(function(layer) {
+//     var item = markerList.appendChild(document.createElement('li'));
+//     item.innerHTML = layer.toGeoJSON().properties.title;
+//     item.onclick = function() {
+//       map.setView(layer.getLatLng(), 14);
+//       layer.openPopup();
+//     };
+//   });
+// });
+
+
 
 
 // ================================================================================
@@ -332,8 +364,8 @@ $('#get-directions').on('click', function(e) {
 
       var steps = response.routes[0].legs[0].steps.forEach(function(step) {
         var meters_conv = step.distance.toFixed(1);
-        $('#instructions-list').append('<p>'+ step.maneuver.instruction + '</p>');
-        $('#distance-list').append('<p>' + meters_conv + ' meters</p>');
+        $('#instructions-list').append('<p><div class="icon heart"></div>'+ step.maneuver.instruction + ' for ' + meters_conv + ' meters</p>');
+        // $('#distance-list').append('<p>' + meters_conv + ' meters</p>');
       });
     }
     // map.setView(polyline.getLatLng(), 14);
@@ -376,30 +408,34 @@ $('#add-new').on('click', function(e) {
   });
 });
 
+// http://leafletjs.com/reference.html#popup
+// suggest additional points of interest
+// var pointToSegmentDistance(point, segment1, segment 2)
+
 
 // get step directions and email directions to your phone
-$('#email').on('click', function(e) {
-  e.preventDefault();
-  var email_message = "";
-  $.ajax({
-    type: "POST",
-    url: '/route_directions',
-    success: function(response) {
-      var steps = response.routes[0].legs[0].steps.forEach(function(step) {
-        var meters_conv = step.distance.toFixed(1);
-        email_message += (step.maneuver.instruction + " for " + meters_conv ";\n");
-      });
-    }
-  });
-  $.ajax({
-    type: "POST",
-    url: '/email_directions',
-    data: email_message,
-    success: function() {
-      bootbox.alert('Email has been sent.');
-    },
-  });
-});
+// $('#email').on('click', function(e) {
+//   e.preventDefault();
+//   var email_message = "";
+//   $.ajax({
+//     type: "POST",
+//     url: '/route_directions',
+//     success: function(response) {
+//       var steps = response.routes[0].legs[0].steps.forEach(function(step) {
+//         var meters_conv = step.distance.toFixed(1);
+//         email_message += (step.maneuver.instruction + " for " + meters_conv ";\n");
+//       });
+//     }
+//   });
+//   $.ajax({
+//     type: "POST",
+//     url: '/email_directions',
+//     data: email_message,
+//     success: function() {
+//       bootbox.alert('Email has been sent.');
+//     },
+//   });
+// });
 
 
 

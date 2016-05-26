@@ -61,12 +61,17 @@ class User(db.Model):
 
         self.email = email
         self.salt = bcrypt.gensalt()
-        self.password_hash = bcrypt.hashpw(password.encode('utf8'), self.salt)
+        self.password_hash = bcrypt.hashpw(password.encode('utf8'), self.salt.encode('utf8'))
 
     def verify_password(self, password):
         """Verify user's password, a method that can be called on a user."""
 
-        return check_password_hash(self.password_hash, password.encode('utf8'))
+        password_hash = bcrypt.hashpw(password.encode('utf8'), self.salt.encode('utf8'))
+
+        if self.password_hash == password_hash:
+            return True
+        else:
+            return False
 
 
 class Rating(db.Model):

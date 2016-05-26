@@ -22,31 +22,43 @@
     {% block content %}     
 
         <!-- Display the map and prompt -->
-        <div id='map'></div>
+        <div id='map' class='center-quiet'>
+            <div id='map-controls'>
+                <div id='geolocation'></div>
+                <div id='zoom-controls'></div>
+            </div>
+
+            <div class='map-tooltips'></div>
+
+        </div>
+        
+        <div class='col4 pad2 fill-darken1 pin-right offcanvas-right animate'>
+             <div id='directions'>   
+                <div id='errors'>errors</div>
+
+                  <ul id='marker-list'></ul>
+                
+                  <div id='routes'></div>
+                  <div id='duration'></div>
+                  <a href='/email_directions' id='email'>Send directions to your phone</a>
+                  <div id='instructions'></div>
+                     <ul id='instructions-list'>
+        <!--                 <ul id='distance-list'></ul> -->
+                    </ul>
+            </div>
+
+        </div>
 
 <!--             <span class="default">Add destination</span>
             <span class="active">Destination added</span>
             <span class="remove">Remove</span> -->
    
-        <div class='map-tooltips'></div>
         
-        <div id='map-controls'>
-            <div id='geolocation'></div>
-            <div id='zoom-controls'></div>
-        </div>
-
-        <div id='errors'>errors</div>
 
 
-        <div id='directions'>
-          <div id='routes'></div>
-          <div id='duration'></div>
-          <a href='/email_directions' id='email'>Send directions to your phone</a>
-          <div id='instructions'></div>
-             <ul id='instructions-list'>
-                <ul id='distance-list'></ul>
-            </ul>
-        </div>
+ 
+
+
 
             {% if waypoints %}
                 {% for waypoint in waypoints %}

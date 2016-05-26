@@ -142,29 +142,7 @@ def load_ratings():
     db.session.commit()
 
 
-def load_images():
-  """Load seed images of landmarks with Google Streetview API."""
 
-  # https://developers.google.com/maps/documentation/streetview/intro#introduction
-
-    # lat/lng 40.457375,-80.009353
-    coordinates = 
-    # width/height in pixels
-    size = '300x200'
-
-    url = "https://maps.googleapis.com/maps/api/streetview?location=%s&size=%s" % (coordinates, size)
-    response = requests.get(url)
-    
-    # response = response.json()
-    # place_name = response['features'][0]['place_name']
-    # coordinates = response['features'][0]['geometry']['coordinates']
-
-    # return imageurl, host on imgur, call load_images() within dataset loading
-    #  henry: create a csv file with images from google street view and imgur imageurl
-    #  and then seed only once so rate limits aren't exceeded
-    for image in images:
-
-      return imageurl
 
 
 

@@ -16,6 +16,8 @@ import requests
 import smtplib
 from email.mime.text import MIMEText
 
+from geopy.distance import vincenty
+
 from mapbox import Geocoder
 
 
@@ -171,6 +173,9 @@ def initial_landmarks_json():
                             "id": landmark.landmark_id
                             }
                         for landmark in Landmark.query.limit(20)
+                        # for landmark in Rating.query.order_by(Rating.user_score.desc()).limit(20)
+                        # for landmark in Landmark.query.order_by(Landmark.ratings.user_score.desc()).limit(20)
+                        # FIXME
                         ]
                     }
 
@@ -338,8 +343,6 @@ def save_destination():
 
     else:
         user.saved = [data]
-
-    # ProgrammingError: (psycopg2.ProgrammingError) can't adapt type 'dict' [SQL: 'UPDATE users SET saved=%(saved)s WHERE users.user_id = %(users_user_id)s'] [parameters: {'users_user_id': 1, 'saved': [{'coordinates': [u'-122.404896', u'37.800621'], 'place_name': u'Montague Pl'}]}]
 
     db.session.commit()
 
@@ -542,6 +545,32 @@ def add_image():
 
     return "Success"
 
+@app.route('/find_nearby')
+def find_nearby_destination_on_route():
+    """User has at least 1 selected destination, and is looking for a highly 
+    rated, nearby attraction to add to their trip."""
+
+    if session['waypoints']
+
+    # if the distance between session['waypoints'] and other landmarks is < .2 miles,
+    # order_by highest rated landmarks, and return a list of up to 3 suggestions
+
+
+@app.route('/other_favorites', methods=["GET"])
+def suggest_other_favorites():
+    """User is viewing landmark details page, and app suggests another highly rated
+    destination that is nearby."""
+
+    landmark_id = request.args.get("landmark_id")
+
+    landmark_coordinates = (landmark.landmark_lat, landmark.landmark_lng)
+
+    # https://pypi.python.org/pypi/geopy
+    # for landmark in Landmarks:
+    #     filter_by vincenty((landmark_coordinates, (landmark.landmark_lat, landmark.landmark_lng)).miles<0.2).order_by(ratings).limit(3)
+    # # suggest up to 3 other highly rated attractions within .2 miles of current destination
+
+    # return jsonify(data)
 
 
 
