@@ -22,7 +22,7 @@
     {% block content %}     
 
         <!-- Display the map and prompt -->
-        <div id='map' class='center-quiet'>
+        <div id='map'>
             <div id='map-controls'>
                 <div id='geolocation'></div>
                 <div id='zoom-controls'></div>
@@ -30,13 +30,10 @@
 
             <div class='map-tooltips'></div>
 
-        </div>
-        
-        <div class='col4 pad2 fill-darken1 pin-right offcanvas-right animate'>
-             <div id='directions'>   
+            <div id='directions'>   
                 <div id='errors'>errors</div>
 
-                  <ul id='marker-list'></ul>
+                  <!-- <ul id='marker-list'></ul> -->
                 
                   <div id='routes'></div>
                   <div id='duration'></div>
@@ -48,6 +45,7 @@
             </div>
 
         </div>
+
 
 <!--             <span class="default">Add destination</span>
             <span class="active">Destination added</span>

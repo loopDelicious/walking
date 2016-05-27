@@ -3,7 +3,7 @@
 import sqlalchemy
 from jinja2 import StrictUndefined
 
-from flask import Flask, render_template, redirect, request, flash, session, jsonify
+from flask import Flask, render_template, redirect, request, flash, session, jsonify, Response
 from flask_debugtoolbar import DebugToolbarExtension
 
 from model import Landmark, User, Rating, Walk, WalkLandmarkLink, LandmarkImage, connect_to_db, db
@@ -16,8 +16,6 @@ import requests
 import smtplib
 from email.mime.text import MIMEText
 
-from geopy.distance import vincenty
-
 from mapbox import Geocoder
 
 
@@ -26,6 +24,7 @@ app = Flask(__name__)
 # Required to use Flask sessions and the debug toolbar
 app.secret_key = os.environ["FLASK_SECRET_KEY"]
 accessToken = os.environ["MAPBOX_API_KEY"]
+googleKey = os.environ["GOOGLE_API_KEY"]
 
 # Raise an error if you use an undefined variable in Jinja2
 app.jinja_env.undefined = StrictUndefined
@@ -331,7 +330,7 @@ def save_destination():
 
     user = User.query.filter_by(user_id=session.get('user_id')).first()
 
-    # import pdb; pdb.set_trace()
+    import pdb; pdb.set_trace()
 
     saved_landmarks = user.saved
 
@@ -339,14 +338,18 @@ def save_destination():
         if data in saved_landmarks:
             return "Already saved."
         else:
-            saved.append(data)
+            user.saved.append(data)
 
     else:
         user.saved = [data]
 
+
+
+        # FIXME ProgrammingError: (psycopg2.ProgrammingError) can't adapt type 'dict'
+
     db.session.commit()
 
-    return jsonify(data)
+    return 
 
 
 
@@ -502,6 +505,7 @@ def show_landmark(landmark_id):
 
 @app.route('/rate_landmark', methods=["POST"])
 def rate_landmark():
+    """User rates landmark from the landmark details page."""
 
     score = request.form.get("score")
     landmark_id = request.form.get("landmark_id")
@@ -529,6 +533,30 @@ def rate_landmark():
         # FIXME return average score or reload page?
 
 
+@app.route('/notes_landmark', methods=["POST"])
+def add_notes_to_rating():
+    """User saves notes to db when rating landmark from the landmark details page."""
+
+    score = request.form.get("score")
+    notes = request.form.get("notes")
+    landmark_id = request.form.get("landmark_id")
+    user_id = session['user_id']
+
+    possible_notes = Rating.query.filter(Rating.user_id == user_id, Rating.landmark_id == landmark_id).first()    
+
+    if possible_notes:
+        possible_notes.notes = notes
+        db.session.commit()
+        return "Your review has been updated."
+    else:
+        new_notes = Rating(user_score=score,
+                           notes=notes,
+                           landmark_id=landmark_id,
+                           user_id=user_id)
+
+        db.session.add(new_notes)
+        db.session.commit()
+        return "Review saved."
 
 @app.route('/add_image', methods=["POST"])
 def add_image():
@@ -545,14 +573,34 @@ def add_image():
 
     return "Success"
 
+
+def calc_distance(origin, destination):
+    """Helper function to calculate walking distance between 2 points."""
+
+    url = 'https://maps.googleapis.com/maps/api/distancematrix/json?mode=walking&origins=%s&destinations=%s&key=%s' % (origin, destination, googleKey)
+    import pdb; pdb.set_trace()
+    response = requests.get(url)
+    response = response.json()
+
+    distance = response['rows'][0]['elements'][0]['distance']['value']
+    # response in meters (0.5 miles = 805 meters)
+    return distance
+
+
 @app.route('/find_nearby')
 def find_nearby_destination_on_route():
     """User has at least 1 selected destination, and is looking for a highly 
     rated, nearby attraction to add to their trip."""
+    
+    suggestions = []
+    # if session['waypoints']
+    for item in session['waypoints']:
+        
+        if (calc_distance(item['coordinates'][0], item['coordinates'][1]) < 0.2) and (item.rating > 4):
+            suggestions.append(item)
+        else:
+            return "No items match your criteria."
 
-    if session['waypoints']
-
-    # if the distance between session['waypoints'] and other landmarks is < .2 miles,
     # order_by highest rated landmarks, and return a list of up to 3 suggestions
 
 
@@ -562,13 +610,20 @@ def suggest_other_favorites():
     destination that is nearby."""
 
     landmark_id = request.args.get("landmark_id")
-
+    landmark = Landmark.query.filter_by(landmark_id=landmark_id).first()
     landmark_coordinates = (landmark.landmark_lat, landmark.landmark_lng)
 
-    # https://pypi.python.org/pypi/geopy
-    # for landmark in Landmarks:
-    #     filter_by vincenty((landmark_coordinates, (landmark.landmark_lat, landmark.landmark_lng)).miles<0.2).order_by(ratings).limit(3)
-    # # suggest up to 3 other highly rated attractions within .2 miles of current destination
+    subset = Landmark.query.filter(Landmark.user_score > 3).all()
+
+    for l in subset:
+        l_coord = (l.landmark_lat, l.landmark_lng)
+        distance = calc_distance(landmark_coordinates, l_coord)
+        # create a separate list with l and distance, sort by distance
+
+            
+        # weight by number of user scores
+        # sqlalchemy include dynamic calculation, pivot table in postgres? materialized table? k-dimensional tree
+            # enumerate
 
     # return jsonify(data)
 

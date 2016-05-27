@@ -5,12 +5,23 @@
 
 // display rating confirmation
 function rate_landmark(response) {
-  if (response =="Your rating has been updated.") {
+  if (response == "Your rating has been updated.") {
     bootbox.alert("Your rating has been updated.");
   } else {
     bootbox.alert("Thank you for your rating.");
   }
 };
+// FIXME update star display, static 
+
+
+function review_landmark(response) {
+  if (response == "Your review has been updated.") {
+    bootbox.alert("Your review has been updated.");
+  } else {
+    bootbox.alert("Thank you for your rating.");
+  }
+};
+// FIXME update review display, static
 
 // ajax post request to save user landmark rating from landmark page to db
 $('.rating').on('click', function(e) {
@@ -23,6 +34,20 @@ $('.rating').on('click', function(e) {
       'score': $(this).val()
     },
     success: rate_landmark,
+  });
+});
+
+// ajax post request to save user notes from landmark page to db
+$('#ratings').on('submit', function(e){
+  e. preventDefault();
+  $.ajax({
+    type: "POST",
+    url: '/notes_landmark',
+    data:{
+      'landmark_id': landmark_id,
+      'notes': $('#user-notes').val()
+    },
+    success: review_landmark,
   });
 });
 

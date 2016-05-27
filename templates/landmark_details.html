@@ -19,10 +19,21 @@
       <p>{{ landmark.landmark_description|default("", True) }}</p>
 
         <ul>
-          <li>Location:  {{ landmark.landmark_location_description|default("", True) }}</li>
-          <li>Artist:  {{ landmark.landmark_artist|default("", True) }}</li>
-          <li>Dislay dimensions:  {{ landmark.landmark_display_dimensions|default("", True) }}</li>
-          <li>Medium:  {{ landmark.landmark_medium|default("", True) }}</li>
+          {% if landmark.landmark_location_description %}
+            <li>Location:  {{ landmark.landmark_location_description|default("", True) }}</li>
+          {% endif %}
+
+          {% if landmark.landmark_artist %}
+            <li>Artist:  {{ landmark.landmark_artist|default("", True) }}</li>
+          {% endif %}
+
+          {% if landmark.landmark_display_dimensions %}
+            <li>Dislay dimensions:  {{ landmark.landmark_display_dimensions|default("", True) }}</li>
+          {% endif %}
+
+          {% if landmark.landmark_medium %}
+            <li>Medium:  {{ landmark.landmark_medium|default("", True) }}</li>
+          {% endif %}
         </ul>
 
     <!-- display average rating and option to rate this landmark -->
@@ -38,6 +49,8 @@
                   <input type='button' src='/static/catburrito.jpeg' class='rating' value='3'>
                   <input type='button' src='/static/catburrito.jpeg' class='rating' value='4'>
                   <input type='button' src='/static/catburrito.jpeg' class='rating' value='5'>
+                  <input type='text' id='notes' name='user-notes'>
+                  <input type='submit'>
                 </form>  
                 <br>                
 

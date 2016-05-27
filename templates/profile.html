@@ -3,39 +3,49 @@
 {% extends 'base.html' %}
 {% block content %}
 
-    <h2>Profile</h2>
+    <h4>Profile</h4>
     <p>View a log of all your walks.  Add and rate landmarks.</p>
     <ul>
      <!-- Passed through user object, display user email attribute -->
           <li>Username: {{ user.email }}</li>
           </br>
 
-          <li>My Walks:
-            {% for walk in walks %}
-              <!-- for every walk that has been parsed from the ratings object that was passed through, we are able to display its score. Since the dbs have an established relationship, we can access the title from the movies table -->
-              {{ walk.start_datetime }} on PLACEHOLDER FOR LOCATION
-              {{ walk.landmark.name }}: {{ walk.landmark.score }}
+          {% if walks %}
+            <li>My Walks:
+              {% for walk in walks %}
+                <!-- for every walk that has been parsed from the ratings object that was passed through, we are able to display its score. Since the dbs have an established relationship, we can access the title from the movies table -->
+                {{ walk.start_datetime }} on PLACEHOLDER FOR LOCATION
+                {{ walk.landmark.name }}: {{ walk.landmark.score }}
 
-              <!-- FIXME:  DISPLAY WALKS OR LANDMARKS???  ADD LINK TO LANDMARK DETAILS PAGE -->
+                <!-- FIXME:  DISPLAY WALKS OR LANDMARKS???  ADD LINK TO LANDMARK DETAILS PAGE -->
 
-              </br>
-            {% endfor %}
-          </li>
-
-          <li>My Landmark Ratings:
-              {% for rating in ratings %}
-                <!-- for every landmark that has been parsed from the ratings object that was passed through, we display its score.  -->
-                {{ rating.landmark.landmark_name }}: {{ rating.user_score }}
                 </br>
               {% endfor %}
-          </li>
+            </li>
+          {% endif %}
 
-          <li>My Saved Landmarks:
-            {% for landmark in saved_landmarks|default("", True) %}
-            <!-- for every landmark that has been parsed from the ratings object that was passed through, we display its score.  -->
-              <ul>{{ landmark.place_name|default("", True) }}</ul>
-          </li>{% endfor %}
+          {% if ratings %}
+            <li>My Landmark Ratings: 
+                <ul>{% for rating in ratings %}
+                  <!-- for every landmark that has been parsed from the ratings object that was passed through, we display its score.  -->
+                  {{ rating.landmark.landmark_name | title }}: {{ rating.user_score }}
+                      {% if rating.user_notes_for_landmark %}
+                          {{ rating.user_notes_for_landmark }}
+                      {% endif %}
+                  </br>
+                {% endfor %}</ul>
+            </li>
+          {% endif %}
+
+          {% if saved_landmarks %}
+            <li>My Saved Landmarks:
+              {% for landmark in saved_landmarks|default("", True) %}
+              <!-- for every landmark that has been parsed from the ratings object that was passed through, we display its score.  -->
+                <ul>{{ landmark.place_name|default("", True) }}</ul>
+            </li>{% endfor %}
+          {% endif %}
           
     </ul>
+    <a href='/map'>Start a new walk</a>
               <!-- <a href="/users/{{ user.user_id }}"> -->
 {% endblock %}
