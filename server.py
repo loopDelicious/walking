@@ -123,13 +123,14 @@ def show_user():
 
     ratings = user.ratings
     walks = user.walks
-    saved_landmarks = user.saved
+    
+    saved = UserSaved.query.filter_by(user_id=session.get('user_id')).all()
     
     return render_template('profile.html', 
                             user=user, 
                             ratings=ratings, 
                             walks=walks,
-                            saved_landmarks=saved_landmarks)
+                            saved=saved)
 
 
 # ================================================================================
@@ -308,53 +309,25 @@ def add_destination():
 
 @app.route('/save_destination', methods=['POST'])
 def save_destination():
-    """User does not add destination to their trip, but saves the destination for later."""
+    """User does not add destination to their trip, but saves the destination as a favorite."""
 
     # users submitting from popup will have landmark_id
     landmark_id = request.form.get("landmark_id")
-    # access attributes of the model Landmark object from db
-    if landmark_id:
-        destination = Landmark.query.filter(Landmark.landmark_id == landmark_id).first()
-        place_name = destination.landmark_name
-        coordinates = [destination.landmark_lng, destination.landmark_lat]
-    # users saving from geocoder will have full geojson object
-    else:
-        coordinates = request.form.getlist("coordinates[]")
-        place_name = request.form.get("place_name")
-    # format all users into data dictionary with 2 keys
-    data = {
-        "place_name": place_name,
-        "coordinates": coordinates
-    }
+    user_id = session['user_id']
+
+    # Create a possible_saved object to query if user_id AND landmark_id is in the user_saved table
+    possible_saved = UserSaved.query.filter(UserSaved.user_id == user_id, UserSaved.landmark_id == landmark_id).first()
     
-    user = User.query.filter_by(user_id=session.get('user_id')).first()
-    # FIXME: initialize empty list "[]" in string
-
-    saved_landmarks = user.saved
-    import pdb; pdb.set_trace()
-
-    # data = json.loads(data)
-    saved_landmarks = json.loads(saved_landmarks)
-
-    if saved_landmarks:
-        if data in saved_landmarks:
-            return "Already saved."
-        else:
-            saved_landmarks.append(data)
-            user.saved = json.dumps(saved_landmarks)
-
+    # If this saved destination does not yet exist for this user, we will add to the session database.
+    if possible_saved:
+        return "This destination has already been saved."
     else:
-        user.saved = json.dumps([data])
-
-        # jsonify flask dict Only, would need to wrap list in dict
-        # json library to use dumps / loads for lists, dicts
-
-        # FIXME ProgrammingError: (psycopg2.ProgrammingError) can't adapt type 'dict'
-
-    db.session.commit()
-
-    return 
-
+        # Instantiate new saved destination to add to the user_saved table
+        new_saved = UserSaved(landmark_id=landmark_id, 
+                              user_id=user_id)
+        db.session.add(new_saved)
+        db.session.commit()
+        return "Destination saved."
 
 
 @app.route('/origin_and_destination')

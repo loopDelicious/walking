@@ -49,7 +49,6 @@ class User(db.Model):
     email = db.Column(db.String(70), nullable=False)
     password_hash = db.Column(db.String(80), nullable=False)
     salt = db.Column(db.String(40), nullable=False)
-    saved = db.Column(db.String(500), nullable=True)
 
     def __repr__(self):
         """Provide helpful representation when printed, for human readability."""
@@ -62,7 +61,6 @@ class User(db.Model):
         self.email = email
         self.salt = bcrypt.gensalt()
         self.password_hash = bcrypt.hashpw(password.encode('utf8'), self.salt.encode('utf8'))
-        self.saved = []
 
     def verify_password(self, password):
         """Verify user's password, a method that can be called on a user."""
@@ -130,6 +128,7 @@ class WalkLandmarkLink(db.Model):
 
     __tablename__ = "walk_landmark_link"
 
+    # add user_id? unique primary key? OR polyline list of waypoints?
     walk_id = db.Column(db.Integer, db.ForeignKey('walks.walk_id'), primary_key=True)
     landmark_id = db.Column(db.Integer, db.ForeignKey('landmarks.landmark_id'), primary_key=True)
     # UniqueConstraint('walk_id', 'landmark_id')
@@ -159,7 +158,31 @@ class LandmarkImage(db.Model):
         return "<LandmarkImage image_id=%s landmark_id=%s imageurl=%s>" % (self.image_id, self.landmark_id, self.imageurl)
 
 
+class UserSaved(db.Model):
+    """Saved destinations as favorited by users."""
 
+    __tablename__ = "user_saved"
+
+    saved_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    landmark_id = db.Column(db.Integer, db.ForeignKey('landmarks.landmark_id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+
+    # Define relationship to landmark
+    landmark = db.relationship("Landmark", backref=db.backref('saved'))
+    # Define relationship to user
+    user = db.relationship("User", backref=db.backref('saved'))
+
+    def __repr__(self):
+        """Provide helpful representation when printed, for human readability."""
+
+        return "<UserSaved saved_id=%s landmark_id=%s user_id=%s>" % (self.saved_id, self.landmark_id, self.user_id)
+
+    def __init__(self, landmark_id, user_id):
+        """Instantiate a user object within the User class with salted passwords."""
+
+        self.landmark_id = landmark_id
+        self.user_id = user_id
+        self.saved = []
 
 
 ##############################################################################

@@ -37,11 +37,12 @@
             </li>
           {% endif %}
 
-          {% if saved_landmarks %}
+          {% if saved %}
             <li>My Saved Landmarks:
-              {% for landmark in saved_landmarks|default("", True) %}
+              {% for landmark in saved|default("", True) %}
               <!-- for every landmark that has been parsed from the ratings object that was passed through, we display its score.  -->
                 <ul>{{ landmark.place_name|default("", True) }}</ul>
+                <!-- FIXME display map of saved destinations with pop ups. -->
             </li>{% endfor %}
           {% endif %}
           
