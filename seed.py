@@ -9,6 +9,10 @@ from server import app
 import json
 import requests
 
+# FIXME how do I import file from directory below?
+from seed_data/text_generator import open_and_read_file, make_chains, make_text
+from random import choice, randint
+
 
 def load_civic_art():
     """Load civic art from sfgov_civic_art.json into database."""
@@ -111,35 +115,66 @@ def load_users():
 
 
 def load_ratings():
-    """Load seed ratings with random data generator."""
-    # https://www.mockaroo.com/
+    # """Load seed ratings with random data generator."""
+    # # https://www.mockaroo.com/
     
-    print "Ratings"
+    # print "Ratings"
 
-    #Start with newly generated users when re-seeding
-    Rating.query.delete()
+    # #Start with newly generated users when re-seeding
+    # Rating.query.delete()
 
-    with open('seed_data/MOCK_DATA_ratings.json') as data_file:
-      data_file2 = data_file.read()
-      data = json.loads(data_file2)
+    # with open('seed_data/MOCK_DATA_ratings.json') as data_file:
+    #   data_file2 = data_file.read()
+    #   data = json.loads(data_file2)
 
-    for rating in data:
-      landmark_id = rating['landmark_id']
-      user_id = rating['user_id']
-      user_score = rating['user_score']
+    # for rating in data:
+    #   landmark_id = rating['landmark_id']
+    #   user_id = rating['user_id']
+    #   user_score = rating['user_score']
 
-      if rating['user_notes_for_landmark']:
-        user_notes_for_landmark = rating['user_notes_for_landmark']
+    #   if rating['user_notes_for_landmark']:
+    #     user_notes_for_landmark = rating['user_notes_for_landmark']
 
-      rating = Rating(
-                    landmark_id=landmark_id,
-                    user_id=user_id,
-                    user_score=user_score,
-                    user_notes_for_landmark=user_notes_for_landmark)
+    #   rating = Rating(
+    #                 landmark_id=landmark_id,
+    #                 user_id=user_id,
+    #                 user_score=user_score,
+    #                 user_notes_for_landmark=user_notes_for_landmark)
 
-      db.session.add(rating)
+    #   db.session.add(rating)
 
-    db.session.commit()
+    # db.session.commit()
+
+    """Use pseudo random number and Markov text generator to create text for sample ratings."""
+
+    # rate ~900 landmarks in ascending order beginning with 1
+    counter = 1
+    while counter < 894:
+    
+        landmark_id = counter
+
+        # from user base of ~100
+        user_id = randint(1,100)
+
+        # assign random score for up to 5-star ratings
+        user_score = randint(1,5)
+
+        # use markov chain generator to create reviews
+        input_text = open_and_read_file("fairy.txt")
+        chains, words = make_chains(input_text)
+        random_text = make_text(chains, words)
+        user_notes_for_landmark = choice(random_text)
+
+        rating = Rating(
+                landmark_id=landmark_id,
+                user_id=user_id,
+                user_score=user_score,
+                user_notes_for_landmark=user_notes_for_landmark)
+
+        db.session.add(rating)
+        db.session.commit()
+        counter +=1
+
 
 
 
