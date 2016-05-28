@@ -306,7 +306,6 @@ def add_destination():
     return jsonify(data)
 
 
-
 @app.route('/save_destination', methods=['POST'])
 def save_destination():
     """User does not add destination to their trip, but saves the destination for later."""
@@ -327,23 +326,28 @@ def save_destination():
         "place_name": place_name,
         "coordinates": coordinates
     }
-
+    
     user = User.query.filter_by(user_id=session.get('user_id')).first()
-
-    import pdb; pdb.set_trace()
+    # FIXME: initialize empty list "[]" in string
 
     saved_landmarks = user.saved
+    import pdb; pdb.set_trace()
+
+    # data = json.loads(data)
+    saved_landmarks = json.loads(saved_landmarks)
 
     if saved_landmarks:
         if data in saved_landmarks:
             return "Already saved."
         else:
-            user.saved.append(data)
+            saved_landmarks.append(data)
+            user.saved = json.dumps(saved_landmarks)
 
     else:
-        user.saved = [data]
+        user.saved = json.dumps([data])
 
-
+        # jsonify flask dict Only, would need to wrap list in dict
+        # json library to use dumps / loads for lists, dicts
 
         # FIXME ProgrammingError: (psycopg2.ProgrammingError) can't adapt type 'dict'
 

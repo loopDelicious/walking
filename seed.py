@@ -91,7 +91,7 @@ def load_users():
     print "Users"
 
     # Start with newly generated users when re-seeding
-    # User.query.delete()
+    User.query.delete()
 
     with open('seed_data/MOCK_DATA_users.json') as data_file:
       data_file2 = data_file.read()

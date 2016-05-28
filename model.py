@@ -62,6 +62,7 @@ class User(db.Model):
         self.email = email
         self.salt = bcrypt.gensalt()
         self.password_hash = bcrypt.hashpw(password.encode('utf8'), self.salt.encode('utf8'))
+        self.saved = []
 
     def verify_password(self, password):
         """Verify user's password, a method that can be called on a user."""
@@ -146,6 +147,7 @@ class LandmarkImage(db.Model):
 
     image_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     landmark_id = db.Column(db.Integer, db.ForeignKey('landmarks.landmark_id'))
+    landmark_coordinates = db.Column(db.String(50), nullable=True)
     imageurl = db.Column(db.String(255), nullable=False)
 
     # Define relationship to landmark

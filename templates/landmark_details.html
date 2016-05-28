@@ -37,28 +37,38 @@
         </ul>
 
     <!-- display average rating and option to rate this landmark -->
+    {% if user_rating %}
+          <h3>You rated this landmark:  {{ user_rating.user_score }}</h3>
 
-    <h3>Average Rating: {{ average|default("Be the first to rate this landmark.", True) }}</h3>
-        {% if session.get('user_id') %} 
+          {% if user_rating.user_notes_for_landmark %}
+            {{ user_rating.user_notes_for_landmark }}
+          {% endif %}
 
-                <!-- Rate via Like/Heart or 5-stars? -->
+    {% else %}
+          <h3>{{ average|default("Be the first to rate this landmark.", True) }}</h3>
+              {% if session.get('user_id') %} 
 
-                <form id='ratings' method='POST'>
-                  <input type='button' src='/static/catburrito.jpeg' class='rating' value='1'>
-                  <input type='button' src='/static/catburrito.jpeg' class='rating' value='2'>
-                  <input type='button' src='/static/catburrito.jpeg' class='rating' value='3'>
-                  <input type='button' src='/static/catburrito.jpeg' class='rating' value='4'>
-                  <input type='button' src='/static/catburrito.jpeg' class='rating' value='5'>
-                  <input type='text' id='notes' name='user-notes'>
-                  <input type='submit'>
-                </form>  
-                <br>                
+                      <!-- Rate via Like/Heart or 5-stars? -->
 
-        {% else %}
+                      <form id='ratings' method='POST'>
+                        <input type='button' src='/static/catburrito.jpeg' class='rating' value='1'>
+                        <input type='button' src='/static/catburrito.jpeg' class='rating' value='2'>
+                        <input type='button' src='/static/catburrito.jpeg' class='rating' value='3'>
+                        <input type='button' src='/static/catburrito.jpeg' class='rating' value='4'>
+                        <input type='button' src='/static/catburrito.jpeg' class='rating' value='5'>
+                        <input type='text' id='notes' name='user-notes'>
+                        <input type='submit'>
+                      </form>  
+                      <br>                
 
-            <a href="/login">Log In to Rate this Landmark</a>
+              {% else %}
 
-        {% endif %}
+                  <a href="/login">Log In to Rate this Landmark</a>
+
+              {% endif %}
+    {% endif %}
+
+
 
 
     <!-- image gallery and option to upload a new image -->
