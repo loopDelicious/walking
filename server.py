@@ -530,18 +530,20 @@ def add_notes_to_rating():
 
     score = request.form.get("score")
     notes = request.form.get("notes")
+    import pdb; pdb.set_trace()
+
     landmark_id = request.form.get("landmark_id")
     user_id = session['user_id']
 
     possible_notes = Rating.query.filter(Rating.user_id == user_id, Rating.landmark_id == landmark_id).first()    
 
     if possible_notes:
-        possible_notes.notes = notes
+        possible_notes.user_notes_for_landmark = notes
         db.session.commit()
         return "Your review has been updated."
     else:
         new_notes = Rating(user_score=score,
-                           notes=notes,
+                           user_notes_for_landmark=notes,
                            landmark_id=landmark_id,
                            user_id=user_id)
 

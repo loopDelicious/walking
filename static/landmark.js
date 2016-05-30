@@ -45,7 +45,7 @@ $('#ratings').on('submit', function(e){
     url: '/notes_landmark',
     data:{
       'landmark_id': landmark_id,
-      'notes': $('#user-notes').val()
+      'notes': $('#notes').val()
     },
     success: review_landmark,
   });

@@ -41,7 +41,7 @@
           <h3>You rated this landmark:  {{ user_rating.user_score }}</h3>
 
           {% if user_rating.user_notes_for_landmark %}
-            {{ user_rating.user_notes_for_landmark }}
+            Your said: {{ user_rating.user_notes_for_landmark }}
           {% endif %}
 
     {% else %}
@@ -56,7 +56,7 @@
                         <input type='button' src='/static/catburrito.jpeg' class='rating' value='3'>
                         <input type='button' src='/static/catburrito.jpeg' class='rating' value='4'>
                         <input type='button' src='/static/catburrito.jpeg' class='rating' value='5'>
-                        <input type='text' id='notes' name='user-notes'>
+                        <input type='text' id='notes' class='rating-text' name='user-notes'>
                         <input type='submit'>
                       </form>  
                       <br>                
