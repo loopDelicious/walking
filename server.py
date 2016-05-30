@@ -124,12 +124,12 @@ def show_user():
     """Return page showing details:  walks, landmarks rated, scores."""
 
     user = User.query.filter_by(user_id=session.get('user_id')).first()
-
+    # import pdb; pdb.set_trace()
     ratings = user.ratings
     walks = user.walks
     
-    saved = UserSaved.query.filter_by(user_id=session.get('user_id')).all()
-    
+    # saved = UserSaved.query.filter_by(user_id=session.get('user_id')).all()
+    saved = user.saved
     return render_template('profile.html', 
                             user=user, 
                             ratings=ratings, 
@@ -530,7 +530,6 @@ def add_notes_to_rating():
 
     score = request.form.get("score")
     notes = request.form.get("notes")
-    import pdb; pdb.set_trace()
 
     landmark_id = request.form.get("landmark_id")
     user_id = session['user_id']

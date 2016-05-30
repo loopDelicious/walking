@@ -337,6 +337,7 @@ var polyline = L.polyline([]).addTo(map);
 
 // ajax get request to retrieve route directions from Mapbox Directions API
 $('#get-directions').on('click', function(e) {
+  var $btn = $(this).button('loading');
   $.ajax({
     type: "GET",
     url: '/origin_and_destination',
@@ -371,6 +372,7 @@ $('#get-directions').on('click', function(e) {
     // map.setView(polyline.getLatLng(), 14);
     // map.setView(polyline.latlng, 14);
   });
+  $btn.button('reset');
 });
 
 // FIXME: make suggested landmarks bigger when route drawn:  https://www.mapbox.com/help/analysis-with-turf/

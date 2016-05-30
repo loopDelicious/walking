@@ -53,7 +53,7 @@ class User(db.Model):
     def __repr__(self):
         """Provide helpful representation when printed, for human readability."""
 
-        return "<User user_id=%s email=%s saved=%s>" % (self.user_id, self.email, self.saved)
+        return "<User user_id=%s email=%s>" % (self.user_id, self.email)
            
     def __init__(self, email, password):
         """Instantiate a user object within the User class with salted passwords."""

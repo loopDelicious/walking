@@ -27,6 +27,23 @@
 #directions {
     position: absolute;
     width: 200px;
+    padding: 10px;
+}
+
+#get-directions {
+    width: 100px;
+}
+
+.btn {
+    margin: 5px;
+    width: 100px;
+    background-color: whitesmoke;
+    border-color: lightgray;
+}
+
+.btn-primary {
+    background-color: lightseagreen;
+    border-color: lightseagreen;
 }
 
 .address-input {

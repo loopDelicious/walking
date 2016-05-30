@@ -3,7 +3,11 @@
 {% extends 'base.html' %}
 {% block content %}
 
-    <h4>Profile</h4>
+  <ol class="breadcrumb">
+    <li><a href="/">Walking</a></li>
+    <li class="active">Favorites</li>
+  </ol>
+  
     <p>View a log of all your walks.  Add and rate landmarks.</p>
     <ul>
      <!-- Passed through user object, display user email attribute -->
@@ -28,10 +32,14 @@
             <li>My Landmark Ratings: 
                 <ul>{% for rating in ratings %}
                   <!-- for every landmark that has been parsed from the ratings object that was passed through, we display its score.  -->
-                  {{ rating.landmark.landmark_name | title }}: {{ rating.user_score }}
+                  
+                    {{ rating.landmark.landmark_name | title }}
+                    <ul>
+                      <li>You rated: {{ rating.user_score }}</li>
                       {% if rating.user_notes_for_landmark %}
-                          {{ rating.user_notes_for_landmark }}
+                          <li>Your notes: {{ rating.user_notes_for_landmark }}</li>
                       {% endif %}
+                    </ul>
                   </br>
                 {% endfor %}</ul>
             </li>

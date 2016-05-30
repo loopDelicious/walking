@@ -11,13 +11,12 @@
         <link href="/static/mapbox.css" rel="stylesheet" />
         
         <script src='https://api.mapbox.com/mapbox.js/plugins/mapbox-directions.js/v0.4.0/mapbox.directions.js'></script>
-        <link rel='stylesheet' href='https://api.mapbox.com/mapbox.js/plugins/mapbox-directions.js/v0.4.0/mapbox.directions.css' type='text/css' />
+        <link href='https://api.mapbox.com/mapbox.js/plugins/mapbox-directions.js/v0.4.0/mapbox.directions.css' rel='stylesheet' type='text/css' />
+        <script src='https://api.mapbox.com/mapbox.js/plugins/turf/v2.0.2/turf.min.js'></script>
 
-        <link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.4/mapbox.css' rel='stylesheet' />
-        <script src='https://api.tiles.mapbox.com/mapbox.js/v2.2.4/mapbox.js'></script>
-        <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/turf/v2.0.2/turf.min.js'></script>
 
-        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+        
 
 
     {% endblock %}
@@ -68,15 +67,13 @@
                 {% endfor %}
             {% endif %} -->
 
-        <button id="get-directions" class="control-link">Lock it in</button><br>
-        <button id="clear" class="control-link">clear</button><br>
-        <button id="debugger" class="control-link">debugger</button><br>
+        <button type="button" id="get-directions" data-loading-text="configuring route..." class="btn btn-primary" autocomplete="off">get route</button>
+        <button id="clear" class="btn">clear</button><br>
+        <button id="debugger" class="btn">debugger</button><br>
 
         <script src="/static/mapbox.js"></script>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" async></script>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" async></script>
-        <script src="https://cdn.jsdelivr.net/bootbox/4.4.0/bootbox.min.js" async></script>
+
 
 
 

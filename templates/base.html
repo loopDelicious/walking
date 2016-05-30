@@ -3,10 +3,10 @@
 
 <head>
 
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
-  <link href="/static/mapbox.css" rel="stylesheet">
-  <link href="/static/colorbox-master/example1/colorbox.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <script src="https://code.jquery.com/jquery.js"></script>
+
+
   {% block head %}
       <!-- put extra CSS/JS here -->
   {% endblock %}
@@ -24,65 +24,28 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/"></a>
-      </div>
-      <div>
         <a class="navbar-brand" href="/">Walking</a>
       </div>
-
       <!-- Collect the nav links, forms, and other content for toggling -->
-  <!--     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-          <li><a href="#">Link</a></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#">Separated link</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#">One more separated link</a></li>
-            </ul>
-          </li>
+          <li class="active"><a href="/map">Explore <span class="sr-only">(current)</span></a></li>
         </ul>
-        <form class="navbar-form navbar-left" role="search">
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="Search">
-          </div>
-          <button type="submit" class="btn btn-default">Submit</button> -->
-      <div class=login>
-          
-      </div>
      
         <ul class="nav navbar-nav navbar-right">
-             <button>
-          <li><a href="#">{% if session.get('user_id') %} 
+          <li><a href="/profile">Favorites</a></li>
+          <li>
+            {% if session.get('user_id') %} 
               <a href="/logout">Log Out</a>
-          {% else %}
+            {% else %}
               <a href="/login">Log In</a>
-         {% endif %}</a>
+            {% endif %}
           </li>
-   <!--      </button>
-
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#">Separated link</a></li>
-            </ul>
-          </li> -->
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 
   </nav>
-
 
   <!-- Establish flash queue so messages can get flashed -->
     {% with messages = get_flashed_messages() %}
@@ -101,8 +64,9 @@
       put your content here 
     {% endblock %}
 
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" async></script>
+    <script src="https://cdn.jsdelivr.net/bootbox/4.4.0/bootbox.min.js" async></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" async></script>
 </body>
 
 </html>
