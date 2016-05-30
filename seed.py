@@ -9,8 +9,7 @@ from server import app
 import json
 import requests
 
-# FIXME how do I import file from directory below?
-from seed_data/text_generator import open_and_read_file, make_chains, make_text
+from seed_data.text_generator import open_and_read_file, make_chains, make_text
 from random import choice, randint
 
 
@@ -147,9 +146,11 @@ def load_ratings():
 
     """Use pseudo random number and Markov text generator to create text for sample ratings."""
 
+    print "Ratings"
+
     # rate ~900 landmarks in ascending order beginning with 1
     counter = 1
-    while counter < 894:
+    while counter < 893:
     
         landmark_id = counter
 
@@ -162,7 +163,7 @@ def load_ratings():
         # use markov chain generator to create reviews
         input_text = open_and_read_file("fairy.txt")
         chains, words = make_chains(input_text)
-        random_text = make_text(chains, words)
+        random_text = make_text(chains, words).split(".")
         user_notes_for_landmark = choice(random_text)
 
         rating = Rating(
@@ -174,10 +175,6 @@ def load_ratings():
         db.session.add(rating)
         db.session.commit()
         counter +=1
-
-
-
-
 
 
 

@@ -119,5 +119,5 @@ if __name__ == "__main__":
 
     db.create_all()
 
-load_art_images()
+# load_art_images()
 load_parks_images()

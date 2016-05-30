@@ -181,7 +181,7 @@ landmarkLayer.on('layeradd', function(e) {
   
 
     var popupContent = 
-        '<h2><a href="/landmarks/' + feature.id + '"><img src="' + feature.image + '" />' + feature.properties.name + '</a></h2>' + feature.properties.description + 
+        '<h2><a href="/landmarks/' + feature.id + '"><img src="' + feature.image + '" />' + feature.properties.name + '</a></h2><p>' + feature.properties.description + '</br>Average Rating: ' + feature.avg_rating + '</p>' + 
         '<form action="/add_destination" method="POST" class="popUpAdd"><input type="hidden" id="popup-id" name="landmark_id" value="' + 
         feature.id + '"><button id="popupButton" class="popUp" data-id="' + 
         feature.id + '" data-name="' + feature.properties.name + 
@@ -372,6 +372,8 @@ $('#get-directions').on('click', function(e) {
     // map.setView(polyline.latlng, 14);
   });
 });
+
+// FIXME: make suggested landmarks bigger when route drawn:  https://www.mapbox.com/help/analysis-with-turf/
 
 // ajax post request to clear route from map by removing waypoints in session
 $('#clear').on('click', function(e) {

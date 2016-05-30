@@ -17,6 +17,7 @@ import smtplib
 from email.mime.text import MIMEText
 
 from mapbox import Geocoder
+from geopy.distance import vincenty
 
 
 app = Flask(__name__)
@@ -67,6 +68,7 @@ def registration():
 
             # add user_id to session variable, to login user automatically 
             session['user_id'] = user.user_id
+            session['waypoints'] = []
             user_id = user.user_id
             flash("Your account has been created.")
             return redirect('/map')
@@ -91,8 +93,9 @@ def login():
 
         if possible_user and possible_user.verify_password(password):
 
-            # add user_id to session variable 
+            # add user_id to session variable and initialize waypoints key
             session['user_id'] = possible_user.user_id
+            session['waypoints'] = []
             flash("You are logged in!")
             user_id = possible_user.user_id
 
@@ -110,6 +113,7 @@ def logout():
     """Removes user_id from the session"""
 
     session.pop('user_id', None)
+    session.pop('waypoints', None)
     flash("Logged out.")
 
     return redirect('/')
@@ -141,7 +145,7 @@ def show_user():
 def display_map():
     """Display the initial map"""
 
-    waypoints = []
+    waypoints = session['waypoints']
 
     return render_template('mapbox.html', 
                             waypoints=waypoints)
@@ -190,12 +194,16 @@ def landmarks_json():
 
 
     for landmark in Landmark.query.all():
-        
+        # get the first image of a landmark, if any
         image = ""
-
         if len(landmark.images) > 0:
             image = landmark.images[0].imageurl 
-
+        # get the average rating of a landmark
+        avg_rating = ""
+        rating_scores = [r.user_score for r in landmark.ratings]
+        if len(rating_scores) > 0:
+            avg_rating = float(sum(rating_scores))/len(rating_scores)
+        
         features.append({
                         "type": "Feature",
                         "properties": {
@@ -214,6 +222,7 @@ def landmarks_json():
                         },
                         "id": landmark.landmark_id,
                         'image': image,
+                        'avg_rating': avg_rating,
                         })
     
     landmarks_geojson = {
@@ -334,9 +343,9 @@ def save_destination():
 def return_origin_and_destination():
     """Return origin and destination from session's waypoints key."""
 
-    waypoints_list = session['waypoints']
+    waypoints = session['waypoints']
 
-    if len(waypoints_list) <= 1:
+    if len(waypoints) <= 1:
         flash('Please enter at least 2 destinations for your trip.')
     else:
         origin = session['waypoints'][0]
@@ -358,10 +367,12 @@ def get_directions_geojson():
     # https://github.com/mapbox/intro-to-mapbox/blob/master/demos/directions.html
     # https://github.com/mapbox/mapbox-directions.js
 
-    waypoints_list = session['waypoints']
+    waypoints = session['waypoints']
     route_list = []
 
-    for waypoint in waypoints_list:
+    # add error if no waypoints added yet, OR don't show button until at least 2 waypoints
+
+    for waypoint in waypoints:
         lng = str(waypoint['coordinates'][0]) 
         lat = str(waypoint['coordinates'][1]) 
         pair = lng + ',' + lat
@@ -470,12 +481,15 @@ def show_landmark(landmark_id):
 
     images = LandmarkImage.query.filter_by(landmark_id=landmark_id).all()
 
+    suggestions = []  # remove this later, for testing purposes only
+
     return render_template('landmark_details.html', 
                             landmark=landmark, 
                             ratings=ratings,
                             user_rating=user_rating,
                             average=avg_rating,
-                            images=images
+                            images=images,
+                            suggestions=suggestions
                             )
                           
 
@@ -550,53 +564,85 @@ def add_image():
 
     return "Success"
 
+# FIXME db query to determine highest rated and nearby landmarks, Google Distance to calculate actual distance
 
-def calc_distance(origin, destination):
-    """Helper function to calculate walking distance between 2 points."""
+# def closest_destinations(coordinates):
+#     """Helper function to query database calculating estimated distance between 2 points."""
 
-    url = 'https://maps.googleapis.com/maps/api/distancematrix/json?mode=walking&origins=%s&destinations=%s&key=%s' % (origin, destination, googleKey)
-    import pdb; pdb.set_trace()
-    response = requests.get(url)
-    response = response.json()
+#     nearest = []
 
-    distance = response['rows'][0]['elements'][0]['distance']['value']
-    # response in meters (0.5 miles = 805 meters)
-    return distance
+#     landmarks = Landmark.query.filter(Landmark.ratings.user_score > 3).all()
+
+#     for landmark in landmarks:
+#         landmark_coordinates = (landmark.landmark_lat, landmark.landmark_lng)
+#         if vincenty(coordinates, landmark_coordinates).miles < 0.25
+#             nearest.append(landmark)
+
+#     new_nearest = sorted(nearest, key=itemgetter('landmark.ratings.user_score'), reverse=True)
+
+#     return new_nearest
 
 
-@app.route('/find_nearby')
-def find_nearby_destination_on_route():
-    """User has at least 1 selected destination, and is looking for a highly 
-    rated, nearby attraction to add to their trip."""
+# def calc_true_distance(origin, destination):
+#     """Helper function to use Google Distance Matrix API to more accurately calculate walking distance between 2 points."""
+
+#     url = 'https://maps.googleapis.com/maps/api/distancematrix/json?mode=walking&origins=%s&destinations=%s&key=%s' % (origin, destination, googleKey)
     
-    suggestions = []
-    # if session['waypoints']
-    for item in session['waypoints']:
-        
-        if (calc_distance(item['coordinates'][0], item['coordinates'][1]) < 0.2) and (item.rating > 4):
-            suggestions.append(item)
-        else:
-            return "No items match your criteria."
+#     response = requests.get(url)
+#     response = response.json()
+
+#     distance = response['rows'][0]['elements'][0]['distance']['value']
+#     # response in meters (0.5 miles = 805 meters)
+#     return distance
+
+
+# @app.route('/find_nearby')
+# def find_nearby_destination_on_route():
+#     """User has at least 1 selected destination, and is looking for a highly 
+#     rated, nearby attraction to add to their trip."""
+    
+#     suggestions = []
+
+#     # FIXME: use session['waypoints'] or polyline???
+#     # FIXME: is there a better way to do this besides n*m nested for loops?
+#     landmark = Landmark.query.filter(Landmark.ratings.user_score > 3).order_by(desc(Landmark.ratings.user_score)).all()
+
+#     for item in session['waypoints']:
+#         coordinates = (item['coordinates'][0], item['coordinates'][1])
+#         for landmark in landmarks:
+#             l_coord = (landmark.landmark_lat, landmark.landmark_lng)
+#         if calc_true_distance(coordinates, l_coord) < 0.25:
+#             suggestions.append(item)
+#         
+#         else:
+#             return "No items match your criteria."
+
+#     return suggestions
 
     # order_by highest rated landmarks, and return a list of up to 3 suggestions
 
 
-@app.route('/other_favorites', methods=["GET"])
-def suggest_other_favorites():
-    """User is viewing landmark details page, and app suggests another highly rated
-    destination that is nearby."""
+# @app.route('/other_favorites', methods=["GET"])
+# def suggest_other_favorites():
+#     """User is viewing landmark details page, and app suggests another highly rated
+#     destination that is nearby."""
 
-    landmark_id = request.args.get("landmark_id")
-    landmark = Landmark.query.filter_by(landmark_id=landmark_id).first()
-    landmark_coordinates = (landmark.landmark_lat, landmark.landmark_lng)
+#     landmark_id = request.args.get("landmark_id")
+#     landmark = Landmark.query.filter_by(landmark_id=landmark_id).first()
+#     landmark_coordinates = (landmark.landmark_lat, landmark.landmark_lng)
 
-    subset = Landmark.query.filter(Landmark.user_score > 3).all()
+#     subset = Landmark.query.filter(Landmark.ratings.user_score > 3.5).all()
+#     # subset_nearby = geopy filter
+#     # subset_sort = order_by
+#     suggestions = []
 
-    for l in subset:
-        l_coord = (l.landmark_lat, l.landmark_lng)
-        distance = calc_distance(landmark_coordinates, l_coord)
-        # create a separate list with l and distance, sort by distance
+#     for l in subset:
+#         l_coord = (l.landmark_lat, l.landmark_lng)
+#         if calc_true_distance(landmark_coordinates, l_coord) < 0.25:
+#             suggestions.append(l)
+#     return suggestions
 
+    # FIXME how to pass through suggestions to landmark details page?
             
         # weight by number of user scores
         # sqlalchemy include dynamic calculation, pivot table in postgres? materialized table? k-dimensional tree

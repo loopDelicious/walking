@@ -82,7 +82,7 @@ class Rating(db.Model):
     landmark_id = db.Column(db.Integer, db.ForeignKey('landmarks.landmark_id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     user_score = db.Column(db.Integer, nullable=False)
-    user_notes_for_landmark = db.Column(db.String(500), nullable=True)
+    user_notes_for_landmark = db.Column(db.String(700), nullable=True)
 
     # Define relationship to user
     user = db.relationship("User", backref=db.backref("ratings", order_by=rating_id))

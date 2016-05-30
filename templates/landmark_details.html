@@ -68,9 +68,6 @@
               {% endif %}
     {% endif %}
 
-
-
-
     <!-- image gallery and option to upload a new image -->
 
       <div id='image-display'>
@@ -82,6 +79,16 @@
       <form id='upload' method="POST">
         <label>Upload an Image of {{ landmark.landmark_name }}<input type='file' id='input-upload' name='image' ></label>
       </form>
+
+    <!--  Suggest other nearby areas of interest -->
+
+    {% if suggestions %}
+        <p>You might also be interested in: </p>
+
+            {% for suggestion in suggestions %}
+              <a href="/landmarks/{{ suggestions.landmark_id }}">{{ suggestions.landmark_name }}</a>
+            {% endfor %}
+    {% endif %}
 
 
         <script type="text/javascript">
