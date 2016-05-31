@@ -6,6 +6,8 @@
     <title>Landmark Details</title>
 
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/landmark.css">
+
 
 
 {% endblock %}
@@ -31,7 +33,7 @@
           {% endif %}
 
           {% if landmark.landmark_display_dimensions %}
-            <li>Dislay dimensions:  {{ landmark.landmark_display_dimensions|default("", True) }}</li>
+            <li>Display dimensions:  {{ landmark.landmark_display_dimensions|default("", True) }}</li>
           {% endif %}
 
           {% if landmark.landmark_medium %}
@@ -39,21 +41,10 @@
           {% endif %}
         </ul>
 
-    <!-- display average rating and option to rate this landmark -->
-    {% if user_rating %}
-          <h3>You rated this landmark:  {{ user_rating.user_score }}</h3>
-
-          {% if user_rating.user_notes_for_landmark %}
-            Your said: {{ user_rating.user_notes_for_landmark }}
-          {% endif %}
-
-    {% else %}
-          <h3>{{ average|default("Be the first to rate this landmark.", True) }}</h3>
-              {% if session.get('user_id') %} 
 
                       <!-- Rate via Like/Heart or 5-stars? -->
 
-                      <form id='ratings' method='POST'>
+<!--                       <form id='ratings' method='POST'>
                         <input type='button' src='/static/catburrito.jpeg' class='rating' value='1'>
                         <input type='button' src='/static/catburrito.jpeg' class='rating' value='2'>
                         <input type='button' src='/static/catburrito.jpeg' class='rating' value='3'>
@@ -62,14 +53,27 @@
                         <input type='text' id='notes' class='rating-text' name='user-notes'>
                         <input type='submit'>
                       </form>  
-                      <br>                
+                      <br>   -->
+                   
 
-              {% else %}
+                      <form id='ratings' method='POST'>
+                        <fieldset class="rating">
+                          <input type="radio" id="star5" name="rating" class="rating-input" value="5" />
+                          <label class="full-rating {% if user_rating >= 5 %} selected {% endif %}" for="star5" title="Awesome - 5 stars"></label>
+                          <input type="radio" id="star4" name="rating" class="rating-input" value="4" />
+                          <label class="full-rating {% if user_rating >= 4 %} selected {% endif %}" for="star4" title="Pretty good - 4 stars"></label>
+                          <input type="radio" id="star3" name="rating" class="rating-input" value="3" />
+                          <label class="full-rating {% if user_rating >= 3 %} selected {% endif %}" for="star3" title="Meh - 3 stars"></label>
+                          <input type="radio" id="star2" name="rating" class="rating-input" value="2" />
+                          <label class="full-rating {% if user_rating >= 2 %} selected {% endif %}" for="star2" title="Kinda bad - 2 stars"></label>
+                          <input type="radio" id="star1" name="rating" class="rating-input" value="1" />
+                          <label class="full-rating {% if user_rating >= 1 %} selected {% endif %}" for="star1" title="Sucks big time - 1 star"></label>
+                        </fieldset>  
+                        <input type='text' id='notes' class='rating-text' name='user-notes'>
+                        <input type='submit'>
+                      </form>     
+                      </br>       
 
-                  <a href="/login">Log In to Rate this Landmark</a>
-
-              {% endif %}
-    {% endif %}
 
     <!-- image gallery and option to upload a new image -->
 
@@ -84,16 +88,9 @@
       </form>
 
     <!--  Suggest other nearby areas of interest -->
-    <button id='suggestions'>Suggestions</button>
+    <h2 id='suggestions-title' class='hidden'>Other points of interest: </h2>
+    <ul id='suggestions'></ul>
 
-
-    {% if suggestions %}
-        <p>You might also be interested in: </p>
-
-            {% for suggestion in suggestions %}
-              <a href="/landmarks/{{ suggestions.landmark_id }}">{{ suggestions.landmark_name }}</a>
-            {% endfor %}
-    {% endif %}
 
 
         <script type="text/javascript">

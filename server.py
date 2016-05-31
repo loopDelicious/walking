@@ -459,6 +459,8 @@ def show_landmark(landmark_id):
                                             landmark_id=landmark_id, 
                                             user_id=user_id
                                             ).first()
+        if user_rating:
+            user_rating = user_rating.user_score
     else:
         user_rating = None
 
@@ -481,15 +483,12 @@ def show_landmark(landmark_id):
 
     images = LandmarkImage.query.filter_by(landmark_id=landmark_id).all()
 
-    suggestions = []  # remove this later, for testing purposes only
-
     return render_template('landmark_details.html', 
                             landmark=landmark, 
                             ratings=ratings,
                             user_rating=user_rating,
                             average=avg_rating,
                             images=images,
-                            suggestions=suggestions
                             )
                           
 
@@ -568,7 +567,8 @@ def add_image():
 # ================================================================================
 #  Database performance filters: highest rated, closest landmarks
 # ================================================================================
-@app.route('/highest_rated.geojson')
+
+# @app.route('/highest_rated.geojson')
 def query_highest_rated_landmarks():
     """Limit db query searches and API calcs by this filter:  highly rated landmarks."""
 
@@ -583,7 +583,6 @@ def query_highest_rated_landmarks():
             if avg_rating >= cutoff:
                 best_landmarks.append(landmark)
 
-    # import pdb; pdb.set_trace()
         # use jsonify when returning an object / dict to JS turf.nearest  
         # typeerror cannot convert dict update sequence element - need to call by specific keys on JS
 
@@ -592,8 +591,8 @@ def query_highest_rated_landmarks():
         # use list when returning a list to a python function
     return best_landmarks
         
-all_landmarks = Landmark.query.all()
-def query_closest_destinations(coordinates, subset=all_landmarks): # default value for subset is total Landmark query.all(), or callback function in parameter
+
+def query_closest_destinations(coordinates): 
     """Helper function to query database calculating estimated distance between 2 points."""
 
     nearest = []
@@ -601,15 +600,13 @@ def query_closest_destinations(coordinates, subset=all_landmarks): # default val
     best_landmarks = query_highest_rated_landmarks()
 
     for landmark in best_landmarks:
-        subset_id = Landmark.query.filter((Landmark.landmark_id == landmark) | (Landmark.landmark_id == landmark_id)).first()
-        # FIXME: global name landmark_id is not defined
+        subset_id = Landmark.query.filter(Landmark.landmark_id == landmark.landmark_id).first()
         landmark_coordinates = (landmark.landmark_lat, landmark.landmark_lng)
+        
         if vincenty(coordinates, landmark_coordinates).miles < 0.25:
             nearest.append(landmark)
-    # import pdb; pdb.set_trace()
-    new_nearest = sorted(nearest, key=itemgetter('landmark.ratings.user_score'), reverse=True)
 
-    return new_nearest
+    return nearest
 
 
 @app.route('/other_favorites', methods=["GET"])
@@ -620,23 +617,28 @@ def suggest_other_favorites():
     landmark_id = request.args.get("landmark_id")
     landmark = Landmark.query.filter_by(landmark_id=landmark_id).first()
     coordinates = (landmark.landmark_lat, landmark.landmark_lng)
-
-    # import pdb; pdb.set_trace()
     
     suggestions = query_closest_destinations(coordinates)
 
-    return suggestions
+    data = []
+
+    for suggestion in suggestions:
+
+        suggestion_view = {
+                    'landmark_name': suggestion.landmark_name,
+                    'landmark_coordinates': (suggestion.landmark_lat, suggestion.landmark_lng),
+                    'landmark_description': suggestion.landmark_description,
+                    # http://stackoverflow.com/questions/394809/does-python-have-a-ternary-conditional-operator
+                    'landmark_image': suggestion.images[0].imageurl if len(suggestion.images) > 0 else None
+                    }
+        data.append(suggestion_view)
+    # http://stackoverflow.com/questions/12435297/how-do-i-jsonify-a-list-in-flask
+    return Response(json.dumps(data),  mimetype='application/json')
+
             
-    #     weight by number of user scores
-    #     sqlalchemy include dynamic calculation, pivot table in postgres? materialized table? k-dimensional tree
-    #         enumerate
-
-    # return jsonify(data)
-
-# query_closest_destinations((37.7749,-122.4194), query_highest_rated_landmarks())
-
-# FIXME db query to determine highest rated and nearby landmarks, Google Distance to calculate actual distance
-
+#     weight by number of user scores
+#     sqlalchemy include dynamic calculation, pivot table in postgres? materialized table? k-dimensional tree
+#         enumerate
 
 # def calc_true_distance(origin, destination):
 #     """Helper function to use Google Distance Matrix API to more accurately calculate walking distance between 2 points."""

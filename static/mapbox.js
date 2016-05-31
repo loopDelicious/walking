@@ -288,21 +288,21 @@ routeLayer.on('layeradd', function(e) {
 // load the highest rated landmarks into a layer, but don't add to map
 // FIXME should the nearest attractions be based on the routeLayer or polyline?
 // FIXME /highest_rated.geojson TypeError: cannot convert dictionary update sequence element #0 to a sequence
-var highestRatedLayer = L.mapbox.featureLayer();
-highestRatedLayer.loadURL('/highest_rated.geojson');
+// var highestRatedLayer = L.mapbox.featureLayer();
+// highestRatedLayer.loadURL('/highest_rated.geojson');
 
-routeLayer.on('ready', function (e) {
-  var highestFeatures = highestRatedLayer.getGeoJSON();
+// routeLayer.on('ready', function (e) {
+//   var highestFeatures = highestRatedLayer.getGeoJSON();
 
-  // Using Turf, find the nearest highest rated landmarks to the route
-  var nearestHighest = turf.nearest(e.layer.feature, highestFeatures);
+//   // Using Turf, find the nearest highest rated landmarks to the route
+//   var nearestHighest = turf.nearest(e.layer.feature, highestFeatures);
 
-  // Change the nearest hospital to a large marker
-  nearestHighest.properties['marker-size'] = 'large';
+//   // Change the nearest hospital to a large marker
+//   nearestHighest.properties['marker-size'] = 'large';
 
-  // Add the new GeoJSON to hospitalLayer
-  highestRatedLayer.setGeoJSON(highestFeatures);
-});
+//   // Add the new GeoJSON to hospitalLayer
+//   highestRatedLayer.setGeoJSON(highestFeatures);
+// });
 
 // https://www.mapbox.com/mapbox.js/example/v1.0.0/marker-list-click/
 // add destinations to side panel, zoom to marker when clicked
@@ -357,7 +357,8 @@ var polyline = L.polyline([]).addTo(map);
 
 // ajax get request to retrieve route directions from Mapbox Directions API
 $('#get-directions').on('click', function(e) {
-  // var $btn = $(this).button('loading');
+  var $btn = $(this);
+  $btn.text('configuring route...');
   $.ajax({
     type: "GET",
     url: '/origin_and_destination',
@@ -388,11 +389,11 @@ $('#get-directions').on('click', function(e) {
         $('#instructions-list').append('<p><div class="icon heart"></div>'+ step.maneuver.instruction + ' for ' + meters_conv + ' meters</p>');
         // $('#distance-list').append('<p>' + meters_conv + ' meters</p>');
       });
+      $btn.text('get route');
     }
     // map.setView(polyline.getLatLng(), 14);
     // map.setView(polyline.latlng, 14);
   });
-  // $btn.button('reset');
 });
 
 // FIXME: make suggested landmarks bigger when route drawn:  https://www.mapbox.com/help/analysis-with-turf/

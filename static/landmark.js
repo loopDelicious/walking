@@ -24,7 +24,7 @@ function review_landmark(response) {
 // FIXME update review display, static
 
 // ajax post request to save user landmark rating from landmark page to db
-$('.rating').on('click', function(e) {
+$('.rating-input').on('click', function(e) {
   e.preventDefault();
   $.ajax({
     type: "POST",
@@ -90,16 +90,21 @@ $('#input-upload').on('change', function(e) {
 });
 
 
-$('#suggestions').on('click', function(e) {
+$(document).on('ready', function(e) {
   $.ajax({
     type: "GET",
     url: '/other_favorites',
     data: {
       'landmark_id': landmark_id,
     },
-    success: function() {
-      bootbox.alert("Moar suggestions!");
+    success: function(response) {
+      $('#suggestions-title').removeClass('hidden');
+      // move jQuery selector object out of forEach function to save runtime
+      var $suggestions = $('#suggestions')
+      response.forEach(function(suggestion) {
+        $suggestions.append("<li><h3>" + suggestion.landmark_name + "</h3></li>"); 
+      });
     }
-  })
-})
-
+  });
+});
+// FIXME: add landmark_image, description in html string for suggestions

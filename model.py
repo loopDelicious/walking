@@ -36,8 +36,8 @@ class Landmark(db.Model):
     def __repr__(self):
         """Provide helpful representation when printed, for human readability."""
 
-        return "<Landmark landmark_id=%s landmark_name=%s landmark_description=%s location=%s>" % (self.landmark_id, 
-            self.landmark_name, self.landmark_description, self.location)
+        return "<Landmark landmark_id=%s landmark_name=%s landmark_description=%s>" % (self.landmark_id, 
+            self.landmark_name, self.landmark_location_description)
 
 
 class User(db.Model):
