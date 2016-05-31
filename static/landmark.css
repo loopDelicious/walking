@@ -8,6 +8,11 @@ h1 { font-size: 1.5em; margin: 10px; }
 
 /****** Style Star Rating Widget *****/
 
+.rating-text {
+  width: 300px;
+  height: 150px;
+}
+
 .rating { 
   border: none;
   float: left;

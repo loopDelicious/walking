@@ -3,16 +3,22 @@
 {% extends 'base.html' %}
 {% block content %}
 
-  <ol class="breadcrumb">
-    <li><a href="/">Walking</a></li>
-    <li class="active">Favorites</li>
-  </ol>
-  
+
     <p>View a log of all your walks.  Add and rate landmarks.</p>
     <ul>
      <!-- Passed through user object, display user email attribute -->
           <li>Username: {{ user.email }}</li>
           </br>
+
+          {% if saved %}
+            <li>My Saved Landmarks:
+              {% for save in saved|default("", True) %}
+              <!-- for every landmark that has been parsed from the ratings object that was passed through, we display its score.  -->
+                <ul><a href="/landmarks/{{ save.landmark_id }}">{{ save.landmark.landmark_name|default("", True) }}</a></ul>
+                <!-- FIXME display map of saved destinations with pop ups. -->
+            </li>{% endfor %}
+          {% endif %}
+
 
           {% if walks %}
             <li>My Walks:
@@ -33,7 +39,7 @@
                 <ul>{% for rating in ratings %}
                   <!-- for every landmark that has been parsed from the ratings object that was passed through, we display its score.  -->
                   
-                    {{ rating.landmark.landmark_name | title }}
+                    <a href="/landmarks/{{ rating.landmark_id}}">{{ rating.landmark.landmark_name | title }}</a>
                     <ul>
                       <li>You rated: {{ rating.user_score }}</li>
                       {% if rating.user_notes_for_landmark %}
@@ -45,14 +51,6 @@
             </li>
           {% endif %}
 
-          {% if saved %}
-            <li>My Saved Landmarks:
-              {% for landmark in saved|default("", True) %}
-              <!-- for every landmark that has been parsed from the ratings object that was passed through, we display its score.  -->
-                <ul>{{ landmark.place_name|default("", True) }}</ul>
-                <!-- FIXME display map of saved destinations with pop ups. -->
-            </li>{% endfor %}
-          {% endif %}
           
     </ul>
     <a href='/map'>Start a new walk</a>

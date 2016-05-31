@@ -19,6 +19,9 @@
  <!-- FIXME bootstrap containers    -->
 
     <h3>{{ landmark.landmark_name|default("", True) }}</h3>
+      {% if average %}
+          {{  average  }}
+      {% endif %}
 
       <!-- http://stackoverflow.com/questions/11146619/suppress-none-output-as-string-in-jinja2 -->
       <p>{{ landmark.landmark_description|default("", True) }}</p>
@@ -55,7 +58,13 @@
                       </form>  
                       <br>   -->
                    
+                  {% if user_rating is not none %}
+                      Your rating: {{ user_rating.user_score }} </br>
+                      {% if user_rating.user_notes_for_landmark %}
+                        {{ user_rating.user_notes_for_landmark }}
+                      {% endif %}
 
+                  {% else %}
                       <form id='ratings' method='POST'>
                         <fieldset class="rating">
                           <input type="radio" id="star5" name="rating" class="rating-input" value="5" />
@@ -69,11 +78,12 @@
                           <input type="radio" id="star1" name="rating" class="rating-input" value="1" />
                           <label class="full-rating {% if user_rating >= 1 %} selected {% endif %}" for="star1" title="Sucks big time - 1 star"></label>
                         </fieldset>  
-                        <input type='text' id='notes' class='rating-text' name='user-notes'>
+                        </br>
+                        <input type='text' id='notes' class='rating-text' placeholder='What should people know about this place?' name='user-notes'>
                         <input type='submit'>
                       </form>     
                       </br>       
-
+                  {% endif %}
 
     <!-- image gallery and option to upload a new image -->
 

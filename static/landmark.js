@@ -89,7 +89,7 @@ $('#input-upload').on('change', function(e) {
   });
 });
 
-
+// show landmarks that are highly rated and located nearby
 $(document).on('ready', function(e) {
   $.ajax({
     type: "GET",
@@ -102,7 +102,9 @@ $(document).on('ready', function(e) {
       // move jQuery selector object out of forEach function to save runtime
       var $suggestions = $('#suggestions')
       response.forEach(function(suggestion) {
-        $suggestions.append("<li><h3>" + suggestion.landmark_name + "</h3></li>"); 
+        $suggestions.append("<li><h3><a href='/landmarks/" + suggestion.landmark_id +
+        "'>" + suggestion.landmark_name + "</a></h3></li><li><img src='" +
+        suggestion.landmark_image + "'/></li>"); 
       });
     }
   });

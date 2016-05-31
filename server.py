@@ -6,7 +6,7 @@ from jinja2 import StrictUndefined
 from flask import Flask, render_template, redirect, request, flash, session, jsonify, Response
 from flask_debugtoolbar import DebugToolbarExtension
 
-from model import Landmark, User, Rating, Walk, WalkLandmarkLink, LandmarkImage, connect_to_db, db
+from model import Landmark, User, Rating, Walk, WalkLandmarkLink, LandmarkImage, UserSaved, connect_to_db, db
 
 import os
 import json
@@ -129,7 +129,10 @@ def show_user():
     walks = user.walks
     
     # saved = UserSaved.query.filter_by(user_id=session.get('user_id')).all()
-    saved = user.saved
+    saved = UserSaved.query.filter_by(user_id=session.get('user_id')).all()
+# [<UserSaved saved_id=1 landmark_id=158 user_id=102>, <UserSaved saved_id=2 landmark_id=637 user_id=102>]
+    # import pdb; pdb.set_trace()
+
     return render_template('profile.html', 
                             user=user, 
                             ratings=ratings, 
@@ -454,13 +457,12 @@ def show_landmark(landmark_id):
 
     user_id = session.get('user_id')
 
+    # if user has previously submitted a rating
     if user_id:
         user_rating = Rating.query.filter_by(
                                             landmark_id=landmark_id, 
                                             user_id=user_id
                                             ).first()
-        if user_rating:
-            user_rating = user_rating.user_score
     else:
         user_rating = None
 
@@ -508,7 +510,7 @@ def rate_landmark():
     # If this score does not yet exist, we will add to the session database.
     # If this score already exists, we will update the value of the existing score.
     if possible_rating:
-        possible_rating.score = score
+        possible_rating.user_score = score
         db.session.commit()
         return "Your rating has been updated."
     else:
@@ -626,12 +628,18 @@ def suggest_other_favorites():
 
         suggestion_view = {
                     'landmark_name': suggestion.landmark_name,
+                    'landmark_id': suggestion.landmark_id,
                     'landmark_coordinates': (suggestion.landmark_lat, suggestion.landmark_lng),
                     'landmark_description': suggestion.landmark_description,
                     # http://stackoverflow.com/questions/394809/does-python-have-a-ternary-conditional-operator
                     'landmark_image': suggestion.images[0].imageurl if len(suggestion.images) > 0 else None
                     }
-        data.append(suggestion_view)
+
+        if coordinates == suggestion_view['landmark_coordinates']:
+            pass
+        else:
+            data.append(suggestion_view)
+        # data.append(suggestion_view)
     # http://stackoverflow.com/questions/12435297/how-do-i-jsonify-a-list-in-flask
     return Response(json.dumps(data),  mimetype='application/json')
 
