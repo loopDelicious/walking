@@ -63,7 +63,9 @@ function add_image(response) {
         'imageURL': response.data.link,
         'landmark_id': landmark_id
     },
-    success: alert("Upload complete"),
+    success: function() {
+      bootbox.alert("Upload complete");
+    }
   }); 
 }
 
@@ -87,4 +89,17 @@ $('#input-upload').on('change', function(e) {
   });
 });
 
+
+$('#suggestions').on('click', function(e) {
+  $.ajax({
+    type: "GET",
+    url: '/other_favorites',
+    data: {
+      'landmark_id': landmark_id,
+    },
+    success: function() {
+      bootbox.alert("Moar suggestions!");
+    }
+  })
+})
 

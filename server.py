@@ -441,7 +441,7 @@ def email_directions():
 
 
 # ================================================================================
-#  Phase 2: landmark ratings, walk score, user notes
+#  Landmark interactions: landmark ratings, walk score, user notes, images
 # ================================================================================
 
 
@@ -565,23 +565,77 @@ def add_image():
 
     return "Success"
 
+# ================================================================================
+#  Database performance filters: highest rated, closest landmarks
+# ================================================================================
+@app.route('/highest_rated.geojson')
+def query_highest_rated_landmarks():
+    """Limit db query searches and API calcs by this filter:  highly rated landmarks."""
+
+    best_landmarks = []
+    cutoff = 3.7  # best_landmarks are at least rated this score (inclusive)
+
+    for landmark in Landmark.query.all():
+
+        rating_scores = [r.user_score for r in landmark.ratings]
+        if len(rating_scores) > 0:
+            avg_rating = float(sum(rating_scores))/len(rating_scores)
+            if avg_rating >= cutoff:
+                best_landmarks.append(landmark)
+
+    # import pdb; pdb.set_trace()
+        # use jsonify when returning an object / dict to JS turf.nearest  
+        # typeerror cannot convert dict update sequence element - need to call by specific keys on JS
+
+    # return jsonify(best_landmarks)
+
+        # use list when returning a list to a python function
+    return best_landmarks
+        
+all_landmarks = Landmark.query.all()
+def query_closest_destinations(coordinates, subset=all_landmarks): # default value for subset is total Landmark query.all(), or callback function in parameter
+    """Helper function to query database calculating estimated distance between 2 points."""
+
+    nearest = []
+
+    best_landmarks = query_highest_rated_landmarks()
+
+    for landmark in best_landmarks:
+        subset_id = Landmark.query.filter((Landmark.landmark_id == landmark) | (Landmark.landmark_id == landmark_id)).first()
+        # FIXME: global name landmark_id is not defined
+        landmark_coordinates = (landmark.landmark_lat, landmark.landmark_lng)
+        if vincenty(coordinates, landmark_coordinates).miles < 0.25:
+            nearest.append(landmark)
+    # import pdb; pdb.set_trace()
+    new_nearest = sorted(nearest, key=itemgetter('landmark.ratings.user_score'), reverse=True)
+
+    return new_nearest
+
+
+@app.route('/other_favorites', methods=["GET"])
+def suggest_other_favorites():
+    """User is viewing landmark details page, and app suggests another highly rated
+    destination that is nearby."""
+
+    landmark_id = request.args.get("landmark_id")
+    landmark = Landmark.query.filter_by(landmark_id=landmark_id).first()
+    coordinates = (landmark.landmark_lat, landmark.landmark_lng)
+
+    # import pdb; pdb.set_trace()
+    
+    suggestions = query_closest_destinations(coordinates)
+
+    return suggestions
+            
+    #     weight by number of user scores
+    #     sqlalchemy include dynamic calculation, pivot table in postgres? materialized table? k-dimensional tree
+    #         enumerate
+
+    # return jsonify(data)
+
+# query_closest_destinations((37.7749,-122.4194), query_highest_rated_landmarks())
+
 # FIXME db query to determine highest rated and nearby landmarks, Google Distance to calculate actual distance
-
-# def closest_destinations(coordinates):
-#     """Helper function to query database calculating estimated distance between 2 points."""
-
-#     nearest = []
-
-#     landmarks = Landmark.query.filter(Landmark.ratings.user_score > 3).all()
-
-#     for landmark in landmarks:
-#         landmark_coordinates = (landmark.landmark_lat, landmark.landmark_lng)
-#         if vincenty(coordinates, landmark_coordinates).miles < 0.25
-#             nearest.append(landmark)
-
-#     new_nearest = sorted(nearest, key=itemgetter('landmark.ratings.user_score'), reverse=True)
-
-#     return new_nearest
 
 
 # def calc_true_distance(origin, destination):
@@ -623,39 +677,9 @@ def add_image():
     # order_by highest rated landmarks, and return a list of up to 3 suggestions
 
 
-# @app.route('/other_favorites', methods=["GET"])
-# def suggest_other_favorites():
-#     """User is viewing landmark details page, and app suggests another highly rated
-#     destination that is nearby."""
-
-#     landmark_id = request.args.get("landmark_id")
-#     landmark = Landmark.query.filter_by(landmark_id=landmark_id).first()
-#     landmark_coordinates = (landmark.landmark_lat, landmark.landmark_lng)
-
-#     subset = Landmark.query.filter(Landmark.ratings.user_score > 3.5).all()
-#     # subset_nearby = geopy filter
-#     # subset_sort = order_by
-#     suggestions = []
-
-#     for l in subset:
-#         l_coord = (l.landmark_lat, l.landmark_lng)
-#         if calc_true_distance(landmark_coordinates, l_coord) < 0.25:
-#             suggestions.append(l)
-#     return suggestions
-
-    # FIXME how to pass through suggestions to landmark details page?
-            
-        # weight by number of user scores
-        # sqlalchemy include dynamic calculation, pivot table in postgres? materialized table? k-dimensional tree
-            # enumerate
-
-    # return jsonify(data)
-
-
-
 @app.route('/debugger')
 def display_debug_message():
-    """Display session and preserves dictionary format in colorbox alert."""
+    """Display session and preserves dictionary format in bootbox alert."""
 
     return jsonify(session)
 
