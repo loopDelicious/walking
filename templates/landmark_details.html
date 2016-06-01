@@ -63,12 +63,7 @@
                       <br>   -->
                    
                   {% if user_rating is not none %}
-                      Your rating: {{ user_rating.user_score }} </br>
-                      {% if user_rating.user_notes_for_landmark %}
-                        {{ user_rating.user_notes_for_landmark }}
-                      {% endif %}
 
-                  {% else %}
                       <form id='ratings' method='POST'>
                         <fieldset class="rating">
                           <input type="radio" id="star5" name="rating" class="rating-input" value="5" />
@@ -86,7 +81,10 @@
                         <input type='text' id='notes' class='rating-text' placeholder='What should people know about this place?' name='user-notes'>
                         <input type='submit'>
                       </form>     
-                      </br>       
+                      </br>                       
+                      {% if user_rating.user_notes_for_landmark %}
+                        {{ user_rating.user_notes_for_landmark }}
+                      {% endif %}      
                   {% endif %}
 
     <!-- image gallery and option to upload a new image -->
