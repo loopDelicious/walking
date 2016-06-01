@@ -2,6 +2,7 @@
 
 from flask_sqlalchemy import SQLAlchemy
 import bcrypt
+import correlation
 
 # Connection to the PostgreSQL database through the Flask-SQLAlchemy library.
 # On this, we can find the `session` object, where we do most of our interactions.
@@ -72,6 +73,44 @@ class User(db.Model):
         else:
             return False
 
+    def similarity(self, other):
+        """Return Pearson rating for user compared to other user."""
+
+        u_ratings = {}
+        paired_ratings = []
+
+        for r in self.ratings:
+            u_ratings[r.landmark_id] = r
+
+        for r in other.ratings:
+            u_r = u_ratings.get(r.landmark_id)
+            if u_r:
+                paired_ratings.append( (u_r.user_score, r.user_score) )
+
+        if paired_ratings:
+            return correlation.pearson(paired_ratings)
+
+        else:
+            return 0.0
+
+    def predict_rating(self, landmark):
+        """Predict a user's rating of a landmark."""
+
+        other_ratings = landmark.ratings
+        other_users = [ r.user for r in other_ratings ]
+
+        similarities = [
+            (self.similarity(other_user), other_user)
+            for other_user in other_users
+        ]
+
+        similarities.sort(reverse=True)
+        sim, best_match_user = similarities[0]
+
+        matched_rating = None
+        for rating in other_ratings:
+            if rating.user_id == best_match_user.user_id:
+                return rating.user_score * sim
 
 class Rating(db.Model):
     """Ratings score of landmark given by users."""

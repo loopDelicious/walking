@@ -472,6 +472,8 @@ def show_landmark(landmark_id):
     ratings = Rating.query.filter_by(landmark_id=landmark_id).all()
     rating_scores = [r.user_score for r in ratings]
 
+    prediction = None
+
     if len(rating_scores) > 0:
         avg_rating = float(sum(rating_scores))/len(rating_scores)
     else:
@@ -479,6 +481,8 @@ def show_landmark(landmark_id):
 
     if (not user_rating) and user_id:
         user = User.query.get(user_id)
+        if user:
+            prediction = user.predict_rating(landmark)
 
     # getting ratings from landmark object since tables are joined by db.relationship
     ratings = landmark.ratings
@@ -489,6 +493,7 @@ def show_landmark(landmark_id):
                             landmark=landmark, 
                             ratings=ratings,
                             user_rating=user_rating,
+                            prediction=prediction,
                             average=avg_rating,
                             images=images,
                             )

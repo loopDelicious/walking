@@ -251,7 +251,6 @@ $(document).on('submit', '.popUpAdd', function(e) {
     }, 
     success: add_destination,
   });
-      // FIXME close popup
 });
 
 // ajax post request to save user-selected pop-up landmark to db
@@ -359,6 +358,7 @@ var polyline = L.polyline([]).addTo(map);
 $('#get-directions').on('click', function(e) {
   var $btn = $(this);
   $btn.text('configuring route...');
+  $('#directions').fadeIn();
   $.ajax({
     type: "GET",
     url: '/origin_and_destination',

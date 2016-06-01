@@ -4,14 +4,10 @@
 {% block content %}
 
 
-    <p>View a log of all your walks.  Add and rate landmarks.</p>
+    <p>{{user.email }}:  View a log of all your walks.  Add and rate landmarks.</p>
     <ul>
-     <!-- Passed through user object, display user email attribute -->
-          <li>Username: {{ user.email }}</li>
-          </br>
-
           {% if saved %}
-            <li>My Saved Landmarks:
+            <li>My Favorites:
               {% for save in saved|default("", True) %}
               <!-- for every landmark that has been parsed from the ratings object that was passed through, we display its score.  -->
                 <ul><a href="/landmarks/{{ save.landmark_id }}">{{ save.landmark.landmark_name|default("", True) }}</a></ul>
@@ -35,7 +31,7 @@
           {% endif %}
 
           {% if ratings %}
-            <li>My Landmark Ratings: 
+            <li>My Landmarks: 
                 <ul>{% for rating in ratings %}
                   <!-- for every landmark that has been parsed from the ratings object that was passed through, we display its score.  -->
                   
@@ -46,7 +42,6 @@
                           <li>Your notes: {{ rating.user_notes_for_landmark }}</li>
                       {% endif %}
                     </ul>
-                  </br>
                 {% endfor %}</ul>
             </li>
           {% endif %}

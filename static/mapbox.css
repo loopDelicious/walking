@@ -16,42 +16,43 @@
     }
 
 .map { 
-    position:absolute; 
-    top:0; 
-    bottom:0; 
-    width:100%; 
+    position: absolute; 
+    top: 0; 
+    bottom: 0; 
+    width: 100%; 
 }
-
-
 
 #directions {
     position: absolute;
     width: 200px;
     padding: 10px;
+    display: none;
 }
 
 #get-directions {
     width: 100px;
 }
 
-.btn {
+.btn-primary {
+    margin: 5px;
+    width: 100px;
+    background-color: lightseagreen;
+    border-color: lightseagreen;
+}
+
+.btn-secondary {
     margin: 5px;
     width: 100px;
     background-color: whitesmoke;
     border-color: lightgray;
 }
 
-.btn-primary {
-    background-color: lightseagreen;
-    border-color: lightseagreen;
-}
-
-.address-input {
+/*.address-input {
     z-index: 10;
     width: 100px;
     top: 10px;
     left: 10px;
-}
+}*/
 
 #directions {
     z-index: 99;

@@ -22,6 +22,10 @@
       {% if average %}
           {{  average  }}
       {% endif %}
+      {% if (prediction) and (prediction > 3.5) %}
+          <p>People similar to you also enjoyed this destination.</p>
+      {% endif %}
+
 
       <!-- http://stackoverflow.com/questions/11146619/suppress-none-output-as-string-in-jinja2 -->
       <p>{{ landmark.landmark_description|default("", True) }}</p>
@@ -98,7 +102,7 @@
       </form>
 
     <!--  Suggest other nearby areas of interest -->
-    <h2 id='suggestions-title' class='hidden'>Other points of interest: </h2>
+    <h2 id='suggestions-title' class='hidden'>Other nearby destinations: </h2>
     <ul id='suggestions'></ul>
 
 

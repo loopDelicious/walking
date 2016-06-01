@@ -31,7 +31,7 @@
                 <div id='zoom-controls'></div>
             </div>
 
-            <div class='map-tooltips'></div>
+            <!-- <div class='map-tooltips'></div> -->
 
             <div id='directions'>   
                 <div id='errors'>errors</div>
@@ -40,7 +40,7 @@
                 
                   <div id='routes'></div>
                   <div id='duration'></div>
-                  <a href='/email_directions' id='email'>Send directions to your phone</a>
+                    <a href='/email_directions' id='email' >Send directions to your phone</a>
                   <div id='instructions'></div>
                      <ul id='instructions-list'>
         <!--                 <ul id='distance-list'></ul> -->
@@ -67,9 +67,9 @@
                 {% endfor %}
             {% endif %} -->
 
-        <button type="button" id="get-directions" data-loading-text="configuring route..." class="btn btn-primary" autocomplete="off">get route</button>
-        <button id="clear" class="btn">clear</button><br>
-        <button id="debugger" class="btn">debugger</button><br>
+        <button type="button" id="get-directions" class="btn btn-primary" autocomplete="off">get route</button>
+        <button id="clear" class="btn btn-secondary">clear</button><br>
+        <button id="debugger" class="btn btn-secondary">debugger</button><br>
 
         <script src="/static/mapbox.js"></script>
 

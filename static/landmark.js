@@ -53,7 +53,7 @@ $('#ratings').on('submit', function(e){
 
 
 // http://stackoverflow.com/questions/10863658/load-image-with-jquery-and-append-it-to-the-dom
-
+// ajax post request to upload image from landmark page to db
 function add_image(response) {
   $('#image-display').append('<img src=' + response.data.link + '>');
   $.ajax({
@@ -68,8 +68,6 @@ function add_image(response) {
     }
   }); 
 }
-
-//display image on landmark details page AND popup?
 
 // http://stackoverflow.com/questions/3572993/how-to-send-file-input-using-jquery
 // ajax post request to upload image 
@@ -109,4 +107,4 @@ $(document).on('ready', function(e) {
     }
   });
 });
-// FIXME: add landmark_image, description in html string for suggestions
+
