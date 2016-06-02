@@ -1,5 +1,5 @@
 # walking #
-The smartest walking app for planning and rating landmarks for urban walks
+The smartest walking app for planning and rating your urban hikes
 
 ## Project Tech Stack ##
 PostgresSQL, SQLAlchemy, Python, Flask, JavaScript, JQuery, Ajax, Bootstrap, HTML5, CSS3
