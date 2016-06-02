@@ -1,8 +1,8 @@
 # walking #
-4 week Hackbright project:  walking app for planning and rating landmarks for urban walks
+The smartest walking app for planning and rating landmarks for urban walks
 
 ## Project Tech Stack ##
-PostgresSQL, SQLAlchemy, Python, Flask, JavaScript, JQuery, Ajax, HTML5, CSS3
+PostgresSQL, SQLAlchemy, Python, Flask, JavaScript, JQuery, Ajax, Bootstrap, HTML5, CSS3
 
 ## APIs ##
 Leaflet, Mapbox.js, Mapbox Directions, Mapbox Geocoding, Google Maps Distance Matrix, Google Maps Streetview, Imgur photo upload
