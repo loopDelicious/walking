@@ -18,15 +18,22 @@
 
           {% if walks %}
             <li>My Walks:
-              {% for walk in walks %}
-                <!-- for every walk that has been parsed from the ratings object that was passed through, we are able to display its score. Since the dbs have an established relationship, we can access the title from the movies table -->
-                {{ walk.start_datetime }} on PLACEHOLDER FOR LOCATION
-                {{ walk.landmark.name }}: {{ walk.landmark.score }}
+              <ul>{% for walk in walks %}
+                <li>{{ walk.log_datetime | date }}:  from
+                    {{ walk.origin}} to {{ walk.destination }}
+                    <!-- walk.walk_landmark_link.landmark.landmark_name -->
 
-                <!-- FIXME:  DISPLAY WALKS OR LANDMARKS???  ADD LINK TO LANDMARK DETAILS PAGE -->
+                    ({{ walk.distance }} meters in 
 
-                </br>
+                      {% if (walk.duration > 60) %}
+                        {{ walk.duration / 60 }} hours
+                      {% else %}
+                        {{ walk.duration }} minutes
+                      {% endif %})
+                </li>
+                <!-- FIXME: allow rating of walks? -->
               {% endfor %}
+            </ul>
             </li>
           {% endif %}
 

@@ -19,6 +19,8 @@ from email.mime.text import MIMEText
 from mapbox import Geocoder
 from geopy.distance import vincenty
 
+from datetime import date
+
 
 app = Flask(__name__)
 
@@ -130,8 +132,8 @@ def show_user():
     
     # saved = UserSaved.query.filter_by(user_id=session.get('user_id')).all()
     saved = UserSaved.query.filter_by(user_id=session.get('user_id')).all()
-# [<UserSaved saved_id=1 landmark_id=158 user_id=102>, <UserSaved saved_id=2 landmark_id=637 user_id=102>]
-    # import pdb; pdb.set_trace()
+
+
 
     return render_template('profile.html', 
                             user=user, 
@@ -690,6 +692,46 @@ def suggest_other_favorites():
 #     return suggestions
 
     # order_by highest rated landmarks, and return a list of up to 3 suggestions
+
+# ================================================================================
+#  Save and display walks
+# ================================================================================
+
+@app.route('/save_walk', methods=['POST'])
+def save_walk():
+    """User saves a constructed walk to the db."""
+
+    user_id = session['user_id']
+
+    origin_name = request.form.get('origin')
+    origin = Landmark.query.filter(Landmark.landmark_name==origin_name).first()
+    origin_id = origin.landmark_id
+
+    destination_name = request.form.get('destination')
+    destination = Landmark.query.filter(Landmark.landmark_name==destination_name).first()
+    destination_id = destination.landmark_id
+
+    log_datetime = date.today()
+    duration = request.form.get("duration")
+    distance = request.form.get("distance")
+
+    # Instantiate new saved walk to add to the walks table
+    new_saved = Walk(user_id=user_id, 
+                     origin=origin_id,
+                     destination=destination_id,
+                     log_datetime=log_datetime,
+                     duration=duration,
+                     distance=distance
+                    )
+    db.session.add(new_saved)
+    db.session.commit()
+    return "Walk saved."
+
+
+@app.template_filter('date')
+def datetimeformat(value, format='%A, %b-%d-%Y'):
+    return value.strftime(format)
+
 
 
 @app.route('/debugger')

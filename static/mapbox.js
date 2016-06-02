@@ -359,12 +359,14 @@ $('#get-directions').on('click', function(e) {
   var $btn = $(this);
   $btn.text('configuring route...');
   $('#directions').fadeIn();
+  var origin;
+  var destination;
   $.ajax({
     type: "GET",
     url: '/origin_and_destination',
     success: function(data) {
-      var origin = data.origin.place_name.split(',')[0];
-      var destination = data.destination.place_name.split(',')[0];
+      origin = data.origin.place_name.split(',')[0];
+      destination = data.destination.place_name.split(',')[0];
       $('#routes').append('<p>'+ origin + ' to ' + destination +': </p>');
     }
   });
@@ -390,11 +392,35 @@ $('#get-directions').on('click', function(e) {
         // $('#distance-list').append('<p>' + meters_conv + ' meters</p>');
       });
       $btn.text('get route');
+
+      // ajax post request if the user wants to save the walk
+      $('#saved').on('click', function(e) {
+        e.preventDefault();
+        var distance = 0;
+        var steps = response.routes[0].legs[0].steps.forEach(function(step) {
+          var meters_conv = step.distance;
+          distance += meters_conv;
+        })
+        $.ajax({
+          type: "POST",
+          url: '/save_walk',
+          data: {
+            'duration': duration_conv,
+            'distance': distance,
+            'origin': origin,
+            'destination': destination
+          },
+          success: function(response) {
+            if (response=="Walk saved.") {
+              bootbox.alert('Walk saved.');
+            }
+          }
+        });
+      });
     }
-    // map.setView(polyline.getLatLng(), 14);
-    // map.setView(polyline.latlng, 14);
   });
 });
+
 
 // FIXME: make suggested landmarks bigger when route drawn:  https://www.mapbox.com/help/analysis-with-turf/
 

@@ -33,7 +33,10 @@ $('.rating-input').on('click', function(e) {
       'landmark_id': landmark_id,
       'score': $(this).val()
     },
-    success: rate_landmark,
+    success: function() {
+      rate_landmark();
+      $('.rating-input').attr('readonly', 'readonly');
+    }
   });
 });
 

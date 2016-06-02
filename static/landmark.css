@@ -43,8 +43,25 @@ h1 { font-size: 1.5em; margin: 10px; }
 .rating:not(:checked) > label:hover, /* hover current star */
 .rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
 
-label.selected,
+
 .rating > input:checked + label:hover, /* hover current star when changing rating */
 .rating > input:checked ~ label:hover,
 .rating > label:hover ~ input:checked ~ label, /* lighten current selection */
-.rating > input:checked ~ label:hover ~ label { color: #FFED85;  } 
+.rating > input:checked ~ label:hover ~ label { color: #FFED85;  }
+
+/*https://www.everythingfrontend.com/posts/star-rating-input-pure-css.html*/
+/*.full-rating:hover,
+.full-rating:hover ~ .full-rating,
+.rating-input:checked ~ .full-rating {
+  background-position: 0 0;
+}
+
+.full-rating,
+.rating:hover .full-rating {
+  position: relative;
+  float: right;
+  display: block;
+  width: 16px;
+  height: 16px;
+  background: url('star.png') 0 -16px;
+}*/

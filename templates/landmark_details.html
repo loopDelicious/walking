@@ -51,19 +51,8 @@
 
                       <!-- Rate via Like/Heart or 5-stars? -->
 
-<!--                       <form id='ratings' method='POST'>
-                        <input type='button' src='/static/catburrito.jpeg' class='rating' value='1'>
-                        <input type='button' src='/static/catburrito.jpeg' class='rating' value='2'>
-                        <input type='button' src='/static/catburrito.jpeg' class='rating' value='3'>
-                        <input type='button' src='/static/catburrito.jpeg' class='rating' value='4'>
-                        <input type='button' src='/static/catburrito.jpeg' class='rating' value='5'>
-                        <input type='text' id='notes' class='rating-text' name='user-notes'>
-                        <input type='submit'>
-                      </form>  
-                      <br>   -->
-                   
-                  {% if user_rating is not none %}
-
+                  
+                      <h1>Been here?  Give it a rating.</h1>
                       <form id='ratings' method='POST'>
                         <fieldset class="rating">
                           <input type="radio" id="star5" name="rating" class="rating-input" value="5" />
@@ -82,10 +71,7 @@
                         <input type='submit'>
                       </form>     
                       </br>                       
-                      {% if user_rating.user_notes_for_landmark %}
-                        {{ user_rating.user_notes_for_landmark }}
-                      {% endif %}      
-                  {% endif %}
+
 
     <!-- image gallery and option to upload a new image -->
 

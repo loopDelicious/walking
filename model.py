@@ -145,12 +145,11 @@ class Walk(db.Model):
 
     walk_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
-    origin_lat = db.Column(db.Float, nullable=False)
-    origin_lng = db.Column(db.Float, nullable=False)
-    destination_lat = db.Column(db.Float, nullable=False)
-    destination_lng = db.Column(db.Float, nullable=False)
-    start_datetime = db.Column(db.DateTime, nullable=False)
-    end_datetime = db.Column(db.DateTime, nullable=False)
+    origin = db.Column(db.Integer, db.ForeignKey('landmarks.landmark_id'))
+    destination = db.Column(db.Integer, db.ForeignKey('landmarks.landmark_id'))
+    log_datetime = db.Column(db.Date, nullable=False)
+    duration = db.Column(db.Float, nullable=True)
+    distance = db.Column(db.Float, nullable=True)
 
     #Define relationship to user
     user = db.relationship("User", backref=db.backref("walks", order_by=walk_id))
@@ -158,8 +157,8 @@ class Walk(db.Model):
     def __repr__(self):
         """Provide helpful representation when printed, for human readability."""
 
-        return "<Walk walk_id=%s user_id=%s origin_geocode=%s destination_geocode=%s start_datetime=%s end_datetime=%s>" % (self.walk_id, 
-            self.user_id, self.origin_geocode, self.destination_geocode, self.start_datetime, self.end_datetime)
+        return "<Walk walk_id=%s user_id=%s origin=%s destination=%s log_datetime=%s minutes=%s meters=%s>" % (self.walk_id, 
+            self.user_id, self.origin, self.destination, self.log_datetime, self.duration, self.distance)
 
 
 class WalkLandmarkLink(db.Model):
