@@ -238,6 +238,37 @@ def landmarks_json():
     return jsonify(landmarks_geojson)
 
 
+@app.route('/saved.geojson')
+def saved_landmarks_json():
+    """Send landmark data for saved landmarks layer as Geojson from database."""
+
+    features = []
+    saved = []
+    user_id = session['user_id']
+
+
+    landmarks = UserSaved.query.filter(UserSaved.user_id==user_id).all()
+    for landmark in landmarks:
+        landmark = Landmark.query.filter(Landmark.landmark_id==landmark).first()
+        if landmark:
+            features.append({
+                            "type": "Feature",
+                            "geometry": {
+                                "coordinates": [
+                                    landmark.landmark_lng,
+                                    landmark.landmark_lat],
+                                "type": "Point"
+                            },
+                            "id": landmark.landmark_id,
+                            })
+    
+    saved_geojson = {
+                        "type": "FeatureCollection",
+                        "features": features,
+                        }
+
+    return jsonify(saved_geojson)
+
 
 # ================================================================================
 #  Map interaction
@@ -726,6 +757,30 @@ def save_walk():
     db.session.add(new_saved)
     db.session.commit()
     return "Walk saved."
+
+@app.route('/clear_a_saved', methods=['POST'])
+def clear_saved():
+    """Delete saved landmark from UserSaved table."""
+
+    saved_id=request.form.get('saved_id')
+    UserSaved.query.filter_by(saved_id=saved_id).delete()
+
+    db.session.commit()
+
+    return "Saved landmark deleted."
+
+
+@app.route('/clear_walk', methods=['POST'])
+def clear_walk():
+    """Delete walk from saved walks table."""
+
+    walk_id = request.form.get('walk_id')
+    # import pdb; pdb.set_trace()
+    Walk.query.filter_by(walk_id=walk_id).delete()
+
+    db.session.commit()
+
+    return "Walk deleted."
 
 
 @app.template_filter('date')
