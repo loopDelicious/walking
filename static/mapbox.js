@@ -151,11 +151,21 @@ function confirm_destination(coordinates, place_name) {
 var initialLandmarkLayer = L.mapbox.featureLayer().addTo(map);
 initialLandmarkLayer.loadURL('/initial_landmarks.geojson');
 
+initialLandmarkLayer.on('layeradd', function(e) {
+  var marker = e.layer,
+    feature = marker.feature;
+  // stylize markers
+  marker.setIcon(L.mapbox.marker.icon({
+    'marker-symbol': 'star',
+    'marker-color': '#20B2AA',
+    'marker-size': 'small',
+    'riseOnHover': 'true',
+  })); 
+})
+
 // load the landmark markers into a featureLayer from geojson, but don't add to map
 var landmarkLayer = L.mapbox.featureLayer();
 landmarkLayer.loadURL('/landmarks.geojson');
-
-// FIXME when user clicks OR zooms, load the full landmark set (only once)
 initialLandmarkLayer.once('click', function(e) {
     map.setView(e.latlng, 14);
     map.panTo(e.latlng);
@@ -163,22 +173,18 @@ initialLandmarkLayer.once('click', function(e) {
     map.removeLayer(initialLandmarkLayer);
   });
 
-// FIXME transition user from initialLandmarkLayer to landmarkLayer and persist
-// FIXME how to do zoom / pan on zoom OR click
-
 // create popups for landmarks
 landmarkLayer.on('layeradd', function(e) {
 
     var marker = e.layer,
         feature = marker.feature;
+    marker.setIcon(L.mapbox.marker.icon({
+      'marker-symbol': 'star',
+      'marker-color': '#20B2AA',
+      'marker-size': 'small',
+      'riseOnHover': 'true',
+    })); 
 
-    // stylize markers
-    // marker.setIcon(L.mapbox.marker.icon({
-    // 'marker-symbol': 'star',
-    // 'marker-color': '#D3D3D3',
-    // 'marker-size': 'small',
-    // 'riseOnHover': 'true',
-    // }));  
     // FIXME popup displays Remove if added
     // var popupStatus = ''
 
@@ -491,28 +497,29 @@ $('#add-new').on('click', function(e) {
 
 
 // get step directions and email directions to your phone
-// $('#email').on('click', function(e) {
-//   e.preventDefault();
-//   var email_message = "";
-//   $.ajax({
-//     type: "POST",
-//     url: '/route_directions',
-//     success: function(response) {
-//       var steps = response.routes[0].legs[0].steps.forEach(function(step) {
-//         var meters_conv = step.distance.toFixed(1);
-//         email_message += (step.maneuver.instruction + " for " + meters_conv ";\n");
-//       });
-//     }
-//   });
-//   $.ajax({
-//     type: "POST",
-//     url: '/email_directions',
-//     data: email_message,
-//     success: function() {
-//       bootbox.alert('Email has been sent.');
-//     },
-//   });
-// });
+$('#email').on('click', function(e) {
+  e.preventDefault();
+  var email_message = "";
+  $.ajax({
+    type: "GET",
+    url: '/route_directions',
+    success: function(response) {
+      var steps = response.routes[0].legs[0].steps.forEach(function(step) {
+        var meters_conv = step.distance.toFixed(1);
+        email_message += (step.maneuver.instruction + " for " + meters_conv);
+        // email_message += (step.maneuver.instruction + " for " + meters_conv ";\n");
+      });
+    }
+  });
+  $.ajax({
+    type: "POST",
+    url: '/email_directions',
+    data: email_message,
+    success: function() {
+      bootbox.alert('Email has been sent.');
+    },
+  });
+});
 
 
 

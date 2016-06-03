@@ -9,9 +9,12 @@
     font-weight: 700;
 }
 
+#marker-list {
+    font: 12px;
+}
+
 #popupButton {
     background-color: lightseagreen;
-    border-color: lightseagreen;
     color: whitesmoke;
     border-radius: 2px;
     transition-duration: 0.4s;
@@ -26,7 +29,7 @@
 }
 
 #popupButton:hover {
-    background-color: lightseagreen;
+    background-color: hotpink;
     color: lightgray;
 }
 
@@ -35,6 +38,10 @@
     color: lightgray;
 }
 
+
+#map-master {
+    position: relative;
+}
 
 #map { 
     height: 500px;
@@ -76,7 +83,7 @@
 
 #directions {
     position: absolute;
-    width: 200px;
+    width: 300px;
     padding: 10px;
     display: none;
     z-index: 99;
@@ -122,12 +129,14 @@ div:empty {
   display: none;
 }
 
+
 .loader {
     border: 8px solid #f3f3f3; /* Light grey */
     border-top: 8px solid lightseagreen;
     border-radius: 50%;
     width: 50px;
     height: 50px;
+    margin: 0 auto;
     z-index: 98;
     display: none;
     -webkit-animation: spin 2s linear infinite;

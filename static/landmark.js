@@ -1,8 +1,6 @@
 
 // http://stackoverflow.com/questions/1987524/turn-a-number-into-star-rating-display-using-jquery-and-css
 
-
-
 // display rating confirmation
 function rate_landmark(response) {
   if (response == "Your rating has been updated.") {
@@ -11,8 +9,6 @@ function rate_landmark(response) {
     bootbox.alert("Thank you for your rating.");
   }
 };
-// FIXME update star display, static 
-
 
 function review_landmark(response) {
   if (response == "Your review has been updated.") {
@@ -21,21 +17,24 @@ function review_landmark(response) {
     bootbox.alert("Thank you for your rating.");
   }
 };
-// FIXME update review display, static
+
+function display_rating(rating) {
+  $('#display').text(rating);
+}
 
 // ajax post request to save user landmark rating from landmark page to db
 $('.rating-input').on('click', function(e) {
-  e.preventDefault();
+  var $this = $(this).val();
   $.ajax({
     type: "POST",
     url: '/rate_landmark',
     data: {
       'landmark_id': landmark_id,
-      'score': $(this).val()
+      'score': $this,
     },
     success: function() {
       rate_landmark();
-      $('.rating-input').attr('readonly', 'readonly');
+      display_rating($this);
     }
   });
 });
@@ -99,12 +98,16 @@ $(document).on('ready', function(e) {
       'landmark_id': landmark_id,
     },
     success: function(response) {
+      if (response.length == 0) {
+        return;
+      }
+
       $('#suggestions-title').removeClass('hidden');
       // move jQuery selector object out of forEach function to save runtime
       var $suggestions = $('#suggestions')
       response.forEach(function(suggestion) {
         $suggestions.append("<li><h3><a href='/landmarks/" + suggestion.landmark_id +
-        "'>" + suggestion.landmark_name + "</a></h3></li><li><img src='" +
+        "'>" + suggestion.landmark_name + "</a></h3><img src='" +
         suggestion.landmark_image + "' class='thumbnail'/></li>"); 
       });
     }

@@ -519,7 +519,8 @@ def email_directions():
 
     steps = request.form.get("email_message")
 
-    user = User.query.filter_by(session['user_id']==user_id).first()
+    user_id = session['user_id']
+    user = User.query.filter(User.user_id==user_id).first()
     email = user.email
 
     # python smartlib
@@ -558,15 +559,19 @@ def show_landmark(landmark_id):
     landmark = Landmark.query.get(landmark_id)
 
     user_id = session.get('user_id')
-
+    user_score = None
     # if user has previously submitted a rating
     if user_id:
         user_rating = Rating.query.filter_by(
                                             landmark_id=landmark_id, 
                                             user_id=user_id
                                             ).first()
+        if user_rating:
+            user_score = user_rating.user_score
+
     else:
         user_rating = None
+
 
     # import pdb; pdb.set_trace()
 
@@ -595,6 +600,7 @@ def show_landmark(landmark_id):
                             landmark=landmark, 
                             ratings=ratings,
                             user_rating=user_rating,
+                            user_score=user_score,
                             prediction=prediction,
                             average=avg_rating,
                             images=images,
@@ -749,7 +755,7 @@ def suggest_other_favorites():
         # data.append(suggestion_view)
     # http://stackoverflow.com/questions/12435297/how-do-i-jsonify-a-list-in-flask
     return Response(json.dumps(data),  mimetype='application/json')
-
+    
             
 #     weight by number of user scores
 #     sqlalchemy include dynamic calculation, pivot table in postgres? materialized table? k-dimensional tree
@@ -888,11 +894,11 @@ def display_debug_message():
 if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the point
     # that we invoke the DebugToolbarExtension
-    app.debug = False
+    app.debug = True
 
     connect_to_db(app)
 
     # Use the DebugToolbar
-    DebugToolbarExtension(app)
+    # DebugToolbarExtension(app)
 
     app.run()

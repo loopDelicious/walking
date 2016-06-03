@@ -7,10 +7,6 @@
         <meta charset='utf-8' />
         <title>Favorites</title>
 
-
-      <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-
-
         <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
         <script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
         <link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet' />
@@ -24,17 +20,18 @@
     <p>{{user.email }}:  View a log of all your walks.  Add and rate landmarks.</p>
     
           {% if saved %}
-              <div id='map'>
-                <div id='saved-panel'>
-                  <h2>My Favorites: </h2>
-                  {% for save in saved|default("", True) %}
-                  <!-- for every landmark that has been parsed from the ratings object that was passed through, we display its score.  -->
+            <div id='map-master'>
+              <div id='saved-panel'>
+                <h2>My Favorites: </h2>
+                {% for save in saved|default("", True) %}
+                <!-- for every landmark that has been parsed from the ratings object that was passed through, we display its score.  -->
+              
+                  <ul><a href="/landmarks/{{ save.landmark_id }}">{{ save.landmark.landmark_name|default("", True) }}</a><a href='/clear_a_saved' class='clear-saved' name='saved_id' data-value='{{ save.saved_id}}' /> remove</a></ul>
                 
-                    <ul><a href="/landmarks/{{ save.landmark_id }}">{{ save.landmark.landmark_name|default("", True) }}</a><a href='/clear_a_saved' class='clear-saved' name='saved_id' data-value='{{ save.saved_id}}' /> remove</a></ul>
-                  
-                  {% endfor %}
-                </div>
+                {% endfor %}
               </div>
+              <div id='map'></div>
+            </div>
             
           {% endif %}   
           

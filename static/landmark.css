@@ -6,11 +6,24 @@ fieldset, label { margin: 0; padding: 0; }
 body{ margin: 20px; }
 h1 { font-size: 1.5em; margin: 10px; }
 
+#display {
+  font-weight: bold;
+  font: 'lucida grande', Arial, Helvetica, sans-serif;
+  color: lightseagreen;
+  font-size: 22px;
+  margin-top: 2px;
+  margin-left: 22px;
+  float: left;
+}
+
+
 /****** Style Star Rating Widget *****/
 
 .rating-text {
   width: 300px;
   height: 75px;
+  display: block;
+  clear: both;
 }
 
 .rating { 
@@ -34,20 +47,24 @@ h1 { font-size: 1.5em; margin: 10px; }
 
 .rating > label { 
   color: #ddd; 
- float: right; 
+  float: right; 
 }
 
 /***** CSS Magic to Highlight Stars on Hover *****/
 
 .rating > input:checked ~ label, /* show gold star when clicked */
 .rating:not(:checked) > label:hover, /* hover current star */
-.rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
+.rating:not(:checked) > label:hover ~ label { 
+  color: #FFD700;  
+  } /* hover previous stars in list */
 
-
+label.selected,
 .rating > input:checked + label:hover, /* hover current star when changing rating */
 .rating > input:checked ~ label:hover,
 .rating > label:hover ~ input:checked ~ label, /* lighten current selection */
-.rating > input:checked ~ label:hover ~ label { color: #FFED85;  }
+.rating > input:checked ~ label:hover ~ label { 
+  color: #FFED85;  
+  }
 
 /*https://www.everythingfrontend.com/posts/star-rating-input-pure-css.html*/
 /*.full-rating:hover,

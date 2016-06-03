@@ -25,7 +25,8 @@
     {% block content %}     
 
         <!-- Display the map and prompt -->
-        <div id='map'>
+        <div id='map-master'>
+        <div id='map'></div>
             <div id='map-controls'>
                 <div id='geolocation'></div>
                 <div id='zoom-controls'></div>
@@ -35,11 +36,11 @@
 
             <div id='directions'>   
                 <!-- <div id='errors'>errors</div> -->
-                  <!-- <ul id='marker-list'></ul> -->
+                  <ul id='marker-list'></ul>
                 
                   <div id='routes'></div>
                   <div id='duration'></div>
-                    <a href='/email_directions' id='email' >Send directions to your phone</a>
+                    <a href='/email_directions' id='email' >Send directions to your phone</a></br>
                     <a href='/save_walk' id='saved' >Save this walk</a>
                     <div class="loader"></div>
                   <div id='instructions'></div>
@@ -47,8 +48,8 @@
         <!--                 <ul id='distance-list'></ul> -->
                     </ul>
             </div>
-
         </div>
+        
 
 
 <!--             <span class="default">Add destination</span>
