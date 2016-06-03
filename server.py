@@ -126,19 +126,38 @@ def show_user():
     """Return page showing details:  walks, landmarks rated, scores."""
 
     user = User.query.filter_by(user_id=session.get('user_id')).first()
-    # import pdb; pdb.set_trace()
     ratings = user.ratings
-    walks = user.walks
     
-    # saved = UserSaved.query.filter_by(user_id=session.get('user_id')).all()
+    # import pdb; pdb.set_trace()
+
+    walks = user.walks
+    # for walk in walks:
+    #     origin = Landmark.query.filter(Landmark.landmark_id == walk.origin).first()
+    #     origin = origin.landmark_name
+
+    #     destination = Landmark.query.filter(Landmark.landmark_id == walk.destination).first()
+    #     destination = destination.landmark_name
+        
+    #     metaWalks = {
+    #         "walk_id": walk.walk_id,
+    #         "metadata": {
+    #             "origin": origin,
+    #             "destination": destination,
+    #             "datetime": walk.log_datetime,
+    #             "duration": walk.duration,
+    #             "distance": walk.distance
+    #             }
+    #         }
+
     saved = UserSaved.query.filter_by(user_id=session.get('user_id')).all()
 
-
+    # import pdb; pdb.set_trace()
 
     return render_template('profile.html', 
                             user=user, 
                             ratings=ratings, 
                             walks=walks,
+                            # metaWalks=metaWalks,
                             saved=saved)
 
 
@@ -245,14 +264,31 @@ def saved_landmarks_json():
     features = []
     saved = []
     user_id = session['user_id']
-
-
+   
     landmarks = UserSaved.query.filter(UserSaved.user_id==user_id).all()
     for landmark in landmarks:
-        landmark = Landmark.query.filter(Landmark.landmark_id==landmark).first()
+        landmark = Landmark.query.filter(Landmark.landmark_id==landmark.landmark_id).first()
         if landmark:
+
+            image = ""
+            if len(landmark.images) > 0:
+                image = landmark.images[0].imageurl 
+            
+            avg_rating = ""
+            rating_scores = [r.user_score for r in landmark.ratings]
+            if len(rating_scores) > 0:
+                avg_rating = float(sum(rating_scores))/len(rating_scores)
+
             features.append({
                             "type": "Feature",
+                            "properties": {
+                                "name": landmark.landmark_name,
+                                "description": landmark.landmark_description,
+                                "artist":  landmark.landmark_artist,
+                                "display-dimensions": landmark.landmark_display_dimensions,
+                                "location-description": landmark.landmark_location_description,
+                                "medium": landmark.landmark_medium
+                            },
                             "geometry": {
                                 "coordinates": [
                                     landmark.landmark_lng,
@@ -260,6 +296,8 @@ def saved_landmarks_json():
                                 "type": "Point"
                             },
                             "id": landmark.landmark_id,
+                            'image': image,
+                            'avg_rating': avg_rating,
                             })
     
     saved_geojson = {
@@ -375,6 +413,23 @@ def save_destination():
         return "Destination saved."
 
 
+
+# @app.route('/remove_destination', methods=['POST'])
+# def remove_destination():
+#     """User removes destination from their trip planning."""
+
+#     landmark_id = request.form.get('landmark_id"')
+#     landmark = Landmark.query.filter(Landmark.landmark_id == landmark.id).first()
+#     landmark_name = landmark.landmark_name
+
+#     waypoints  = request.session['waypoints']
+
+#     if landmark_name in waypoints['place_name']:
+#         waypoints.remove(landmark)
+#         return "Destination removed."
+
+
+
 @app.route('/origin_and_destination')
 def return_origin_and_destination():
     """Return origin and destination from session's waypoints key."""
@@ -433,6 +488,20 @@ def return_all_waypoints():
 
     return jsonify(waypoints)
 
+
+# @app.route('/check_in_waypoints')
+# def check_if_location_in_waypoints():
+#     """Return True if location is in session waypoints."""
+
+#     landmark_id = request.form.get('landmark_id"')
+#     import pdb; pdb.set_trace()
+#     landmark = Landmark.query.filter(Landmark.landmark_id == landmark_id).first()
+#     landmark_name = landmark.landmark_name
+
+#     waypoints = request.session['waypoints']
+
+#     if landmark_name in waypoints['place_name']:
+#         return True
 
 
 @app.route('/clear', methods=['POST'])
@@ -783,10 +852,29 @@ def clear_walk():
     return "Walk deleted."
 
 
+# ================================================================================
+#  Jinja custom filters, custom debugger 
+# ================================================================================
+
 @app.template_filter('date')
 def datetimeformat(value, format='%A, %b-%d-%Y'):
+    """Custom Jinja filter to format date."""
+
     return value.strftime(format)
 
+@app.template_filter('time')
+def durationformat(value):
+    """Custom Jinja filter to format duration."""
+    
+    result = '%.2f' % value
+    return result
+
+@app.template_filter('distance')
+def distanceformat(value):
+    """Custom Jinja filter to format distance."""
+    
+    result = '%.1f' % value
+    return result
 
 
 @app.route('/debugger')
@@ -800,7 +888,7 @@ def display_debug_message():
 if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the point
     # that we invoke the DebugToolbarExtension
-    app.debug = True
+    app.debug = False
 
     connect_to_db(app)
 

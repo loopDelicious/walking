@@ -22,8 +22,8 @@
       {% if average %}
           {{  average  }}
       {% endif %}
-      {% if (prediction) and (prediction > 3.5) %}
-          <p>People similar to you also enjoyed this destination.</p>
+      {% if (prediction) and (user_rating is none) %}
+          <p>Based on your preferences, you might rate this landmark: {{ prediction }}</p>
       {% endif %}
 
 
@@ -77,7 +77,13 @@
 
       <div id='image-display'>
         {% for image in images %}
-          <img src="{{ image.imageurl }}">
+        <div class="row">
+          <div class="col-sm-6 col-md-4">
+            <div class='thumbnail'>
+              <img src="{{ image.imageurl }}">
+            </div>
+          </div>
+        </div>
         {% endfor %}
       </div>
 

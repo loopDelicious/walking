@@ -22,32 +22,38 @@
 
 
     <p>{{user.email }}:  View a log of all your walks.  Add and rate landmarks.</p>
-    <ul>
+    
           {% if saved %}
-            <li>My Favorites:
-              <div id='map'></div>
-              {% for save in saved|default("", True) %}
-              <!-- for every landmark that has been parsed from the ratings object that was passed through, we display its score.  -->
-                <ul><a href="/landmarks/{{ save.landmark_id }}">{{ save.landmark.landmark_name|default("", True) }}</a><a href='/clear_a_saved' class='clear-saved' name='saved_id' data-value='{{ save.saved_id}}' /> remove</a></ul>
-                <!-- FIXME display map of saved destinations with pop ups. -->
-            </li>{% endfor %}
-          {% endif %}
-
+              <div id='map'>
+                <div id='saved-panel'>
+                  <h2>My Favorites: </h2>
+                  {% for save in saved|default("", True) %}
+                  <!-- for every landmark that has been parsed from the ratings object that was passed through, we display its score.  -->
+                
+                    <ul><a href="/landmarks/{{ save.landmark_id }}">{{ save.landmark.landmark_name|default("", True) }}</a><a href='/clear_a_saved' class='clear-saved' name='saved_id' data-value='{{ save.saved_id}}' /> remove</a></ul>
+                  
+                  {% endfor %}
+                </div>
+              </div>
+            
+          {% endif %}   
+          
+    <ul>
 
           {% if walks %}
-            <li>My Walks:
+            <li><h3>My Walks:</h3>
               <ul>{% for walk in walks %}
                 <li>{{ walk.log_datetime | date }}:  from
-                    {{ walk.origin}} to {{ walk.destination }}
+                    {{ walk.origin }} to {{ walk.destination }}
                     <!-- walk.walk_landmark_link.landmark.landmark_name -->
 
-                    ({{ walk.distance }} meters in 
+                    ({{ walk.distance | distance }} meters in 
 
                       {% if (walk.duration > 60) %}
-                        {{ walk.duration / 60 }} hours
+                        {{ (walk.duration / 60) | time }} hours)
                       {% else %}
-                        {{ walk.duration }} minutes) 
-                      {% endif %}<a href='/clear_walk' class='clear' name='walk_id' data-value='{{ walk.walk_id }}' />remove</a>
+                        {{ walk.duration | time }} minutes) 
+                      {% endif %}<a href='/clear_walk' class='clear' name='walk_id' data-value='{{ walk.walk_id }}' /> remove</a>
                 </li>
                 <!-- FIXME: allow rating of walks? -->
               {% endfor %}
@@ -56,7 +62,7 @@
           {% endif %}
 
           {% if ratings %}
-            <li>My Landmarks: 
+            <li><h3>Landmarks you have rated: </h3>
                 <ul>{% for rating in ratings %}
                   <!-- for every landmark that has been parsed from the ratings object that was passed through, we display its score.  -->
                   

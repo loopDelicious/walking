@@ -105,7 +105,7 @@ $(document).on('ready', function(e) {
       response.forEach(function(suggestion) {
         $suggestions.append("<li><h3><a href='/landmarks/" + suggestion.landmark_id +
         "'>" + suggestion.landmark_name + "</a></h3></li><li><img src='" +
-        suggestion.landmark_image + "'/></li>"); 
+        suggestion.landmark_image + "' class='thumbnail'/></li>"); 
       });
     }
   });

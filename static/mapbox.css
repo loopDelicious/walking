@@ -9,8 +9,35 @@
     font-weight: 700;
 }
 
+#popupButton {
+    background-color: lightseagreen;
+    border-color: lightseagreen;
+    color: whitesmoke;
+    border-radius: 2px;
+    transition-duration: 0.4s;
+}
+
+#saveButton {
+    background-color: whitesmoke;
+    border-color: lightgray;
+    color: black;
+    border-radius: 2px;
+    transition-duration: 0.4s;
+}
+
+#popupButton:hover {
+    background-color: lightseagreen;
+    color: lightgray;
+}
+
+.saveButton:hover {
+    background-color: whitesmoke;
+    color: lightgray;
+}
+
+
 #map { 
-    height: 400px;
+    height: 500px;
     width:  100%;
     margin: 0 left;
     }
@@ -20,13 +47,6 @@
     top: 0; 
     bottom: 0; 
     width: 100%; 
-}
-
-#directions {
-    position: absolute;
-    width: 200px;
-    padding: 10px;
-    display: none;
 }
 
 #get-directions {
@@ -55,6 +75,10 @@
 }*/
 
 #directions {
+    position: absolute;
+    width: 200px;
+    padding: 10px;
+    display: none;
     z-index: 99;
     background: rgba(0,0,0,.8);
     color: white;
@@ -96,4 +120,30 @@
 
 div:empty {
   display: none;
+}
+
+.loader {
+    border: 8px solid #f3f3f3; /* Light grey */
+    border-top: 8px solid lightseagreen;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    z-index: 98;
+    display: none;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+    0% { 
+        transform: rotate(0deg); 
+    }
+    100% { 
+        transform: rotate(360deg); 
+    }
 }

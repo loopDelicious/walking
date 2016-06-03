@@ -1,3 +1,27 @@
 .hidden {
     display: none;
 }
+
+a {
+    color: lightseagreen;
+}
+
+/* unvisited link */
+a:link {
+    color: lightseagreen;
+}
+
+/* visited link */
+a:visited {
+    color: lightseagreen;
+}
+
+/* mouse over link */
+a:hover {
+    color: hotpink;
+}
+
+/* selected link */
+a:active {
+    color: lightseagreen;
+}

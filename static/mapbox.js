@@ -179,22 +179,49 @@ landmarkLayer.on('layeradd', function(e) {
     // 'marker-size': 'small',
     // 'riseOnHover': 'true',
     // }));  
-  
+    // FIXME popup displays Remove if added
+    // var popupStatus = ''
+
+    // $.ajax({
+    //   type: "GET",
+    //   url: '/check_in_waypoints',
+    //   data: {
+    //     'landmark_id': feature.id,
+    //   },
+    //   success: function(response) {
+    //     if (response == true) {
+    //               // when user has already ADDED destination to their trip:  Remove and Save options
+    //       popupStatus = '<p>Added</p><form action="/remove_destination" method="POST" class="popUpRemove"><input type="hidden" id="remove-id" name="landmark_id" value="' +
+    //                     feature.id + '"><form action="/save_destination" method="POST" class="popUpSave"><input type="hidden" id="save-id" name="landmark_id" value="' +
+    //                     feature.id + '"><buton id="saveButton" class="popUpSave" data-id="' +
+    //                     feature.id + '" data-name="' + feature.properties.name + '">Save</button></form>';
+    //     } else { // when user has NOT ADDED destination to their trip:  Add and Save options
+    //       popupStatus = '<form action="/add_destination" method="POST" class="popUpAdd"><input type="hidden" id="popup-id" name="landmark_id" value="' + 
+    //                     feature.id + '"><button id="popupButton" class="popUp" data-id="' + 
+    //                     feature.id + '" data-name="' + feature.properties.name + 
+    //                     '">Add destination</button></form><form action="/save_destination" method="POST" class="popUpSave"><input type="hidden" id="save-id" name="landmark_id" value="' +
+    //                     feature.id + '"><button id="saveButton" class="popUpSave" data-id="' +
+    //                     feature.id + '" data-name="' + feature.properties.name + '">Save</button></form>';
+    //     }
+    //   }
+    // });
 
     var popupContent = 
-        '<h2><a href="/landmarks/' + feature.id + '"><img src="' + feature.image + '" />' + feature.properties.name + '</a></h2><p>' + feature.properties.description + '</br>Average Rating: ' + feature.avg_rating + '</p>' + 
+        '<h2><a href="/landmarks/' + feature.id + '" class="thumbnail"><img src="' + feature.image + '" />' + 
+        feature.properties.name + '</a></h2><p>' + feature.properties.description + '</br>Average Rating: ' + 
+        feature.avg_rating + '</p>' + 
         '<form action="/add_destination" method="POST" class="popUpAdd"><input type="hidden" id="popup-id" name="landmark_id" value="' + 
         feature.id + '"><button id="popupButton" class="popUp" data-id="' + 
         feature.id + '" data-name="' + feature.properties.name + 
-        '">Add destination</button></form><form action="/save_destination" method="POST" class="popUpSave"><input type="hidden" id="save-id" name="landmark_id" value="' +
+        '">add destination</button></form><form action="/save_destination" method="POST" class="popUpSave"><input type="hidden" id="save-id" name="landmark_id" value="' +
         feature.id + '"><button id="saveButton" class="popUpSave" data-id="' +
-        feature.id + '" data-name="' + feature.properties.name + '">Save</button></form>'; 
+        feature.id + '" data-name="' + feature.properties.name + '">save</button></form>';
 
     // if user had added, change to destination added, provide option to remove from trip
     // display average score (if any)
                         
     marker.bindPopup(popupContent, {
-        closeButton: false,
+        closeButton: true,
         minWidth: 120,
         zoomAnimation: true,
         fadeAnimation: true,
@@ -206,10 +233,7 @@ landmarkLayer.on('layeradd', function(e) {
 landmarkLayer.on('click', function(e) {
     e.layer.openPopup();
 });
-//FIXME adjust sensitivity so user can catch the popup
-// landmarkLayer.on('mouseout', function(e) {
-//   e.layer.closePopup();
-// });
+
 
 
 // ================================================================================
@@ -358,6 +382,7 @@ var polyline = L.polyline([]).addTo(map);
 $('#get-directions').on('click', function(e) {
   var $btn = $(this);
   $btn.text('configuring route...');
+  $('.loader').css("display", "block");
   $('#directions').fadeIn();
   var origin;
   var destination;
@@ -392,6 +417,7 @@ $('#get-directions').on('click', function(e) {
         // $('#distance-list').append('<p>' + meters_conv + ' meters</p>');
       });
       $btn.text('get route');
+      $('.loader').css("display", "none");
 
       // ajax post request if the user wants to save the walk
       $('#saved').on('click', function(e) {

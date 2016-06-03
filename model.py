@@ -154,6 +154,10 @@ class Walk(db.Model):
     #Define relationship to user
     user = db.relationship("User", backref=db.backref("walks", order_by=walk_id))
 
+    ends = db.relationship("Landmark", 
+                            secondary="walk_landmark_link"
+                            )
+
     def __repr__(self):
         """Provide helpful representation when printed, for human readability."""
 
