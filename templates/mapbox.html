@@ -15,17 +15,14 @@
 
         <link href="/static/mapbox.css" rel="stylesheet" />
 
-
-
-        
-
-
     {% endblock %}
     
           
     {% block content %}     
 
         <!-- Display the map and prompt -->
+        <textarea type='text' id='custom-geocoder' placeholder='Where do you want to go?' name='joyce-geocoder'></textarea>
+
         <div id='map-master'>
         <div id='map'></div>
             <div id='map-controls'>
@@ -50,20 +47,11 @@
                     </ul>
             </div>
         </div>
-        
-
 
 <!--             <span class="default">Add destination</span>
             <span class="active">Destination added</span>
             <span class="remove">Remove</span> -->
    
-        
-
-
- 
-
-
-
 <!--             {% if waypoints %}
                 {% for waypoint in waypoints %}
                     <ul>{{ waypoint }}</ul>
@@ -75,10 +63,6 @@
         <button id="debugger" class="btn btn-secondary">debugger</button><br>
 
         <script src="/static/mapbox.js"></script>
-
-
-
-
 
     {% endblock %}
           

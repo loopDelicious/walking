@@ -93,7 +93,28 @@ geocoderControl.on('submit', function(e) {
   e.geocoderControl.close();
 });
 
-// confirm user selection with dialog to save, add or cancel action
+$('#custom-geocoder').autocomplete({
+  delay: 500,  // delay to minimize the load but less responsive
+  source: function(request, response) {
+    $.ajax({
+      type: "GET",
+      url: "/autocomplete",
+      data: {
+        'term': request.term
+      },
+      success: function(data) {
+        response(data);
+      }
+    });
+  }
+});
+
+
+
+// ================================================================================
+//  confirm user selection with dialog to save, add or cancel action
+// ================================================================================
+
 function confirm_destination(coordinates, place_name) {
   bootbox.dialog({
     message: "Add this destination to your trip?",
@@ -316,7 +337,6 @@ routeLayer.on('layeradd', function(e) {
 
 // load the highest rated landmarks into a layer, but don't add to map
 // FIXME should the nearest attractions be based on the routeLayer or polyline?
-// FIXME /highest_rated.geojson TypeError: cannot convert dictionary update sequence element #0 to a sequence
 // var highestRatedLayer = L.mapbox.featureLayer();
 // highestRatedLayer.loadURL('/highest_rated.geojson');
 

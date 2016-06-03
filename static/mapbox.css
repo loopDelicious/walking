@@ -1,4 +1,11 @@
 
+.rating-text {
+  width: 300px;
+  height: 75px;
+  display: block;
+  clear: both;
+}
+
 /*Markers and pop ups*/
 #popup {
     max-width: 400px;

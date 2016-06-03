@@ -65,20 +65,3 @@ label.selected,
 .rating > input:checked ~ label:hover ~ label { 
   color: #FFED85;  
   }
-
-/*https://www.everythingfrontend.com/posts/star-rating-input-pure-css.html*/
-/*.full-rating:hover,
-.full-rating:hover ~ .full-rating,
-.rating-input:checked ~ .full-rating {
-  background-position: 0 0;
-}
-
-.full-rating,
-.rating:hover .full-rating {
-  position: relative;
-  float: right;
-  display: block;
-  width: 16px;
-  height: 16px;
-  background: url('star.png') 0 -16px;
-}*/

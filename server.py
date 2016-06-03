@@ -350,6 +350,23 @@ def geocode():
     return jsonify(data)
 
 
+@app.route('/autocomplete')
+def autocomplete():
+    """User inputs text into textarea, and database will suggest places from landmarks database."""
+
+    term = request.args.get('term')
+    import pdb; pdb.set_trace()
+    landmarks = Landmark.query.filter(Landmark.landmark_name.like('%' + term.lower + '%')).all()
+    possibilities = []
+    
+    for landmark in landmarks:
+        possibility = landmark.landmark_name
+        possibilities.append(possibility)
+
+    return json.dumps(possibilities)
+
+
+
 @app.route('/add_destination', methods=['POST'])
 def add_destination():
     """Add a new destination to the session from popup marker."""
@@ -574,7 +591,6 @@ def show_landmark(landmark_id):
 
     else:
         user_rating = None
-
 
     # import pdb; pdb.set_trace()
 
