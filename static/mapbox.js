@@ -413,6 +413,7 @@ $('#get-directions').on('click', function(e) {
       // var coordinates = response.waypoints.forEach(function(waypoint) {
       //   L.marker([waypoint.location[1],waypoint.location[0]]).addTo(polyline);
       // });
+      var email_message = '';
       var duration = response.routes[0].duration;
       var duration_conv = (duration/60).toFixed(0);
       $('#duration').append('<p>'+ duration_conv + ' minutes</p>');
@@ -421,6 +422,7 @@ $('#get-directions').on('click', function(e) {
         var meters_conv = step.distance.toFixed(1);
         $('#instructions-list').append('<p><div class="icon heart"></div>'+ step.maneuver.instruction + ' for ' + meters_conv + ' meters</p>');
         // $('#distance-list').append('<p>' + meters_conv + ' meters</p>');
+        email_message += (step.maneuver.instruction + ' for ' + meters_conv + '\n');
       });
       $btn.text('get route');
       $('.loader').css("display", "none");
@@ -449,10 +451,25 @@ $('#get-directions').on('click', function(e) {
           }
         });
       });
+
+      // ajax post request if the user wants to send step-by-step directions by email
+      $('#email').on('click', function(e) {
+        e.preventDefault();
+
+        $.ajax({
+          type: "POST",
+          url: '/email_directions',
+          data: {
+            'email_message': email_message
+          },
+          success: function() {
+            bootbox.alert('Email has been sent.');
+          },
+        });
+      });
     }
   });
 });
-
 
 // FIXME: make suggested landmarks bigger when route drawn:  https://www.mapbox.com/help/analysis-with-turf/
 
@@ -494,34 +511,6 @@ $('#add-new').on('click', function(e) {
 // http://leafletjs.com/reference.html#popup
 // suggest additional points of interest
 // var pointToSegmentDistance(point, segment1, segment 2)
-
-
-// get step directions and email directions to your phone
-$('#email').on('click', function(e) {
-  e.preventDefault();
-  var email_message = "";
-  $.ajax({
-    type: "GET",
-    url: '/route_directions',
-    success: function(response) {
-      var steps = response.routes[0].legs[0].steps.forEach(function(step) {
-        var meters_conv = step.distance.toFixed(1);
-        email_message += (step.maneuver.instruction + " for " + meters_conv);
-        // email_message += (step.maneuver.instruction + " for " + meters_conv ";\n");
-      });
-    }
-  });
-  $.ajax({
-    type: "POST",
-    url: '/email_directions',
-    data: email_message,
-    success: function() {
-      bootbox.alert('Email has been sent.');
-    },
-  });
-});
-
-
 
 
 // python returns a jsonified string, jquery interprets as object so must re-stringify

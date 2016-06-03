@@ -521,26 +521,29 @@ def email_directions():
 
     user_id = session['user_id']
     user = User.query.filter(User.user_id==user_id).first()
-    email = user.email
+    user_email = str(user.email)
 
     # python smartlib
     sender = 'joycelin79@gmail.com'
-    receiver = ['joycelin79@gmail.com']
+    receiver = [user_email]
     message = """From: From <%s>
     To: To <%s>
     Subject: Walking Directions
 
     %s
     """ % (sender, receiver, steps)
-    steps
 
+    # remember to start up a local SMTP server with Python
+    # http://stackoverflow.com/questions/5619914/sendmail-errno61-connection-refused
+    # python -m smtpd -n -c DebuggingServer localhost:1025
     try:
-        s = smtplib.SMTP('localhost')
+        s = smtplib.SMTP('localhost', 1025)
+        print s
         s.sendmail(sender, receiver, message)
         s.quit()
         result = "Email sent."
 
-    except SMTPException:
+    except smtplib.SMTPException:
         result = "Error: unable to send email"
 
     return result

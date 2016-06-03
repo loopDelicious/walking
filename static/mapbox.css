@@ -17,12 +17,13 @@
     background-color: lightseagreen;
     color: whitesmoke;
     border-radius: 2px;
+    border: 0;
     transition-duration: 0.4s;
 }
 
 #saveButton {
     background-color: whitesmoke;
-    border-color: lightgray;
+    border: 1px solid lightgray;
     color: black;
     border-radius: 2px;
     transition-duration: 0.4s;
@@ -58,6 +59,12 @@
 
 #get-directions {
     width: 100px;
+    border: 0;
+}
+
+#get-directions:hover {
+    background-color: hotpink;
+    color: lightgray;
 }
 
 .btn-primary {
@@ -126,9 +133,18 @@
 }
 
 div:empty {
-  display: none;
+    display: none;
 }
 
+.thumbnail {
+    margin: -20px -11px 0 -11px;
+    border: 0;
+    padding: 0;
+}
+
+.thumbnail:hover {
+    border-color: hotpink;
+}
 
 .loader {
     border: 8px solid #f3f3f3; /* Light grey */
@@ -139,13 +155,7 @@ div:empty {
     margin: 0 auto;
     z-index: 98;
     display: none;
-    -webkit-animation: spin 2s linear infinite;
     animation: spin 2s linear infinite;
-}
-
-@-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
 }
 
 @keyframes spin {
