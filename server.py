@@ -355,8 +355,9 @@ def autocomplete():
     """User inputs text into textarea, and database will suggest places from landmarks database."""
 
     term = request.args.get('term')
-    import pdb; pdb.set_trace()
-    landmarks = Landmark.query.filter(Landmark.landmark_name.like('%' + term.lower + '%')).all()
+    term = term.lower()
+    # import pdb; pdb.set_trace()
+    landmarks = Landmark.query.filter(Landmark.landmark_name.ilike('%' + term + '%')).all()
     possibilities = []
     
     for landmark in landmarks:

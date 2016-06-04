@@ -106,6 +106,9 @@ $('#custom-geocoder').autocomplete({
         response(data);
       }
     });
+  },
+  select: function(event, ui) {
+    $('#auto-display').text(ui.item.value);
   }
 });
 
