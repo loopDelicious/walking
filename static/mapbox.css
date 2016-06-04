@@ -1,16 +1,16 @@
 
-.rating-text {
-  width: 300px;
-  height: 75px;
-  display: block;
-  clear: both;
+#geocoder {
+    position: absolute;
+    z-index: 2;
+    top: 20px;
+    left: 20px;
+    background-color: white;
+    border-radius: 2px;
+    overflow: hidden;
 }
 
-#auto-display {
-    width: 300px;
-    height: 75px;
-    display: block;
-    clear: both;
+.navbar {
+    margin-bottom: 0;
 }
 
 /*Markers and pop ups*/

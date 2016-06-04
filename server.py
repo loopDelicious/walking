@@ -332,11 +332,11 @@ def geocode():
     """User inputs address.  Convert to geojson lat_long coordinates and add to session."""
 
     destination = request.form.get("destination")
+    bbox = '-122.556125,37.705107,-122.338846,37.838462' # bounding box within which to limit results
  
-    # geocoder = Geocoder()
-    url = "https://api.mapbox.com/geocoding/v5/mapbox.places/proximity=-122.4194,37.7749&%s.json?access_token=%s" % (destination, accessToken)
+    url = "https://api.mapbox.com/geocoding/v5/mapbox.places/%s.json?proximity=-122.4194,37.7749&bbox=%s&access_token=%s" % (destination, bbox, accessToken)
     response = requests.get(url)
-    # import pdb; pdb.set_trace()
+  
     response = response.json()
     place_name = response['features'][0]['place_name']
     coordinates = response['features'][0]['geometry']['coordinates']
@@ -352,19 +352,35 @@ def geocode():
 
 @app.route('/autocomplete')
 def autocomplete():
-    """User inputs text into textarea, and database will suggest places from landmarks database."""
+    """User inputs text, and database will suggest places from landmarks database."""
 
     term = request.args.get('term')
-    term = term.lower()
-    # import pdb; pdb.set_trace()
-    landmarks = Landmark.query.filter(Landmark.landmark_name.ilike('%' + term + '%')).all()
-    possibilities = []
-    
-    for landmark in landmarks:
-        possibility = landmark.landmark_name
-        possibilities.append(possibility)
 
-    return json.dumps(possibilities)
+    # Phase 2: keep cache keys based on search fragments, mem cache to improve responsiveness and diminish load
+    landmarks = Landmark.query.filter(Landmark.landmark_name.ilike('%' + term + '%')).limit(10).all()
+    possibilities = []
+    bbox = '-122.556125,37.705107,-122.338846,37.838462' # bounding box within which to limit results
+    # import pdb; pdb.set_trace()
+
+    if landmarks:
+        for landmark in landmarks:
+            possibility = landmark.landmark_name.title()
+            possibilities.append(possibility)
+    
+    else:  # if no db results, search mapbox places with autocomplete
+        url = "https://api.mapbox.com/geocoding/v5/mapbox.places/%s.json?proximity=-122.4194,37.7749&bbox=%s&access_token=%s" % (term, bbox, accessToken)
+        response = requests.get(url)
+        response = response.json()
+
+        for feature in response['features']:
+            possibilities.append(feature['place_name'])
+
+    if not possibilities:
+        possibilities = ['No results']
+
+    possibilities = possibilities[:10]
+
+    return Response(json.dumps(possibilities),  mimetype='application/json')
 
 
 

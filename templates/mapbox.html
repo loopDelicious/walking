@@ -21,10 +21,13 @@
     {% block content %}     
 
         <!-- Display the map and prompt -->
-        <textarea type='text' id='custom-geocoder' placeholder='Where do you want to go?' name='joyce-geocoder'></textarea>
-        <textarea type='text' id='auto-display'></textarea>
+
 
         <div id='map-master'>
+            <label id='geocoder'>
+                <i class='walk icon big'></i>
+                <input type='text' id='custom-geocoder' placeholder='Where do you want to go?' name='joyce-geocoder'>
+            </label>
         <div id='map'></div>
             <div id='map-controls'>
                 <div id='geolocation'></div>

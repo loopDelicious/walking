@@ -32,12 +32,12 @@ var map = L.mapbox.map('map', 'mapbox.streets', {
     });
 
 // add search box geocoder to map
-var geocoderControl = L.mapbox.geocoderControl('mapbox.places',{
-  autocomplete: true,
-  keepOpen: true,
-  position: 'topleft',
-  // rippleEffect: true,
-}).addTo(map);
+// var geocoderControl = L.mapbox.geocoderControl('mapbox.places',{
+//   autocomplete: true,
+//   keepOpen: true,
+//   position: 'topleft',
+//   // rippleEffect: true,
+// }).addTo(map);
 
 // https://www.mapbox.com/mapbox.js/api/v2.4.0/l-mapbox-geocoder/
 // where do I pass through optional parameters proximity=latlng to bias search results?
@@ -74,7 +74,7 @@ var directionsRoutesControl = L.mapbox.directions.routesControl('routes', direct
     .addTo(map);
 var directionsInstructionsControl = L.mapbox.directions.instructionsControl('instructions', directions)
     .addTo(map);
-new L.Control.Zoom({ position: 'topleft' }).addTo(map);
+new L.Control.Zoom({ position: 'bottomleft' }).addTo(map);
 
 
 // ================================================================================
@@ -82,33 +82,35 @@ new L.Control.Zoom({ position: 'topleft' }).addTo(map);
 // ================================================================================
 
 // place a marker for entered address
-geocoderControl.on('select', function(e) {
-  var coordinates = e.feature.geometry.coordinates;
-  var place_name = e.feature.text;
-  // map.panTo(e.latlng);
-  confirm_destination(coordinates, place_name);
-});
+// geocoderControl.on('select', function(e) {
+//   var coordinates = e.feature.geometry.coordinates;
+//   var place_name = e.feature.text;
+//   // map.panTo(e.latlng);
+//   confirm_destination(coordinates, place_name);
+// });
 
-geocoderControl.on('submit', function(e) {
-  e.geocoderControl.close();
-});
+// geocoderControl.on('submit', function(e) {
+//   e.geocoderControl.close();
+// });
 
 $('#custom-geocoder').autocomplete({
   delay: 500,  // delay to minimize the load but less responsive
-  source: function(request, response) {
+  source: function(request, response_cb) {
     $.ajax({
       type: "GET",
       url: "/autocomplete",
       data: {
         'term': request.term
       },
-      success: function(data) {
-        response(data);
+      success: function(response) {
+        response_cb(response);
       }
     });
   },
+  // response: function(event, ui) {},
   select: function(event, ui) {
-    $('#auto-display').text(ui.item.value);
+    // console.log(ui.item)
+    // $('#auto-display').text(ui.item.value);
   }
 });
 
