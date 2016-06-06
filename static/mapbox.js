@@ -239,7 +239,7 @@ landmarkLayer.on('layeradd', function(e) {
     // });
 
     var popupContent = 
-        '<h2><a href="/landmarks/' + feature.id + '" class="thumbnail"><img src="' + feature.image + '" />' + 
+        '<h2><a href="/landmarks/' + feature.id + '" class="walkmap-thumbnail"><img src="' + feature.image + '" />' + 
         feature.properties.name + '</a></h2><p>' + feature.properties.description + '</br>Average Rating: ' + 
         feature.avg_rating + '</p>' + 
         '<form action="/add_destination" method="POST" class="popUpAdd"><input type="hidden" id="popup-id" name="landmark_id" value="' + 

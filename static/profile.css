@@ -1,0 +1,40 @@
+
+/*Markers and pop ups*/
+#popup {
+    max-width: 400px;
+    font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+}
+
+.marker-title {
+    font-weight: 700;
+}
+
+#map-master { 
+    height: 400px;
+    width:  100%;
+    position: relative;
+}
+
+#map {
+    height: 400px;
+}
+
+.map { 
+    position: absolute; 
+    top: 0; 
+    bottom: 0; 
+    width: 100%; 
+}
+
+#saved-panel {
+    position: absolute;
+    width: 300px;
+    padding: 10px;
+    z-index: 99;
+    background: rgba(12,71,68, 0.8);
+    color: white;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+}

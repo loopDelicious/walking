@@ -17,6 +17,12 @@ h1 { font-size: 1.5em; margin: 10px; }
 }
 
 
+.upload {
+  padding: 10px;
+  background-color: whitesmoke;
+  border-radius: 2px;
+}
+
 /****** Style Star Rating Widget *****/
 
 .rating-text {

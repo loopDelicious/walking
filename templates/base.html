@@ -6,9 +6,11 @@
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.css">
   <link href='//mapbox.com/base/latest/base.css' rel='stylesheet' />
+  <link href="/static/mapbox.css" rel="stylesheet" />
   <link rel="stylesheet" type="text/css" href="/static/base.css">
   <script src="https://code.jquery.com/jquery.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.js"></script>
+
 
 
   {% block head %}
@@ -28,23 +30,28 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/">Christopher Walken</a>
+        <a class="navbar-brand" href="/">walkSF</a>
       </div>
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="/map">Explore <span class="sr-only">(current)</span></a></li>
+          <li class="active"><a href="/map">explore <span class="sr-only">(current)</span></a></li>
         </ul>
      
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="/profile">Favorites</a></li>
+            <li>
+              
+              <a href="/profile"><i class="icon heart"></i>favorites</a>
+            </li>
+
           <li>
             {% if session.get('user_id') %} 
-              <a href="/logout">Log Out</a>
+              <a href="/logout">log out</a>
             {% else %}
-              <a href="/login">Log In</a>
+              <a href="/login">log in</a>
             {% endif %}
           </li>
+
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

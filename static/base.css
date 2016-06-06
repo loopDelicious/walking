@@ -1,7 +1,9 @@
+
 .hidden {
     display: none;
 }
 
+/*link styling*/
 a {
     color: lightseagreen;
 }
@@ -34,4 +36,26 @@ a:active {
 
 .cf:after {
     clear: both;
+}
+
+.walkmap-thumbnail {
+    margin: -21px -11px 0 -11px;
+    display: block;
+}
+
+.leaflet-popup-close-button {
+    color: white;
+    text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+}
+
+.navbar-default .navbar-nav>li>a:hover {
+    color: hotpink;
+}
+
+.navbar-default .navbar-nav>.active>a {
+    color: hotpink;
+}
+
+.navbar-brand {
+    font-weight: bold;
 }

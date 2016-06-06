@@ -91,7 +91,11 @@
       </div>
 
       <form id='upload' method="POST">
-        <label>Upload an Image of {{ landmark.landmark_name }}<input type='file' id='input-upload' name='image' ></label>
+        <label class='upload'>
+          <i class='picture icon big'></i>
+          Upload an Image of {{ landmark.landmark_name }}
+          <input type='file' id='input-upload' class='hidden' name='image' >
+        </label>
       </form>
 
     <!--  Suggest other nearby areas of interest -->
