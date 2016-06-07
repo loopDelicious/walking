@@ -60,3 +60,7 @@ a:active {
     font-weight: bold;
 }
 
+.leaflet-popup-content { 
+    width: auto !important 
+}
+
