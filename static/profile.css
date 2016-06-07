@@ -1,4 +1,12 @@
 
+h1 {
+    font-size: 16px ;
+}
+
+ul {
+    margin-left: -20px;
+}
+
 /*Markers and pop ups*/
 #popup {
     max-width: 400px;
@@ -37,4 +45,21 @@
     right: 0;
     bottom: 0;
     overflow: auto;
+}
+
+.clear-saved {
+    color: lightgray !important;
+}
+
+#start-new {
+    margin: 10px;
+}
+
+#lower-display {
+    margin: 10px;
+    padding: 10px;
+    border-style: solid;
+    border-radius: 6px;
+    border-color: lightgray;
+    border-width: 2px;
 }

@@ -16,12 +16,12 @@
 {% block content %}
 
 
-    <p>{{user.email }}:  View a log of all your walks.  Add and rate landmarks.</p>
+
     
           {% if saved %}
             <div id='map-master'>
               <div id='saved-panel'>
-                <h2>My Favorites: </h2>
+                <h1>My Favorites: </h1>
                 {% for save in saved|default("", True) %}
                 <!-- for every landmark that has been parsed from the ratings object that was passed through, we display its score.  -->
               
@@ -32,50 +32,57 @@
               <div id='map'></div>
             </div>
             
-          {% endif %}   
-          
-    <ul>
+          {% endif %}  
 
-          {% if walks %}
-            <li><h3>My Walks:</h3>
-              <ul>{% for walk in walks %}
-                <li>{{ walk.log_datetime | date }}:  from
-                    {{ walk.origin }} to {{ walk.destination }}
-                    <!-- walk.walk_landmark_link.landmark.landmark_name -->
+    <div id='lower-display'>    
+      <p><b>View a log of all your walks.  Add and rate landmarks.</b></p>
 
-                    ({{ walk.distance | distance }} meters in 
+      <ul>
 
-                      {% if (walk.duration > 60) %}
-                        {{ (walk.duration / 60) | time }} hours)
-                      {% else %}
-                        {{ walk.duration | time }} minutes) 
-                      {% endif %}<a href='/clear_walk' class='clear' name='walk_id' data-value='{{ walk.walk_id }}' /> remove</a>
-                </li>
-                <!-- FIXME: allow rating of walks? -->
-              {% endfor %}
-            </ul>
-            </li>
-          {% endif %}
+            {% if walks %}
+              <li><h1>My Walks:</h1>
+                <ul>{% for walk in walks %}
+                  <li>{{ walk.log_datetime | date }}:  from
+                      {{ walk.origin }} to {{ walk.destination }}
+                      <!-- walk.walk_landmark_link.landmark.landmark_name -->
 
-          {% if ratings %}
-            <li><h3>Landmarks you have rated: </h3>
-                <ul>{% for rating in ratings %}
-                  <!-- for every landmark that has been parsed from the ratings object that was passed through, we display its score.  -->
-                  
-                    <a href="/landmarks/{{ rating.landmark_id}}">{{ rating.landmark.landmark_name | title }}</a>
-                    <ul>
-                      <li>You rated: {{ rating.user_score }}</li>
-                      {% if rating.user_notes_for_landmark %}
-                          <li>Your notes: {{ rating.user_notes_for_landmark }}</li>
-                      {% endif %}
-                    </ul>
-                {% endfor %}</ul>
-            </li>
-          {% endif %}
+                      ({{ walk.distance | distance }} meters in 
 
-          
-    </ul>
-    <a href='/map'>Start a new walk</a>
+                        {% if (walk.duration > 60) %}
+                          {{ (walk.duration / 60) | time }} hours)
+                        {% else %}
+                          {{ walk.duration | time }} minutes) 
+                        {% endif %}<a href='/clear_walk' class='clear' name='walk_id' data-value='{{ walk.walk_id }}' /> remove</a>
+                  </li>
+                  <!-- FIXME: allow rating of walks? -->
+                {% endfor %}
+              </ul>
+                <div id='start-new'>
+                  <i class='walk icon'></i>
+                  <a href='/map'>Start a new walk</a>
+                </div>
+              </li>
+            {% endif %}
+
+            {% if ratings %}
+              <li><h1>Landmarks you have rated: </h1>
+                  <ul>{% for rating in ratings %}
+                    <!-- for every landmark that has been parsed from the ratings object that was passed through, we display its score.  -->
+                    
+                      <a href="/landmarks/{{ rating.landmark_id}}">{{ rating.landmark.landmark_name | title }}</a>
+                      <ul>
+                        <li>You rated: {{ rating.user_score }}</li>
+                        {% if rating.user_notes_for_landmark %}
+                            <li>Your notes: {{ rating.user_notes_for_landmark }}</li>
+                        {% endif %}
+                      </ul>
+                  {% endfor %}</ul>
+              </li>
+            {% endif %}
+
+      </ul>
+    </div>
+
 
         <script src="/static/profile.js"></script>
 

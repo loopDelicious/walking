@@ -59,7 +59,7 @@
 
           <li>
             {% if session.get('user_id') %} 
-              <a href="/logout">log out</a>
+              <a href="/logout" class='btn-logout'>log out</a>
             {% else %}
               <a href="/login">log in</a>
             {% endif %}
@@ -72,7 +72,7 @@
   </nav>
 
   <!-- Establish flash queue so messages can get flashed -->
-    {% with messages = get_flashed_messages() %}
+<!--     {% with messages = get_flashed_messages() %}
       {% if messages %}
         <ul class=flashes>
         {% for message in messages %}
@@ -80,7 +80,7 @@
         {% endfor %}
         </ul>
       {% endif %}
-    {% endwith %}
+    {% endwith %} -->
 
     <div id="jquery-flash-container"></div>
       

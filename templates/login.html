@@ -1,18 +1,28 @@
 {% extends 'base.html' %}
+
+{% block head %}
+    
+    <title>Log In</title>
+    <link rel="stylesheet" href="/static/login.css">
+
+{% endblock %}
+
 {% block content %}
 
     <h2>Log In</h2>
     
-    <form action = '/login' method="POST">
-      <input type = "text" placeholder="email address" name = "email" />
-      </br>
-      <input type = "password" placeholder="password" name = "password" />
-      </br>
-      <input type = "submit" value = "Login" />
-    </form>
-</br>
+    <div class='login-form'>
+        <form action = '/login' id='login-form' method="POST">
+          <input type = "text" placeholder="email address" name = "email" />
+          </br>
+          <input type = "password" placeholder="password" name = "password" />
+          </br>
+          <input type = "submit" value = "Login" class='btn-primary' />
+        </form>
+    </div>
 
-<a href="/registration">Create an account</a>
+<a href="/registration" class='reg-link'>Create an account</a>
 
 
+<script src="static/login.js"></script>
 {% endblock %}

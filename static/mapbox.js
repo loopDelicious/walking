@@ -249,8 +249,8 @@ landmarkLayer.on('layeradd', function(e) {
     // });
 
     var popupContent = 
-        '<h2><a href="/landmarks/' + feature.id + '" class="walkmap-thumbnail"><img src="' + feature.image + '" />' + 
-        feature.properties.name + '</a></h2><p>' + feature.properties.description + '</br>Average Rating: ' + 
+        '<h2><a href="/landmarks/' + feature.id + '" class="walkmap-thumbnail"><img src="' + feature.image + '" /><p class="pop-title">' + 
+        feature.properties.name + '</p></a></h2><p>' + feature.properties.description + '</br>Average Rating: ' + 
         feature.avg_rating + '</p>' + 
         '<form action="/add_destination" method="POST" class="popUpAdd"><input type="hidden" id="popup-id" name="landmark_id" value="' + 
         feature.id + '"><button id="popupButton" class="popUp" data-id="' + 
@@ -434,9 +434,13 @@ $('#get-directions').on('click', function(e) {
     type: "GET",
     url: '/origin_and_destination',
     success: function(data) {
-      origin = data.origin.place_name.split(',')[0];
-      destination = data.destination.place_name.split(',')[0];
-      $('#routes').append('<p>'+ origin + ' to ' + destination +': </p>');
+      if (data == 'Please enter at least 2 destinations for your trip.') {
+        bootbox.alert('Please enter at least 2 destinations for your trip.');
+      } else {
+        origin = data.origin.place_name.split(',')[0];
+        destination = data.destination.place_name.split(',')[0];
+        $('#routes').append('<p>'+ origin + ' to ' + destination +': </p>');
+      }
     }
   });
   $.ajax({

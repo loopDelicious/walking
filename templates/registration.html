@@ -1,15 +1,25 @@
 {% extends 'base.html' %}
+
+{% block head %}
+    
+    <title>Registration</title>
+    <link rel="stylesheet" href="/static/login.css">
+
+{% endblock %}
+
 {% block content %}
 
     <h2>Create an account</h2>
     
-    <form action = '/registration' method="POST">
-      <input type = "text" placeholder = "email address" name = "email" />
-      </br>
-      <input type = "text" placeholder = "password" name = "password" />
-      </br>
-      <input type = "submit" value = "Submit" />
-    </form>
+    <div class='registration-form'>
+        <form action = '/registration' method="POST">
+          <input type = "text" placeholder = "email address" name = "email" />
+          </br>
+          <input type = "text" placeholder = "password" name = "password" />
+          </br>
+          <input type = "submit" value = "Submit" class='btn-primary' />
+        </form>
+    </div>
 
-
+<script src="/static/registration.js"></script>
 {% endblock %}

@@ -59,8 +59,7 @@ def registration():
         possible_user = User.query.filter_by(email=email).first()
 
         if possible_user:
-            flash("An account has already been created for this email.")
-            return redirect('/login')
+            return "An account has already been created for this email."
 
         # Add user to user database
         else:
@@ -72,7 +71,6 @@ def registration():
             session['user_id'] = user.user_id
             session['waypoints'] = []
             user_id = user.user_id
-            flash("Your account has been created.")
             return redirect('/map')
 
     else:
@@ -98,13 +96,12 @@ def login():
             # add user_id to session variable and initialize waypoints key
             session['user_id'] = possible_user.user_id
             session['waypoints'] = []
-            flash("You are logged in!")
             user_id = possible_user.user_id
-
-            return redirect('/map')
+           
+            return redirect('/map', 
+                            "You are logged in!")
         else:
-            flash("Verify email and password entered is correct.")
-            return redirect('/login')
+            return "Verify email and password entered is correct."
 
     else:
         return render_template('login.html')
@@ -116,9 +113,9 @@ def logout():
 
     session.pop('user_id', None)
     session.pop('waypoints', None)
-    flash("Logged out.")
 
-    return redirect('/')
+    return redirect('/',
+                    "Logged out.")
 
 
 @app.route('/profile')
@@ -488,7 +485,7 @@ def return_origin_and_destination():
     waypoints = session['waypoints']
 
     if len(waypoints) <= 1:
-        flash('Please enter at least 2 destinations for your trip.')
+        return 'Please enter at least 2 destinations for your trip.'
     else:
         origin = session['waypoints'][0]
         destination = session['waypoints'][-1]
@@ -952,7 +949,7 @@ if __name__ == "__main__":
     connect_to_db(app)
 
     # Use the DebugToolbar
-    # DebugToolbarExtension(app)
+    DebugToolbarExtension(app)
 
-    # app.run()
-    app.run(host='0.0.0.0')
+    app.run()
+    # app.run(host='0.0.0.0')

@@ -3,6 +3,28 @@
     display: none;
 }
 
+/*button styling*/
+.btn-primary {
+    margin: 5px;
+    border-radius: 2px;
+    background-color: lightseagreen;
+    border-color: lightseagreen;
+}
+
+.btn-primary:hover {
+    background-color: hotpink;
+    color: lightgray;
+    border-color: hotpink;
+}
+
+.btn-secondary {
+    margin: 5px;
+    width: 100px;
+    border-radius: 2px;
+    background-color: whitesmoke;
+    border-color: lightgray;
+}
+
 /*link styling*/
 a {
     color: lightseagreen;
@@ -63,4 +85,6 @@ a:active {
 .leaflet-popup-content { 
     width: auto !important;
 }
+
+
 

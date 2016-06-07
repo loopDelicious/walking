@@ -3,6 +3,14 @@ input {
     font-size: 12px;
 }
 
+h2 {
+    font-size: 12px;
+}
+
+p {
+    font-size: 12px;
+}
+
 #geocoder {
     position: absolute;
     z-index: 2;
@@ -16,6 +24,7 @@ input {
 #custom-geocoder {
     width: 200px;
     padding: 11px;
+    border: transparent;
 }
 
 .navbar {
@@ -26,6 +35,10 @@ input {
 #popup {
     max-width: 400px;
     font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+}
+
+.leaflet-popup-content-wrapper {
+    min-width: 150px;
 }
 
 .marker-title {
@@ -41,6 +54,7 @@ input {
     color: whitesmoke;
     border-radius: 2px;
     border: 0;
+    display: inline-block;
     transition-duration: 0.4s;
 }
 
@@ -49,6 +63,7 @@ input {
     border: 1px solid lightgray;
     color: black;
     border-radius: 2px;
+    display: inline-block;
     transition-duration: 0.4s;
 }
 
@@ -62,6 +77,17 @@ input {
     color: lightgray;
 }
 
+
+
+.leaflet-container h1, .leaflet-container h2, .leaflet-container h3, .leaflet-container h4, .leaflet-container h5, .leaflet-container h6, .leaflet-container p {
+    font-size: 15px;
+    line-height: 20px;
+    margin: 4px 2px 4px 2px;
+}
+
+/*.leaflet-popup-content-wrapper {
+    min-width: 175px;
+}*/
 
 #map-master {
     position: relative;
@@ -90,19 +116,7 @@ input {
     color: lightgray;
 }
 
-.btn-primary {
-    margin: 5px;
-    width: 100px;
-    background-color: lightseagreen;
-    border-color: lightseagreen;
-}
 
-.btn-secondary {
-    margin: 5px;
-    width: 100px;
-    background-color: whitesmoke;
-    border-color: lightgray;
-}
 
 /*.address-input {
     z-index: 10;
