@@ -1,5 +1,5 @@
 # walkSF #
-#### the smartest walking app for planning and rating your urban hikes
+##### the smartest walking app for planning and rating your urban hikes
 
 Learn more about the developer: www.linkedin.com/in/joyce-lin-7246531b
 
