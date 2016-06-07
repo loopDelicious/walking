@@ -13,6 +13,7 @@
 // ================================================================================
 //  Initializing the map and controls
 // ================================================================================
+$(document).ready(function() {
 
 // default mapbox.js API public access token
 L.mapbox.accessToken = 'pk.eyJ1Ijoiam95Y2VsaW43OSIsImEiOiJjaW8zNzk5bHcwMDA5dzFrcXd6anpnY2xoIn0.ovObS9ODfNsnaa8ie--fKQ';
@@ -39,25 +40,22 @@ var map = L.mapbox.map('map', 'mapbox.streets', {
 //   // rippleEffect: true,
 // }).addTo(map);
 
-// https://www.mapbox.com/mapbox.js/api/v2.4.0/l-mapbox-geocoder/
-// where do I pass through optional parameters proximity=latlng to bias search results?
-// can't bias autocomplete results by SF proximity since /geocoding is occuring on backend and included in query parameters
-
 // display variable copy in the geocoder depending if the user has entered an origin
 // http://stackoverflow.com/questions/28551603/change-the-placeholder-text-of-an-input-field-after-initializing
-map.addEventListener('ready', function () {
-  $.ajax({
-    type: "GET",
-    url: '/has_origin',
-    success: function(response) {
-      if (response.status == false) {
-        document.querySelector('.leaflet-control-mapbox-geocoder-form input').placeholder = "Where do you want to go?";
-      } else {
-        document.querySelector('.leaflet-control-mapbox-geocoder-form input').placeholder = "Where to next?";
-      }
-    }
-  });
-});
+
+// map.addEventListener('ready', function () {
+//   $.ajax({
+//     type: "GET",
+//     url: '/has_origin',
+//     success: function(response) {
+//       if (response.status == false) {
+//         document.querySelector('.leaflet-control-mapbox-geocoder-form input').placeholder = "Where do you want to go?";
+//       } else {
+//         document.querySelector('.leaflet-control-mapbox-geocoder-form input').placeholder = "Where to next?";
+//       }
+//     }
+//   });
+// });
 
 // create a directions object, from which the layer and inputs will pull data
 var directions = L.mapbox.directions({
@@ -274,14 +272,17 @@ landmarkLayer.on('click', function(e) {
 
 // stand alone function to add destination marker to routelayer
 function add_destination(response) {
-  var coordinates = response.coordinates;
-  var place_name = response.place_name;
-  L.marker([coordinates[1], coordinates[0]], {
-    'title': place_name,
-    'riseOnHover': true
-  }).addTo(routeLayer);
-  bootbox.alert('Destination added.');
-  // closePopup();
+  if (response == "Already added.") {
+    bootbox.alert("Destination already added.");
+  } else {
+    var coordinates = response.coordinates;
+    var place_name = response.place_name;
+    L.marker([coordinates[1], coordinates[0]], {
+      'title': place_name,
+      'riseOnHover': true
+    }).addTo(routeLayer);
+    bootbox.alert('Destination added.');
+  };
 };
 
 function save_destination(response) {
@@ -471,7 +472,9 @@ $('#get-directions').on('click', function(e) {
           },
           success: function(response) {
             if (response=="Walk saved.") {
+              console.log("before");
               bootbox.alert('Walk saved.');
+              console.log("after");
             }
           }
         });
@@ -561,5 +564,7 @@ $('#debugger').on('click', function(e){
       });
     }   
   });
+});
+
 });
 

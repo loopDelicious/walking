@@ -390,6 +390,7 @@ def add_destination():
 
     # users submitting from popup will have landmark_id
     landmark_id = request.form.get("landmark_id")
+
     # access attributes of the model Landmark object from db
     if landmark_id:
         destination = Landmark.query.filter(Landmark.landmark_id == landmark_id).first()
@@ -407,7 +408,7 @@ def add_destination():
         "place_name": place_name,
         "coordinates": coordinates
     }
-
+    print data
     if 'waypoints' in session:
         # mapbox.Directions limits routes to 25 places of interest
         if len(session['waypoints']) < 25:

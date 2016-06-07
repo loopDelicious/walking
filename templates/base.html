@@ -3,15 +3,28 @@
 
 <head>
 
-  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.css">
-  <link href='//mapbox.com/base/latest/base.css' rel='stylesheet' />
-  <link href="/static/mapbox.css" rel="stylesheet" />
-  <link rel="stylesheet" type="text/css" href="/static/base.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+
+<!-- jquery -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.css">
   <script src="https://code.jquery.com/jquery.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.js"></script>
+  <!-- // <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
 
+<!-- bootstrap -->
 
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- mapbox -->
+  <!-- <link href='//mapbox.com/base/latest/base.css' rel='stylesheet' /> -->
+  <link href="/static/mapbox-local.css" rel="stylesheet" />
+  <script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
+  <link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet' />
+  <script src='https://api.mapbox.com/mapbox.js/plugins/mapbox-directions.js/v0.4.0/mapbox.directions.js'></script>
+  <link href='https://api.mapbox.com/mapbox.js/plugins/mapbox-directions.js/v0.4.0/mapbox.directions.css' rel='stylesheet' type='text/css' />
+  <script src='https://api.mapbox.com/mapbox.js/plugins/turf/v2.0.2/turf.min.js'></script>
+<!-- joyce -->
+  <link href="/static/mapbox.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/base.css">
 
   {% block head %}
       <!-- put extra CSS/JS here -->
@@ -75,9 +88,10 @@
       put your content here 
     {% endblock %}
 
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" async></script>
-    <script src="https://cdn.jsdelivr.net/bootbox/4.4.0/bootbox.min.js" async></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" async></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.js"></script>
+  <script src="https://cdn.jsdelivr.net/bootbox/4.4.0/bootbox.min.js"></script>
+
+
 </body>
 
 </html>

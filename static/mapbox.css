@@ -1,4 +1,8 @@
 
+input {
+    font-size: 12px;
+}
+
 #geocoder {
     position: absolute;
     z-index: 2;
@@ -7,6 +11,10 @@
     background-color: white;
     border-radius: 2px;
     overflow: hidden;
+}
+
+#custom-geocoder {
+    width: 200px;
 }
 
 .navbar {
