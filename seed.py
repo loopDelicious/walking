@@ -1,7 +1,7 @@
 """Utility file to seed landmarks database from SFgov data in seed_data/"""
 
 from sqlalchemy import func
-from model import Landmark, User, Rating, Walk, WalkLandmarkLink, LandmarkImage
+from model import Landmark, User, Rating, Walk, WalkLandmarkLink, LandmarkImage, UserSaved
 from datetime import datetime
 
 from model import connect_to_db, db

@@ -32,13 +32,13 @@ var map = L.mapbox.map('map', 'mapbox.streets', {
     interactive: true, // make interactive instead of static
     });
 
-// add search box geocoder to map
-// var geocoderControl = L.mapbox.geocoderControl('mapbox.places',{
-//   autocomplete: true,
-//   keepOpen: true,
-//   position: 'topleft',
-//   // rippleEffect: true,
-// }).addTo(map);
+// create search box geocoder, but don't add to map
+var geocoderControl = L.mapbox.geocoderControl('mapbox.places',{
+  autocomplete: true,
+  keepOpen: true,
+  position: 'topleft',
+  // rippleEffect: true,
+});
 
 // display variable copy in the geocoder depending if the user has entered an origin
 // http://stackoverflow.com/questions/28551603/change-the-placeholder-text-of-an-input-field-after-initializing
@@ -107,8 +107,20 @@ $('#custom-geocoder').autocomplete({
   },
   // response: function(event, ui) {},
   select: function(event, ui) {
-    // console.log(ui.item)
-    // $('#auto-display').text(ui.item.value);
+    $.ajax({
+      type: "POST",
+      url:'/geocode',
+      data: {
+        'place': ui.item.value
+      },
+      success: function(response) {
+        var coordinates = response['coordinates'];
+        var place_name = response['place_name'];
+        confirm_destination(coordinates, place_name);
+        $('#custom-geocoder').attr('value') = '';
+
+      }
+    });
   }
 });
 

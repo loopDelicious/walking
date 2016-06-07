@@ -61,6 +61,6 @@ a:active {
 }
 
 .leaflet-popup-content { 
-    width: auto !important 
+    width: auto !important;
 }
 
