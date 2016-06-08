@@ -16,7 +16,6 @@ body {
     background-repeat: no-repeat;
 }
 
-
 h1 { 
   font-size: 25px; 
   margin-left: 13px;
@@ -76,7 +75,7 @@ h3 {
 
 textarea {
   border-color: lightgray;
-  background-color: whitesmoke;
+  background-color: rgba(245, 245, 245, 0.5)
 }
 
 .rating-text {
