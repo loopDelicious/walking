@@ -70,8 +70,10 @@
                         </fieldset>  
                           <div id='display'></div>
                         </br>
-                        <textarea type='text' id='notes' class='rating-text' placeholder='What should people know about this place?' name='user-notes'></textarea>
-                        <input type='submit' class='btn-secondary'>
+                        <div class='rating-container cf'>
+                          <textarea type='text' id='notes' class='rating-text' placeholder='What should people know about this place?' name='user-notes'></textarea>
+                          <input type='submit' class='rating-submit btn btn-secondary'>
+                        </div>
                       </form>     
                       </br>                       
 
@@ -93,7 +95,7 @@
           <form id='upload' method="POST">
             <a class='upload'>
               <i class='picture icon big'></i>
-              Upload an Image of {{ landmark.landmark_name }}
+              Upload an Image of {{ landmark.landmark_name | title }}
               <input type='file' id='input-upload' class='hidden' name='image' >
             </a>
           </form>

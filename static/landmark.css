@@ -10,9 +10,8 @@ html, body {
 }
 
 body {
-    background: url(/static/bridge.jpg);
+    background: linear-gradient(transparent 60%, white), url(/static/bridge.jpg);
     background-size: cover;
-    margin: 20px;
     background-repeat: no-repeat;
 }
 
@@ -27,6 +26,31 @@ h2 {
 
 h3 {
   font-size: 20px;
+}
+
+.rating-container {
+  clear: both;
+  width: 500px;
+  height: 70px;
+}
+
+.rating-text {
+  width: 430px;
+  display: block;
+  float: left;
+  border-right: none;
+  border-radius: 4px 0 0 4px;
+  padding: 10px;
+  height: 100%;
+  resize: none;
+}
+
+.rating-submit {
+  width: 70px;
+  float: right;
+  margin: 0;
+  height: 100%;
+  border-radius: 0 4px 4px 0;
 }
 
 .landmark-div {
@@ -76,12 +100,6 @@ h3 {
 textarea {
   border-color: lightgray;
   background-color: rgba(245, 245, 245, 0.5)
-}
-
-.rating-text {
-  width: 450px;
-  display: block;
-  clear: both;
 }
 
 .rating { 
