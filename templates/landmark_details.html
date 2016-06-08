@@ -18,9 +18,10 @@
 
  <!-- FIXME bootstrap containers    -->
 
-    <h3>{{ landmark.landmark_name|default("", True) }}</h3>
+    <h1>{{ landmark.landmark_name|default("", True) }}</h1>
+    <div class='landmark-div'>
       {% if average %}
-          <p> Average Rating: {{  average  }} </p>
+          <h2> Average Rating: {{  average  }} </h2>
       {% endif %}
       {% if (prediction) and (user_rating is none) %}
           <p>Based on your preferences, you might rate this landmark: {{ prediction }}</p>
@@ -52,7 +53,7 @@
                       <!-- Rate via Like/Heart or 5-stars? -->
 
                   
-                      <h1>Been here?  Give it a rating.</h1>
+                      <h2>Been here?  Give it a rating.</h2>
           
                       <form id='ratings' method='POST'>
                         <fieldset class="rating cf">
@@ -70,37 +71,39 @@
                           <div id='display'></div>
                         </br>
                         <textarea type='text' id='notes' class='rating-text' placeholder='What should people know about this place?' name='user-notes'></textarea>
-                        </br>
                         <input type='submit' class='btn-secondary'>
                       </form>     
                       </br>                       
 
 
-    <!-- image gallery and option to upload a new image -->
+        <!-- image gallery and option to upload a new image -->
 
-      <div id='image-display'>
-        {% for image in images %}
-        <div class="row">
-          <div class="col-sm-6 col-md-4">
-            <div class='landmark-thumbnail'>
-              <img src="{{ image.imageurl }}">
+          <div id='image-display'>
+            {% for image in images %}
+            <div class="row">
+              <div class="col-sm-6 col-md-4">
+                <div class='landmark-thumbnail'>
+                  <img src="{{ image.imageurl }}">
+                </div>
+              </div>
             </div>
+            {% endfor %}
           </div>
-        </div>
-        {% endfor %}
+
+          <form id='upload' method="POST">
+            <a class='upload'>
+              <i class='picture icon big'></i>
+              Upload an Image of {{ landmark.landmark_name }}
+              <input type='file' id='input-upload' class='hidden' name='image' >
+            </a>
+          </form>
       </div>
 
-      <form id='upload' method="POST">
-        <label class='upload'>
-          <i class='picture icon big'></i>
-          Upload an Image of {{ landmark.landmark_name }}
-          <input type='file' id='input-upload' class='hidden' name='image' >
-        </label>
-      </form>
-
     <!--  Suggest other nearby areas of interest -->
-    <h2 id='suggestions-title' class='hidden'>Check out these other highly rated destinations nearby.</h2>
-    <ul id='suggestions'></ul>
+    <div class='suggestions-display'>
+        <h2 id='suggestions-title' class='hidden'>Check out these other highly rated destinations nearby.</h2>
+        <ul id='suggestions'></ul>
+    </div>
 
 
 

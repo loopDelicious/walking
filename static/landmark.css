@@ -3,8 +3,50 @@
 @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 
 fieldset, label { margin: 0; padding: 0; }
-body{ margin: 20px; }
-h1 { font-size: 1.5em; margin: 10px; }
+
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    background: url(/static/bridge.jpg);
+    background-size: cover;
+    margin: 20px;
+    background-repeat: no-repeat;
+}
+
+
+h1 { 
+  font-size: 25px; 
+  margin-left: 13px;
+}
+
+h2 {
+  font-size: 20px;
+}
+
+h3 {
+  font-size: 20px;
+}
+
+.landmark-div {
+    margin: 10px;
+    padding: 10px;
+    border-style: solid;
+    border-radius: 6px;
+    border-color: lightgray;
+    border-width: 2px;
+}
+
+.suggestions-display {
+    margin: 10px;
+    padding: 10px;
+    border-style: solid;
+    border-radius: 6px;
+    border-color: lightgray;
+    border-width: 2px;
+}
 
 #display {
   font-weight: bold;
@@ -18,7 +60,6 @@ h1 { font-size: 1.5em; margin: 10px; }
 
 .landmark-thumbnail {
   height: 200px;
-  width: 300px;
 }
 
 .upload {
@@ -27,24 +68,19 @@ h1 { font-size: 1.5em; margin: 10px; }
   border-radius: 2px;
 }
 
-h2 {
-  font-size: 20px;
-}
-
-h3 {
-  font-size: 14px;
-}
-
 .suggestion-images {
-  width: 150px;
   height: 100px;
 }
 
 /****** Style Star Rating Widget *****/
 
+textarea {
+  border-color: lightgray;
+  background-color: whitesmoke;
+}
+
 .rating-text {
-  width: 300px;
-  height: 75px;
+  width: 450px;
   display: block;
   clear: both;
 }

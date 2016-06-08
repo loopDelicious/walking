@@ -1,3 +1,7 @@
+.navbar {
+    background: url(/static/nice_snow.png);
+}
+
 
 .hidden {
     display: none;

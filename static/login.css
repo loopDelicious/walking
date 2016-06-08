@@ -1,6 +1,30 @@
+
+body {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    background: url(/static/precipice.jpg);
+    background-size: cover;
+    margin: 50px 0 0 100px;
+}
+
 h2 {
     font-size: 20px;
     margin: 15px;
+}
+
+input[type="text"] {
+    background: rgba(32, 178, 170, 0.1);
+    border: none;
+    outline: none;
+}
+
+input[type="password"] {
+    background: rgba(32, 178, 170, 0.1);
+    border: none;
+    outline: none;
 }
 
 .login-form {
@@ -9,6 +33,8 @@ h2 {
 
 .registration-form {
     margin: 15px;
+    background: transparent;
+    border: none;
 }
 
 .reg-link {

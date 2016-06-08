@@ -1,4 +1,14 @@
 
+body {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    background: url(/static/nice_snow.png);
+    background-size: cover;
+}
+
 input {
     font-size: 12px;
 }
@@ -80,7 +90,7 @@ p {
 
 
 .leaflet-container h1, .leaflet-container h2, .leaflet-container h3, .leaflet-container h4, .leaflet-container h5, .leaflet-container h6, .leaflet-container p {
-    font-size: 15px;
+    font-size: 12px;
     line-height: 20px;
     margin: 4px 2px 4px 2px;
 }
@@ -107,7 +117,6 @@ p {
 }
 
 #get-directions {
-    width: 100px;
     border: 0;
 }
 
@@ -173,10 +182,14 @@ div:empty {
     display: none;
 }
 
-.thumbnail {
-    margin: -20px -11px 0 -11px;
+.walkmap-thumbnail {
+    margin: -20px -13px 0 -13px;
     border: 0;
     padding: 0;
+}
+
+.pop-title:hover {
+    color: hotpink;
 }
 
 .thumbnail:hover {

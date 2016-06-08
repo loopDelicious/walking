@@ -71,7 +71,9 @@ def registration():
             session['user_id'] = user.user_id
             session['waypoints'] = []
             user_id = user.user_id
+            message = "Your account has been created."
             return redirect('/map')
+            # return redirect(url_for('/map', message=message))
 
     else:
         return render_template('registration.html')
@@ -97,9 +99,10 @@ def login():
             session['user_id'] = possible_user.user_id
             session['waypoints'] = []
             user_id = possible_user.user_id
-           
-            return redirect('/map', 
-                            "You are logged in!")
+            message = "You are logged in!"
+            return redirect('/map')
+            # return redirect(url_for('/map', message=message))
+
         else:
             return "Verify email and password entered is correct."
 
@@ -113,9 +116,9 @@ def logout():
 
     session.pop('user_id', None)
     session.pop('waypoints', None)
+    message = "Logged out."
 
-    return redirect('/',
-                    "Logged out.")
+    return redirect('/')
 
 
 @app.route('/profile')
@@ -949,7 +952,7 @@ if __name__ == "__main__":
     connect_to_db(app)
 
     # Use the DebugToolbar
-    DebugToolbarExtension(app)
+    # DebugToolbarExtension(app)
 
     app.run()
     # app.run(host='0.0.0.0')
