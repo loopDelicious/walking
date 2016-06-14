@@ -20,34 +20,49 @@
 
     <h1>{{ landmark.landmark_name|default("", True) }}</h1>
     <div class='landmark-div'>
+
+      <ul>
+        {% if landmark.landmark_description %}
+          <li>{{ landmark.landmark_description|default("", True) }}</li>
+        {% endif %}
+
+        {% if landmark.landmark_location_description %}
+          <li>Location:  {{ landmark.landmark_location_description|default("", True) }}</li>
+        {% endif %}
+
+        {% if landmark.landmark_artist %}
+          <li>Artist:  {{ landmark.landmark_artist|default("", True) }}</li>
+        {% endif %}
+
+        {% if landmark.landmark_display_dimensions %}
+          <li>Display dimensions:  {{ landmark.landmark_display_dimensions|default("", True) }}</li>
+        {% endif %}
+
+        {% if landmark.landmark_medium %}
+          <li>Medium:  {{ landmark.landmark_medium|default("", True) }}</li>
+        {% endif %}
+      </ul>
+
       {% if average %}
           <h2> Average Rating: {{  average  }} </h2>
       {% endif %}
+      
+      {% if reviews %}
+        <h2> User notes: </h2>
+        {% for review in reviews %}
+        <ul><i><p> {{ review | default("", True) }} </p></i></ul>
+        {% endfor %}
+      {% endif %}
+
       {% if (prediction) and (user_rating is none) %}
           <p>Based on your preferences, you might rate this landmark: {{ prediction }}</p>
       {% endif %}
 
 
       <!-- http://stackoverflow.com/questions/11146619/suppress-none-output-as-string-in-jinja2 -->
-      <p>{{ landmark.landmark_description|default("", True) }}</p>
+      
 
-        <ul>
-          {% if landmark.landmark_location_description %}
-            <li>Location:  {{ landmark.landmark_location_description|default("", True) }}</li>
-          {% endif %}
 
-          {% if landmark.landmark_artist %}
-            <li>Artist:  {{ landmark.landmark_artist|default("", True) }}</li>
-          {% endif %}
-
-          {% if landmark.landmark_display_dimensions %}
-            <li>Display dimensions:  {{ landmark.landmark_display_dimensions|default("", True) }}</li>
-          {% endif %}
-
-          {% if landmark.landmark_medium %}
-            <li>Medium:  {{ landmark.landmark_medium|default("", True) }}</li>
-          {% endif %}
-        </ul>
 
 
                       <!-- Rate via Like/Heart or 5-stars? -->

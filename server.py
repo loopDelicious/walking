@@ -628,9 +628,10 @@ def show_landmark(landmark_id):
 
     # import pdb; pdb.set_trace()
 
-    # Get the average rating of a landmark
+    # Get the average rating of a landmark, and user reviews
     ratings = Rating.query.filter_by(landmark_id=landmark_id).all()
     rating_scores = [r.user_score for r in ratings]
+    reviews = [r.user_notes_for_landmark for r in ratings]
 
     prediction = None
 
@@ -653,6 +654,7 @@ def show_landmark(landmark_id):
                             landmark=landmark, 
                             ratings=ratings,
                             user_rating=user_rating,
+                            reviews=reviews,
                             user_score=user_score,
                             prediction=prediction,
                             average=avg_rating,
