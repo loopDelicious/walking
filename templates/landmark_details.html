@@ -44,7 +44,7 @@
       </ul>
 
       {% if average %}
-          <h2> Average Rating: {{  average  }} </h2>
+          <h2> Average Rating: {{  average | round(1, 'floor') }} </h2>
       {% endif %}
       
       {% if reviews %}
