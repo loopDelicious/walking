@@ -1,4 +1,7 @@
 # walkSF #
+
+![GitHub](https://img.shields.io/github/license/loopDelicious/walking)
+
 ##### the smartest walking app for planning and rating your urban hikes
 
 Learn more about the developer: www.linkedin.com/in/joyce-lin
