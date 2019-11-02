@@ -30,4 +30,4 @@ requests==2.10.0
 six==1.10.0
 SQLAlchemy==1.0.3
 uritemplate.py==0.3.0
-Werkzeug==0.10.4
+Werkzeug==0.15.3
